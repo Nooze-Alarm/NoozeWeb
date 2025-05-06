@@ -1,41 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nooze - Wake Up Revolutionized</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nooze</title>
+    <link rel="stylesheet" href="global.css">
 </head>
-
 <body>
-  <!-- Navbar -->
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="features.html">Features</a></li>g
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Nooze</div>
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="features.html" class="contact-btn">Features</a>
+        </nav>
+    </header>
 
-  <!-- Hero Section with Animation -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h1 class="fade-in-up">Nooze</h1>
-      <p class="fade-in-up">The next generation of wake-up technology</p>
-      <a href="features.html" class="cta-btn fade-in-up">Explore Features</a>
-    </div>
-  </section>
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>
+                    Nooze — The Smarter Way to Wake Up
+                </h1>
+                <p>Customize your mornings with intelligent alarms, calming sounds, and real-time sync across all your devices.</p>
+                <div class="buttons">
+                    <a href="contact.html" class="btn-primary">Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-images">
+                <img src="dashboard-preview.png" alt="Nooze App Dashboard" class="dashboard">
+            </div>
+        </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Nooze. All rights reserved.</p>
-  </footer>
+        <section id="features" class="features">
+            <h2>Key Features</h2>
+            <div class="card-container">
+                <div class="card">
+                    <img src="modern-ui.jpg" alt="Modern Interface">
+                    <h3>Intuitive Modern Interface</h3>
+                    <p>Set and manage alarms effortlessly with a beautifully designed UI.</p>
+                </div>
+                <div class="card">
+                    <img src="cross-platform.jpg" alt="Cross-platform Compatibility">
+                    <h3>Cross-Platform Support</h3>
+                    <p>Nooze runs smoothly on iOS, Android, Windows, and macOS.</p>
+                </div>
+                <div class="card">
+                    <img src="mobile-app.jpg" alt="Mobile Monitoring">
+                    <h3>Smart Wake Features</h3>
+                    <p>Use sleep tracking, smart snooze, and adaptive volume features for a better morning.</p>
+                </div>
+                <div class="card">
+                    <img src="support.jpg" alt="24/7 Support">
+                    <h3>24/7 Support</h3>
+                    <p>We’re always here to help with setup or questions—any time, any day.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <script src="script.js"></script>
+    <footer class="footer">
+        <p>&copy; 2025 Nooze | All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
