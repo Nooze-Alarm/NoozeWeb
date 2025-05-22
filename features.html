@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nooze - Features</title>
+    <link rel="stylesheet" href="global.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav class="navbar">
+            <div class="logo">Nooze<span>App</span></div>
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="#" class="contact-btn" id="subscribeBtn">Subscribe</a>
+        </nav>
+        <main class="main-content">
+            <section class="features fade-in">
+                <h2>Features</h2>
+                <div class="card-container">
+                    <!-- Example feature card -->
+                    <div class="card fade-in">
+                        <h3>Smart Wake Technology</h3>
+                        <p>Wake up refreshed with intelligent alarm scheduling and adaptive soundscapes.</p>
+                    </div>
+                    <!-- Add more feature cards here -->
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            &copy; 2024 Nooze. All rights reserved.
+        </footer>
+    </div>
+    <!-- Subscribe Modal -->
+    <div id="subscribeModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Subscribe for Nooze Updates</h2>
+            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required style="margin-bottom:1rem; width:100%; padding:0.75rem; border-radius:8px; border:none; background:#2c2c2c; color:#fff;">
+                <button type="submit" class="btn-primary" style="width:100%;">Subscribe</button>
+            </form>
+            <div id="subscribeThankYou" style="display:none; color:#00bcd4; margin-top:1rem; text-align:center;">Thank you for subscribing!</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    // Modal logic with one-time popup
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('subscribeModal');
+        const btn = document.getElementById('subscribeBtn');
+        const close = document.getElementById('closeModal');
+        const form = document.getElementById('subscribeForm');
+        const thankYou = document.getElementById('subscribeThankYou');
+        // Show modal only once per user
+        if (!localStorage.getItem('noozeSubscribed')) {
+            setTimeout(() => { modal.style.display = 'block'; }, 1000);
+        }
+        btn.onclick = function(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+        };
+        close.onclick = function() {
+            modal.style.display = 'none';
+            localStorage.setItem('noozeSubscribed', 'true');
+        };
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                localStorage.setItem('noozeSubscribed', 'true');
+            }
+        };
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    form.style.display = 'none';
+                    thankYou.style.display = 'block';
+                    localStorage.setItem('noozeSubscribed', 'true');
+                    setTimeout(() => { modal.style.display = 'none'; }, 2000);
+                } else {
+                    thankYou.textContent = 'There was an error. Please try again.';
+                    thankYou.style.color = '#ff5252';
+                    thankYou.style.display = 'block';
+                }
+            });
+        };
+    });
+    </script>
+    <style>
+    .modal {
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        background: rgba(0,0,0,0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-content {
+        background: #181818;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.7);
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+    }
+    .close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #bbb;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+    .close:hover {
+        color: #00bcd4;
+    }
+    </style>
+</body>
+</html>
