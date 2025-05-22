@@ -1,0 +1,60 @@
+/* Modal Styles Extracted from HTML */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background: #181818;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.7);
+    width: 100%;
+    max-width: 540px;
+    position: relative;
+}
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #bbb;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close:hover {
+    color: #00bcd4;
+}
+.modal-subscribe-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.85rem 0;
+    background: linear-gradient(90deg, #00bcd4 0%, #2196f3 100%);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,188,212,0.15);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    letter-spacing: 0.5px;
+}
+.modal-subscribe-btn:hover {
+    background: linear-gradient(90deg, #2196f3 0%, #00bcd4 100%);
+    box-shadow: 0 4px 16px rgba(33,150,243,0.18);
+    transform: translateY(-2px) scale(1.03);
+}
+.modal-subscribe-btn:active {
+    background: #0097a7;
+    box-shadow: 0 2px 8px rgba(0,188,212,0.10);
+    transform: scale(0.98);
+} 
