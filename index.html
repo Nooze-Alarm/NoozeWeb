@@ -70,7 +70,7 @@
             <h2>Subscribe for Nooze Updates</h2>
             <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required style="margin-bottom:1rem; width:100%; padding:0.75rem; border-radius:8px; border:none; background:#2c2c2c; color:#fff;">
-                <button type="submit" class="btn-primary" style="width:100%;">Subscribe</button>
+                <button type="submit" class="modal-subscribe-btn">Subscribe</button>
             </form>
             <div id="subscribeThankYou" style="display:none; color:#00bcd4; margin-top:1rem; text-align:center;">Thank you for subscribing!</div>
         </div>
@@ -139,11 +139,11 @@
     }
     .modal-content {
         background: #181818;
-        padding: 2rem;
+        padding: 2.5rem;
         border-radius: 12px;
         box-shadow: 0 4px 24px rgba(0,0,0,0.7);
         width: 100%;
-        max-width: 400px;
+        max-width: 540px;
         position: relative;
     }
     .close {
@@ -157,6 +157,31 @@
     }
     .close:hover {
         color: #00bcd4;
+    }
+    .modal-subscribe-btn {
+        display: inline-block;
+        width: 100%;
+        padding: 0.85rem 0;
+        background: linear-gradient(90deg, #00bcd4 0%, #2196f3 100%);
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,188,212,0.15);
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+        letter-spacing: 0.5px;
+    }
+    .modal-subscribe-btn:hover {
+        background: linear-gradient(90deg, #2196f3 0%, #00bcd4 100%);
+        box-shadow: 0 4px 16px rgba(33,150,243,0.18);
+        transform: translateY(-2px) scale(1.03);
+    }
+    .modal-subscribe-btn:active {
+        background: #0097a7;
+        box-shadow: 0 2px 8px rgba(0,188,212,0.10);
+        transform: scale(0.98);
     }
     </style>
 </body>
