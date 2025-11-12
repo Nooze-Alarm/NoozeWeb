@@ -1,3 +1,27 @@
+// Rate Limiter Utility
+function checkRateLimit(key, cooldownMinutes) {
+    const storageKey = 'nooze_rate_limit_' + key;
+    const lastSubmission = localStorage.getItem(storageKey);
+    
+    if (lastSubmission) {
+        const timeDiff = (Date.now() - parseInt(lastSubmission)) / 1000 / 60; // minutes
+        if (timeDiff < cooldownMinutes) {
+            const remainingMinutes = Math.ceil(cooldownMinutes - timeDiff);
+            return {
+                allowed: false,
+                remainingMinutes: remainingMinutes
+            };
+        }
+    }
+    
+    return { allowed: true };
+}
+
+function setRateLimit(key) {
+    const storageKey = 'nooze_rate_limit_' + key;
+    localStorage.setItem(storageKey, Date.now().toString());
+}
+
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -56,6 +80,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (subscribeForm) {
             subscribeForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
+                // Check rate limit (5 minutes cooldown for subscribe)
+                const rateLimitCheck = checkRateLimit('subscribe', 5);
+                if (!rateLimitCheck.allowed) {
+                    if (subscribeThankYou) {
+                        const minutes = rateLimitCheck.remainingMinutes;
+                        const timeText = minutes === 1 ? '1 minute' : minutes + ' minutes';
+                        subscribeThankYou.textContent = 'Please wait ' + timeText + ' before subscribing again.';
+                        subscribeThankYou.classList.remove('hidden');
+                        subscribeThankYou.classList.add('text-red-500');
+                        subscribeThankYou.classList.remove('text-primary');
+                    }
+                    return;
+                }
+                
                 const formData = new FormData(subscribeForm);
                 const submitBtn = subscribeForm.querySelector('button[type="submit"]');
                 const emailInput = subscribeForm.querySelector('input[type="email"]');
@@ -81,7 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
 
                     if (response.ok) {
-                        // Success
+                        // Success - set rate limit
+                        setRateLimit('subscribe');
+                        
                         submitBtn.textContent = 'Subscribed!';
                         submitBtn.classList.remove('bg-primary', 'hover:bg-primary-dark');
                         submitBtn.classList.add('bg-green-500');
@@ -153,13 +194,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isOpen) {
                 answer.classList.add('hidden');
                 if (icon) icon.classList.remove('rotate-180');
-            } else {
+      } else {
                 answer.classList.remove('hidden');
                 if (icon) icon.classList.add('rotate-180');
-            }
-        });
+      }
     });
-
+  });
+  
     // Contact Form Validation
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -171,6 +212,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // Check rate limit (2 minutes cooldown for contact)
+            const rateLimitCheck = checkRateLimit('contact', 2);
+            if (!rateLimitCheck.allowed) {
+                if (formError) {
+                    const minutes = rateLimitCheck.remainingMinutes;
+                    const timeText = minutes === 1 ? '1 minute' : minutes + ' minutes';
+                    formError.textContent = 'Please wait ' + timeText + ' before submitting another message.';
+                    formError.classList.remove('hidden');
+                    formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                return;
+            }
 
             if (formSuccess) formSuccess.classList.add('hidden');
             if (formError) formError.classList.add('hidden');
@@ -189,6 +243,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 if (response.ok) {
+                    // Success - set rate limit
+                    setRateLimit('contact');
+                    
                     if (formSuccess) {
                         formSuccess.classList.remove('hidden');
                         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -294,6 +351,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (footerSubscribeForm) {
         footerSubscribeForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Check rate limit (5 minutes cooldown for subscribe)
+            const rateLimitCheck = checkRateLimit('subscribe', 5);
+            if (!rateLimitCheck.allowed) {
+                const submitBtn = footerSubscribeForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                const minutes = rateLimitCheck.remainingMinutes;
+                const timeText = minutes === 1 ? '1 minute' : minutes + ' minutes';
+                submitBtn.textContent = 'Wait ' + timeText;
+                submitBtn.disabled = true;
+                setTimeout(function() {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+                return;
+            }
+            
             const formData = new FormData(footerSubscribeForm);
             const submitBtn = footerSubscribeForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
@@ -303,12 +377,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             try {
                 const response = await fetch(footerSubscribeForm.action, {
-                    method: 'POST',
+                method: 'POST',
                     body: formData,
-                    headers: { 'Accept': 'application/json' }
+                headers: { 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
+                    // Success - set rate limit
+                    setRateLimit('subscribe');
+                    
                     submitBtn.textContent = 'Subscribed!';
                     submitBtn.classList.add('bg-green-500', 'hover:bg-green-600');
                     footerSubscribeForm.reset();
@@ -348,8 +425,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
             }
-        });
     });
+});
 
     // Enhanced mobile menu animation
     if (mobileMenuBtn && mobileMenu) {
@@ -399,3 +476,4 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+  
