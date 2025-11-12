@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Nooze — Our Story</title>
+    <meta name="description" content="Learn about Nooze's mission, how the idea was born, and the team behind the smarter way to wake up.">
+    <meta name="keywords" content="about nooze, nooze story, smart alarm developer, sleep technology">
+    <meta name="author" content="Nooze">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nooze.app/about.html">
+    <meta property="og:title" content="About Nooze — Our Story">
+    <meta property="og:description" content="Learn about Nooze's mission, how the idea was born, and the team behind the smarter way to wake up.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nooze.app/about.html">
+    <meta property="twitter:title" content="About Nooze — Our Story">
+    <meta property="twitter:description" content="Learn about Nooze's mission, how the idea was born, and the team behind the smarter way to wake up.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#00bcd4',
+                            dark: '#0097a7',
+                            light: '#2196f3',
+                        },
+                        dark: {
+                            DEFAULT: '#121212',
+                            lighter: '#181818',
+                            light: '#1a1a1a',
+                            card: '#252525',
+                            nav: '#1f1f1f',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-dark text-gray-300 font-sans antialiased min-h-screen flex flex-col scroll-smooth">
+    <!-- Navbar -->
+    <nav class="bg-dark-nav shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-white">
+                        Nooze<span class="text-primary">Alarm</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Home
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Features
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="about.html" class="text-primary relative">
+                        About
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                    </a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        FAQ
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Contact
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <button id="subscribeBtn" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
+                    Subscribe
+                </button>
+
+                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="mobileMenu" class="hidden md:hidden pb-4 overflow-hidden transition-all duration-300 opacity-0 max-h-0">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors">Features</a>
+                    <a href="about.html" class="text-primary">About</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors">FAQ</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1">
+        <!-- Hero Section -->
+        <section class="bg-dark-lighter py-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 fade-in">
+                    About Nooze
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto fade-in">
+                    The story behind the smarter way to wake up
+                </p>
+            </div>
+        </section>
+
+        <!-- Our Mission Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
+                        Our Mission
+                    </h2>
+                    <div class="bg-dark-card rounded-xl p-8 shadow-lg">
+                        <p class="text-gray-300 mb-6 leading-relaxed text-lg">
+                            At Nooze, our mission is to revolutionize how people wake up. We believe that starting your day right shouldn't be a struggle. Every morning should begin feeling refreshed, energized, and ready to take on whatever comes your way.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            We're building a comprehensive solution that combines smart technology, beautiful design, and seamless synchronization across all your devices. Nooze isn't just an alarm clock—it's your personal sleep assistant, helping you optimize your rest and transform your mornings into the best part of your day.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How the Idea Was Born Section -->
+        <section class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-center fade-in">
+                        How the Idea Was Born
+                    </h2>
+                    <div class="bg-dark-card rounded-xl p-8 shadow-lg fade-in">
+                        <div class="space-y-6 text-gray-300">
+                            <p class="leading-relaxed">
+                                Nooze was born from personal struggle. I experienced insomnia for a period of time, and even when I did manage to sleep, the quality was poor. Waking up became a daily battle—feeling groggy, disoriented, and struggling to get out of bed, no matter how many hours I had slept.
+                            </p>
+                            <p class="leading-relaxed">
+                                Traditional alarms made it worse. They would blare at a fixed time, often catching me in deep sleep, leaving me feeling even more exhausted. I started researching sleep science and discovered that waking up during the wrong phase of your sleep cycle can leave you feeling terrible, even after a full night's rest.
+                            </p>
+                            <p class="leading-relaxed">
+                                That's when the idea hit me: <strong class="text-white">What if an alarm could understand your sleep patterns and wake you at the perfect moment?</strong> What if technology could help you not just wake up, but wake up feeling refreshed?
+                            </p>
+                            <p class="leading-relaxed">
+                                As a developer, I realized I had the skills to build this. Sleep science has advanced significantly, but alarm technology hasn't kept up. I saw an opportunity to combine smart sleep cycle detection with intelligent alarm technology—something that could genuinely help people like me who struggle with sleep and waking up.
+                            </p>
+                            <p class="leading-relaxed">
+                                Nooze isn't just a product I'm building—it's a solution to a problem I've lived through. Every feature, every design decision, comes from understanding what it's like to struggle with sleep and wake up feeling terrible. Today, I'm turning that personal experience into something that can help others wake up feeling their best, every single day.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About the Developer Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-center fade-in">
+                        About the Developer
+                    </h2>
+                    <div class="bg-dark-card rounded-xl p-8 shadow-lg fade-in">
+                        <div class="text-center mb-6">
+                            <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary/30 shadow-lg bg-dark-lighter">
+                                <img src="snimka.jpg" alt="Teodor Mirchev" class="w-full h-full object-cover" style="min-width: 100%; min-height: 100%;" />
+                            </div>
+                            <h3 class="text-2xl font-semibold text-white mb-2">Teodor Mirchev</h3>
+                            <p class="text-gray-400">Founder & Developer</p>
+                            <p class="text-gray-500 text-sm mt-1">Full Stack Developer & Prompt Engineer</p>
+                        </div>
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p>
+                                Hi, I'm Teodor Mirchev, a 19-year-old full stack developer and prompt engineer with 5 years of programming experience. Nooze is my passion project—born from my own struggles with insomnia and poor sleep quality.
+                            </p>
+                            <p>
+                                After experiencing firsthand how difficult it can be to wake up feeling refreshed, I decided to use my development skills to create a solution. My background in full stack development allows me to build Nooze across all platforms, while my experience as a prompt engineer helps me think creatively about how to solve complex problems.
+                            </p>
+                            <p>
+                                Building Nooze has been a journey of learning—not just about sleep science, but about understanding what people really need to improve their mornings. Every feature I build comes from a place of empathy, because I know what it's like to struggle with sleep and wake up feeling terrible.
+                            </p>
+                            <p>
+                                I'm committed to creating a product that genuinely helps people. Privacy, user experience, and real-world effectiveness are my top priorities. Nooze isn't just an app to me—it's a solution I wish I had when I was struggling with sleep, and I'm excited to share it with others who face the same challenges.
+                            </p>
+                            <div class="border-t border-gray-700 pt-6 mt-6">
+                                <p class="text-gray-400 text-sm">
+                                    Want to get in touch? I'd love to hear from you at <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12 fade-in">
+                    What We Stand For
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-dark-card rounded-xl p-6 text-center fade-in">
+                        <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Privacy First</h3>
+                        <p class="text-gray-400">Your sleep data is yours. We use encryption, local storage, and never sell your information.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 text-center fade-in">
+                        <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">User-Centric</h3>
+                        <p class="text-gray-400">Every feature is designed with your needs in mind. We listen, iterate, and improve based on real feedback.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 text-center fade-in">
+                        <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Science-Based</h3>
+                        <p class="text-gray-400">Our approach is grounded in sleep science research and proven methods for optimal wake timing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-r from-primary to-primary-light">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-4 fade-in">
+                    Join Us on This Journey
+                </h2>
+                <p class="text-black/80 text-xl mb-8 max-w-2xl mx-auto fade-in">
+                    Be part of the Nooze community and help shape the future of wake-up technology
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 fade-in">
+                    <button id="subscribeBtnBottom" class="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors">
+                        Subscribe for Updates
+                    </button>
+                    <a href="contact.html" class="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="hidden fixed bottom-8 right-8 bg-primary text-black p-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-40 opacity-0 transform translate-y-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-dark-lighter text-gray-400 mt-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">About Nooze</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Nooze is an intelligent alarm app designed to revolutionize how you wake up. Our goal is to help you start each day feeling refreshed and energized through smart sleep tracking and optimal wake timing.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-primary transition-colors">Features</a></li>
+                        <li><a href="about.html" class="text-primary">About</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Policies</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html#privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="contact.html#terms" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Stay Updated</h3>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Subscribe to get notified when Nooze launches
+                    </p>
+                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-4">
+                        <div class="flex gap-2">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Your email"
+                                required
+                                class="flex-1 px-4 py-2 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                            />
+                            <button type="submit" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
+                                Subscribe
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Email: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>
+                    </p>
+                    <div class="flex flex-col space-y-2">
+                        <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 16.11 4c-2.48 0-4.49 2.014-4.49 4.495 0 .352.04.695.116 1.022C7.728 9.37 4.1 7.6 1.67 4.905a4.48 4.48 0 0 0-.61 2.262c0 1.56.793 2.936 2.003 3.744a4.48 4.48 0 0 1-2.034-.563v.057c0 2.18 1.55 4.002 3.604 4.418a4.48 4.48 0 0 1-2.027.077c.572 1.785 2.23 3.084 4.19 3.12A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.77 0-.195-.004-.39-.013-.583A9.13 9.13 0 0 0 24 4.59a8.98 8.98 0 0 1-2.54.698z"/>
+                            </svg>
+                            <span>NoozeAlarm</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 8.306c-.638 0-1.262-.062-1.86-.18v6.13c0 3.18-2.58 5.76-5.76 5.76-1.54 0-2.94-.6-4-1.57a5.75 5.75 0 0 1-1.76-4.19c0-3.18 2.58-5.76 5.76-5.76.13 0 .26.01.39.02v2.07a3.7 3.7 0 0 0-.39-.02c-2.06 0-3.74 1.68-3.74 3.74 0 1.03.42 1.97 1.1 2.65.68.68 1.62 1.1 2.65 1.1 2.06 0 3.74-1.68 3.74-3.74V2.25h2.06c.1 1.01.57 1.93 1.29 2.61.72.68 1.68 1.1 2.71 1.1v2.35z"/>
+                            </svg>
+                            <span>nooze.alarm.app</span>
+                        </a>
+                        <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>
+                            </svg>
+                            <span>Nooze-Alarm</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 Nooze | All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribeModal" class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-70 flex items-center justify-center transition-opacity duration-300">
+        <div class="bg-dark-lighter rounded-xl p-8 max-w-md w-full mx-4 relative">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-primary text-2xl transition-colors">
+                &times;
+            </button>
+            <h2 class="text-2xl font-bold text-white mb-4">Subscribe for Nooze Updates</h2>
+            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="space-y-4">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    class="w-full px-4 py-3 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <button type="submit" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                    Subscribe
+                </button>
+            </form>
+            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4">
+                Thank you for subscribing!
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

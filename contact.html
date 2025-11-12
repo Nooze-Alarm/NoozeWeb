@@ -1,302 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us</title>
-  <link rel="stylesheet" href="global.css" />
-  <link rel="stylesheet" href="contact.css" />
-  <link rel="stylesheet" href="modal.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nooze — Contact Us</title>
+    <meta name="description" content="Get in touch with the Nooze team. Have questions, feedback, or want to learn more? We'd love to hear from you.">
+    <meta name="keywords" content="contact nooze, nooze support, alarm app contact, sleep app help">
+    <meta name="author" content="Nooze">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nooze.app/contact.html">
+    <meta property="og:title" content="Nooze — Contact Us">
+    <meta property="og:description" content="Get in touch with the Nooze team. We'd love to hear from you.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://nooze.app/contact.html">
+    <meta property="twitter:title" content="Nooze — Contact Us">
+    <meta property="twitter:description" content="Get in touch with the Nooze team. We'd love to hear from you.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#2196f3' },
+                        dark: { DEFAULT: '#121212', lighter: '#181818', light: '#1a1a1a', card: '#252525', nav: '#1f1f1f' },
+                    },
+                },
+            },
+        }
+    </script>
 </head>
-<body>
-  <div class="page-wrapper">
-    <nav class="navbar">
-        <div class="logo">Nooze<span>Alarm</span></div>
-        <ul class="menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="features.html">Features</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <a href="#" class="contact-btn" id="subscribeBtn">Subscribe</a>
+<body class="bg-dark text-gray-300 font-sans antialiased min-h-screen flex flex-col scroll-smooth">
+    <!-- Navbar -->
+    <nav class="bg-dark-nav shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-white">
+                        Nooze<span class="text-primary">Alarm</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Home<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Features<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        About<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        FAQ<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="contact.html" class="text-primary relative">
+                        Contact<span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                    </a>
+                </div>
+                <button id="subscribeBtn" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
+                    Subscribe
+                </button>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors">Features</a>
+                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors">About</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors">FAQ</a>
+                    <a href="contact.html" class="text-primary">Contact</a>
+                </div>
+            </div>
+        </div>
     </nav>
-    <!-- Contact Section -->
-    <section class="contact-section fade-in">
-      <div class="container fade-in">
-        <h2 class="contact-title">Get in Touch</h2>
-        <p class="contact-subtitle">
-          Questions? Suggestions? We're here to help.
-        </p>
-        <!-- Formspree form -->
-        <form
-          class="contact-form fade-in"
-          action="https://formspree.io/f/mdkggjgv"
-          method="POST"
-        >
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              placeholder="Write your message here..."
-              required
-            ></textarea>
-          </div>
-          <input type="hidden" name="_next" value="/thank-you.html" />
-          <button type="submit" class="btn-primary">
-            Send Message
-          </button>
-        </form>
-      </div>
-    </section>
-    <footer class="footer custom-footer">
-      <div class="footer-container">
-        <div class="footer-section about">
-          <h3>About Nooze</h3>
-          <p>Nooze is dedicated to making your mornings smarter and more peaceful with intelligent alarms and seamless device sync.</p>
+
+    <main class="flex-1 py-20">
+        <!-- Hero Section -->
+        <section class="bg-dark-lighter py-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 fade-in">
+                    Get in Touch
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto fade-in">
+                    Questions? Suggestions? We're here to help. Reach out to us anytime.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto">
+                    <form id="contactForm" action="https://formspree.io/f/mdkggjgv" method="POST" class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
+                        <div class="mb-6">
+                            <label for="name" class="block text-white font-semibold mb-2">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-dark-lighter text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
+                            <span class="error-message text-red-500 text-sm hidden"></span>
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-white font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="you@example.com" class="w-full px-4 py-3 rounded-lg bg-dark-lighter text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
+                            <span class="error-message text-red-500 text-sm hidden"></span>
+                        </div>
+                        <div class="mb-6">
+                            <label for="subject" class="block text-white font-semibold mb-2">Subject</label>
+                            <select id="subject" name="subject" required class="w-full px-4 py-3 rounded-lg bg-dark-lighter text-white focus:outline-none focus:ring-2 focus:ring-primary transition-all">
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-white font-semibold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-lg bg-dark-lighter text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none"></textarea>
+                            <span class="error-message text-red-500 text-sm hidden"></span>
+                        </div>
+                        <input type="hidden" name="_next" value="/thank-you.html" />
+                        <button type="submit" id="submitBtn" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                            <span id="submitText">Send Message</span>
+                            <span id="submitLoading" class="hidden">Sending...</span>
+                        </button>
+                        <div id="formSuccess" class="hidden mt-4 p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400 text-center">
+                            Thank you! Your message has been sent successfully.
+                        </div>
+                        <div id="formError" class="hidden mt-4 p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400 text-center">
+                            There was an error sending your message. Please try again.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Info Section -->
+        <section class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="text-center fade-in">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Email</h3>
+                        <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Response Time</h3>
+                        <p class="text-gray-400">We aim to respond as quickly as possible</p>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Support</h3>
+                        <p class="text-gray-400">Available to help</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="hidden fixed bottom-8 right-8 bg-primary text-black p-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-40 opacity-0 transform translate-y-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-dark-lighter text-gray-400 mt-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">About Nooze</h3>
+                    <p class="text-gray-400 leading-relaxed">Nooze is an intelligent alarm app designed to revolutionize how you wake up. Our goal is to help you start each day feeling refreshed and energized through smart sleep tracking and optimal wake timing.</p>
+                </div>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-primary transition-colors">Features</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
+                        <li><a href="contact.html" class="text-primary">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Policies</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#terms" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Stay Updated</h3>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Subscribe to get notified when Nooze launches
+                    </p>
+                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-4">
+                        <div class="flex gap-2">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Your email"
+                                required
+                                class="flex-1 px-4 py-2 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                            />
+                            <button type="submit" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
+                                Subscribe
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Email: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>
+                    </p>
+                    <div class="flex flex-col space-y-2">
+                        <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 16.11 4c-2.48 0-4.49 2.014-4.49 4.495 0 .352.04.695.116 1.022C7.728 9.37 4.1 7.6 1.67 4.905a4.48 4.48 0 0 0-.61 2.262c0 1.56.793 2.936 2.003 3.744a4.48 4.48 0 0 1-2.034-.563v.057c0 2.18 1.55 4.002 3.604 4.418a4.48 4.48 0 0 1-2.027.077c.572 1.785 2.23 3.084 4.19 3.12A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.77 0-.195-.004-.39-.013-.583A9.13 9.13 0 0 0 24 4.59a8.98 8.98 0 0 1-2.54.698z"/>
+                            </svg>
+                            <span>NoozeAlarm</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 8.306c-.638 0-1.262-.062-1.86-.18v6.13c0 3.18-2.58 5.76-5.76 5.76-1.54 0-2.94-.6-4-1.57a5.75 5.75 0 0 1-1.76-4.19c0-3.18 2.58-5.76 5.76-5.76.13 0 .26.01.39.02v2.07a3.7 3.7 0 0 0-.39-.02c-2.06 0-3.74 1.68-3.74 3.74 0 1.03.42 1.97 1.1 2.65.68.68 1.62 1.1 2.65 1.1 2.06 0 3.74-1.68 3.74-3.74V2.25h2.06c.1 1.01.57 1.93 1.29 2.61.72.68 1.68 1.1 2.71 1.1v2.35z"/>
+                            </svg>
+                            <span>nooze.alarm.app</span>
+                        </a>
+                        <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>
+                            </svg>
+                            <span>Nooze-Alarm</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 Nooze | All rights reserved.</p>
+            </div>
         </div>
-        <div class="footer-section links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="features.html">Features</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section policies">
-          <h3>Policies</h3>
-          <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-          </ul>
-        </div>
-        <div class="footer-section contact">
-          <h3>Contact Us</h3>
-          <p>Email: <a href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a></p>
-          <div class="footer-socials">
-            <a href="https://x.com/NoozeAlarm" title="Twitter" class="social-icon" aria-label="Twitter" target="_blank" rel="noopener">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 16.11 4c-2.48 0-4.49 2.014-4.49 4.495 0 .352.04.695.116 1.022C7.728 9.37 4.1 7.6 1.67 4.905a4.48 4.48 0 0 0-.61 2.262c0 1.56.793 2.936 2.003 3.744a4.48 4.48 0 0 1-2.034-.563v.057c0 2.18 1.55 4.002 3.604 4.418a4.48 4.48 0 0 1-2.027.077c.572 1.785 2.23 3.084 4.19 3.12A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.77 0-.195-.004-.39-.013-.583A9.13 9.13 0 0 0 24 4.59a8.98 8.98 0 0 1-2.54.698z" fill="#bbb"/></svg>
-              <span class="social-name">NoozeAlarm</span>
-            </a>
-            <a href="https://www.tiktok.com/@nooze.alarm.app" title="TikTok" class="social-icon" aria-label="TikTok" target="_blank" rel="noopener">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.306c-.638 0-1.262-.062-1.86-.18v6.13c0 3.18-2.58 5.76-5.76 5.76-1.54 0-2.94-.6-4-1.57a5.75 5.75 0 0 1-1.76-4.19c0-3.18 2.58-5.76 5.76-5.76.13 0 .26.01.39.02v2.07a3.7 3.7 0 0 0-.39-.02c-2.06 0-3.74 1.68-3.74 3.74 0 1.03.42 1.97 1.1 2.65.68.68 1.62 1.1 2.65 1.1 2.06 0 3.74-1.68 3.74-3.74V2.25h2.06c.1 1.01.57 1.93 1.29 2.61.72.68 1.68 1.1 2.71 1.1v2.35z" fill="#bbb"/></svg>
-              <span class="social-name">nooze.alarm.app</span>
-            </a>
-            <a href="https://github.com/Nooze-Alarm" title="GitHub" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z" fill="#bbb"/></svg>
-              <span class="social-name">Nooze-Alarm</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Nooze | All rights reserved.</p>
-      </div>
     </footer>
-  </div>
-  <!-- Subscribe Modal -->
-  <div id="subscribeModal" class="modal" style="display:none;">
-      <div class="modal-content">
-          <span class="close" id="closeModal">&times;</span>
-          <h2>Subscribe for Nooze Updates</h2>
-          <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
-              <input type="email" name="email" placeholder="Enter your email" required style="margin-bottom:1rem; width:100%; padding:0.75rem; border-radius:8px; border:none; background:#2c2c2c; color:#fff;">
-              <button type="submit" class="btn-primary" style="width:100%;">Subscribe</button>
-          </form>
-          <div id="subscribeThankYou" style="display:none; color:#00bcd4; margin-top:1rem; text-align:center;">Thank you for subscribing!</div>
-      </div>
-  </div>
-  <script src="script.js"></script>
-  <script>
-  // Modal logic with one-time popup
-  document.addEventListener('DOMContentLoaded', function() {
-      const modal = document.getElementById('subscribeModal');
-      const btn = document.getElementById('subscribeBtn');
-      const close = document.getElementById('closeModal');
-      const form = document.getElementById('subscribeForm');
-      const thankYou = document.getElementById('subscribeThankYou');
-      // Show modal only once per user
-      if (!localStorage.getItem('noozeSubscribed')) {
-          setTimeout(() => { modal.style.display = 'block'; }, 1000);
-      }
-      btn.onclick = function(e) {
-          e.preventDefault();
-          modal.style.display = 'block';
-      };
-      close.onclick = function() {
-          modal.style.display = 'none';
-          localStorage.setItem('noozeSubscribed', 'true');
-      };
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = 'none';
-              localStorage.setItem('noozeSubscribed', 'true');
-          }
-      };
-      form.onsubmit = function(e) {
-          e.preventDefault();
-          fetch(form.action, {
-              method: 'POST',
-              body: new FormData(form),
-              headers: { 'Accept': 'application/json' }
-          }).then(response => {
-              if (response.ok) {
-                  form.style.display = 'none';
-                  thankYou.style.display = 'block';
-                  localStorage.setItem('noozeSubscribed', 'true');
-                  setTimeout(() => { modal.style.display = 'none'; }, 2000);
-              } else {
-                  thankYou.textContent = 'There was an error. Please try again.';
-                  thankYou.style.color = '#ff5252';
-                  thankYou.style.display = 'block';
-              }
-          });
-      };
-  });
-  </script>
-  <style>
-  .modal {
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: auto;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  .modal-content {
-      background: #181818;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.7);
-      width: 100%;
-      max-width: 400px;
-      position: relative;
-  }
-  .close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      color: #bbb;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: color 0.2s;
-  }
-  .close:hover {
-      color: #00bcd4;
-  }
-  .custom-footer {
-    background: #181818;
-    color: #bbb;
-    padding: 3rem 0 1rem 0;
-    font-size: 1rem;
-  }
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 2rem;
-  }
-  .footer-section {
-    flex: 1 1 200px;
-    min-width: 200px;
-    margin-bottom: 2rem;
-  }
-  .footer-section h3 {
-    color: #00bcd4;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-  }
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  .footer-section ul li {
-    margin-bottom: 0.5rem;
-  }
-  .footer-section ul li a {
-    color: #bbb;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-section ul li a:hover {
-    color: #00bcd4;
-  }
-  .footer-section p, .footer-section a {
-    color: #bbb;
-  }
-  .footer-section a {
-    text-decoration: none;
-  }
-  .footer-section a:hover {
-    color: #00bcd4;
-  }
-  .footer-socials {
-    margin-top: 1rem;
-  }
-  .social-icon {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.25em;
-  }
-  .social-icon svg {
-    width: 28px;
-    height: 28px;
-    filter: grayscale(1) brightness(1.5);
-    transition: filter 0.2s;
-  }
-  .social-icon:hover svg {
-    filter: none;
-  }
-  .footer-bottom {
-    text-align: center;
-    border-top: 1px solid #222;
-    padding-top: 1rem;
-    color: #888;
-    font-size: 0.95rem;
-  }
-  @media (max-width: 900px) {
-    .footer-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-  .social-name {
-    margin-left: 0.5em;
-    color: #bbb;
-    font-size: 1rem;
-    vertical-align: middle;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
-  </style>
+
+    <!-- Privacy Policy Section -->
+    <section id="privacy" class="py-20 bg-dark-lighter">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Privacy Policy</h2>
+                <div class="bg-dark-card rounded-xl p-8 space-y-6 text-gray-300">
+                    <p class="text-gray-400">Last updated: January 2025</p>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Data Collection</h3>
+                        <p>Nooze collects minimal data necessary to provide our alarm and sleep tracking services. This includes sleep patterns, alarm settings, and app usage data.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Data Storage</h3>
+                        <p>Your data is stored securely using encryption. We prioritize local storage when possible to minimize data transmission.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Data Sharing</h3>
+                        <p>We do not sell your personal information. Data is only shared when necessary for service functionality or as required by law.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Your Rights</h3>
+                        <p>You have the right to access, modify, or delete your data at any time through the app settings or by contacting us.</p>
+                    </div>
+                    <p class="text-gray-400 text-sm">For questions about our privacy practices, please contact us at <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms of Service Section -->
+    <section id="terms" class="py-20 bg-dark">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Terms of Service</h2>
+                <div class="bg-dark-card rounded-xl p-8 space-y-6 text-gray-300">
+                    <p class="text-gray-400">Last updated: January 2025</p>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Acceptance of Terms</h3>
+                        <p>By using Nooze, you agree to these Terms of Service. If you do not agree, please do not use our service.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Service Description</h3>
+                        <p>Nooze provides intelligent alarm and sleep tracking services. We reserve the right to modify or discontinue features at any time.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">User Responsibilities</h3>
+                        <p>You are responsible for maintaining the security of your account and for all activities that occur under your account.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Limitation of Liability</h3>
+                        <p>Nooze is provided "as is" without warranties. We are not liable for any damages resulting from use of the service.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Changes to Terms</h3>
+                        <p>We may update these terms periodically. Continued use of the service constitutes acceptance of updated terms.</p>
+                    </div>
+                    <p class="text-gray-400 text-sm">For questions about these terms, please contact us at <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribeModal" class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-70 flex items-center justify-center transition-opacity duration-300">
+        <div class="bg-dark-lighter rounded-xl p-8 max-w-md w-full mx-4 relative">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-primary text-2xl transition-colors">&times;</button>
+            <h2 class="text-2xl font-bold text-white mb-4">Subscribe for Nooze Updates</h2>
+            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="space-y-4">
+                <input type="email" name="email" placeholder="Enter your email" required class="w-full px-4 py-3 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary" />
+                <button type="submit" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Subscribe</button>
+            </form>
+            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4">Thank you for subscribing!</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
+

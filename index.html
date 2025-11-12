@@ -3,315 +3,878 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nooze</title>
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="modal.css">
+    <title>Nooze — The Smarter Way to Wake Up</title>
+    <meta name="description" content="Customize your mornings with intelligent alarms, calming sounds, and real-time sync across all your devices. Experience the future of wake-up technology.">
+    <meta name="keywords" content="smart alarm, sleep tracking, wake up app, alarm clock, sleep cycle, morning routine">
+    <meta name="author" content="Nooze">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nooze.app/">
+    <meta property="og:title" content="Nooze — The Smarter Way to Wake Up">
+    <meta property="og:description" content="Customize your mornings with intelligent alarms, calming sounds, and real-time sync across all your devices.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nooze.app/">
+    <meta property="twitter:title" content="Nooze — The Smarter Way to Wake Up">
+    <meta property="twitter:description" content="Customize your mornings with intelligent alarms, calming sounds, and real-time sync across all your devices.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#00bcd4',
+                            dark: '#0097a7',
+                            light: '#2196f3',
+                        },
+                        dark: {
+                            DEFAULT: '#121212',
+                            lighter: '#181818',
+                            light: '#1a1a1a',
+                            card: '#252525',
+                            nav: '#1f1f1f',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
 </head>
-<body>
-    <div class="page-wrapper">
-        <nav class="navbar">
-            <div class="logo">Nooze<span>Alarm</span></div>
-            <ul class="menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <a href="#" class="contact-btn" id="subscribeBtn">Subscribe</a>
+<body class="bg-dark text-gray-300 font-sans antialiased min-h-screen flex flex-col scroll-smooth">
+    <!-- Navbar -->
+    <nav class="bg-dark-nav shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-white">
+                        Nooze<span class="text-primary">Alarm</span>
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Home
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Features
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        About
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        FAQ
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
+                        Contact
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <button id="subscribeBtn" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
+                    Subscribe
+                </button>
+
+                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="mobileMenu" class="hidden md:hidden pb-4 overflow-hidden transition-all duration-300 opacity-0 max-h-0">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors">Features</a>
+                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors">About</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors">FAQ</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
         </nav>
-        <main class="main-content">
-            <section class="hero fade-in">
-                <div class="hero-text">
-                    <h1>
+
+    <main class="flex-1">
+        <!-- Hero Section -->
+        <section class="bg-dark-lighter py-20 lg:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                         Nooze — The Smarter Way to Wake Up
                     </h1>
-                    <p>Customize your mornings with intelligent alarms, calming sounds, and real-time sync across all your devices.</p>
-                    <div class="buttons">
-                        <a href="contact.html" class="btn-primary">Get in Touch</a>
+                        <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                            Customize your mornings with intelligent alarms, calming sounds, and real-time sync across all your devices. 
+                            Experience the future of wake-up technology.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="contact.html" class="bg-primary text-black px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                                Get in Touch
+                            </a>
+                            <a href="features.html" class="bg-dark-card text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-dark-light hover:text-white border border-gray-700 transition-colors">
+                                Explore Features
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fade-in flex justify-center lg:justify-end">
+                        <div class="relative max-w-md w-full">
+                            <div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full"></div>
+                            <img src="nooze.png" alt="Nooze App Dashboard" class="relative rounded-2xl shadow-2xl w-full" loading="lazy" />
+                        </div>
                     </div>
                 </div>
-                <div class="hero-images">
-                    <img src="preview.png" alt="Nooze App Dashboard" class="dashboard">
+            </div>
+        </section>
+
+        <!-- Our Goal Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto text-center fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                        Our Goal
+                    </h2>
+                    <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                        At Nooze, our mission is to revolutionize how people wake up. We believe that starting your day right shouldn't be a struggle. Our goal is to create an intelligent alarm system that understands your sleep patterns and wakes you at the perfect moment, ensuring you feel refreshed and energized every morning.
+                    </p>
+                    <p class="text-lg text-gray-400 leading-relaxed">
+                        We're building a comprehensive solution that combines smart technology, beautiful design, and seamless synchronization across all your devices. Nooze isn't just an alarm clock—it's your personal sleep assistant, helping you optimize your rest and transform your mornings.
+                    </p>
+                </div>
                 </div>
             </section>
-            <section id="features" class="features fade-in">
-                <h2>Key Features</h2>
-                <div class="card-container">
-                    <div class="card fade-in">
-                        <img src="logo.png" alt="Modern Interface">
-                        <h3>Intuitive Modern Interface</h3>
-                        <p>Set and manage alarms effortlessly with a beautifully designed UI.</p>
+
+        <!-- Features Preview Section -->
+        <section id="features" class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-4 fade-in">
+                    Key Features
+                </h2>
+                <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto fade-in">
+                    Everything you need for a perfect morning routine
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Smart Wake Technology</h3>
+                        <p class="text-gray-400">Wake up at the optimal time in your sleep cycle for a refreshed morning.</p>
                     </div>
-                    <div class="card fade-in">
-                        <img src="cross-platform.jpg" alt="Cross-platform Compatibility">
-                        <h3>Cross-Platform Support</h3>
-                        <p>Nooze runs smoothly on iOS, Android, Windows, and macOS.</p>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Cross-Platform Sync</h3>
+                        <p class="text-gray-400">Seamlessly sync alarms across iOS, Android, Windows, and macOS devices.</p>
                     </div>
-                    <div class="card fade-in">
-                        <img src="mobile-app.jpg" alt="Mobile Monitoring">
-                        <h3>Smart Wake Features</h3>
-                        <p>Use sleep tracking, smart snooze, and adaptive volume features for a better morning.</p>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Custom Alarm Sounds</h3>
+                        <p class="text-gray-400">Choose from a variety of calming sounds or upload your own favorites.</p>
                     </div>
-                    <div class="card fade-in">
-                        <img src="support.jpg" alt="24/7 Support">
-                        <h3>24/7 Support</h3>
-                        <p>We're always here to help with setup or questions—any time, any day.</p>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Sleep Analytics</h3>
+                        <p class="text-gray-400">Track your sleep patterns and get insights to improve your rest.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Multiple Alarms</h3>
+                        <p class="text-gray-400">Set unlimited alarms with different settings for weekdays, weekends, or specific dates.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Smart Snooze</h3>
+                        <p class="text-gray-400">Intelligent snooze that adapts to your needs with customizable duration and limits.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Weather Integration</h3>
+                        <p class="text-gray-400">Wake up to your local weather forecast and plan your day accordingly.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Calendar Integration</h3>
+                        <p class="text-gray-400">Sync with your calendar to automatically adjust alarms based on your schedule.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Gamification & Leveling</h3>
+                        <p class="text-gray-400">Earn points, unlock achievements, and level up as you build better sleep habits.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Social Platform</h3>
+                        <p class="text-gray-400">Connect with friends, share your progress, and motivate each other to build better sleep routines.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Journal</h3>
+                        <p class="text-gray-400">Track your daily thoughts, mood, and experiences to understand how they affect your sleep quality.</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in focus-within:ring-2 focus-within:ring-primary">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Sleep Aid</h3>
+                        <p class="text-gray-400">Access guided meditations, breathing exercises, and relaxation techniques to help you fall asleep faster.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12 fade-in">
+                    <a href="features.html" class="text-primary hover:text-primary-light font-semibold text-lg transition-colors">
+                        View All Features →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Problem & Solution Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="fade-in">
+                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                                Tired of Waking Up Groggy?
+                            </h2>
+                            <div class="space-y-4 text-gray-300">
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <p>Traditional alarms wake you at a fixed time, even if you're in deep sleep</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <p>No insight into your sleep quality or patterns</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <p>Alarms don't sync across devices, causing confusion</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <p>Limited customization and no gamification to build better habits</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fade-in">
+                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                                Nooze Solves This
+                            </h2>
+                            <div class="space-y-4 text-gray-300">
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <p>Smart wake technology detects your sleep cycle and wakes you at the optimal moment</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <p>Comprehensive sleep analytics help you understand and improve your rest</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <p>Real-time sync across all your devices ensures consistency</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <p>Gamification and social features make building better sleep habits engaging and fun</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-4 fade-in">
+                    Perfect For Everyone
+                </h2>
+                <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto fade-in">
+                    Nooze adapts to your lifestyle, whether you're a busy professional, student, or parent
+                </p>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Busy Professionals</h3>
+                        <p class="text-gray-400 mb-4">Wake up refreshed for important meetings. Calendar integration ensures you're never late, and smart scheduling adapts to your changing routine.</p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li>• Calendar sync for meetings</li>
+                            <li>• Optimal wake time for peak performance</li>
+                            <li>• Cross-device sync for work and home</li>
+                        </ul>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Students</h3>
+                        <p class="text-gray-400 mb-4">Never miss early classes. Multiple alarms for different schedules, sleep tracking to optimize study sessions, and gamification to build consistent routines.</p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li>• Multiple alarm profiles for class schedules</li>
+                            <li>• Sleep analytics for better study performance</li>
+                            <li>• Social features to stay motivated with friends</li>
+                        </ul>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 shadow-lg fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Families</h3>
+                        <p class="text-gray-400 mb-4">Coordinate morning routines with family sharing. Set alarms for kids, track everyone's sleep patterns, and ensure the whole family starts the day right.</p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li>• Family sharing and group alarms</li>
+                            <li>• Parental controls for children's alarms</li>
+                            <li>• Sleep insights for the whole family</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-4 fade-in">
+                    How It Works
+                </h2>
+                <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto fade-in">
+                    Three simple steps to transform your mornings
+                </p>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="text-center fade-in">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl font-bold text-black mx-auto mb-4">1</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Set Your Preferences</h3>
+                        <p class="text-gray-400">Choose your wake-up time, preferred sounds, and smart features</p>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl font-bold text-black mx-auto mb-4">2</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Sleep Tracking</h3>
+                        <p class="text-gray-400">Nooze monitors your sleep cycle to wake you at the optimal time</p>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl font-bold text-black mx-auto mb-4">3</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Wake Up Refreshed</h3>
+                        <p class="text-gray-400">Start your day feeling energized and ready to take on the day</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Roadmap Section -->
+        <section class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-4 fade-in">
+                    Our Development Journey
+                </h2>
+                <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto fade-in">
+                    We're actively building Nooze and making progress every day
+                </p>
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative">
+                        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/30"></div>
+                        <div class="space-y-8">
+                            <div class="relative flex items-start gap-6 fade-in">
+                                <div class="flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center text-black font-bold text-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 pt-2">
+                                    <h3 class="text-xl font-semibold text-white mb-2">Core Development</h3>
+                                    <p class="text-gray-400">Building the foundation: smart wake algorithms, cross-platform sync, and core alarm functionality</p>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start gap-6 fade-in">
+                                <div class="flex-shrink-0 w-16 h-16 bg-primary/50 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 pt-2">
+                                    <h3 class="text-xl font-semibold text-white mb-2">Feature Expansion</h3>
+                                    <p class="text-gray-400">Adding gamification, social features, journal, and sleep aid functionality</p>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start gap-6 fade-in">
+                                <div class="flex-shrink-0 w-16 h-16 bg-dark-card border-2 border-primary rounded-full flex items-center justify-center text-gray-400 font-bold text-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 pt-2">
+                                    <h3 class="text-xl font-semibold text-white mb-2">Beta Testing</h3>
+                                    <p class="text-gray-400">Limited beta release for early subscribers to test and provide feedback</p>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start gap-6 fade-in">
+                                <div class="flex-shrink-0 w-16 h-16 bg-dark-card border-2 border-gray-600 rounded-full flex items-center justify-center text-gray-500 font-bold text-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 pt-2">
+                                    <h3 class="text-xl font-semibold text-white mb-2">Public Launch</h3>
+                                    <p class="text-gray-400">Full release across iOS, Android, Windows, and macOS platforms</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12 fade-in">
+                    <p class="text-gray-400 mb-4">Want to be part of the journey?</p>
+                    <button id="subscribeBtnRoadmap" class="bg-primary text-black px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                        Join Early Access
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Benefits Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-4 fade-in">
+                    Why Nooze Makes a Difference
+                </h2>
+                <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto fade-in">
+                    Experience tangible improvements in your daily life
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-dark-card rounded-xl p-6 fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">More Energy</h3>
+                        <p class="text-gray-400">Wake up at the optimal point in your sleep cycle to feel more energized and alert throughout the day</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Better Sleep Quality</h3>
+                        <p class="text-gray-400">Track and analyze your sleep patterns to identify what helps you rest better and wake up refreshed</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Never Miss Important Events</h3>
+                        <p class="text-gray-400">Calendar integration and smart scheduling ensure you're always on time for meetings, classes, and appointments</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Build Better Habits</h3>
+                        <p class="text-gray-400">Gamification and social features make maintaining a consistent sleep schedule engaging and rewarding</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Data-Driven Insights</h3>
+                        <p class="text-gray-400">Understand how your daily activities, mood, and environment affect your sleep quality with detailed analytics</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 fade-in">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Privacy First</h3>
+                        <p class="text-gray-400">Your sleep data stays private and secure. We use encryption and local storage to protect your personal information</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Science Behind Section -->
+        <section class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-6">
+                        The Science Behind Smart Waking
+                    </h2>
+                    <div class="bg-dark-card rounded-xl p-8 shadow-lg">
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Sleep occurs in cycles, typically lasting 90-110 minutes. Each cycle includes stages of light sleep, deep sleep, and REM (Rapid Eye Movement) sleep. Waking up during deep sleep can leave you feeling groggy and disoriented, while waking during light sleep or REM results in feeling refreshed and alert.
+                        </p>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Nooze uses advanced algorithms to monitor your sleep patterns and detect when you're in a light sleep phase. By waking you at the optimal moment—typically within a 30-minute window before your desired wake time—you'll start your day feeling more energized and ready to take on whatever comes your way.
+                        </p>
+                        <div class="border-t border-gray-700 pt-6">
+                            <h3 class="text-xl font-semibold text-white mb-4">Key Sleep Cycle Facts:</h3>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-3">•</span>
+                                    <span>Most people experience 4-6 sleep cycles per night</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-3">•</span>
+                                    <span>Light sleep phases are the best times to wake up naturally</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-3">•</span>
+                                    <span>Waking during deep sleep can cause sleep inertia (grogginess)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-3">•</span>
+                                    <span>Consistent sleep schedules help regulate your circadian rhythm</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="py-20 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-4 fade-in">
+                    Nooze vs Traditional Alarms
+                </h2>
+                <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto fade-in">
+                    See how Nooze compares to standard alarm clocks
+                </p>
+                <div class="max-w-5xl mx-auto">
+                    <div class="bg-dark-card rounded-xl overflow-hidden shadow-lg fade-in">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-dark-lighter">
+                                    <tr>
+                                        <th class="px-6 py-4 text-left text-white font-semibold">Feature</th>
+                                        <th class="px-6 py-4 text-center text-gray-400 font-semibold">Traditional Alarms</th>
+                                        <th class="px-6 py-4 text-center text-primary font-semibold">Nooze</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700">
+                                    <tr>
+                                        <td class="px-6 py-4 text-gray-300">Sleep Cycle Detection</td>
+                                        <td class="px-6 py-4 text-center text-gray-500">❌</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅</td>
+                                    </tr>
+                                    <tr class="bg-dark-lighter/50">
+                                        <td class="px-6 py-4 text-gray-300">Cross-Platform Sync</td>
+                                        <td class="px-6 py-4 text-center text-gray-500">❌</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-gray-300">Sleep Analytics</td>
+                                        <td class="px-6 py-4 text-center text-gray-500">❌</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅</td>
+                                    </tr>
+                                    <tr class="bg-dark-lighter/50">
+                                        <td class="px-6 py-4 text-gray-300">Calendar Integration</td>
+                                        <td class="px-6 py-4 text-center text-gray-500">❌</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-gray-300">Gamification & Social</td>
+                                        <td class="px-6 py-4 text-center text-gray-500">❌</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅</td>
+                                    </tr>
+                                    <tr class="bg-dark-lighter/50">
+                                        <td class="px-6 py-4 text-gray-300">Journal & Mood Tracking</td>
+                                        <td class="px-6 py-4 text-center text-gray-500">❌</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 text-gray-300">Sleep Aid Features</td>
+                                        <td class="px-6 py-4 text-center text-gray-500">❌</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅</td>
+                                    </tr>
+                                    <tr class="bg-dark-lighter/50">
+                                        <td class="px-6 py-4 text-gray-300">Custom Alarm Sounds</td>
+                                        <td class="px-6 py-4 text-center text-gray-400">Limited</td>
+                                        <td class="px-6 py-4 text-center text-primary">✅ Extensive</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+        <!-- Trust Signals Section -->
+        <section class="py-20 bg-dark-lighter">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12 fade-in">
+                    Your Privacy and Security Matter
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-dark-card rounded-xl p-6 text-center fade-in">
+                        <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">End-to-End Encryption</h3>
+                        <p class="text-gray-400">Your sleep data is encrypted both in transit and at rest, ensuring maximum security</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 text-center fade-in">
+                        <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">GDPR Compliant</h3>
+                        <p class="text-gray-400">We follow international data protection standards and respect your privacy rights</p>
+                    </div>
+                    <div class="bg-dark-card rounded-xl p-6 text-center fade-in">
+                        <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-3">No Data Selling</h3>
+                        <p class="text-gray-400">We never sell your personal information. Your data belongs to you, and we keep it that way</p>
+                    </div>
+                    </div>
+                    </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-r from-primary to-primary-light">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-4 fade-in">
+                    Ready to Transform Your Mornings?
+                </h2>
+                <p class="text-black/80 text-xl mb-8 max-w-2xl mx-auto fade-in">
+                    Subscribe to get notified when Nooze launches and be among the first to experience smarter wake-up technology
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 fade-in">
+                    <button id="subscribeBtnBottom" class="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors">
+                        Subscribe for Updates
+                    </button>
+                    <a href="contact.html" class="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Contact Us
+                    </a>
                     </div>
                 </div>
             </section>
         </main>
-        <footer class="footer custom-footer">
-            <div class="footer-container">
-                <div class="footer-section about">
-                    <h3>About Nooze</h3>
-                    <p>Nooze is dedicated to making your mornings smarter and more peaceful with intelligent alarms and seamless device sync.</p>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="hidden fixed bottom-8 right-8 bg-primary text-black p-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-40 opacity-0 transform translate-y-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-dark-lighter text-gray-400 mt-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">About Nooze</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Nooze is an intelligent alarm app designed to revolutionize how you wake up. Our goal is to help you start each day feeling refreshed and energized through smart sleep tracking and optimal wake timing.
+                    </p>
                 </div>
-                <div class="footer-section links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="features.html">Features</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-primary transition-colors">Features</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section policies">
-                    <h3>Policies</h3>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Policies</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html#privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="contact.html#terms" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
-                <div class="footer-section contact">
-                    <h3>Contact Us</h3>
-                    <p>Email: <a href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a></p>
-                    <div class="footer-socials">
-                        <a href="https://x.com/NoozeAlarm" title="Twitter" class="social-icon" aria-label="Twitter" target="_blank" rel="noopener">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 16.11 4c-2.48 0-4.49 2.014-4.49 4.495 0 .352.04.695.116 1.022C7.728 9.37 4.1 7.6 1.67 4.905a4.48 4.48 0 0 0-.61 2.262c0 1.56.793 2.936 2.003 3.744a4.48 4.48 0 0 1-2.034-.563v.057c0 2.18 1.55 4.002 3.604 4.418a4.48 4.48 0 0 1-2.027.077c.572 1.785 2.23 3.084 4.19 3.12A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.77 0-.195-.004-.39-.013-.583A9.13 9.13 0 0 0 24 4.59a8.98 8.98 0 0 1-2.54.698z" fill="#bbb"/></svg>
-                            <span class="social-name">NoozeAlarm</span>
+                <div>
+                    <h3 class="text-primary text-xl font-semibold mb-4">Stay Updated</h3>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Subscribe to get notified when Nooze launches
+                    </p>
+                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-4">
+                        <div class="flex gap-2">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Your email"
+                                required
+                                class="flex-1 px-4 py-2 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                            />
+                            <button type="submit" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
+                                Subscribe
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Email: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>
+                    </p>
+                    <div class="flex flex-col space-y-2">
+                        <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 16.11 4c-2.48 0-4.49 2.014-4.49 4.495 0 .352.04.695.116 1.022C7.728 9.37 4.1 7.6 1.67 4.905a4.48 4.48 0 0 0-.61 2.262c0 1.56.793 2.936 2.003 3.744a4.48 4.48 0 0 1-2.034-.563v.057c0 2.18 1.55 4.002 3.604 4.418a4.48 4.48 0 0 1-2.027.077c.572 1.785 2.23 3.084 4.19 3.12A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.77 0-.195-.004-.39-.013-.583A9.13 9.13 0 0 0 24 4.59a8.98 8.98 0 0 1-2.54.698z"/>
+                            </svg>
+                            <span>NoozeAlarm</span>
                         </a>
-                        <a href="https://www.tiktok.com/@nooze.alarm.app" title="TikTok" class="social-icon" aria-label="TikTok" target="_blank" rel="noopener">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.306c-.638 0-1.262-.062-1.86-.18v6.13c0 3.18-2.58 5.76-5.76 5.76-1.54 0-2.94-.6-4-1.57a5.75 5.75 0 0 1-1.76-4.19c0-3.18 2.58-5.76 5.76-5.76.13 0 .26.01.39.02v2.07a3.7 3.7 0 0 0-.39-.02c-2.06 0-3.74 1.68-3.74 3.74 0 1.03.42 1.97 1.1 2.65.68.68 1.62 1.1 2.65 1.1 2.06 0 3.74-1.68 3.74-3.74V2.25h2.06c.1 1.01.57 1.93 1.29 2.61.72.68 1.68 1.1 2.71 1.1v2.35z" fill="#bbb"/></svg>
-                            <span class="social-name">nooze.alarm.app</span>
+                        <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 8.306c-.638 0-1.262-.062-1.86-.18v6.13c0 3.18-2.58 5.76-5.76 5.76-1.54 0-2.94-.6-4-1.57a5.75 5.75 0 0 1-1.76-4.19c0-3.18 2.58-5.76 5.76-5.76.13 0 .26.01.39.02v2.07a3.7 3.7 0 0 0-.39-.02c-2.06 0-3.74 1.68-3.74 3.74 0 1.03.42 1.97 1.1 2.65.68.68 1.62 1.1 2.65 1.1 2.06 0 3.74-1.68 3.74-3.74V2.25h2.06c.1 1.01.57 1.93 1.29 2.61.72.68 1.68 1.1 2.71 1.1v2.35z"/>
+                            </svg>
+                            <span>nooze.alarm.app</span>
                         </a>
-                        <a href="https://github.com/Nooze-Alarm" title="GitHub" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z" fill="#bbb"/></svg>
-                            <span class="social-name">Nooze-Alarm</span>
+                        <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>
+                            </svg>
+                            <span>Nooze-Alarm</span>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
                 <p>&copy; 2025 Nooze | All rights reserved.</p>
             </div>
+            </div>
         </footer>
-    </div>
+
     <!-- Subscribe Modal -->
-    <div id="subscribeModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <h2>Subscribe for Nooze Updates</h2>
-            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required style="margin-bottom:1rem; width:100%; padding:0.75rem; border-radius:8px; border:none; background:#2c2c2c; color:#fff;">
-                <button type="submit" class="modal-subscribe-btn">Subscribe</button>
+    <div id="subscribeModal" class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-70 flex items-center justify-center transition-opacity duration-300">
+        <div class="bg-dark-lighter rounded-xl p-8 max-w-md w-full mx-4 relative">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-primary text-2xl transition-colors">
+                &times;
+            </button>
+            <h2 class="text-2xl font-bold text-white mb-4">Subscribe for Nooze Updates</h2>
+            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="space-y-4">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    class="w-full px-4 py-3 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <button type="submit" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                    Subscribe
+                </button>
             </form>
-            <div id="subscribeThankYou" style="display:none; color:#00bcd4; margin-top:1rem; text-align:center;">Thank you for subscribing!</div>
+            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4">
+                Thank you for subscribing!
+            </div>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script>
-    // Modal logic with one-time popup
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('subscribeModal');
-        const btn = document.getElementById('subscribeBtn');
-        const close = document.getElementById('closeModal');
-        const form = document.getElementById('subscribeForm');
-        const thankYou = document.getElementById('subscribeThankYou');
-        // Show modal only once per user
-        if (!localStorage.getItem('noozeSubscribed')) {
-            setTimeout(() => { modal.style.display = 'block'; }, 1000);
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Nooze",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "iOS, Android, Windows, macOS",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Customize your mornings with intelligent alarms, calming sounds, and real-time sync across all your devices.",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "ratingCount": "1"
         }
-        btn.onclick = function(e) {
-            e.preventDefault();
-            modal.style.display = 'block';
-        };
-        close.onclick = function() {
-            modal.style.display = 'none';
-            localStorage.setItem('noozeSubscribed', 'true');
-        };
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-                localStorage.setItem('noozeSubscribed', 'true');
-            }
-        };
-        form.onsubmit = function(e) {
-            e.preventDefault();
-            fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    form.style.display = 'none';
-                    thankYou.style.display = 'block';
-                    localStorage.setItem('noozeSubscribed', 'true');
-                    setTimeout(() => { modal.style.display = 'none'; }, 2000);
-                } else {
-                    thankYou.textContent = 'There was an error. Please try again.';
-                    thankYou.style.color = '#ff5252';
-                    thankYou.style.display = 'block';
-                }
-            });
-        };
-    });
+    }
     </script>
-    <style>
-    .modal {
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow: auto;
-        background: rgba(0,0,0,0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .modal-content {
-        background: #181818;
-        padding: 2.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.7);
-        width: 100%;
-        max-width: 540px;
-        position: relative;
-    }
-    .close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        color: #bbb;
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: color 0.2s;
-    }
-    .close:hover {
-        color: #00bcd4;
-    }
-    .modal-subscribe-btn {
-        display: inline-block;
-        width: 100%;
-        padding: 0.85rem 0;
-        background: linear-gradient(90deg, #00bcd4 0%, #2196f3 100%);
-        color: #fff;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,188,212,0.15);
-        cursor: pointer;
-        transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-        letter-spacing: 0.5px;
-    }
-    .modal-subscribe-btn:hover {
-        background: linear-gradient(90deg, #2196f3 0%, #00bcd4 100%);
-        box-shadow: 0 4px 16px rgba(33,150,243,0.18);
-        transform: translateY(-2px) scale(1.03);
-    }
-    .modal-subscribe-btn:active {
-        background: #0097a7;
-        box-shadow: 0 2px 8px rgba(0,188,212,0.10);
-        transform: scale(0.98);
-    }
-    .custom-footer {
-        background: #181818;
-        color: #bbb;
-        padding: 3rem 0 1rem 0;
-        font-size: 1rem;
-    }
-    .footer-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        max-width: 1200px;
-        margin: 0 auto;
-        gap: 2rem;
-    }
-    .footer-section {
-        flex: 1 1 200px;
-        min-width: 200px;
-        margin-bottom: 2rem;
-    }
-    .footer-section h3 {
-        color: #00bcd4;
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
-    }
-    .footer-section ul {
-        list-style: none;
-        padding: 0;
-    }
-    .footer-section ul li {
-        margin-bottom: 0.5rem;
-    }
-    .footer-section ul li a {
-        color: #bbb;
-        text-decoration: none;
-        transition: color 0.2s;
-    }
-    .footer-section ul li a:hover {
-        color: #00bcd4;
-    }
-    .footer-section p, .footer-section a {
-        color: #bbb;
-    }
-    .footer-section a {
-        text-decoration: none;
-    }
-    .footer-section a:hover {
-        color: #00bcd4;
-    }
-    .footer-socials {
-        margin-top: 1rem;
-    }
-    .social-icon {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.25em;
-    }
-    .social-icon img {
-        width: 28px;
-        height: 28px;
-        filter: grayscale(1) brightness(1.5);
-        transition: filter 0.2s;
-    }
-    .social-icon:hover img {
-        filter: none;
-    }
-    .footer-bottom {
-        text-align: center;
-        border-top: 1px solid #222;
-        padding-top: 1rem;
-        color: #888;
-        font-size: 0.95rem;
-    }
-    @media (max-width: 900px) {
-        .footer-container {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-    }
-    .social-name {
-        margin-left: 0.5em;
-        color: #bbb;
-        font-size: 1rem;
-        vertical-align: middle;
-        font-weight: 500;
-        letter-spacing: 0.02em;
-    }
-    </style>
+
+    <script src="script.js"></script>
 </body>
 </html>
