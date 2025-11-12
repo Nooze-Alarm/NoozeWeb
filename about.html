@@ -8,15 +8,21 @@
     <meta name="keywords" content="about nooze, nooze story, smart alarm developer, sleep technology">
     <meta name="author" content="Nooze">
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nooze.app/about.html">
+    <meta property="og:url" content="https://noozealarm.com/about.html">
     <meta property="og:title" content="About Nooze — Our Story">
     <meta property="og:description" content="Learn about Nooze's mission, how the idea was born, and the team behind the smarter way to wake up.">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://nooze.app/about.html">
+    <meta property="twitter:url" content="https://noozealarm.com/about.html">
     <meta property="twitter:title" content="About Nooze — Our Story">
     <meta property="twitter:description" content="Learn about Nooze's mission, how the idea was born, and the team behind the smarter way to wake up.">
     
@@ -305,6 +311,11 @@
                         Subscribe to get notified when Nooze launches
                     </p>
                     <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-4">
+                        <!-- Honeypot field - hidden from users, bots will fill it -->
+                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                            <label for="footer_website">Website</label>
+                            <input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off" />
+                        </div>
                         <div class="flex gap-2">
                             <input
                                 type="email"
@@ -364,6 +375,11 @@
                     required
                     class="w-full px-4 py-3 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
                 />
+                <!-- Honeypot field - hidden from users, bots will fill it -->
+                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                    <label for="subscribe_website">Website</label>
+                    <input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off" />
+                </div>
                 <button type="submit" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
                     Subscribe
                 </button>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Nooze</title>
+    <meta name="description" content="The page you're looking for doesn't exist.">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#00bcd4',
+                            dark: '#0097a7',
+                            light: '#2196f3',
+                        },
+                        dark: {
+                            DEFAULT: '#121212',
+                            lighter: '#181818',
+                            light: '#1a1a1a',
+                            card: '#252525',
+                            nav: '#1f1f1f',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-dark text-gray-300 font-sans antialiased min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-dark-nav shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-white">
+                        Nooze<span class="text-primary">Alarm</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors">Features</a>
+                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors">About</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors">FAQ</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 404 Content -->
+    <main class="flex-1 flex items-center justify-center py-20">
+        <div class="text-center px-4">
+            <h1 class="text-9xl font-bold text-primary mb-4">404</h1>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Page Not Found</h2>
+            <p class="text-xl text-gray-400 mb-8 max-w-md mx-auto">
+                Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="index.html" class="bg-primary text-black px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+                    Go Home
+                </a>
+                <a href="contact.html" class="bg-dark-card text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-dark-light hover:text-white border border-gray-700 transition-colors">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-lighter text-gray-400 mt-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <p>&copy; 2025 Nooze | All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

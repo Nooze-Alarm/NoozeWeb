@@ -81,6 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
             subscribeForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
+                // Check honeypot field (bots will fill this)
+                const honeypot = subscribeForm.querySelector('input[name="website"]');
+                if (honeypot && honeypot.value) {
+                    // Bot detected - silently fail
+                    return;
+                }
+                
                 // Check rate limit (5 minutes cooldown for subscribe)
                 const rateLimitCheck = checkRateLimit('subscribe', 5);
                 if (!rateLimitCheck.allowed) {
@@ -212,6 +219,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // Check honeypot field (bots will fill this)
+            const honeypot = contactForm.querySelector('input[name="website"]');
+            if (honeypot && honeypot.value) {
+                // Bot detected - silently fail
+                return;
+            }
 
             // Check rate limit (2 minutes cooldown for contact)
             const rateLimitCheck = checkRateLimit('contact', 2);
@@ -351,6 +365,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (footerSubscribeForm) {
         footerSubscribeForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Check honeypot field (bots will fill this)
+            const honeypot = footerSubscribeForm.querySelector('input[name="website"]');
+            if (honeypot && honeypot.value) {
+                // Bot detected - silently fail
+                return;
+            }
             
             // Check rate limit (5 minutes cooldown for subscribe)
             const rateLimitCheck = checkRateLimit('subscribe', 5);

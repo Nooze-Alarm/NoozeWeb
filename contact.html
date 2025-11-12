@@ -8,15 +8,21 @@
     <meta name="keywords" content="contact nooze, nooze support, alarm app contact, sleep app help">
     <meta name="author" content="Nooze">
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nooze.app/contact.html">
+    <meta property="og:url" content="https://noozealarm.com/contact.html">
     <meta property="og:title" content="Nooze — Contact Us">
     <meta property="og:description" content="Get in touch with the Nooze team. We'd love to hear from you.">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://nooze.app/contact.html">
+    <meta property="twitter:url" content="https://noozealarm.com/contact.html">
     <meta property="twitter:title" content="Nooze — Contact Us">
     <meta property="twitter:description" content="Get in touch with the Nooze team. We'd love to hear from you.">
     
@@ -129,6 +135,11 @@
                             <textarea id="message" name="message" rows="6" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-lg bg-dark-lighter text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none"></textarea>
                             <span class="error-message text-red-500 text-sm hidden"></span>
                         </div>
+                        <!-- Honeypot field - hidden from users, bots will fill it -->
+                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+                        </div>
                         <input type="hidden" name="_next" value="/thank-you.html" />
                         <button type="submit" id="submitBtn" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
                             <span id="submitText">Send Message</span>
@@ -219,6 +230,11 @@
                         Subscribe to get notified when Nooze launches
                     </p>
                     <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-4">
+                        <!-- Honeypot field - hidden from users, bots will fill it -->
+                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                            <label for="footer_website">Website</label>
+                            <input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off" />
+                        </div>
                         <div class="flex gap-2">
                             <input
                                 type="email"
@@ -332,6 +348,11 @@
             <h2 class="text-2xl font-bold text-white mb-4">Subscribe for Nooze Updates</h2>
             <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="space-y-4">
                 <input type="email" name="email" placeholder="Enter your email" required class="w-full px-4 py-3 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary" />
+                <!-- Honeypot field - hidden from users, bots will fill it -->
+                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                    <label for="subscribe_website">Website</label>
+                    <input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off" />
+                </div>
                 <button type="submit" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Subscribe</button>
             </form>
             <div id="subscribeThankYou" class="hidden text-primary text-center mt-4">Thank you for subscribing!</div>
