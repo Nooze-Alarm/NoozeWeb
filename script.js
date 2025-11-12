@@ -52,10 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('noozeSubscribed', 'true');
         };
 
-        // Show modal once on first visit
-        if (!localStorage.getItem('noozeSubscribed')) {
-            setTimeout(showModal, 1000);
-        }
+        // Modal no longer auto-shows on first visit (removed to improve UX)
+        // Users can still subscribe via the Subscribe button in the navbar
 
         // Subscribe button handlers
         subscribeBtns.forEach(function(btn) {
