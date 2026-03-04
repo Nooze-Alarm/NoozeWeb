@@ -3,541 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nooze — Features</title>
-    <meta name="description" content="Discover all the powerful features of Nooze: smart wake technology, cross-platform sync, gamification, social platform, journal, and sleep aid.">
-    <meta name="keywords" content="nooze features, smart alarm features, sleep tracking features, alarm app features">
-    <meta name="author" content="Nooze">
-    
-    <!-- Security Headers -->
+    <title>Nooze Features - Smart Alarm, Sleep Tracking, Gamification &amp; More</title>
+    <meta name="description" content="Discover Nooze's features: smart wake technology, sleep cycle tracking, gamification, social challenges, health integrations, smart home control, and more.">
+    <meta name="keywords" content="nooze features, smart alarm features, sleep tracking, gamified alarm, health connect, smart home alarm, wake challenges">
+    <meta name="author" content="Nooze Alarm">
+    <link rel="canonical" href="https://noozealarm.com/features.html">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://noozealarm.com/features.html">
-    <meta property="og:title" content="Nooze — Features">
-    <meta property="og:description" content="Discover all the powerful features of Nooze, the intelligent alarm app.">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://noozealarm.com/features.html">
-    <meta property="twitter:title" content="Nooze — Features">
-    <meta property="twitter:description" content="Discover all the powerful features of Nooze, the intelligent alarm app.">
-    
-    <!-- Favicon -->
+    <meta property="og:title" content="Nooze Features - Smart Alarm, Sleep Tracking &amp; Gamification">
+    <meta property="og:description" content="Smart wake, sleep tracking, gamification, social duels, 10 health integrations, smart home, and 12 themes.">
+    <meta property="og:image" content="https://noozealarm.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@NoozeAlarm">
+    <meta name="twitter:title" content="Nooze Features">
+    <meta name="twitter:description" content="Smart wake, sleep tracking, gamification, social duels, health integrations, and more.">
     <link rel="icon" type="image/png" href="logo.png">
-    
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#2196f3' },
-                        dark: { DEFAULT: '#121212', lighter: '#181818', light: '#1a1a1a', card: '#252525', nav: '#1f1f1f' },
-                    },
+            theme: { extend: {
+                fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                colors: {
+                    primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#26c6da' },
+                    accent: { DEFAULT: '#7c3aed', light: '#a855f7' },
                 },
-            },
+            }},
         }
     </script>
+    <link rel="stylesheet" href="styles.css">
+    <script>if(sessionStorage.getItem('nooze_pixel_transition'))document.write('<style id="pxl-hide">body{visibility:hidden}</style>')</script>
 </head>
-<body class="bg-dark text-gray-300 font-sans antialiased min-h-screen flex flex-col scroll-smooth">
+<body class="min-h-screen flex flex-col">
+    <canvas id="particles"></canvas>
+
     <!-- Navbar -->
-    <nav class="bg-dark-nav shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="nav-blur fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-white">
-                        Nooze<span class="text-primary">Alarm</span>
-                    </a>
+                <a href="index.html" class="text-xl font-bold text-white tracking-tight">Nooze<span class="text-primary">Alarm</span></a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="features.html" class="nav-link active">Features</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        Home<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="features.html" class="text-primary relative">
-                        Features<span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
-                    </a>
-                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        About<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        FAQ<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        Contact<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
+                <div class="flex items-center gap-3">
+                    <button id="subscribeBtn" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5"><span>Subscribe</span></button>
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary p-2" aria-label="Toggle menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
                 </div>
-                <button id="subscribeBtn" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
-                    Subscribe
-                </button>
-                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
             </div>
             <div id="mobileMenu" class="hidden md:hidden pb-4">
-                <div class="flex flex-col space-y-3">
-                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">Home</a>
-                    <a href="features.html" class="text-primary">Features</a>
-                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors">About</a>
-                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors">FAQ</a>
-                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
+                <div class="flex flex-col gap-3 pt-2">
+                    <a href="index.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Home</a>
+                    <a href="features.html" class="text-primary font-medium py-2">Features</a>
+                    <a href="about.html" class="text-gray-300 hover:text-primary py-2 transition-colors">About</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-primary py-2 transition-colors">FAQ</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-1 py-20">
-        <!-- Hero Section -->
-        <section class="bg-dark-lighter py-16">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 fade-in">
-                    Powerful Features for Better Mornings
+    <main class="flex-1 pt-16">
+        <!-- Hero -->
+        <section class="hero-bg py-20 relative">
+            <div class="orb orb-1" style="opacity:0.2;"></div>
+            <div class="orb orb-2" style="opacity:0.15;"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 reveal">
+                    Everything You Need to <span class="gradient-text">Sleep Better</span>
                 </h1>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto fade-in">
-                    Discover all the ways Nooze helps you wake up smarter and start your day right
-                </p>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-1">From intelligent alarms to social challenges, Nooze is packed with features designed to transform your mornings.</p>
             </div>
         </section>
 
-        <!-- Features Grid -->
-        <section class="py-20 bg-dark">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                            </svg>
+        <div class="section-divider"></div>
+
+        <!-- Smart Wake -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl font-bold text-white mb-3 reveal">Smart Wake <span class="gradient-text-cyan">Technology</span></h2>
+                    <p class="text-gray-400 max-w-xl mx-auto reveal delay-1">Wake up during your lightest sleep phase, not mid-dream.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass-card p-7 reveal delay-1">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Smart Wake Technology</h3>
-                        <p class="text-gray-400 mb-4">Advanced algorithms analyze your sleep cycle and wake you at the optimal time, ensuring you feel refreshed and energized.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Sleep cycle detection</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Optimal wake window calculation</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Gradual volume increase</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Adaptive scheduling</span></li>
-                        </ul>
+                        <h3 class="text-white font-semibold mb-2">Configurable Window</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Choose a 15, 20, or 30-minute smart window before your alarm time. Nooze picks the best moment within that range.</p>
                     </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-                            </svg>
+                    <div class="glass-card p-7 reveal delay-2">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Cross-Platform Sync</h3>
-                        <p class="text-gray-400 mb-4">Your alarms sync seamlessly across all your devices. Set an alarm on one device and it will be available on all your other devices.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Real-time cloud sync</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Multi-device support</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Automatic backup</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Offline mode available</span></li>
-                        </ul>
+                        <h3 class="text-white font-semibold mb-2">Hybrid Detection</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Uses your phone's accelerometer and microphone together to accurately detect sleep phases without a wearable.</p>
                     </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-                            </svg>
+                    <div class="glass-card p-7 reveal delay-3">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Custom Alarm Sounds</h3>
-                        <p class="text-gray-400 mb-4">Choose from our extensive library of sounds or upload your own. From nature sounds to your favorite music, wake up your way.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Extensive library of pre-loaded sounds</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Custom audio upload</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Spotify integration</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Fade-in volume control</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Sleep Analytics</h3>
-                        <p class="text-gray-400 mb-4">Track your sleep patterns, wake times, and quality metrics. Get insights to improve your sleep and wake-up experience.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Sleep duration tracking</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Wake time history</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Quality score analysis</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Weekly/monthly reports</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Multiple Alarms</h3>
-                        <p class="text-gray-400 mb-4">Set multiple alarms with different settings for weekdays, weekends, or specific dates. Stay organized and never miss an important event.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Multiple alarms support</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Recurring schedules</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>One-time alarms</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Quick alarm templates</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Smart Snooze</h3>
-                        <p class="text-gray-400 mb-4">Intelligent snooze that adapts to your needs. Configure snooze duration, limits, and even location-based snooze.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Customizable snooze time</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Maximum snooze limits</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Progressive snooze intervals</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Location-aware snooze</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Weather Integration</h3>
-                        <p class="text-gray-400 mb-4">Wake up to your local weather forecast. Know if you need an umbrella or sunglasses before you even get out of bed.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Current conditions</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Daily forecast</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Weather alerts</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Location-based updates</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Calendar Integration</h3>
-                        <p class="text-gray-400 mb-4">Sync with your calendar to automatically adjust alarms based on your schedule. Smart alarms for important meetings.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Google Calendar sync</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Apple Calendar support</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Auto-adjust for events</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Meeting reminders</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Customizable Themes</h3>
-                        <p class="text-gray-400 mb-4">Personalize your app with beautiful themes. Dark mode, light mode, or create your own color scheme.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Multiple theme options</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Custom color schemes</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Dark/Light mode</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Accessibility options</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Notification Center</h3>
-                        <p class="text-gray-400 mb-4">Stay informed with smart notifications about your alarms, sleep insights, and app updates.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Alarm reminders</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Sleep insights</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Weekly summaries</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Customizable notifications</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Family Sharing</h3>
-                        <p class="text-gray-400 mb-4">Share alarms with family members. Perfect for coordinating morning routines and ensuring everyone wakes up on time.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Shared alarm groups</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Family calendar sync</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Parental controls</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Group notifications</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Privacy & Security</h3>
-                        <p class="text-gray-400 mb-4">Your data is encrypted and secure. We prioritize your privacy and data is stored locally when possible.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>End-to-end encryption</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Local data storage</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>No data sharing</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>GDPR compliant</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Gamification & Leveling System</h3>
-                        <p class="text-gray-400 mb-4">Make building better sleep habits fun and engaging. Earn points, unlock achievements, level up, and track your progress as you improve your sleep routine.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Experience points and leveling</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Achievement badges</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Daily challenges</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Progress tracking</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Social Platform</h3>
-                        <p class="text-gray-400 mb-4">Connect with friends and build a community around better sleep. Share your progress, compete in challenges, and motivate each other to maintain healthy sleep habits.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Friend connections</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Progress sharing</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Group challenges</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Leaderboards</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Journal</h3>
-                        <p class="text-gray-400 mb-4">Keep a daily journal to track your thoughts, mood, and experiences. Understand how your daily activities and emotions correlate with your sleep quality and wake-up experience.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Daily journal entries</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Mood tracking</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Sleep correlation insights</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Export and review history</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 fade-in">
-                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold text-white mb-3">Sleep Aid</h3>
-                        <p class="text-gray-400 mb-4">Access a comprehensive library of sleep aids including guided meditations, breathing exercises, white noise, and relaxation techniques to help you fall asleep faster and sleep more deeply.</p>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Guided meditations</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Breathing exercises</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>White noise and nature sounds</span></li>
-                            <li class="flex items-start"><span class="text-primary mr-2">•</span><span>Sleep stories and ASMR</span></li>
-            </ul>
+                        <h3 class="text-white font-semibold mb-2">Sleep Stage Analysis</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Identifies light, deep, and REM sleep stages. View detailed breakdowns in your sleep analytics dashboard.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Feature Comparison -->
-        <section class="py-20 bg-dark-lighter">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12 fade-in">
-                    Why Choose Nooze?
-                </h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="flex items-start space-x-4 fade-in">
-                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
+        <div class="section-divider"></div>
+
+        <!-- Wake Challenges & Gamification -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="reveal">
+                        <h2 class="text-3xl font-bold text-white mb-3">Wake <span class="gradient-text">Challenges</span></h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">No snooze button. Instead, you prove you're awake with real-world challenges that get you out of bed and moving.</p>
+                        <div class="space-y-4">
+                            <div class="glass-card-static p-5 flex items-start gap-4">
+                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">NFC Tag Scan</h4>
+                                    <p class="text-gray-400 text-sm">Place an NFC tag in your bathroom or kitchen. Scan it to dismiss the alarm.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Intelligent Sleep Tracking</h3>
-                                <p class="text-gray-400">Unlike basic alarm apps, Nooze uses advanced sleep cycle detection to wake you at the perfect time.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 fade-in">
-                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Seamless Multi-Device Experience</h3>
-                                <p class="text-gray-400">Sync your alarms across all devices automatically. No manual setup required.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 fade-in">
-                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Comprehensive Analytics</h3>
-                                <p class="text-gray-400">Get detailed insights into your sleep patterns and wake-up quality to improve over time.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 fade-in">
-                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Highly Customizable</h3>
-                                <p class="text-gray-400">From sounds to themes to schedules, customize every aspect of your wake-up experience.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 fade-in">
-                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Smart Integrations</h3>
-                                <p class="text-gray-400">Connect with your calendar, weather, and music services for a complete morning routine.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 fade-in">
-                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Continuous Development</h3>
-                                <p class="text-gray-400">We're committed to regular updates and new features based on user feedback and evolving needs.</p>
+                            <div class="glass-card-static p-5 flex items-start gap-4">
+                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">Photo Capture</h4>
+                                    <p class="text-gray-400 text-sm">Take a photo to prove you're out of bed. Gets you moving immediately.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="reveal delay-2">
+                        <h2 class="text-3xl font-bold text-white mb-3"><span class="gradient-text">Gamification</span> System</h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Turn waking up into a rewarding daily habit with XP, levels, quests, and achievements.</p>
+                        <div class="space-y-4">
+                            <div class="glass-card-static p-5">
+                                <h4 class="text-white font-medium mb-2">XP Rewards</h4>
+                                <p class="text-gray-400 text-sm">10-50 XP per wake-up, 5 XP per journal entry, up to 30 XP streak bonus daily.</p>
+                            </div>
+                            <div class="glass-card-static p-5">
+                                <h4 class="text-white font-medium mb-2">Levels &amp; Titles</h4>
+                                <p class="text-gray-400 text-sm">Progressive leveling system with unlockable titles and achievement badges.</p>
+                            </div>
+                            <div class="glass-card-static p-5">
+                                <h4 class="text-white font-medium mb-2">Quests &amp; Achievements</h4>
+                                <p class="text-gray-400 text-sm">Complete daily/weekly quests and unlock permanent achievements for milestones.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Social & Health -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="reveal">
+                        <h2 class="text-3xl font-bold text-white mb-3">Social <span class="gradient-text-cyan">Features</span></h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Wake up is better with friends. Compete, challenge, and motivate each other.</p>
+                        <ul class="space-y-3 text-gray-400 text-sm">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Add friends by username search</li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>XP-based leaderboards</li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Wake duels &mdash; challenge friends to wake up first</li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Activity feed showing friend progress</li>
+                        </ul>
+                    </div>
+                    <div class="reveal delay-2">
+                        <h2 class="text-3xl font-bold text-white mb-3">Health <span class="gradient-text">Hub</span></h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Connect your wearables for richer sleep and health data.</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Health Connect</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Fitbit</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Garmin</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Oura</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Whoop</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Polar</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Withings</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Suunto</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Huawei</div>
+                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Samsung</div>
+                        </div>
+                        <p class="text-gray-500 text-xs mt-3">Heart rate, SpO2, respiratory rate, and sleep stage data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- More Features Grid -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-white mb-12 text-center reveal">And <span class="gradient-text">Much More</span></h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <div class="glass-card p-6 reveal delay-1">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">Sleep Aids</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Built-in calming soundscapes and ambient noise with auto-stop timer to help you fall asleep faster.</p>
+                    </div>
+
+                    <div class="glass-card p-6 reveal delay-2">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">Sleep Journal</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Log mood, dreams, and notes daily. Earn 5 XP per entry and track patterns over time.</p>
+                    </div>
+
+                    <div class="glass-card p-6 reveal delay-3">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">Smart Home</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Home Assistant &amp; webhook support. Automate lights and devices when your alarm triggers. Gradual wake-up lighting.</p>
+                    </div>
+
+                    <div class="glass-card p-6 reveal delay-4">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">Cross-Device Sync</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Sign in with Google or email. Real-time bi-directional cloud sync. Works offline with local storage.</p>
+                    </div>
+
+                    <div class="glass-card p-6 reveal delay-5">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">12 Themes</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">6 free themes (Default, Ocean, Forest, Lavender, Crimson, Amber) + 6 premium animated gradients.</p>
+                    </div>
+
+                    <div class="glass-card p-6 reveal delay-6">
+                        <div class="feature-icon mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">Privacy &amp; Security</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Encrypted local storage, no data selling, full control to delete your data anytime.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- CTA -->
+        <section class="py-20 text-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-white mb-4 reveal">Ready to Try Nooze?</h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto reveal delay-1">Subscribe to get notified when we launch on Google Play.</p>
+                <button id="subscribeBtnBottom" class="btn-primary reveal delay-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                    <span>Get Notified</span>
+                </button>
+            </div>
         </section>
     </main>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="hidden fixed bottom-8 right-8 bg-primary text-black p-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-40 opacity-0 transform translate-y-4">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
     </button>
 
     <!-- Footer -->
-    <footer class="bg-dark-lighter text-gray-400 mt-auto">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer class="footer-gradient border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">About Nooze</h3>
-                    <p class="text-gray-400 leading-relaxed">Nooze is an intelligent alarm app designed to revolutionize how you wake up. Our goal is to help you start each day feeling refreshed and energized through smart sleep tracking and optimal wake timing.</p>
+                    <a href="index.html" class="text-xl font-bold text-white mb-4 inline-block">Nooze<span class="text-primary">Alarm</span></a>
+                    <p class="text-gray-500 text-sm leading-relaxed">The intelligent alarm clock that tracks your sleep, wakes you at the perfect moment, and turns mornings into a rewarding experience.</p>
                 </div>
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
+                    <h4 class="text-white font-semibold mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
-                        <li><a href="features.html" class="text-primary">Features</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-primary transition-colors">Features</a></li>
                         <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About</a></li>
                         <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
                         <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                        <li><a href="support.html" class="text-gray-400 hover:text-primary transition-colors">Support Us</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">Policies</h3>
-                    <ul class="space-y-2">
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="contact.html#privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
                         <li><a href="contact.html#terms" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">Stay Updated</h3>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        Subscribe to get notified when Nooze launches
-                    </p>
-                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-4">
-                        <!-- Honeypot field - hidden from users, bots will fill it -->
-                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
-                            <label for="footer_website">Website</label>
-                            <input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off" />
-                        </div>
+                    <h4 class="text-white font-semibold mb-4">Stay Updated</h4>
+                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-5">
+                        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="footer_website">Website</label><input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off"></div>
                         <div class="flex gap-2">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Your email"
-                                required
-                                class="flex-1 px-4 py-2 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
-                            />
-                            <button type="submit" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
-                                Subscribe
-                            </button>
+                            <input type="email" name="email" placeholder="Your email" required class="form-input !py-2.5 !text-sm flex-1">
+                            <button type="submit" class="btn-primary !py-2.5 !px-4 text-sm"><span>Go</span></button>
                         </div>
                     </form>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        Email: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>
-                    </p>
-                    <div class="flex flex-col space-y-2">
-                        <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 16.11 4c-2.48 0-4.49 2.014-4.49 4.495 0 .352.04.695.116 1.022C7.728 9.37 4.1 7.6 1.67 4.905a4.48 4.48 0 0 0-.61 2.262c0 1.56.793 2.936 2.003 3.744a4.48 4.48 0 0 1-2.034-.563v.057c0 2.18 1.55 4.002 3.604 4.418a4.48 4.48 0 0 1-2.027.077c.572 1.785 2.23 3.084 4.19 3.12A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.77 0-.195-.004-.39-.013-.583A9.13 9.13 0 0 0 24 4.59a8.98 8.98 0 0 1-2.54.698z"/>
-                            </svg>
-                            <span>NoozeAlarm</span>
-                        </a>
-                        <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M21 8.306c-.638 0-1.262-.062-1.86-.18v6.13c0 3.18-2.58 5.76-5.76 5.76-1.54 0-2.94-.6-4-1.57a5.75 5.75 0 0 1-1.76-4.19c0-3.18 2.58-5.76 5.76-5.76.13 0 .26.01.39.02v2.07a3.7 3.7 0 0 0-.39-.02c-2.06 0-3.74 1.68-3.74 3.74 0 1.03.42 1.97 1.1 2.65.68.68 1.62 1.1 2.65 1.1 2.06 0 3.74-1.68 3.74-3.74V2.25h2.06c.1 1.01.57 1.93 1.29 2.61.72.68 1.68 1.1 2.71 1.1v2.35z"/>
-                            </svg>
-                            <span>nooze.alarm.app</span>
-                        </a>
-                        <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>
-                            </svg>
-                            <span>Nooze-Alarm</span>
-                        </a>
+                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozealarm@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozealarm@gmail.com</a></p>
+                    <div class="flex gap-3">
+                        <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                        <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16V11.7a4.83 4.83 0 01-3.77-1.93V6.69h3.77z"/></svg></a>
+                        <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="View on GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg></a>
+                        <a href="https://www.linkedin.com/company/nooze-alarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                        <a href="https://ko-fi.com/noozealarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Support on Ko-fi"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg></a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-                <p>&copy; 2025 Nooze | All rights reserved.</p>
-            </div>
-            </div>
-        </footer>
+            <div class="border-t border-white/5 mt-12 pt-8 text-center text-gray-600 text-sm">&copy; 2025-2026 Nooze Alarm. All rights reserved.</div>
+        </div>
+    </footer>
 
     <!-- Subscribe Modal -->
-    <div id="subscribeModal" class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-70 flex items-center justify-center transition-opacity duration-300">
-        <div class="bg-dark-lighter rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-primary text-2xl transition-colors">&times;</button>
-            <h2 class="text-2xl font-bold text-white mb-4">Subscribe for Nooze Updates</h2>
-            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="space-y-4">
-                <input type="email" name="email" placeholder="Enter your email" required class="w-full px-4 py-3 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary" />
-                <!-- Honeypot field - hidden from users, bots will fill it -->
-                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
-                    <label for="subscribe_website">Website</label>
-                    <input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off" />
-                </div>
-                <button type="submit" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Subscribe</button>
+    <div id="subscribeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Subscribe for updates">
+        <div class="modal-content">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-xl transition-colors" aria-label="Close"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            <h2 class="text-2xl font-bold text-white mb-2">Get Notified</h2>
+            <p class="text-gray-400 text-sm mb-6">Be the first to know when Nooze launches on Google Play.</p>
+            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
+                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="subscribe_website">Website</label><input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off"></div>
+                <input type="email" name="email" placeholder="Enter your email" required class="form-input mb-4">
+                <button type="submit" class="btn-primary w-full"><span>Subscribe</span></button>
             </form>
-            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4">Thank you for subscribing!</div>
+            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4 text-sm font-medium">Thank you for subscribing!</div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-

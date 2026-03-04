@@ -3,369 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nooze — Frequently Asked Questions</title>
-    <meta name="description" content="Find answers to common questions about Nooze, the intelligent alarm app that helps you wake up feeling refreshed.">
-    <meta name="keywords" content="nooze faq, smart alarm questions, sleep tracking app, alarm clock help">
-    <meta name="author" content="Nooze">
-    
-    <!-- Security Headers -->
+    <title>Nooze FAQ - Common Questions About the Smart Alarm App</title>
+    <meta name="description" content="Find answers to common questions about Nooze: smart wake technology, sleep tracking, gamification, health integrations, pricing, privacy, and more.">
+    <meta name="keywords" content="nooze faq, smart alarm questions, sleep tracker help, alarm app faq, nooze pricing, nooze features">
+    <meta name="author" content="Nooze Alarm">
+    <link rel="canonical" href="https://noozealarm.com/faq.html">
+
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <!-- Open Graph / Facebook -->
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://noozealarm.com/faq.html">
-    <meta property="og:title" content="Nooze — Frequently Asked Questions">
-    <meta property="og:description" content="Find answers to common questions about Nooze, the intelligent alarm app.">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://noozealarm.com/faq.html">
-    <meta property="twitter:title" content="Nooze — Frequently Asked Questions">
-    <meta property="twitter:description" content="Find answers to common questions about Nooze, the intelligent alarm app.">
-    
-    <!-- Favicon -->
+    <meta property="og:title" content="Nooze FAQ - Common Questions About the Smart Alarm App">
+    <meta property="og:description" content="Find answers to common questions about Nooze, the intelligent alarm and sleep tracker for Android.">
+    <meta property="og:image" content="https://noozealarm.com/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@NoozeAlarm">
+    <meta name="twitter:title" content="Nooze FAQ - Smart Alarm App Questions">
+    <meta name="twitter:description" content="Find answers to common questions about Nooze, the intelligent alarm and sleep tracker.">
+
     <link rel="icon" type="image/png" href="logo.png">
-    
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
                     colors: {
-                        primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#2196f3' },
-                        dark: { DEFAULT: '#121212', lighter: '#181818', light: '#1a1a1a', card: '#252525', nav: '#1f1f1f' },
+                        primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#26c6da' },
+                        accent: { DEFAULT: '#7c3aed', light: '#a855f7' },
                     },
                 },
             },
         }
     </script>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is Nooze?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nooze is a smart alarm clock and sleep tracker for Android. It monitors your sleep cycles using your phone's sensors, wakes you during light sleep for a more refreshed feeling, and gamifies your morning routine with XP, levels, and challenges."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which platforms does Nooze support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nooze is currently available for Android. It's built natively for the best performance and integrates with Android's Health Connect platform."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does the smart wake technology work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nooze uses your phone's accelerometer and microphone to detect sleep phases. You set a smart wake window (15, 20, or 30 minutes before your alarm). Nooze monitors your sleep and triggers the alarm when it detects you're in light sleep within that window, resulting in a more natural wake-up."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is Nooze free to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes, and cloud sync. Nooze Premium adds animated themes, premium backgrounds, exclusive titles, and advanced analytics for \u20ac0.99/month or \u20ac9.99/year."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why is there no snooze button?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "By design. Sleep science shows that hitting snooze fragments your sleep and actually makes you groggier. Instead, Nooze uses wake challenges (NFC scanning or photo capture) to ensure you're fully awake, and rewards you with XP for getting up."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Nooze track my sleep automatically?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Place your phone near your bed and Nooze monitors your sleep using motion and sound analysis. For more detailed data, it also integrates with Health Connect and wearable devices like Fitbit, Garmin, Oura, Whoop, Polar, Withings, and Suunto."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What health devices does Nooze support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nooze integrates with 10 health providers: Android Health Connect (native), Fitbit, Garmin, Oura, Whoop, Polar, Withings, Suunto, Huawei, and Samsung Health (via Health Connect). These provide heart rate, SpO2, and respiratory rate data."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does the gamification work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You earn XP for waking up on time (10-50 XP), writing journal entries (5 XP), and maintaining streaks (up to 30 XP bonus). XP lets you level up, complete quests, unlock achievements, and earn exclusive titles."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I sync across multiple devices?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Sign in with Google or email, and your alarms, sleep data, and profile sync in real-time across all your Android devices via the cloud. The app also works fully offline with local storage."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is my data private and secure?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Privacy is a top priority. Your data is encrypted and stored securely. We prioritize local storage, never sell your information, and give you full control to delete your data at any time through the app."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Nooze work with smart home devices?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! Nooze integrates with Home Assistant and supports generic webhooks. You can automate lights, control devices, and create gradual wake-up lighting scenes when your alarm triggers."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I contact support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Email us at noozealarm@gmail.com or use the Contact page on this website. You can also reach us on X (@NoozeAlarm) or TikTok (@nooze.alarm.app)."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>if(sessionStorage.getItem('nooze_pixel_transition'))document.write('<style id="pxl-hide">body{visibility:hidden}</style>')</script>
 </head>
-<body class="bg-dark text-gray-300 font-sans antialiased min-h-screen flex flex-col scroll-smooth">
+<body class="min-h-screen flex flex-col">
+    <canvas id="particles"></canvas>
+
     <!-- Navbar -->
-    <nav class="bg-dark-nav shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="nav-blur fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-white">
-                        Nooze<span class="text-primary">Alarm</span>
-                    </a>
+                <a href="index.html" class="text-xl font-bold text-white tracking-tight">
+                    Nooze<span class="text-primary">Alarm</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="features.html" class="nav-link">Features</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="faq.html" class="nav-link active">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        Home<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        Features<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        About<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="faq.html" class="text-primary relative">
-                        FAQ<span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
-                    </a>
-                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors duration-300 relative group">
-                        Contact<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
+                <div class="flex items-center gap-3">
+                    <button id="subscribeBtn" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5"><span>Subscribe</span></button>
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary p-2" aria-label="Toggle menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
                 </div>
-                <button id="subscribeBtn" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
-                    Subscribe
-                </button>
-                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
             </div>
             <div id="mobileMenu" class="hidden md:hidden pb-4">
-                <div class="flex flex-col space-y-3">
-                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">Home</a>
-                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors">Features</a>
-                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors">About</a>
-                    <a href="faq.html" class="text-primary">FAQ</a>
-                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
+                <div class="flex flex-col gap-3 pt-2">
+                    <a href="index.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Features</a>
+                    <a href="about.html" class="text-gray-300 hover:text-primary py-2 transition-colors">About</a>
+                    <a href="faq.html" class="text-primary font-medium py-2">FAQ</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
-        </nav>
+    </nav>
 
-    <main class="flex-1 py-20">
-        <!-- Hero Section -->
-        <section class="bg-dark-lighter py-16">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 fade-in">
-                    Frequently Asked Questions
+    <main class="flex-1 pt-16">
+        <!-- Hero -->
+        <section class="hero-bg py-20 relative">
+            <div class="orb orb-1" style="opacity: 0.2;"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 reveal">
+                    Frequently Asked <span class="gradient-text">Questions</span>
                 </h1>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto fade-in">
-                    Find answers to common questions about Nooze
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-1">
+                    Everything you need to know about Nooze.
                 </p>
             </div>
         </section>
 
+        <div class="section-divider"></div>
+
         <!-- FAQ Accordion -->
-        <section class="py-20 bg-dark">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-                <div class="space-y-4">
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">What is Nooze?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Nooze is a next-generation alarm clock app for iOS and Android, designed to help you wake up smarter and feel more refreshed. It uses intelligent sleep tracking and smart wake technology to wake you at the optimal time in your sleep cycle.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">Which platforms does Nooze support?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Nooze is available for iOS and Android mobile devices. All platforms sync seamlessly through the cloud, so your alarms are always available across all your devices.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">How does the smart wake technology work?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Nooze uses advanced algorithms to monitor your sleep cycle through movement and sound analysis. It detects when you're in light sleep and wakes you during that phase, rather than during deep sleep. This results in a more natural, refreshing wake-up experience. The app learns your sleep patterns over time to improve accuracy.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">Is Nooze free to use?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Pricing details will be announced closer to launch. Our goal is to make Nooze accessible while ensuring we can continue to develop and improve the app. Subscribe to our updates to be notified about pricing information and launch details.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">How can I get notified about the app launch?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Click the Subscribe button in the navigation bar to sign up for updates. You'll receive notifications about the official launch, new features, beta testing opportunities, and exclusive early access offers.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">Does Nooze track my sleep automatically?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Yes! Nooze can automatically track your sleep when you place your device near your bed. It uses motion detection and sound analysis to monitor your sleep cycles. For more accurate tracking, you can also use compatible wearable devices that integrate with Nooze.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">Can I use my own music as alarm sounds?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Absolutely! Nooze allows you to upload your own audio files or connect to music streaming services like Spotify. You can create custom playlists specifically for waking up, and the app supports various audio formats including MP3, AAC, and more.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">How do I sync alarms across multiple devices?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Simply sign in with your Nooze account on all devices. Your alarms, settings, and sleep data automatically sync through our secure cloud service. Changes made on one device appear on all others within seconds. You can also enable offline mode if you prefer local-only storage.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">Is my data private and secure?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Privacy is our top priority. All your data is encrypted end-to-end, and we never share your personal information with third parties. Sleep data is stored securely and can be deleted at any time. We're fully GDPR compliant and transparent about our data practices.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">How do I contact support?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">You can reach our support team anytime through the Contact page on this website, or email us directly at noozealarm@gmail.com. We're committed to providing excellent support and will respond to all inquiries as quickly as possible.</p>
-                        </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">Can I set different alarms for weekdays and weekends?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Yes! Nooze makes it easy to create recurring alarm schedules. You can set different alarms for weekdays, weekends, or specific days of the week. You can also create one-time alarms for special events or dates.</p>
-                    </div>
-                    </div>
-                    <div class="bg-dark-card rounded-xl p-6 shadow-lg transition-all duration-300 fade-in">
-                        <button class="faq-question w-full text-left flex justify-between items-center p-4 focus:outline-none">
-                            <h3 class="text-xl font-semibold text-white pr-4">Does Nooze work offline?</h3>
-                            <svg class="w-6 h-6 text-primary transition-transform duration-300 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer hidden px-4 pb-4">
-                            <p class="text-gray-400 leading-relaxed">Yes, Nooze works offline for basic alarm functionality. However, features like cloud sync, weather updates, and calendar integration require an internet connection. You can enable offline mode in settings to use the app completely offline.</p>
-                    </div>
-                    </div>
+        <section class="py-20">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+
+                <div class="faq-item glass-card-static p-0 reveal">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">What is Nooze?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Nooze is a smart alarm clock and sleep tracker for Android. It monitors your sleep cycles using your phone's sensors, wakes you during light sleep for a more refreshed feeling, and gamifies your morning routine with XP, levels, and challenges.</p>
                     </div>
                 </div>
-            </section>
 
-        <!-- Still Have Questions Section -->
-        <section class="py-20 bg-dark-lighter">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in">
-                    Still Have Questions?
-                </h2>
-                <p class="text-gray-400 text-xl mb-8 fade-in">
-                    We're here to help! Reach out to our support team anytime.
-                </p>
-                <a href="contact.html" class="bg-primary text-black px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors inline-block fade-in">
-                    Contact Support
+                <div class="faq-item glass-card-static p-0 reveal delay-1">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">Which platforms does Nooze support?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Nooze is currently available for Android. It's built natively for the best performance and integrates with Android's Health Connect platform.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-1">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">How does the smart wake technology work?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Nooze uses your phone's accelerometer and microphone to detect sleep phases. You set a smart wake window (15, 20, or 30 minutes before your alarm). Nooze monitors your sleep and triggers the alarm when it detects you're in light sleep within that window, resulting in a more natural wake-up.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-2">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">Is Nooze free to use?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Yes! All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes, and cloud sync. Nooze Premium (&euro;0.99/month or &euro;9.99/year) adds animated themes, premium profile backgrounds, exclusive titles, and advanced analytics.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-2">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">Why is there no snooze button?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">By design. Sleep science shows that hitting snooze fragments your sleep and actually makes you groggier. Instead, Nooze uses wake challenges (NFC scanning or photo capture) to ensure you're fully awake, and rewards you with XP for getting up.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-3">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">Does Nooze track my sleep automatically?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Yes. Place your phone near your bed and Nooze monitors your sleep using motion and sound analysis. For more detailed data, it also integrates with Health Connect and wearable devices like Fitbit, Garmin, Oura, Whoop, Polar, Withings, and Suunto.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-3">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">What health devices does Nooze support?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Nooze integrates with 10 health providers: Android Health Connect (native), Fitbit, Garmin, Oura, Whoop, Polar, Withings, Suunto, Huawei, and Samsung Health (via Health Connect). These provide heart rate, SpO2, and respiratory rate data.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">How does the gamification work?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">You earn XP for waking up on time (10-50 XP), writing journal entries (5 XP), and maintaining streaks (up to 30 XP bonus). XP lets you level up, complete quests, unlock achievements, and earn exclusive titles.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">Can I sync across multiple devices?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Yes. Sign in with Google or email, and your alarms, sleep data, and profile sync in real-time across all your Android devices via the cloud. The app also works fully offline with local storage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-5">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">Is my data private and secure?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Privacy is a top priority. Your data is encrypted and stored securely. We prioritize local storage, never sell your information, and give you full control to delete your data at any time through the app.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-5">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">Does Nooze work with smart home devices?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Yes! Nooze integrates with Home Assistant and supports generic webhooks. You can automate lights, control devices, and create gradual wake-up lighting scenes when your alarm triggers.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card-static p-0 reveal delay-6">
+                    <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
+                        <h3 class="text-lg font-semibold text-white pr-4">How do I contact support?</h3>
+                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">Email us at <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a> or use the <a href="contact.html" class="text-primary hover:underline">Contact page</a>. You can also reach us on <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="text-primary hover:underline">X (@NoozeAlarm)</a> or <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="text-primary hover:underline">TikTok (@nooze.alarm.app)</a>.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- CTA -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4 reveal">Still Have Questions?</h2>
+                <p class="text-gray-400 text-lg mb-8 reveal delay-1">We're here to help.</p>
+                <a href="contact.html" class="btn-primary reveal delay-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <span>Contact Support</span>
                 </a>
-                </div>
-            </section>
-        </main>
+            </div>
+        </section>
+    </main>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="hidden fixed bottom-8 right-8 bg-primary text-black p-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-40 opacity-0 transform translate-y-4">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
     </button>
 
     <!-- Footer -->
-    <footer class="bg-dark-lighter text-gray-400 mt-auto">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer class="footer-gradient border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">About Nooze</h3>
-                    <p class="text-gray-400 leading-relaxed">Nooze is an intelligent alarm app designed to revolutionize how you wake up. Our goal is to help you start each day feeling refreshed and energized through smart sleep tracking and optimal wake timing.</p>
+                    <a href="index.html" class="text-xl font-bold text-white mb-4 inline-block">Nooze<span class="text-primary">Alarm</span></a>
+                    <p class="text-gray-500 text-sm leading-relaxed">The intelligent alarm clock that tracks your sleep, wakes you at the perfect moment, and turns mornings into a rewarding experience.</p>
                 </div>
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
+                    <h4 class="text-white font-semibold mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
                         <li><a href="features.html" class="text-gray-400 hover:text-primary transition-colors">Features</a></li>
                         <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About</a></li>
-                        <li><a href="faq.html" class="text-primary">FAQ</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
                         <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                        <li><a href="support.html" class="text-gray-400 hover:text-primary transition-colors">Support Us</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">Policies</h3>
-                    <ul class="space-y-2">
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="contact.html#privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
                         <li><a href="contact.html#terms" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-primary text-xl font-semibold mb-4">Stay Updated</h3>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        Subscribe to get notified when Nooze launches
-                    </p>
-                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-4">
-                        <!-- Honeypot field - hidden from users, bots will fill it -->
-                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                    <h4 class="text-white font-semibold mb-4">Stay Updated</h4>
+                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-5">
+                        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
                             <label for="footer_website">Website</label>
-                            <input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off" />
+                            <input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off">
                         </div>
                         <div class="flex gap-2">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Your email"
-                                required
-                                class="flex-1 px-4 py-2 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
-                            />
-                            <button type="submit" class="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-sm">
-                                Subscribe
-                            </button>
+                            <input type="email" name="email" placeholder="Your email" required class="form-input !py-2.5 !text-sm flex-1">
+                            <button type="submit" class="btn-primary !py-2.5 !px-4 text-sm"><span>Go</span></button>
                         </div>
                     </form>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        Email: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>
-                    </p>
-                    <div class="flex flex-col space-y-2">
-                        <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.082A4.48 4.48 0 0 0 16.11 4c-2.48 0-4.49 2.014-4.49 4.495 0 .352.04.695.116 1.022C7.728 9.37 4.1 7.6 1.67 4.905a4.48 4.48 0 0 0-.61 2.262c0 1.56.793 2.936 2.003 3.744a4.48 4.48 0 0 1-2.034-.563v.057c0 2.18 1.55 4.002 3.604 4.418a4.48 4.48 0 0 1-2.027.077c.572 1.785 2.23 3.084 4.19 3.12A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.77 0-.195-.004-.39-.013-.583A9.13 9.13 0 0 0 24 4.59a8.98 8.98 0 0 1-2.54.698z"/>
-                            </svg>
-                            <span>NoozeAlarm</span>
+                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozealarm@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozealarm@gmail.com</a></p>
+                    <div class="flex gap-3">
+                        <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on X">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
-                        <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M21 8.306c-.638 0-1.262-.062-1.86-.18v6.13c0 3.18-2.58 5.76-5.76 5.76-1.54 0-2.94-.6-4-1.57a5.75 5.75 0 0 1-1.76-4.19c0-3.18 2.58-5.76 5.76-5.76.13 0 .26.01.39.02v2.07a3.7 3.7 0 0 0-.39-.02c-2.06 0-3.74 1.68-3.74 3.74 0 1.03.42 1.97 1.1 2.65.68.68 1.62 1.1 2.65 1.1 2.06 0 3.74-1.68 3.74-3.74V2.25h2.06c.1 1.01.57 1.93 1.29 2.61.72.68 1.68 1.1 2.71 1.1v2.35z"/>
-                            </svg>
-                            <span>nooze.alarm.app</span>
+                        <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on TikTok">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16V11.7a4.83 4.83 0 01-3.77-1.93V6.69h3.77z"/></svg>
                         </a>
-                        <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>
-                            </svg>
-                            <span>Nooze-Alarm</span>
+                        <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="View on GitHub">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/nooze-alarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on LinkedIn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://ko-fi.com/noozealarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Support on Ko-fi">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-                <p>&copy; 2025 Nooze | All rights reserved.</p>
+            <div class="border-t border-white/5 mt-12 pt-8 text-center text-gray-600 text-sm">
+                <p>&copy; 2025-2026 Nooze Alarm. All rights reserved.</p>
             </div>
-            </div>
-        </footer>
+        </div>
+    </footer>
 
     <!-- Subscribe Modal -->
-    <div id="subscribeModal" class="hidden fixed inset-0 z-50 overflow-auto bg-black bg-opacity-70 flex items-center justify-center transition-opacity duration-300">
-        <div class="bg-dark-lighter rounded-xl p-8 max-w-md w-full mx-4 relative">
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-primary text-2xl transition-colors">&times;</button>
-            <h2 class="text-2xl font-bold text-white mb-4">Subscribe for Nooze Updates</h2>
-            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="space-y-4">
-                <input type="email" name="email" placeholder="Enter your email" required class="w-full px-4 py-3 rounded-lg bg-dark-card text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary" />
-                <!-- Honeypot field - hidden from users, bots will fill it -->
-                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+    <div id="subscribeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Subscribe for updates">
+        <div class="modal-content">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-xl transition-colors" aria-label="Close modal">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h2 class="text-2xl font-bold text-white mb-2">Get Notified</h2>
+            <p class="text-gray-400 text-sm mb-6">Be the first to know when Nooze launches on Google Play.</p>
+            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
+                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
                     <label for="subscribe_website">Website</label>
-                    <input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off" />
-    </div>
-                <button type="submit" class="bg-primary text-black w-full px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Subscribe</button>
+                    <input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                <input type="email" name="email" placeholder="Enter your email" required class="form-input mb-4">
+                <button type="submit" class="btn-primary w-full"><span>Subscribe</span></button>
             </form>
-            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4">Thank you for subscribing!</div>
+            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4 text-sm font-medium">Thank you for subscribing!</div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html> 
-
+</html>

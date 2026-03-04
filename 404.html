@@ -3,90 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | Nooze</title>
-    <meta name="description" content="The page you're looking for doesn't exist.">
-    
-    <!-- Security Headers -->
+    <title>404 - Page Not Found | Nooze Alarm</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Head back to Nooze Alarm's homepage.">
+    <meta name="robots" content="noindex, nofollow">
+
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/png" href="logo.png">
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
                     colors: {
-                        primary: {
-                            DEFAULT: '#00bcd4',
-                            dark: '#0097a7',
-                            light: '#2196f3',
-                        },
-                        dark: {
-                            DEFAULT: '#121212',
-                            lighter: '#181818',
-                            light: '#1a1a1a',
-                            card: '#252525',
-                            nav: '#1f1f1f',
-                        },
+                        primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#26c6da' },
+                        accent: { DEFAULT: '#7c3aed', light: '#a855f7' },
                     },
                 },
             },
         }
     </script>
+    <link rel="stylesheet" href="styles.css">
+    <script>if(sessionStorage.getItem('nooze_pixel_transition'))document.write('<style id="pxl-hide">body{visibility:hidden}</style>')</script>
 </head>
-<body class="bg-dark text-gray-300 font-sans antialiased min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
+    <canvas id="particles"></canvas>
+
     <!-- Navbar -->
-    <nav class="bg-dark-nav shadow-lg">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="nav-blur fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-white">
-                        Nooze<span class="text-primary">Alarm</span>
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">Home</a>
-                    <a href="features.html" class="text-gray-300 hover:text-primary transition-colors">Features</a>
-                    <a href="about.html" class="text-gray-300 hover:text-primary transition-colors">About</a>
-                    <a href="faq.html" class="text-gray-300 hover:text-primary transition-colors">FAQ</a>
-                    <a href="contact.html" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
+                <a href="index.html" class="text-xl font-bold text-white tracking-tight">
+                    Nooze<span class="text-primary">Alarm</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="features.html" class="nav-link">Features</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- 404 Content -->
-    <main class="flex-1 flex items-center justify-center py-20">
-        <div class="text-center px-4">
-            <h1 class="text-9xl font-bold text-primary mb-4">404</h1>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Page Not Found</h2>
-            <p class="text-xl text-gray-400 mb-8 max-w-md mx-auto">
-                Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
+    <main class="flex-1 flex items-center justify-center hero-bg relative pt-16">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div class="text-center px-4 relative z-10">
+            <h1 class="text-[10rem] sm:text-[12rem] font-extrabold leading-none mb-2 reveal">
+                <span class="gradient-text">404</span>
+            </h1>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 reveal delay-1">Page Not Found</h2>
+            <p class="text-lg text-gray-400 mb-10 max-w-md mx-auto reveal delay-2">
+                The page you're looking for doesn't exist or has been moved.
             </p>
-            <div class="flex flex-wrap gap-4 justify-center">
-                <a href="index.html" class="bg-primary text-black px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
-                    Go Home
+            <div class="flex flex-wrap gap-4 justify-center reveal delay-3">
+                <a href="index.html" class="btn-primary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span>Go Home</span>
                 </a>
-                <a href="contact.html" class="bg-dark-card text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-dark-light hover:text-white border border-gray-700 transition-colors">
-                    Contact Us
+                <a href="contact.html" class="btn-outline">
+                    <span>Contact Us</span>
                 </a>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark-lighter text-gray-400 mt-auto">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="text-center">
-                <p>&copy; 2025 Nooze | All rights reserved.</p>
-            </div>
+    <footer class="footer-gradient border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-gray-600 text-sm">
+            <p>&copy; 2025-2026 Nooze Alarm. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
-

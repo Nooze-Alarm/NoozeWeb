@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Nooze - Get in Touch &amp; Support</title>
-    <meta name="description" content="Contact the Nooze team for support, feedback, or partnerships. View our Privacy Policy and Terms of Service.">
-    <meta name="keywords" content="contact nooze, nooze support, nooze alarm help, nooze privacy policy, nooze terms">
+    <title>Support Nooze - Buy Us a Coffee | Ko-fi</title>
+    <meta name="description" content="Support Nooze development by buying us a coffee on Ko-fi. Your contribution helps us build better sleep technology for everyone.">
+    <meta name="keywords" content="support nooze, donate nooze, nooze ko-fi, buy coffee nooze alarm">
     <meta name="author" content="Nooze Alarm">
-    <link rel="canonical" href="https://noozealarm.com/contact.html">
+    <link rel="canonical" href="https://noozealarm.com/support.html">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://noozealarm.com/contact.html">
-    <meta property="og:title" content="Contact Nooze - Get in Touch">
-    <meta property="og:description" content="Reach out to the Nooze team for support, feedback, or partnerships.">
+    <meta property="og:url" content="https://noozealarm.com/support.html">
+    <meta property="og:title" content="Support Nooze - Buy Us a Coffee">
+    <meta property="og:description" content="Help us build better sleep technology. Every coffee counts.">
     <meta property="og:image" content="https://noozealarm.com/logo.png">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@NoozeAlarm">
-    <meta name="twitter:title" content="Contact Nooze">
+    <meta name="twitter:title" content="Support Nooze">
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,7 @@
                     <a href="features.html" class="nav-link">Features</a>
                     <a href="about.html" class="nav-link">About</a>
                     <a href="faq.html" class="nav-link">FAQ</a>
-                    <a href="contact.html" class="nav-link active">Contact</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
                 </div>
                 <div class="flex items-center gap-3">
                     <button id="subscribeBtn" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5"><span>Subscribe</span></button>
@@ -67,7 +67,7 @@
                     <a href="features.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Features</a>
                     <a href="about.html" class="text-gray-300 hover:text-primary py-2 transition-colors">About</a>
                     <a href="faq.html" class="text-gray-300 hover:text-primary py-2 transition-colors">FAQ</a>
-                    <a href="contact.html" class="text-primary font-medium py-2">Contact</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
@@ -76,95 +76,65 @@
     <main class="flex-1 pt-16">
         <!-- Hero -->
         <section class="hero-bg py-20 relative">
+            <div class="orb orb-1" style="opacity:0.15;"></div>
             <div class="orb orb-2" style="opacity:0.15;"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 reveal">Get in <span class="gradient-text">Touch</span></h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-1">Have a question, feedback, or partnership idea? We'd love to hear from you.</p>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 reveal">Support <span class="gradient-text">Nooze</span></h1>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-1">Help us build better sleep technology. Every contribution fuels development and keeps the lights on.</p>
             </div>
         </section>
 
         <div class="section-divider"></div>
 
-        <!-- Contact Form + Info -->
+        <!-- Ko-fi Section -->
         <section class="py-20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-5 gap-10">
-                    <!-- Form -->
-                    <div class="lg:col-span-3 reveal">
-                        <div class="glass-card-static p-8">
-                            <h2 class="text-xl font-bold text-white mb-6">Send a Message</h2>
-                            <form id="contactForm" action="https://formspree.io/f/mdkggjgv" method="POST" class="space-y-5">
-                                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="contact_website">Website</label><input type="text" id="contact_website" name="website" tabindex="-1" autocomplete="off"></div>
-
-                                <div>
-                                    <label for="name" class="block text-sm text-gray-400 mb-1.5">Name</label>
-                                    <input type="text" id="name" name="name" required class="form-input" placeholder="Your name">
-                                    <span class="error-message hidden text-red-400 text-xs mt-1"></span>
-                                </div>
-
-                                <div>
-                                    <label for="email" class="block text-sm text-gray-400 mb-1.5">Email</label>
-                                    <input type="email" id="email" name="email" required class="form-input" placeholder="your@email.com">
-                                    <span class="error-message hidden text-red-400 text-xs mt-1"></span>
-                                </div>
-
-                                <div>
-                                    <label for="subject" class="block text-sm text-gray-400 mb-1.5">Subject</label>
-                                    <select id="subject" name="subject" required class="form-input">
-                                        <option value="" disabled selected>Select a topic</option>
-                                        <option value="General Inquiry">General Inquiry</option>
-                                        <option value="Technical Support">Technical Support</option>
-                                        <option value="Feedback">Feedback</option>
-                                        <option value="Partnership">Partnership</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="message" class="block text-sm text-gray-400 mb-1.5">Message</label>
-                                    <textarea id="message" name="message" required rows="5" class="form-input resize-none" placeholder="How can we help?"></textarea>
-                                    <span class="error-message hidden text-red-400 text-xs mt-1"></span>
-                                </div>
-
-                                <button type="submit" id="submitBtn" class="btn-primary w-full">
-                                    <span id="submitText">Send Message</span>
-                                    <span id="submitLoading" class="hidden">Sending...</span>
-                                </button>
-
-                                <div id="formSuccess" class="hidden text-primary text-sm text-center font-medium">Message sent successfully! We'll get back to you soon.</div>
-                                <div id="formError" class="hidden text-red-400 text-sm text-center">Something went wrong. Please try again or email us directly.</div>
-                            </form>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <!-- CTA Card -->
+                    <div class="reveal">
+                        <div class="glass-card p-8 text-center gradient-border">
+                            <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/20 flex items-center justify-center mx-auto mb-6">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" class="text-primary"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-white mb-3">Buy Us a Coffee</h2>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">Nooze is built by a solo developer with a passion for better sleep. Your support helps cover server costs, development tools, and keeps new features coming.</p>
+                            <a href="https://ko-fi.com/noozealarm" target="_blank" rel="noopener noreferrer" class="btn-primary w-full">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-black"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg>
+                                <span>Support on Ko-fi</span>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Info Cards -->
-                    <div class="lg:col-span-2 space-y-5 reveal delay-2">
-                        <div class="glass-card-static p-6">
-                            <div class="feature-icon mb-3">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <!-- What Your Support Does -->
+                    <div class="reveal delay-1">
+                        <h3 class="text-xl font-bold text-white mb-6">Where Your Support Goes</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-11 !h-11 !rounded-xl flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">Server &amp; Infrastructure</h4>
+                                    <p class="text-gray-400 text-sm">Firebase hosting, cloud sync, and backend services that keep Nooze running reliably.</p>
+                                </div>
                             </div>
-                            <h3 class="text-white font-semibold mb-1">Email</h3>
-                            <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline text-sm">noozealarm@gmail.com</a>
-                        </div>
-
-                        <div class="glass-card-static p-6">
-                            <div class="feature-icon mb-3">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-11 !h-11 !rounded-xl flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">New Features</h4>
+                                    <p class="text-gray-400 text-sm">More health integrations, smarter algorithms, and community-requested features.</p>
+                                </div>
                             </div>
-                            <h3 class="text-white font-semibold mb-1">Response Time</h3>
-                            <p class="text-gray-400 text-sm">We typically respond within 24-48 hours.</p>
-                        </div>
-
-                        <div class="glass-card-static p-6">
-                            <div class="feature-icon mb-3">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </div>
-                            <h3 class="text-white font-semibold mb-1">Community</h3>
-                            <div class="space-y-2 mt-2">
-                                <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">X (Twitter) &mdash; @NoozeAlarm</a>
-                                <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">TikTok &mdash; @nooze.alarm.app</a>
-                                <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">GitHub &mdash; Nooze-Alarm</a>
-                                <a href="https://www.linkedin.com/company/nooze-alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">LinkedIn &mdash; Nooze Alarm</a>
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-11 !h-11 !rounded-xl flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">Keeping It Free</h4>
+                                    <p class="text-gray-400 text-sm">Your support means core features stay free for everyone. No ads, no data selling.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -174,65 +144,32 @@
 
         <div class="section-divider"></div>
 
-        <!-- Privacy Policy -->
-        <section class="py-20" id="privacy">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="glass-card-static p-8 sm:p-10 reveal">
-                    <h2 class="text-2xl font-bold text-white mb-6">Privacy Policy</h2>
-                    <p class="text-gray-500 text-sm mb-6">Last updated: January 2025</p>
-
-                    <div class="space-y-6 text-gray-400 text-sm leading-relaxed">
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Data Collection</h3>
-                            <p>Nooze collects minimal data necessary for alarm and sleep tracking functionality. This includes sleep patterns, alarm settings, and basic app usage data. We do not collect data beyond what is needed to provide our core services.</p>
+        <!-- Other Ways -->
+        <section class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-2xl font-bold text-white mb-4 reveal">Other Ways to Support</h2>
+                <p class="text-gray-400 mb-10 max-w-xl mx-auto reveal delay-1">Not everyone can donate, and that's completely fine. Here are free ways to help Nooze grow.</p>
+                <div class="grid sm:grid-cols-3 gap-6">
+                    <div class="glass-card-static p-6 reveal delay-1">
+                        <div class="feature-icon mx-auto mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
                         </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Data Storage</h3>
-                            <p>Your data is encrypted and stored primarily on your device. When you enable cloud sync, data is transmitted securely and stored in encrypted form on our servers. You can use Nooze entirely offline if you prefer local-only storage.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Data Sharing</h3>
-                            <p>We never sell your personal information to third parties. Data is only shared when necessary to provide the service (e.g., cloud sync) or when required by law. Health data from connected devices stays on your device and is never uploaded to our servers.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Your Rights</h3>
-                            <p>You can access, modify, or delete your data at any time through the app settings. You can request a complete deletion of your account and all associated data by contacting us at <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>.</p>
-                        </div>
+                        <h3 class="text-white font-semibold mb-2">Rate &amp; Review</h3>
+                        <p class="text-gray-400 text-sm">Leave a review on Google Play when we launch. It helps others discover Nooze.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Terms of Service -->
-        <section class="py-20" id="terms">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="glass-card-static p-8 sm:p-10 reveal">
-                    <h2 class="text-2xl font-bold text-white mb-6">Terms of Service</h2>
-                    <p class="text-gray-500 text-sm mb-6">Last updated: January 2025</p>
-
-                    <div class="space-y-6 text-gray-400 text-sm leading-relaxed">
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Acceptance of Terms</h3>
-                            <p>By downloading, installing, or using Nooze, you agree to be bound by these Terms of Service. If you do not agree, do not use the application.</p>
+                    <div class="glass-card-static p-6 reveal delay-2">
+                        <div class="feature-icon mx-auto mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
                         </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Service Description</h3>
-                            <p>Nooze is an alarm clock and sleep tracking application for Android. Features include smart wake technology, sleep monitoring, gamification, social features, and health device integrations. Some features require a Premium subscription.</p>
+                        <h3 class="text-white font-semibold mb-2">Spread the Word</h3>
+                        <p class="text-gray-400 text-sm">Tell friends about Nooze or share on social media. Word of mouth is powerful.</p>
+                    </div>
+                    <div class="glass-card-static p-6 reveal delay-3">
+                        <div class="feature-icon mx-auto mb-4">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
                         </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">User Responsibilities</h3>
-                            <p>You are responsible for maintaining the security of your account credentials. You agree not to misuse the service, attempt to access other users' data, or use the app for any unlawful purpose. You must be at least 13 years old to use Nooze.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Limitation of Liability</h3>
-                            <p>Nooze is provided "as is" without warranties of any kind. We are not liable for any damages arising from the use of the application, including but not limited to missed alarms or inaccurate sleep data. Nooze is not a medical device and should not be used as a substitute for professional medical advice.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Changes to Terms</h3>
-                            <p>We may update these terms from time to time. Continued use of the app after changes constitutes acceptance of the new terms. For questions, contact <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>.</p>
-                        </div>
+                        <h3 class="text-white font-semibold mb-2">Give Feedback</h3>
+                        <p class="text-gray-400 text-sm">Report bugs, suggest features, or just let us know what you think via <a href="contact.html" class="text-primary hover:underline">contact</a>.</p>
                     </div>
                 </div>
             </div>
@@ -265,8 +202,8 @@
                 <div>
                     <h4 class="text-white font-semibold mb-4">Legal</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
-                        <li><a href="#terms" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="contact.html#privacy" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="contact.html#terms" class="text-gray-400 hover:text-primary transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div>

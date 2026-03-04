@@ -1,9 +1,8 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
 Sitemap: https://noozealarm.com/sitemap.xml
 
-# Disallow admin or private areas (if any in future)
-# Disallow: /admin/
-
+# Block crawling of internal/private paths
+Disallow: /admin/
+Disallow: /*.json$
