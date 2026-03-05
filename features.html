@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://noozealarm.com/features.html">
     <meta property="og:title" content="Nooze Features - Smart Alarm, Sleep Tracking &amp; Gamification">
     <meta property="og:description" content="Smart wake, sleep tracking, gamification, social duels, 10 health integrations, smart home, and 12 themes.">
-    <meta property="og:image" content="https://noozealarm.com/logo.png">
+    <meta property="og:image" content="https://noozealarm.com/nooze.png">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@NoozeAlarm">
     <meta name="twitter:title" content="Nooze Features">
@@ -54,6 +54,7 @@
                     <a href="about.html" class="nav-link">About</a>
                     <a href="faq.html" class="nav-link">FAQ</a>
                     <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="support.html" class="nav-link">Support Us</a>
                 </div>
                 <div class="flex items-center gap-3">
                     <button id="subscribeBtn" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5"><span>Subscribe</span></button>
@@ -69,6 +70,7 @@
                     <a href="about.html" class="text-gray-300 hover:text-primary py-2 transition-colors">About</a>
                     <a href="faq.html" class="text-gray-300 hover:text-primary py-2 transition-colors">FAQ</a>
                     <a href="contact.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Contact</a>
+                    <a href="support.html" class="text-gray-300 hover:text-primary py-2 transition-colors">Support Us</a>
                 </div>
             </div>
         </div>
@@ -130,24 +132,69 @@
                 <div class="grid md:grid-cols-2 gap-12 items-start">
                     <div class="reveal">
                         <h2 class="text-3xl font-bold text-white mb-3">Wake <span class="gradient-text">Challenges</span></h2>
-                        <p class="text-gray-400 mb-6 leading-relaxed">No snooze button. Instead, you prove you're awake with real-world challenges that get you out of bed and moving.</p>
-                        <div class="space-y-4">
-                            <div class="glass-card-static p-5 flex items-start gap-4">
+                        <p class="text-gray-400 mb-6 leading-relaxed">No snooze button. Instead, you prove you're awake with real-world challenges that get you out of bed and moving. Three difficulty levels per challenge.</p>
+                        <div class="space-y-3">
+                            <div class="glass-card-static p-4 flex items-start gap-4">
+                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">Math Problems</h4>
+                                    <p class="text-gray-400 text-sm">Solve arithmetic to dismiss. Scales from simple addition to multi-step equations.</p>
+                                </div>
+                            </div>
+                            <div class="glass-card-static p-4 flex items-start gap-4">
+                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">Memory Match</h4>
+                                    <p class="text-gray-400 text-sm">Match patterns from memory. Engages your brain to fully wake up.</p>
+                                </div>
+                            </div>
+                            <div class="glass-card-static p-4 flex items-start gap-4">
                                 <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
                                     <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                                 </div>
                                 <div>
-                                    <h4 class="text-white font-medium mb-1">NFC Tag Scan</h4>
-                                    <p class="text-gray-400 text-sm">Place an NFC tag in your bathroom or kitchen. Scan it to dismiss the alarm.</p>
+                                    <h4 class="text-white font-medium mb-1">Shake to Wake</h4>
+                                    <p class="text-gray-400 text-sm">Shake your phone vigorously to dismiss. Gets your body moving right away.</p>
                                 </div>
                             </div>
-                            <div class="glass-card-static p-5 flex items-start gap-4">
+                            <div class="glass-card-static p-4 flex items-start gap-4">
+                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">Typing Challenge</h4>
+                                    <p class="text-gray-400 text-sm">Type out a sentence accurately. Forces focus and fine motor engagement.</p>
+                                </div>
+                            </div>
+                            <div class="glass-card-static p-4 flex items-start gap-4">
+                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">QR Code Scan</h4>
+                                    <p class="text-gray-400 text-sm">Place a QR code anywhere in your home. Walk to it and scan to dismiss.</p>
+                                </div>
+                            </div>
+                            <div class="glass-card-static p-4 flex items-start gap-4">
                                 <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
                                     <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 </div>
                                 <div>
                                     <h4 class="text-white font-medium mb-1">Photo Capture</h4>
                                     <p class="text-gray-400 text-sm">Take a photo to prove you're out of bed. Gets you moving immediately.</p>
+                                </div>
+                            </div>
+                            <div class="glass-card-static p-4 flex items-start gap-4">
+                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
+                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium mb-1">NFC Tag Scan</h4>
+                                    <p class="text-gray-400 text-sm">Place an NFC tag in your bathroom or kitchen. Scan it to dismiss.</p>
                                 </div>
                             </div>
                         </div>
@@ -192,20 +239,18 @@
                     </div>
                     <div class="reveal delay-2">
                         <h2 class="text-3xl font-bold text-white mb-3">Health <span class="gradient-text">Hub</span></h2>
-                        <p class="text-gray-400 mb-6 leading-relaxed">Connect your wearables for richer sleep and health data.</p>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Health Connect</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Fitbit</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Garmin</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Oura</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Whoop</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Polar</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Withings</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Suunto</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Huawei</div>
-                            <div class="glass-card-static p-3 text-center text-sm text-gray-300">Samsung</div>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Pull sleep and health data from Android's Health Connect platform, which aggregates data from your wearables and fitness apps.</p>
+                        <div class="glass-card-static p-5 mb-4">
+                            <h4 class="text-white font-medium mb-2">Health Connect Integration</h4>
+                            <p class="text-gray-400 text-sm mb-3">Works with any wearable or app that syncs to Health Connect &mdash; Fitbit, Samsung Health, Google Fit, Garmin, Oura, Whoop, and more.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">Heart Rate</span>
+                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">Sleep Stages</span>
+                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">SpO2</span>
+                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">Respiratory Rate</span>
+                            </div>
                         </div>
-                        <p class="text-gray-500 text-xs mt-3">Heart rate, SpO2, respiratory rate, and sleep stage data.</p>
+                        <p class="text-gray-500 text-xs">Data availability depends on your wearable's Health Connect support.</p>
                     </div>
                 </div>
             </div>
@@ -273,6 +318,103 @@
 
         <div class="section-divider"></div>
 
+        <!-- Comparison Table -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl font-bold text-white mb-3 reveal">How Nooze <span class="gradient-text">Compares</span></h2>
+                    <p class="text-gray-400 max-w-xl mx-auto reveal delay-1">See how Nooze stacks up against other popular alarm apps.</p>
+                </div>
+                <div class="overflow-x-auto reveal delay-2">
+                    <table class="w-full text-sm text-left">
+                        <thead>
+                            <tr class="border-b border-white/10">
+                                <th class="py-4 px-4 text-gray-400 font-medium">Feature</th>
+                                <th class="py-4 px-4 text-center"><span class="text-primary font-bold">Nooze</span></th>
+                                <th class="py-4 px-4 text-center text-gray-400">Alarmy</th>
+                                <th class="py-4 px-4 text-center text-gray-400">Sleep Cycle</th>
+                                <th class="py-4 px-4 text-center text-gray-400">Stock Alarm</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-400">
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Smart wake (light sleep detection)</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Wake challenges (7 types)</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">No snooze philosophy</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">Optional</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Gamification (XP, levels, quests)</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Social leaderboards &amp; wake duels</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Health Connect integration</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">Limited</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Smart home control</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">Philips Hue</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Sleep journal</td>
+                                <td class="py-3 px-4 text-center text-primary">Yes</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                                <td class="py-3 px-4 text-center">Notes only</td>
+                                <td class="py-3 px-4 text-center">No</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-3 px-4">Themes &amp; customization</td>
+                                <td class="py-3 px-4 text-center text-primary">12 themes</td>
+                                <td class="py-3 px-4 text-center">Limited</td>
+                                <td class="py-3 px-4 text-center">Limited</td>
+                                <td class="py-3 px-4 text-center">None</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">Free tier</td>
+                                <td class="py-3 px-4 text-center text-primary">Full features</td>
+                                <td class="py-3 px-4 text-center">Ad-supported</td>
+                                <td class="py-3 px-4 text-center">Limited</td>
+                                <td class="py-3 px-4 text-center">Free</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
         <!-- CTA -->
         <section class="py-20 text-center">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -307,6 +449,7 @@
                         <li><a href="faq.html" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
                         <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
                         <li><a href="support.html" class="text-gray-400 hover:text-primary transition-colors">Support Us</a></li>
+                        <li><a href="roadmap.html" class="text-gray-400 hover:text-primary transition-colors">Roadmap</a></li>
                     </ul>
                 </div>
                 <div>

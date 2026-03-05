@@ -4,9 +4,9 @@
 (function initPageTransition() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    var PIXEL = 40;
-    var WAVE_DURATION = 450;
-    var PIXEL_ANIM = 180;
+    var PIXEL = 20;
+    var WAVE_DURATION = 280;
+    var PIXEL_ANIM = 100;
     var BG_COLORS = ['#050510', '#060614', '#070718', '#08081c', '#0a0a1a', '#0b0b1e'];
     var ACCENTS = ['rgba(0,188,212,0.5)', 'rgba(124,58,237,0.4)', 'rgba(59,130,246,0.35)'];
 
@@ -37,7 +37,7 @@
                 grid.push({
                     x: c * PIXEL,
                     y: r * PIXEL,
-                    delay: (d / maxDist) * WAVE_DURATION + Math.random() * 60,
+                    delay: (d / maxDist) * WAVE_DURATION + Math.random() * 25,
                     color: pickColor()
                 });
             }
@@ -342,8 +342,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showModal() {
         if (!modal) return;
+        var content = modal.querySelector('.modal-content');
+        if (content && !content.querySelector('.modal-skeleton')) {
+            var skeleton = document.createElement('div');
+            skeleton.className = 'modal-skeleton';
+            skeleton.innerHTML = '<div class="skel-line skel-title"></div><div class="skel-line skel-subtitle"></div><div class="skel-line skel-input"></div><div class="skel-line skel-btn"></div>';
+            content.insertBefore(skeleton, content.firstChild);
+            // Wrap existing form content
+            var formEls = content.querySelectorAll('h2, p, form, #subscribeThankYou');
+            formEls.forEach(function(el) { el.classList.add('modal-form'); });
+            content.classList.add('loading');
+        }
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        // Brief skeleton then reveal form
+        if (content) {
+            setTimeout(function() { content.classList.remove('loading'); }, 400);
+        }
     }
 
     function hideModal() {

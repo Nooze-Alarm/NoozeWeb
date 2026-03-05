@@ -450,6 +450,54 @@ body {
     transform: scale(1) translateY(0);
 }
 
+/* --- Modal Skeleton Loader --- */
+.modal-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-skeleton .skel-line {
+    height: 14px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-skeleton .skel-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.04) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.modal-skeleton .skel-title {
+    height: 24px;
+    width: 55%;
+}
+
+.modal-skeleton .skel-subtitle {
+    width: 80%;
+}
+
+.modal-skeleton .skel-input {
+    height: 46px;
+    border-radius: 12px;
+    margin-top: 8px;
+}
+
+.modal-skeleton .skel-btn {
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(0, 188, 212, 0.1);
+}
+
+.modal-content.loading .modal-form { display: none; }
+.modal-content:not(.loading) .modal-skeleton { display: none; }
+
 /* --- Form Inputs --- */
 .form-input {
     width: 100%;
