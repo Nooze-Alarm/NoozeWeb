@@ -72,14 +72,14 @@ body::before {
     border-radius: 16px;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 }
 
 .glass-card:hover {
     background: var(--bg-card-hover);
-    border-color: rgba(0, 188, 212, 0.15);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 188, 212, 0.05);
+    border-color: rgba(0, 188, 212, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .glass-card-static {
@@ -249,7 +249,7 @@ body::before {
 /* --- Section Dividers --- */
 .section-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.2), rgba(14, 116, 144, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
 }
 
 /* --- Feature Icon Container --- */
@@ -274,8 +274,8 @@ body::before {
 /* --- Scroll Animations --- */
 .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal.visible {
@@ -285,8 +285,8 @@ body::before {
 
 .reveal-left {
     opacity: 0;
-    transform: translateX(-40px);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal-left.visible {
@@ -296,8 +296,8 @@ body::before {
 
 .reveal-right {
     opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal-right.visible {
@@ -307,8 +307,8 @@ body::before {
 
 .reveal-scale {
     opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal-scale.visible {
@@ -320,9 +320,6 @@ body::before {
 .delay-1 { transition-delay: 0.1s; }
 .delay-2 { transition-delay: 0.2s; }
 .delay-3 { transition-delay: 0.3s; }
-.delay-4 { transition-delay: 0.4s; }
-.delay-5 { transition-delay: 0.5s; }
-.delay-6 { transition-delay: 0.6s; }
 
 /* --- Floating Animation --- */
 @keyframes float {
@@ -336,8 +333,8 @@ body::before {
 
 /* --- Pulse Glow --- */
 @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 20px rgba(0, 188, 212, 0.1); }
-    50% { box-shadow: 0 0 40px rgba(0, 188, 212, 0.2); }
+    0%, 100% { box-shadow: 0 0 15px rgba(0, 188, 212, 0.08); }
+    50% { box-shadow: 0 0 25px rgba(0, 188, 212, 0.12); }
 }
 
 .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
