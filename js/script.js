@@ -8,7 +8,7 @@
     var WAVE_DURATION = 280;
     var PIXEL_ANIM = 100;
     var BG_COLORS = ['#050510', '#060614', '#070718', '#08081c', '#0a0a1a', '#0b0b1e'];
-    var ACCENTS = ['rgba(0,188,212,0.5)', 'rgba(124,58,237,0.4)', 'rgba(59,130,246,0.35)'];
+    var ACCENTS = ['rgba(0,188,212,0.5)', 'rgba(14,116,144,0.4)', 'rgba(59,130,246,0.35)'];
 
     function pickColor() {
         if (Math.random() < 0.07) return ACCENTS[Math.floor(Math.random() * ACCENTS.length)];
