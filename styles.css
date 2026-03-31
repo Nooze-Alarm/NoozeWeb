@@ -138,7 +138,7 @@ body {
 .orb-2 {
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.25), transparent 70%);
+    background: radial-gradient(circle, rgba(14, 116, 144, 0.25), transparent 70%);
     bottom: -150px;
     left: -100px;
     animation-delay: -7s;
@@ -236,7 +236,7 @@ body {
 /* --- Section Dividers --- */
 .section-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.2), rgba(124, 58, 237, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.2), rgba(14, 116, 144, 0.2), transparent);
 }
 
 /* --- Feature Icon Container --- */
@@ -247,7 +247,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(0, 188, 212, 0.15), rgba(124, 58, 237, 0.1));
+    background: linear-gradient(135deg, rgba(0, 188, 212, 0.15), rgba(14, 116, 144, 0.1));
     border: 1px solid rgba(0, 188, 212, 0.15);
     flex-shrink: 0;
 }
@@ -370,7 +370,7 @@ body {
     inset: 0;
     padding: 1px;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(0, 188, 212, 0.3), rgba(124, 58, 237, 0.3));
+    background: linear-gradient(135deg, rgba(0, 188, 212, 0.3), rgba(14, 116, 144, 0.3));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
