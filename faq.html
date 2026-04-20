@@ -147,7 +147,7 @@
                 "name": "How do I contact support?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Email us at noozealarm@gmail.com or use the Contact page on this website. You can also reach us on X (@NoozeAlarm) or TikTok (@nooze.alarm.app)."
+                    "text": "Email us at noozesupport@gmail.com or use the Contact page on this website. You can also reach us on X (@NoozeAlarm) or TikTok (@nooze.alarm.app)."
                 }
             }
         ]
@@ -175,7 +175,6 @@
                     <a href="support.html" class="nav-link">Support Us</a>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button id="subscribeBtn" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5"><span>Subscribe</span></button>
                     <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary p-2" aria-label="Toggle menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -330,7 +329,7 @@
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Email us at <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a> or use the <a href="contact.html" class="text-primary hover:underline">Contact page</a>. You can also reach us on <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="text-primary hover:underline">X (@NoozeAlarm)</a> or <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="text-primary hover:underline">TikTok (@nooze.alarm.app)</a>.</p>
+                        <p class="text-gray-400 leading-relaxed">Email us at <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a> or use the <a href="contact.html" class="text-primary hover:underline">Contact page</a>. You can also reach us on <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="text-primary hover:underline">X (@NoozeAlarm)</a> or <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="text-primary hover:underline">TikTok (@nooze.alarm.app)</a>.</p>
                     </div>
                 </div>
 
@@ -344,9 +343,9 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-3xl font-bold text-white mb-4 reveal">Still Have Questions?</h2>
                 <p class="text-gray-400 text-lg mb-8 reveal delay-1">We're here to help.</p>
-                <a href="contact.html" class="btn-primary reveal delay-2">
+                <a href="mailto:noozesupport@gmail.com" class="btn-primary reveal delay-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    <span>Contact Support</span>
+                    <span>Email Support</span>
                 </a>
             </div>
         </section>
@@ -385,18 +384,8 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-white font-semibold mb-4">Stay Updated</h4>
-                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-5">
-                        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
-                            <label for="footer_website">Website</label>
-                            <input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off">
-                        </div>
-                        <div class="flex gap-2">
-                            <input type="email" name="email" placeholder="Your email" required class="form-input !py-2.5 !text-sm flex-1">
-                            <button type="submit" class="btn-primary !py-2.5 !px-4 text-sm"><span>Go</span></button>
-                        </div>
-                    </form>
-                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozealarm@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozealarm@gmail.com</a></p>
+                    <h4 class="text-white font-semibold mb-4">Get in Touch</h4>
+                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozesupport@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozesupport@gmail.com</a></p>
                     <div class="flex gap-3">
                         <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on X">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -421,26 +410,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Subscribe Modal -->
-    <div id="subscribeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Subscribe for updates">
-        <div class="modal-content">
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-xl transition-colors" aria-label="Close modal">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-            <h2 class="text-2xl font-bold text-white mb-2">Get Notified</h2>
-            <p class="text-gray-400 text-sm mb-6">Be the first to know when Nooze launches on Google Play.</p>
-            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
-                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
-                    <label for="subscribe_website">Website</label>
-                    <input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off">
-                </div>
-                <input type="email" name="email" placeholder="Enter your email" required class="form-input mb-4">
-                <button type="submit" class="btn-primary w-full"><span>Subscribe</span></button>
-            </form>
-            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4 text-sm font-medium">Thank you for subscribing!</div>
-        </div>
-    </div>
 
     <script src="js/script.js"></script>
 </body>

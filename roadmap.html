@@ -57,7 +57,6 @@
                     <a href="support.html" class="nav-link">Support Us</a>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button id="subscribeBtn" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5"><span>Subscribe</span></button>
                     <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary p-2" aria-label="Toggle menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -257,7 +256,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold text-white mb-4 reveal">Have a Feature Idea?</h2>
                 <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto reveal delay-1">We build Nooze based on what you need. Tell us what's missing.</p>
-                <a href="contact.html" class="btn-primary reveal delay-2">
+                <a href="mailto:noozesupport@gmail.com?subject=Feature%20Suggestion" class="btn-primary reveal delay-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
                     <span>Suggest a Feature</span>
                 </a>
@@ -296,15 +295,8 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-white font-semibold mb-4">Stay Updated</h4>
-                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-5">
-                        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="footer_website">Website</label><input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off"></div>
-                        <div class="flex gap-2">
-                            <input type="email" name="email" placeholder="Your email" required class="form-input !py-2.5 !text-sm flex-1">
-                            <button type="submit" class="btn-primary !py-2.5 !px-4 text-sm"><span>Go</span></button>
-                        </div>
-                    </form>
-                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozealarm@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozealarm@gmail.com</a></p>
+                    <h4 class="text-white font-semibold mb-4">Get in Touch</h4>
+                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozesupport@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozesupport@gmail.com</a></p>
                     <div class="flex gap-3">
                         <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                         <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16V11.7a4.83 4.83 0 01-3.77-1.93V6.69h3.77z"/></svg></a>
@@ -317,21 +309,6 @@
             <div class="border-t border-white/5 mt-12 pt-8 text-center text-gray-600 text-sm">&copy; 2025-2026 Nooze Alarm. All rights reserved.</div>
         </div>
     </footer>
-
-    <!-- Subscribe Modal -->
-    <div id="subscribeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Subscribe for updates">
-        <div class="modal-content">
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-xl transition-colors" aria-label="Close"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
-            <h2 class="text-2xl font-bold text-white mb-2">Get Notified</h2>
-            <p class="text-gray-400 text-sm mb-6">Be the first to know when Nooze launches on Google Play.</p>
-            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
-                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="subscribe_website">Website</label><input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off"></div>
-                <input type="email" name="email" placeholder="Enter your email" required class="form-input mb-4">
-                <button type="submit" class="btn-primary w-full"><span>Subscribe</span></button>
-            </form>
-            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4 text-sm font-medium">Thank you for subscribing!</div>
-        </div>
-    </div>
 
     <script src="js/script.js"></script>
 </body>

@@ -56,7 +56,6 @@
                     <a href="support.html" class="nav-link">Support Us</a>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button id="subscribeBtn" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5"><span>Subscribe</span></button>
                     <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary p-2" aria-label="Toggle menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -87,87 +86,29 @@
 
         <div class="section-divider"></div>
 
-        <!-- Contact Form + Info -->
+        <!-- Contact Info -->
         <section class="py-20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-5 gap-10">
-                    <!-- Form -->
-                    <div class="lg:col-span-3 reveal">
-                        <div class="glass-card-static p-8">
-                            <h2 class="text-xl font-bold text-white mb-6">Send a Message</h2>
-                            <form id="contactForm" action="https://formspree.io/f/mdkggjgv" method="POST" class="space-y-5">
-                                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="contact_website">Website</label><input type="text" id="contact_website" name="website" tabindex="-1" autocomplete="off"></div>
-
-                                <div>
-                                    <label for="name" class="block text-sm text-gray-400 mb-1.5">Name</label>
-                                    <input type="text" id="name" name="name" required class="form-input" placeholder="Your name">
-                                    <span class="error-message hidden text-red-400 text-xs mt-1"></span>
-                                </div>
-
-                                <div>
-                                    <label for="email" class="block text-sm text-gray-400 mb-1.5">Email</label>
-                                    <input type="email" id="email" name="email" required class="form-input" placeholder="your@email.com">
-                                    <span class="error-message hidden text-red-400 text-xs mt-1"></span>
-                                </div>
-
-                                <div>
-                                    <label for="subject" class="block text-sm text-gray-400 mb-1.5">Subject</label>
-                                    <select id="subject" name="subject" required class="form-input">
-                                        <option value="" disabled selected>Select a topic</option>
-                                        <option value="General Inquiry">General Inquiry</option>
-                                        <option value="Technical Support">Technical Support</option>
-                                        <option value="Feedback">Feedback</option>
-                                        <option value="Partnership">Partnership</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="message" class="block text-sm text-gray-400 mb-1.5">Message</label>
-                                    <textarea id="message" name="message" required rows="5" class="form-input resize-none" placeholder="How can we help?"></textarea>
-                                    <span class="error-message hidden text-red-400 text-xs mt-1"></span>
-                                </div>
-
-                                <button type="submit" id="submitBtn" class="btn-primary w-full">
-                                    <span id="submitText">Send Message</span>
-                                    <span id="submitLoading" class="hidden">Sending...</span>
-                                </button>
-
-                                <div id="formSuccess" class="hidden text-primary text-sm text-center font-medium">Message sent successfully! We'll get back to you soon.</div>
-                                <div id="formError" class="hidden text-red-400 text-sm text-center">Something went wrong. Please try again or email us directly.</div>
-                            </form>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div class="glass-card-static p-6 reveal">
+                        <div class="feature-icon mb-3">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         </div>
+                        <h3 class="text-white font-semibold mb-1">Email</h3>
+                        <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline text-sm">noozesupport@gmail.com</a>
+                        <p class="text-gray-400 text-sm mt-3">We typically respond within 24-48 hours.</p>
                     </div>
 
-                    <!-- Info Cards -->
-                    <div class="lg:col-span-2 space-y-5 reveal delay-2">
-                        <div class="glass-card-static p-6">
-                            <div class="feature-icon mb-3">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            </div>
-                            <h3 class="text-white font-semibold mb-1">Email</h3>
-                            <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline text-sm">noozealarm@gmail.com</a>
+                    <div class="glass-card-static p-6 reveal delay-1">
+                        <div class="feature-icon mb-3">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         </div>
-
-                        <div class="glass-card-static p-6">
-                            <div class="feature-icon mb-3">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <h3 class="text-white font-semibold mb-1">Response Time</h3>
-                            <p class="text-gray-400 text-sm">We typically respond within 24-48 hours.</p>
-                        </div>
-
-                        <div class="glass-card-static p-6">
-                            <div class="feature-icon mb-3">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </div>
-                            <h3 class="text-white font-semibold mb-1">Community</h3>
-                            <div class="space-y-2 mt-2">
-                                <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">X (Twitter) &mdash; @NoozeAlarm</a>
-                                <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">TikTok &mdash; @nooze.alarm.app</a>
-                                <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">GitHub &mdash; Nooze-Alarm</a>
-                                <a href="https://www.linkedin.com/company/nooze-alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">LinkedIn &mdash; Nooze Alarm</a>
-                            </div>
+                        <h3 class="text-white font-semibold mb-1">Community</h3>
+                        <div class="space-y-2 mt-2">
+                            <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">X (Twitter) &mdash; @NoozeAlarm</a>
+                            <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">TikTok &mdash; @nooze.alarm.app</a>
+                            <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">GitHub &mdash; Nooze-Alarm</a>
+                            <a href="https://www.linkedin.com/company/nooze-alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">LinkedIn &mdash; Nooze Alarm</a>
                         </div>
                     </div>
                 </div>
@@ -188,7 +129,7 @@
                         <!-- 1. Data Controller -->
                         <div>
                             <h3 class="text-white font-semibold mb-2">1. Data Controller</h3>
-                            <p>Nooze Alarm<br>Contact: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a></p>
+                            <p>Nooze Alarm<br>Contact: <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a></p>
                         </div>
 
                         <!-- 2. Data We Collect -->
@@ -287,7 +228,7 @@
                                 <li>Object to processing (Art. 21);</li>
                                 <li>Withdraw consent at any time.</li>
                             </ul>
-                            <p class="mt-2">Contact <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a> to exercise your rights. We respond within 30 days.</p>
+                            <p class="mt-2">Contact <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a> to exercise your rights. We respond within 30 days.</p>
                         </div>
 
                         <!-- 9. Complaints -->
@@ -317,7 +258,7 @@
                         <!-- 12. Contact -->
                         <div>
                             <h3 class="text-white font-semibold mb-2">12. Contact</h3>
-                            <p><a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a></p>
+                            <p><a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -338,7 +279,7 @@
                         <!-- 1. Service Provider -->
                         <div>
                             <h3 class="text-white font-semibold mb-2">1. Service Provider</h3>
-                            <p>Nooze Alarm is provided by its developer under the laws of the Republic of Bulgaria (&ldquo;Provider&rdquo;). Contact: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a>.</p>
+                            <p>Nooze Alarm is provided by its developer under the laws of the Republic of Bulgaria (&ldquo;Provider&rdquo;). Contact: <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a>.</p>
                         </div>
 
                         <!-- 2. Description of Service -->
@@ -462,7 +403,7 @@
                         <!-- 16. Contact -->
                         <div>
                             <h3 class="text-white font-semibold mb-2">16. Contact</h3>
-                            <p>For questions about these Terms contact us at: <a href="mailto:noozealarm@gmail.com" class="text-primary hover:underline">noozealarm@gmail.com</a></p>
+                            <p>For questions about these Terms contact us at: <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -502,15 +443,8 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-white font-semibold mb-4">Stay Updated</h4>
-                    <form id="footerSubscribeForm" action="https://formspree.io/f/xovdzjol" method="POST" class="mb-5">
-                        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="footer_website">Website</label><input type="text" id="footer_website" name="website" tabindex="-1" autocomplete="off"></div>
-                        <div class="flex gap-2">
-                            <input type="email" name="email" placeholder="Your email" required class="form-input !py-2.5 !text-sm flex-1">
-                            <button type="submit" class="btn-primary !py-2.5 !px-4 text-sm"><span>Go</span></button>
-                        </div>
-                    </form>
-                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozealarm@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozealarm@gmail.com</a></p>
+                    <h4 class="text-white font-semibold mb-4">Get in Touch</h4>
+                    <p class="text-gray-500 text-sm mb-4"><a href="mailto:noozesupport@gmail.com" class="text-gray-400 hover:text-primary transition-colors">noozesupport@gmail.com</a></p>
                     <div class="flex gap-3">
                         <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                         <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all" aria-label="Follow on TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16V11.7a4.83 4.83 0 01-3.77-1.93V6.69h3.77z"/></svg></a>
@@ -523,21 +457,6 @@
             <div class="border-t border-white/5 mt-12 pt-8 text-center text-gray-600 text-sm">&copy; 2025-2026 Nooze Alarm. All rights reserved.</div>
         </div>
     </footer>
-
-    <!-- Subscribe Modal -->
-    <div id="subscribeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Subscribe for updates">
-        <div class="modal-content">
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-xl transition-colors" aria-label="Close"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
-            <h2 class="text-2xl font-bold text-white mb-2">Get Notified</h2>
-            <p class="text-gray-400 text-sm mb-6">Be the first to know when Nooze launches on Google Play.</p>
-            <form id="subscribeForm" action="https://formspree.io/f/xovdzjol" method="POST">
-                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><label for="subscribe_website">Website</label><input type="text" id="subscribe_website" name="website" tabindex="-1" autocomplete="off"></div>
-                <input type="email" name="email" placeholder="Enter your email" required class="form-input mb-4">
-                <button type="submit" class="btn-primary w-full"><span>Subscribe</span></button>
-            </form>
-            <div id="subscribeThankYou" class="hidden text-primary text-center mt-4 text-sm font-medium">Thank you for subscribing!</div>
-        </div>
-    </div>
 
     <script src="js/script.js"></script>
 </body>
