@@ -83,7 +83,7 @@
                 "name": "Is Nooze free to use?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes! All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes, and cloud sync. Nooze Premium adds animated themes, premium backgrounds, exclusive titles, and advanced analytics for \u20ac0.99/month or \u20ac9.99/year."
+                    "text": "Yes! All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes, and cloud sync. Nooze Premium adds animated themes, premium backgrounds, exclusive titles, and advanced analytics for \u20ac2.99/month or \u20ac14.99/year."
                 }
             },
             {
@@ -91,7 +91,7 @@
                 "name": "Why is there no snooze button?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "By design. Sleep science shows that hitting snooze fragments your sleep and actually makes you groggier. Instead, Nooze offers 7 wake challenges (math problems, memory match, shake, typing, QR scan, photo capture, NFC tag) across 3 difficulty levels to ensure you're fully awake, and rewards you with XP for getting up."
+                    "text": "By design. Sleep science shows that hitting snooze fragments your sleep and actually makes you groggier. Instead, Nooze offers 7 wake challenges (math, memory, shake, typing, QR scan, photo capture, NFC scan — with anagram coming soon) across 3 difficulty levels to ensure you're fully awake, and rewards you with XP for getting up."
                 }
             },
             {
@@ -195,14 +195,19 @@
 
     <main class="flex-1 pt-16">
         <!-- Hero -->
-        <section class="hero-bg py-20 relative">
-            <div class="orb orb-1" style="opacity: 0.2;"></div>
+        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-3"></div>
+            <div class="scanlines"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 reveal">
-                    Frequently Asked <span class="gradient-text">Questions</span>
+                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Quick answers</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">
+                    Frequently Asked <span class="iris-text">Questions</span>
                 </h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-1">
-                    Everything you need to know about Nooze.
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">
+                    Everything you need to know about Nooze before launch day.
                 </p>
             </div>
         </section>
@@ -213,117 +218,117 @@
         <section class="py-20">
             <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
 
-                <div class="faq-item glass-card-static p-0 reveal">
+                <div class="faq-item holo-card holo-card-no-pad reveal">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">What is Nooze?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Nooze is a smart alarm clock and sleep tracker for Android. It monitors your sleep cycles using your phone's sensors, wakes you during light sleep for a more refreshed feeling, and gamifies your morning routine with XP, levels, and challenges.</p>
+                        <p class="text-gray-400 leading-relaxed">Nooze is a smart alarm clock and sleep tracker for Android. It monitors your sleep cycles using your phone's motion and microphone (plus wearable data when available), wakes you during light sleep for a more refreshed start, and gamifies your morning with XP, levels, achievements and friendly duels &mdash; minus a snooze button.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-1">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">Which platforms does Nooze support?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Nooze is currently available for Android. It's built natively for the best performance and integrates with Android's Health Connect platform.</p>
+                        <p class="text-gray-400 leading-relaxed">Android only at launch. Nooze is built natively for Android (Kotlin / Jetpack Compose) and integrates with Health Connect, the OS-level hub that exposes wearable data from Fitbit, Garmin, Oura, Whoop, Samsung Health and others. iOS is not on the roadmap right now.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-1">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">How does the smart wake technology work?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Nooze uses your phone's accelerometer and microphone to detect sleep phases. You set a smart wake window (15, 20, or 30 minutes before your alarm). Nooze monitors your sleep and triggers the alarm when it detects you're in light sleep within that window, resulting in a more natural wake-up.</p>
+                        <p class="text-gray-400 leading-relaxed">You pick a smart wake window of 15, 20 or 30 minutes per alarm. Inside that window Nooze checks recent sleep stage data &mdash; fused from your phone's motion, ambient sound and any connected wearable &mdash; and fires the alarm as soon as you're already in Light or REM sleep. If you stay deep, the alarm just rings at its original time.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-2">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">Is Nooze free to use?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes! All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes, and cloud sync. Nooze Premium (&euro;0.99/month or &euro;9.99/year) adds animated themes, premium profile backgrounds, exclusive titles, and advanced analytics.</p>
+                        <p class="text-gray-400 leading-relaxed">All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes and cloud sync. Nooze Premium (&euro;2.99/month or &euro;14.99/year &mdash; saves about 58%) unlocks sleep aids, smart-home triggers, advanced analytics, 6 animated themes, premium backgrounds and exclusive titles &amp; badges.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-2">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">Why is there no snooze button?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">By design. Sleep science shows that hitting snooze fragments your sleep and actually makes you groggier. Instead, Nooze offers 7 wake challenges (math, memory match, shake, typing, QR scan, photo capture, NFC tag) across 3 difficulty levels to ensure you're fully awake, and rewards you with XP for getting up.</p>
+                        <p class="text-gray-400 leading-relaxed">By design. Hitting snooze fragments your sleep and trains the brain to dread mornings. Instead, Nooze offers seven wake challenges &mdash; math, memory, shake, typing, QR scan, photo capture and NFC scan &mdash; with anagram on the way. Three difficulty levels. The alarm only stops when you finish one. The harder you finish, the more XP. The brand name itself is a play on the word.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-3">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-3">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">Does Nooze track my sleep automatically?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes. Place your phone near your bed and Nooze monitors your sleep using motion and sound analysis. For more detailed data, it also integrates with Health Connect and wearable devices like Fitbit, Garmin, Oura, Whoop, Polar, Withings, and Suunto.</p>
+                        <p class="text-gray-400 leading-relaxed">Yes. Place your phone near the bed and Nooze runs an overnight tracking session, sampling motion, sound and (if you wear one) heart-rate data every 30 seconds. It distinguishes Awake, Light, Deep and REM stages, and produces a quality score, cycle count and wake-ease rating for the morning. There's also a shared-bed mode that ignores your partner's movement and a wearable-only mode if you trust your watch over the phone.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-3">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-3">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">What health devices does Nooze support?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Nooze integrates with Android Health Connect, which aggregates data from your wearables and fitness apps like Fitbit, Samsung Health, Google Fit, Garmin, Oura, Whoop, and more. This provides heart rate, SpO2, respiratory rate, and sleep stage data.</p>
+                        <p class="text-gray-400 leading-relaxed">Nooze plugs into Android Health Connect, which aggregates data from compatible wearables and fitness apps &mdash; Fitbit, Samsung Health, Google Fit, Garmin, Oura, Whoop and more. From there Nooze can read sleep stages, heart rate and SpO₂. If a device or app supports Health Connect, it works with Nooze.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-1">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">How does the gamification work?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">You earn XP for waking up on time (10-50 XP), writing journal entries (5 XP), and maintaining streaks (up to 30 XP bonus). XP lets you level up, complete quests, unlock achievements, and earn exclusive titles.</p>
+                        <p class="text-gray-400 leading-relaxed">Every wake earns XP &mdash; 10 base, plus bonuses for finishing a challenge, finishing it fast, or nailing a perfect wake (up to 50 max). Journal entries give 3 XP. Each daily streak day adds 5 XP. Achievements grant 50 XP, and winning a wake duel adds 100 XP. XP fuels levels, unlocks titles and badges, and feeds your friends&rsquo; activity feed.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-1">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">Can I sync across multiple devices?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes. Sign in with Google or email, and your alarms, sleep data, and profile sync in real-time across all your Android devices via the cloud. The app also works fully offline with local storage.</p>
+                        <p class="text-gray-400 leading-relaxed">Yes. Sign in with Google or email and your alarms, profile, gamification, friends and feed sync across your Android devices. Raw biometrics (the half-minute sleep samples, snore clips, heart-rate readings) stay on each device &mdash; only summary stats sync. The app also works fully offline; it syncs when you're back online.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-2">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">Is my data private and secure?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Privacy is a top priority. Your data is encrypted and stored securely. We prioritize local storage, never sell your information, and give you full control to delete your data at any time through the app.</p>
+                        <p class="text-gray-400 leading-relaxed">Yes. Local data is encrypted at rest. Sleep biometrics, snore recordings and journal notes stay on your device. Cloud sync is opt-in and only carries the minimum needed for cross-device continuity (alarms, achievements, friends). We never sell data, and you can delete everything from settings.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-2">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">Does Nooze work with smart home devices?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes! Nooze integrates with Home Assistant and supports generic webhooks. You can automate lights, control devices, and create gradual wake-up lighting scenes when your alarm triggers.</p>
+                        <p class="text-gray-400 leading-relaxed">Yes (Premium). Nooze integrates with Home Assistant and generic webhooks. Trigger lights, blinds, kettles or any other device when your alarm fires &mdash; or set up a gradual lighting scene that ramps up alongside the volume.</p>
                     </div>
                 </div>
 
-                <div class="faq-item glass-card-static p-0 reveal delay-3">
+                <div class="faq-item holo-card holo-card-no-pad reveal delay-3">
                     <button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
                         <h3 class="text-lg font-semibold text-white pr-4">How do I contact support?</h3>
                         <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -339,14 +344,20 @@
         <div class="section-divider"></div>
 
         <!-- CTA -->
-        <section class="py-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl font-bold text-white mb-4 reveal">Still Have Questions?</h2>
-                <p class="text-gray-400 text-lg mb-8 reveal delay-1">We're here to help.</p>
-                <a href="mailto:noozesupport@gmail.com" class="btn-primary reveal delay-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    <span>Email Support</span>
-                </a>
+        <section class="py-28 relative hero-bg overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid" style="opacity:0.7;"></div>
+            <div class="orb orb-2" style="opacity:0.2;"></div>
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="holo-card reveal"><div class="holo-card-inner text-center" style="padding:48px 32px;">
+                    <span class="holo-chip mb-6"><span class="dot"></span> Still curious</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Still Have <span class="iris-text">Questions?</span></h2>
+                    <p class="text-gray-400 text-lg mb-10">If something's not covered here, drop us a line &mdash; we read everything.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="mailto:noozesupport@gmail.com" class="btn-primary"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Email Support</span></a>
+                        <a href="features.html" class="btn-outline"><span>Browse Features</span></a>
+                    </div>
+                </div></div>
             </div>
         </section>
     </main>

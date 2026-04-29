@@ -2,8 +2,17 @@
   "name": "nooze-web",
   "version": "2.0.0",
   "description": "Nooze Alarm website - HTML with Tailwind CSS",
-  "scripts": {},
-  "keywords": ["nooze", "alarm", "website"],
+  "scripts": {
+    "check": "node dev/check.js"
+  },
+  "keywords": [
+    "nooze",
+    "alarm",
+    "website"
+  ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  }
 }

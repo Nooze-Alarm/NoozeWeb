@@ -3,38 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nooze Features - Smart Alarm, Sleep Tracking, Gamification &amp; More</title>
-    <meta name="description" content="Discover Nooze's features: smart wake technology, sleep cycle tracking, gamification, social challenges, health integrations, smart home control, and more.">
-    <meta name="keywords" content="nooze features, smart alarm features, sleep tracking, gamified alarm, health connect, smart home alarm, wake challenges">
+    <title>Features - Nooze | Smart Wake, Sleep Tracking, Gamified Mornings</title>
+    <meta name="description" content="Explore every Nooze feature: smart wake windows, hybrid sleep tracking, seven wake challenges (NFC, math, photo and more), gamification, social duels, sleep aids and 12 animated themes.">
+    <meta name="keywords" content="smart alarm features, sleep cycle tracker, wake challenges, gamified alarm, sleep stage detection, smart wake window, no snooze alarm">
     <meta name="author" content="Nooze Alarm">
     <link rel="canonical" href="https://noozealarm.com/features.html">
+
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://noozealarm.com/features.html">
-    <meta property="og:title" content="Nooze Features - Smart Alarm, Sleep Tracking &amp; Gamification">
-    <meta property="og:description" content="Smart wake, sleep tracking, gamification, social duels, 10 health integrations, smart home, and 12 themes.">
+    <meta property="og:title" content="Nooze Features - Smart Alarm &amp; Sleep Tracker">
+    <meta property="og:description" content="Smart wake, hybrid sleep tracking, 6 wake challenges, gamification, social duels and more.">
     <meta property="og:image" content="https://noozealarm.com/nooze.png">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:site_name" content="Nooze Alarm">
+
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@NoozeAlarm">
     <meta name="twitter:title" content="Nooze Features">
-    <meta name="twitter:description" content="Smart wake, sleep tracking, gamification, social duels, health integrations, and more.">
+    <meta name="twitter:description" content="Smart wake, hybrid sleep tracking, 6 wake challenges, gamification, social duels and more.">
+    <meta name="twitter:image" content="https://noozealarm.com/nooze.png">
+
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="apple-touch-icon" href="assets/logo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: { extend: {
-                fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-                colors: {
-                    primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#26c6da' },
-                    accent: { DEFAULT: '#0e7490', light: '#06b6d4' },
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#26c6da' },
+                        accent: { DEFAULT: '#0e7490', light: '#06b6d4' },
+                    },
                 },
-            }},
+            },
         }
     </script>
     <link rel="stylesheet" href="css/styles.css">
@@ -43,11 +53,13 @@
 <body class="min-h-screen flex flex-col">
     <canvas id="particles"></canvas>
 
-    <!-- Navbar -->
     <nav class="nav-blur fixed top-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-white tracking-tight"><img src="assets/logo.png" alt="Nooze" class="w-8 h-8 rounded-lg">Nooze<span class="text-primary">Alarm</span></a>
+                <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-white tracking-tight">
+                    <img src="assets/logo.png" alt="Nooze" class="w-8 h-8 rounded-lg">
+                    Nooze<span class="text-primary">Alarm</span>
+                </a>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="features.html" class="nav-link active">Features</a>
@@ -75,181 +87,140 @@
         </div>
     </nav>
 
-    <main class="flex-1 pt-16">
-        <!-- Hero -->
-        <section class="hero-bg py-20 relative">
-            <div class="orb orb-1" style="opacity:0.2;"></div>
-            <div class="orb orb-2" style="opacity:0.15;"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 reveal">
-                    Everything You Need to <span class="gradient-text">Sleep Better</span>
+    <main class="flex-1">
+        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-3"></div>
+            <div class="scanlines"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Built around your sleep</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 reveal delay-1 tracking-tight">
+                    Every <span class="iris-text">Feature</span><span class="text-white">,</span> Built to Wake You Better
                 </h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-1">From intelligent alarms to social challenges, Nooze is packed with features designed to transform your mornings.</p>
+                <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto reveal delay-2 leading-relaxed">
+                    Smart wake windows, hybrid sleep detection, seven wake challenges, gamification, social duels and 12 themes — all in one Android app, no snooze button anywhere.
+                </p>
             </div>
         </section>
 
         <div class="section-divider"></div>
 
-        <!-- Smart Wake -->
-        <section class="py-20">
+        <section class="py-24 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-14">
-                    <h2 class="text-3xl font-bold text-white mb-3 reveal">Smart Wake <span class="gradient-text-cyan">Technology</span></h2>
-                    <p class="text-gray-400 max-w-xl mx-auto reveal delay-1">Wake up during your lightest sleep phase, not mid-dream.</p>
+                    <span class="holo-chip mb-4 reveal"><span class="dot"></span> Core technology</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">Smart Wake <span class="gradient-text-cyan">Window</span></h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
+                        Pick a 15, 20 or 30 minute window before your alarm. Nooze fires when you're already in light sleep, never mid-REM.
+                    </p>
                 </div>
+
                 <div class="grid md:grid-cols-3 gap-6">
-                    <div class="glass-card p-7 reveal delay-1">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Configurable Window</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Choose a 15, 20, or 30-minute smart window before your alarm time. Nooze picks the best moment within that range.</p>
-                    </div>
-                    <div class="glass-card p-7 reveal delay-2">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Hybrid Detection</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Uses your phone's accelerometer and microphone together to accurately detect sleep phases without a wearable.</p>
-                    </div>
-                    <div class="glass-card p-7 reveal delay-3">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Sleep Stage Analysis</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Identifies light, deep, and REM sleep stages. View detailed breakdowns in your sleep analytics dashboard.</p>
-                    </div>
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <h3 class="text-xl font-semibold text-white mb-3">15 / 20 / 30 min</h3>
+                        <p class="text-gray-400 leading-relaxed">Choose how loose the window is per alarm. Tighter for fixed schedules, wider for weekends.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg></div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Hybrid Detection</h3>
+                        <p class="text-gray-400 leading-relaxed">Combines wearable data, motion and ambient sound. Higher confidence wins; quiet nights still get tracked.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Gradual Volume Ramp</h3>
+                        <p class="text-gray-400 leading-relaxed">Volume rises softly across the last few minutes so you ease into the morning instead of jolting awake.</p>
+                    </div></div>
                 </div>
             </div>
         </section>
 
         <div class="section-divider"></div>
 
-        <!-- Wake Challenges & Gamification -->
-        <section class="py-20">
+        <section class="py-24 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-2 gap-12 items-start">
-                    <div class="reveal">
-                        <h2 class="text-3xl font-bold text-white mb-3">Wake <span class="gradient-text">Challenges</span></h2>
-                        <p class="text-gray-400 mb-6 leading-relaxed">No snooze button. Instead, you prove you're awake with real-world challenges that get you out of bed and moving. Three difficulty levels per challenge.</p>
-                        <div class="space-y-3">
-                            <div class="glass-card-static p-4 flex items-start gap-4">
-                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
-                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-medium mb-1">Math Problems</h4>
-                                    <p class="text-gray-400 text-sm">Solve arithmetic to dismiss. Scales from simple addition to multi-step equations.</p>
-                                </div>
-                            </div>
-                            <div class="glass-card-static p-4 flex items-start gap-4">
-                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
-                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-medium mb-1">Memory Match</h4>
-                                    <p class="text-gray-400 text-sm">Match patterns from memory. Engages your brain to fully wake up.</p>
-                                </div>
-                            </div>
-                            <div class="glass-card-static p-4 flex items-start gap-4">
-                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
-                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-medium mb-1">Shake to Wake</h4>
-                                    <p class="text-gray-400 text-sm">Shake your phone vigorously to dismiss. Gets your body moving right away.</p>
-                                </div>
-                            </div>
-                            <div class="glass-card-static p-4 flex items-start gap-4">
-                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
-                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-medium mb-1">Typing Challenge</h4>
-                                    <p class="text-gray-400 text-sm">Type out a sentence accurately. Forces focus and fine motor engagement.</p>
-                                </div>
-                            </div>
-                            <div class="glass-card-static p-4 flex items-start gap-4">
-                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
-                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-medium mb-1">QR Code Scan</h4>
-                                    <p class="text-gray-400 text-sm">Place a QR code anywhere in your home. Walk to it and scan to dismiss.</p>
-                                </div>
-                            </div>
-                            <div class="glass-card-static p-4 flex items-start gap-4">
-                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
-                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-medium mb-1">Photo Capture</h4>
-                                    <p class="text-gray-400 text-sm">Take a photo to prove you're out of bed. Gets you moving immediately.</p>
-                                </div>
-                            </div>
-                            <div class="glass-card-static p-4 flex items-start gap-4">
-                                <div class="feature-icon !w-10 !h-10 !rounded-lg flex-shrink-0">
-                                    <svg class="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-medium mb-1">NFC Tag Scan</h4>
-                                    <p class="text-gray-400 text-sm">Place an NFC tag in your bathroom or kitchen. Scan it to dismiss.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="reveal delay-2">
-                        <h2 class="text-3xl font-bold text-white mb-3"><span class="gradient-text">Gamification</span> System</h2>
-                        <p class="text-gray-400 mb-6 leading-relaxed">Turn waking up into a rewarding daily habit with XP, levels, quests, and achievements.</p>
-                        <div class="space-y-4">
-                            <div class="glass-card-static p-5">
-                                <h4 class="text-white font-medium mb-2">XP Rewards</h4>
-                                <p class="text-gray-400 text-sm">10-50 XP per wake-up, 5 XP per journal entry, up to 30 XP streak bonus daily.</p>
-                            </div>
-                            <div class="glass-card-static p-5">
-                                <h4 class="text-white font-medium mb-2">Levels &amp; Titles</h4>
-                                <p class="text-gray-400 text-sm">Progressive leveling system with unlockable titles and achievement badges.</p>
-                            </div>
-                            <div class="glass-card-static p-5">
-                                <h4 class="text-white font-medium mb-2">Quests &amp; Achievements</h4>
-                                <p class="text-gray-400 text-sm">Complete daily/weekly quests and unlock permanent achievements for milestones.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center mb-14">
+                    <span class="holo-chip mb-4 reveal"><span class="dot"></span> No snooze, ever</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">Seven Wake <span class="gradient-text">Challenges</span></h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
+                        The alarm only stops when you prove you're awake. Pick one, mix several, choose a difficulty.
+                    </p>
                 </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">Math</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Solve quick problems scaled to your difficulty.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h10M4 18h10"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">Memory</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Repeat a sequence — short-term memory wakes you fast.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">Shake</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Shake the phone to a target — gets blood moving instantly.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5h2l1 7h12l1-7h2M5 21h2m10 0h2M9 12v5m6-5v5"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">Typing</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Type a phrase accurately — no autocorrect to lean on.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">QR Scan</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Stick a QR in the kitchen — you have to leave bed to scan it.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.66-.9l.82-1.2A2 2 0 0110.07 4h3.86a2 2 0 011.66.9l.82 1.2A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">Photo</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Snap a target object Nooze recognises — proves you're up and moving.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M5.281 13.575a9.5 9.5 0 0113.438 0M2.45 10.745a13.5 13.5 0 0119.1 0M12 20h.01"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">NFC Scan</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Tap an NFC tag stuck across the room. The alarm only stops once your phone touches it.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-1 opacity-80"><div class="holo-card-inner tilt-inner relative">
+                        <span class="absolute top-3 right-3 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-accent/20 text-accent-light border border-accent/30" style="letter-spacing:0.14em;text-transform:uppercase;">Coming Soon</span>
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+                        <h3 class="text-white font-semibold mb-1">Anagram</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Unscramble a word — light cognitive load, surprisingly effective.</p>
+                    </div></div>
+                </div>
+
+                <p class="text-center text-gray-500 mt-10 text-sm reveal">Combine multiple challenges in one alarm. Pick easy, medium or hard. The harder you finish, the more XP.</p>
             </div>
         </section>
 
         <div class="section-divider"></div>
 
-        <!-- Social & Health -->
-        <section class="py-20">
+        <section class="py-24 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div class="reveal">
-                        <h2 class="text-3xl font-bold text-white mb-3">Social <span class="gradient-text-cyan">Features</span></h2>
-                        <p class="text-gray-400 mb-6 leading-relaxed">Wake up is better with friends. Compete, challenge, and motivate each other.</p>
-                        <ul class="space-y-3 text-gray-400 text-sm">
-                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Add friends by username search</li>
-                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>XP-based leaderboards</li>
-                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Wake duels &mdash; challenge friends to wake up first</li>
-                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Activity feed showing friend progress</li>
+                        <span class="holo-chip mb-4"><span class="dot"></span> Hybrid sleep detection</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Tracks <span class="gradient-text-cyan">Four Sleep Phases</span></h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                            Awake, Light, Deep and REM — detected through your phone's motion and microphone, fused with wearable data when you have one.
+                        </p>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Confidence-weighted detection: wearable &gt; on-body sensor fusion &gt; nightstand mic.</li>
+                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Shared-bed mode raises the threshold so a partner's movement isn't logged as yours.</li>
+                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Wearable-only mode skips on-phone sensors entirely if you trust your watch.</li>
+                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Snore and sleep-talk events surfaced in your morning summary.</li>
                         </ul>
                     </div>
-                    <div class="reveal delay-2">
-                        <h2 class="text-3xl font-bold text-white mb-3">Health <span class="gradient-text">Hub</span></h2>
-                        <p class="text-gray-400 mb-6 leading-relaxed">Pull sleep and health data from Android's Health Connect platform, which aggregates data from your wearables and fitness apps.</p>
-                        <div class="glass-card-static p-5 mb-4">
-                            <h4 class="text-white font-medium mb-2">Health Connect Integration</h4>
-                            <p class="text-gray-400 text-sm mb-3">Works with any wearable or app that syncs to Health Connect &mdash; Fitbit, Samsung Health, Google Fit, Garmin, Oura, Whoop, and more.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">Heart Rate</span>
-                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">Sleep Stages</span>
-                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">SpO2</span>
-                                <span class="text-xs px-2 py-1 rounded-md bg-primary/10 text-primary border border-primary/20">Respiratory Rate</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-500 text-xs">Data availability depends on your wearable's Health Connect support.</p>
+                    <div class="grid grid-cols-2 gap-4 reveal-scale">
+                        <div class="metric"><div class="num"><span data-counter="4" data-duration="1200">0</span></div><div class="lbl">Sleep Phases</div><div class="desc">Awake · Light · Deep · REM</div></div>
+                        <div class="metric"><div class="num"><span data-counter="30" data-duration="1500">0</span><span class="unit">s</span></div><div class="lbl">Sample Rate</div><div class="desc">A new data point every half-minute.</div></div>
+                        <div class="metric"><div class="num"><span data-counter="100" data-duration="1800">0</span><span class="unit">%</span></div><div class="lbl">On-Device</div><div class="desc">Raw biometrics never leave your phone.</div></div>
+                        <div class="metric"><div class="num">∞</div><div class="lbl">History</div><div class="desc">Quality, cycles and wake-ease scored every night.</div></div>
                     </div>
                 </div>
             </div>
@@ -257,171 +228,179 @@
 
         <div class="section-divider"></div>
 
-        <!-- More Features Grid -->
-        <section class="py-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-white mb-12 text-center reveal">And <span class="gradient-text">Much More</span></h2>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                    <div class="glass-card p-6 reveal delay-1">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Sleep Aids</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Built-in calming soundscapes and ambient noise with auto-stop timer to help you fall asleep faster.</p>
-                    </div>
-
-                    <div class="glass-card p-6 reveal delay-2">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Sleep Journal</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Log mood, dreams, and notes daily. Earn 5 XP per entry and track patterns over time.</p>
-                    </div>
-
-                    <div class="glass-card p-6 reveal delay-3">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Smart Home</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Home Assistant &amp; webhook support. Automate lights and devices when your alarm triggers. Gradual wake-up lighting.</p>
-                    </div>
-
-                    <div class="glass-card p-6 reveal delay-1">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Cross-Device Sync</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Sign in with Google or email. Real-time bi-directional cloud sync. Works offline with local storage.</p>
-                    </div>
-
-                    <div class="glass-card p-6 reveal delay-2">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">12 Themes</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">6 free themes (Default, Ocean, Forest, Lavender, Crimson, Amber) + 6 premium animated gradients.</p>
-                    </div>
-
-                    <div class="glass-card p-6 reveal delay-3">
-                        <div class="feature-icon mb-4">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">Privacy &amp; Security</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Encrypted local storage, no data selling, full control to delete your data anytime.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Comparison Table -->
-        <section class="py-20">
+        <section class="py-24 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-14">
-                    <h2 class="text-3xl font-bold text-white mb-3 reveal">How Nooze <span class="gradient-text">Compares</span></h2>
-                    <p class="text-gray-400 max-w-xl mx-auto reveal delay-1">See how Nooze stacks up against other popular alarm apps.</p>
+                    <span class="holo-chip mb-4 reveal"><span class="dot"></span> Mornings, made fun</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal"><span class="gradient-text">Gamification</span> &amp; Streaks</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
+                        Earn XP for every wake, journal entry and streak day. Level up. Unlock achievements and titles.
+                    </p>
                 </div>
-                <div class="overflow-x-auto reveal delay-2">
-                    <table class="w-full text-sm text-left">
-                        <thead>
-                            <tr class="border-b border-white/10">
-                                <th class="py-4 px-4 text-gray-400 font-medium">Feature</th>
-                                <th class="py-4 px-4 text-center"><span class="text-primary font-bold">Nooze</span></th>
-                                <th class="py-4 px-4 text-center text-gray-400">Alarmy</th>
-                                <th class="py-4 px-4 text-center text-gray-400">Sleep Cycle</th>
-                                <th class="py-4 px-4 text-center text-gray-400">Stock Alarm</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-gray-400">
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Smart wake (light sleep detection)</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Wake challenges (7 types)</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">No snooze philosophy</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">Optional</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Gamification (XP, levels, quests)</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Social leaderboards &amp; wake duels</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Health Connect integration</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">Limited</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Smart home control</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">Philips Hue</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Sleep journal</td>
-                                <td class="py-3 px-4 text-center text-primary">Yes</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                                <td class="py-3 px-4 text-center">Notes only</td>
-                                <td class="py-3 px-4 text-center">No</td>
-                            </tr>
-                            <tr class="border-b border-white/5">
-                                <td class="py-3 px-4">Themes &amp; customization</td>
-                                <td class="py-3 px-4 text-center text-primary">12 themes</td>
-                                <td class="py-3 px-4 text-center">Limited</td>
-                                <td class="py-3 px-4 text-center">Limited</td>
-                                <td class="py-3 px-4 text-center">None</td>
-                            </tr>
-                            <tr>
-                                <td class="py-3 px-4">Free tier</td>
-                                <td class="py-3 px-4 text-center text-primary">Full features</td>
-                                <td class="py-3 px-4 text-center">Ad-supported</td>
-                                <td class="py-3 px-4 text-center">Limited</td>
-                                <td class="py-3 px-4 text-center">Free</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg></div>
+                        <h3 class="text-xl font-semibold text-white mb-3">XP &amp; Levels</h3>
+                        <p class="text-gray-400 leading-relaxed">Up to 50 XP per wake (challenge bonus + speed + perfect). 3 XP per journal. 5 XP per streak day. 50 XP per achievement.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143z"/></svg></div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Quests &amp; Achievements</h3>
+                        <p class="text-gray-400 leading-relaxed">Daily quests refresh every morning. Long-term achievements unlock for streaks, perfect wakes and milestones.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8c0-5.39-2.59-10.22-6.5-13.33z"/></svg></div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Streaks &amp; Widget</h3>
+                        <p class="text-gray-400 leading-relaxed">Daily wake streak surfaced everywhere — including a home-screen widget so it's the first thing you see.</p>
+                    </div></div>
                 </div>
             </div>
         </section>
 
         <div class="section-divider"></div>
 
-        <!-- CTA -->
-        <section class="py-20 text-center">
+        <section class="py-24 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-white mb-4 reveal">Ready to Try Nooze?</h2>
-                <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto reveal delay-1">Nooze is launching soon on Google Play. Follow along on our socials for updates.</p>
-                <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="btn-primary reveal delay-2">
-                    <span>Follow @NoozeAlarm</span>
-                </a>
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div class="reveal-right">
+                        <span class="holo-chip mb-4"><span class="dot"></span> Compete &amp; cheer</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Friends, Leaderboards &amp; <span class="gradient-text">Wake Duels</span></h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                            Add friends, see who's killing their streak and challenge anyone to a duel: first to nail their wake routine wins.
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="glass-card p-5"><h4 class="text-white font-semibold mb-1">Activity Feed</h4><p class="text-gray-400 text-sm">See friends' achievements, streak milestones and duel results.</p></div>
+                            <div class="glass-card p-5"><h4 class="text-white font-semibold mb-1">Wake Duels</h4><p class="text-gray-400 text-sm">Challenge a friend over a date range. 100 XP for the winner.</p></div>
+                            <div class="glass-card p-5"><h4 class="text-white font-semibold mb-1">Leaderboards</h4><p class="text-gray-400 text-sm">Friends-only ladder. No public scoreboards, no harassment surface.</p></div>
+                            <div class="glass-card p-5"><h4 class="text-white font-semibold mb-1">Anti-Farming</h4><p class="text-gray-400 text-sm">One active duel per pair. No looping challenges to grind XP.</p></div>
+                        </div>
+                    </div>
+                    <div class="reveal-left">
+                        <div class="holo-card"><div class="holo-card-inner" style="padding:32px;">
+                            <div class="text-xs uppercase tracking-widest text-primary mb-3">Wake Duel — 7 days</div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div><div class="text-white font-bold">You</div><div class="text-3xl font-extrabold gradient-text">5,420</div><div class="text-xs text-gray-500">XP this week</div></div>
+                                <div class="text-2xl font-bold text-gray-500">vs</div>
+                                <div class="text-right"><div class="text-white font-bold">Alex</div><div class="text-3xl font-extrabold text-gray-300">4,890</div><div class="text-xs text-gray-500">XP this week</div></div>
+                            </div>
+                            <div class="h-2 rounded-full bg-white/5 overflow-hidden mb-2"><div class="h-full bg-gradient-to-r from-primary to-accent-light" style="width:53%"></div></div>
+                            <div class="flex justify-between text-xs text-gray-500"><span>3 days left</span><span class="text-primary">+100 XP if you win</span></div>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">And <span class="gradient-text-cyan">Much More</span></h2>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Health Hub</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Connects through Health Connect — pulls sleep, heart-rate and SpO₂ data from compatible wearables and apps.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Smart Home</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Trigger lights, blinds and devices on wake via Home Assistant. Bring up your bedroom on your schedule.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Sleep Aids</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Calming soundscapes — rain, ocean, white noise — to help you drift off. Auto-fade so they don't run all night.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Sleep Journal</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Log mood, energy, dreams and notes against each session. Patterns surface over weeks, not screenshots.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Cross-Device Sync</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Your alarms, gamification and friends sync across phones. Raw biometrics stay local on each device.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">12 Themes</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Six free, six premium animated themes. Pick a vibe — from minimal mono to reactive auroras.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Privacy First</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Sleep biometrics never leave your device. Local data is encrypted at rest. Cloud sync is opt-in and minimal.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9.5 9.5l5 5m0-5l-5 5"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Bedtime Reminders</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Optional bedtime nudge with a Quick Settings tile to start the night with one tap.</p>
+                    </div></div>
+                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v18l7-4 7 4V3"/></svg></div>
+                        <h3 class="text-white font-semibold mb-2">Survives Reboots</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Alarms reschedule themselves after device boot or app update — no &quot;forgot to ring&quot; surprises.</p>
+                    </div></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="py-24 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">How Nooze <span class="gradient-text">Compares</span></h2>
+                    <p class="text-gray-400 reveal delay-1">A quick look against a typical alarm + tracking stack.</p>
+                </div>
+
+                <div class="holo-card reveal delay-2"><div class="holo-card-inner" style="padding:0;overflow:hidden;">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="text-left p-4 text-gray-400 font-medium">Feature</th>
+                                    <th class="p-4 text-primary font-semibold">Nooze</th>
+                                    <th class="p-4 text-gray-500">Typical Alarm</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-300">
+                                <tr class="border-b border-white/5"><td class="p-4">Smart wake window</td><td class="p-4 text-center text-primary">15 / 20 / 30 min</td><td class="p-4 text-center text-gray-500">—</td></tr>
+                                <tr class="border-b border-white/5"><td class="p-4">Snooze button</td><td class="p-4 text-center text-primary font-semibold">Removed</td><td class="p-4 text-center text-gray-500">Always</td></tr>
+                                <tr class="border-b border-white/5"><td class="p-4">Wake challenges</td><td class="p-4 text-center text-primary">7 types</td><td class="p-4 text-center text-gray-500">0–1</td></tr>
+                                <tr class="border-b border-white/5"><td class="p-4">Sleep stage tracking</td><td class="p-4 text-center text-primary">Hybrid (4 stages)</td><td class="p-4 text-center text-gray-500">Often missing</td></tr>
+                                <tr class="border-b border-white/5"><td class="p-4">Gamification &amp; streaks</td><td class="p-4 text-center text-primary">XP / quests / titles</td><td class="p-4 text-center text-gray-500">—</td></tr>
+                                <tr class="border-b border-white/5"><td class="p-4">Social &amp; duels</td><td class="p-4 text-center text-primary">Friends &amp; duels</td><td class="p-4 text-center text-gray-500">—</td></tr>
+                                <tr class="border-b border-white/5"><td class="p-4">Smart home trigger</td><td class="p-4 text-center text-primary">Home Assistant</td><td class="p-4 text-center text-gray-500">—</td></tr>
+                                <tr><td class="p-4">Biometrics in cloud</td><td class="p-4 text-center text-primary font-semibold">Stay on device</td><td class="p-4 text-center text-gray-500">Often uploaded</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div></div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="py-28 relative hero-bg overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid" style="opacity:0.7;"></div>
+            <div class="orb orb-2" style="opacity:0.2;"></div>
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="holo-card reveal"><div class="holo-card-inner text-center" style="padding:48px 32px;">
+                    <span class="holo-chip mb-6"><span class="dot"></span> Coming soon · Android</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to <span class="iris-text">Wake Up</span> Better?</h2>
+                    <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10">Nooze is launching on Google Play. Read the story behind it or see what's on the roadmap.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="about.html" class="btn-primary"><span>Our Story</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                        <a href="roadmap.html" class="btn-outline"><span>View Roadmap</span></a>
+                    </div>
+                </div></div>
             </div>
         </section>
     </main>
@@ -430,7 +409,6 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
     </button>
 
-    <!-- Footer -->
     <footer class="footer-gradient border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -469,7 +447,9 @@
                     </div>
                 </div>
             </div>
-            <div class="border-t border-white/5 mt-12 pt-8 text-center text-gray-600 text-sm">&copy; 2025-2026 Nooze Alarm. All rights reserved.</div>
+            <div class="border-t border-white/5 mt-12 pt-8 text-center text-gray-600 text-sm">
+                <p>&copy; 2025-2026 Nooze Alarm. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 

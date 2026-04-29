@@ -376,4 +376,72 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // --- Holo Card: cursor-tracked spotlight + 3D tilt ---
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+        var coarse = window.matchMedia('(pointer: coarse)').matches;
+
+        document.querySelectorAll('.holo-card').forEach(function(card) {
+            var inner = card.querySelector('.holo-card-inner') || card;
+            card.addEventListener('pointermove', function(e) {
+                var r = card.getBoundingClientRect();
+                var x = ((e.clientX - r.left) / r.width) * 100;
+                var y = ((e.clientY - r.top) / r.height) * 100;
+                inner.style.setProperty('--mx', x + '%');
+                inner.style.setProperty('--my', y + '%');
+            });
+        });
+
+        if (!coarse) {
+            document.querySelectorAll('.tilt').forEach(function(el) {
+                var rect;
+                el.addEventListener('pointerenter', function() {
+                    rect = el.getBoundingClientRect();
+                });
+                el.addEventListener('pointermove', function(e) {
+                    if (!rect) rect = el.getBoundingClientRect();
+                    var px = (e.clientX - rect.left) / rect.width - 0.5;
+                    var py = (e.clientY - rect.top) / rect.height - 0.5;
+                    var rx = (-py * 8).toFixed(2);
+                    var ry = (px * 10).toFixed(2);
+                    el.style.transform = 'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+                });
+                el.addEventListener('pointerleave', function() {
+                    el.style.transform = '';
+                });
+            });
+        }
+    }
+
+    // --- Animated Counters ---
+    var counters = document.querySelectorAll('[data-counter]');
+    if (counters.length) {
+        var counterObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (!entry.isIntersecting) return;
+                var el = entry.target;
+                if (el.dataset.counted) return;
+                el.dataset.counted = '1';
+
+                var target = parseFloat(el.dataset.counter);
+                var decimals = parseInt(el.dataset.decimals || '0', 10);
+                var dur = parseInt(el.dataset.duration || '1500', 10);
+                var start = performance.now();
+
+                function tick(now) {
+                    var t = Math.min(1, (now - start) / dur);
+                    var eased = 1 - Math.pow(1 - t, 3);
+                    var v = target * eased;
+                    el.textContent = decimals > 0 ? v.toFixed(decimals) : Math.round(v).toString();
+                    if (t < 1) requestAnimationFrame(tick);
+                    else el.textContent = decimals > 0 ? target.toFixed(decimals) : Math.round(target).toString();
+                }
+                requestAnimationFrame(tick);
+                counterObs.unobserve(el);
+            });
+        }, { threshold: 0.4 });
+
+        counters.forEach(function(el) { counterObs.observe(el); });
+    }
 });

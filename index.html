@@ -141,53 +141,152 @@
 
     <main class="flex-1">
         <!-- Hero Section -->
-        <section class="hero-bg min-h-screen flex items-center pt-16 relative">
+        <section class="hero-bg min-h-screen flex items-center pt-16 relative overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid"></div>
             <div class="orb orb-1"></div>
             <div class="orb orb-2"></div>
             <div class="orb orb-3"></div>
+            <div class="scanlines"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 w-full">
-                <div class="max-w-3xl mx-auto text-center">
-                    <div class="reveal">
-                        <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary border border-primary/20 mb-6">
-                            Coming Soon to Android
-                        </span>
+                <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                    <!-- Left: copy -->
+                    <div class="lg:col-span-7 text-center">
+                        <div class="reveal flex justify-center">
+                            <span class="holo-chip mb-6">
+                                <span class="dot"></span>
+                                Coming Soon · Android
+                            </span>
+                        </div>
+
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-6 reveal delay-1 tracking-tight">
+                            Wake Up<br><span class="iris-text">Smarter</span><span class="text-white">.</span>
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed reveal delay-2 text-balance">
+                            Nooze tracks your sleep cycles, wakes you at the perfect moment in your lightest phase, and turns mornings into a rewarding game. No snooze button. Just better wake-ups.
+                        </p>
+
+                        <div class="flex flex-wrap justify-center gap-4 reveal delay-3">
+                            <a href="features.html" class="btn-primary">
+                                <span>Explore Features</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </a>
+                            <a href="about.html" class="btn-outline">
+                                <span>Our Story</span>
+                            </a>
+                        </div>
+
+                        <!-- Trust indicators -->
+                        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-12 reveal delay-2">
+                            <div class="flex items-center gap-2 text-gray-500 text-sm">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                Privacy First
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-500 text-sm">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Smart Wake Technology
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-500 text-sm">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                Free Core Tier
+                            </div>
+                        </div>
                     </div>
 
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6 reveal delay-1">
-                        Wake Up
-                        <span class="gradient-text"> Smarter</span>
-                    </h1>
+                    <!-- Right: holographic phone mockup -->
+                    <div class="lg:col-span-5 reveal-scale delay-2">
+                        <div class="phone-stage">
+                            <div class="phone">
+                                <div class="phone-screen">
+                                    <div class="status">
+                                        <span>9:41</span>
+                                        <span>NOOZE</span>
+                                    </div>
 
-                    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed reveal delay-2 text-balance">
-                        Nooze tracks your sleep cycles, wakes you at the perfect moment, and turns your mornings into a rewarding experience. No snooze button. Just better wake-ups.
-                    </p>
+                                    <div class="clock">
+                                        <div class="time">06:42</div>
+                                        <div class="label">Smart Wake Active</div>
+                                    </div>
 
-                    <div class="flex flex-wrap justify-center gap-4 reveal delay-3">
-                        <a href="features.html" class="btn-primary">
-                            <span>Explore Features</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                        </a>
-                        <a href="about.html" class="btn-outline">
-                            <span>Our Story</span>
-                        </a>
+                                    <div class="sleep-wave">
+                                        <svg viewBox="0 0 280 70" preserveAspectRatio="none">
+                                            <defs>
+                                                <linearGradient id="wave-grad" x1="0" y1="0" x2="1" y2="0">
+                                                    <stop offset="0%" stop-color="#0e7490"/>
+                                                    <stop offset="50%" stop-color="#00bcd4"/>
+                                                    <stop offset="100%" stop-color="#3b82f6"/>
+                                                </linearGradient>
+                                                <linearGradient id="wave-fill" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="0%" stop-color="rgba(0, 188, 212, 0.25)"/>
+                                                    <stop offset="100%" stop-color="rgba(0, 188, 212, 0)"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M0,55 C20,55 30,20 50,20 C70,20 80,55 100,55 C120,55 130,10 150,10 C170,10 180,50 200,50 C220,50 230,30 250,30 C270,30 280,45 280,45 L280,70 L0,70 Z" fill="url(#wave-fill)"/>
+                                            <path class="line" d="M0,55 C20,55 30,20 50,20 C70,20 80,55 100,55 C120,55 130,10 150,10 C170,10 180,50 200,50 C220,50 230,30 250,30 C270,30 280,45 280,45"/>
+                                            <circle class="marker" cx="0" cy="40" r="4"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="phase-row">
+                                        <div class="phase">Deep</div>
+                                        <div class="phase active">Light</div>
+                                        <div class="phase">REM</div>
+                                        <div class="phase">Awake</div>
+                                    </div>
+
+                                    <div class="alarm-row">
+                                        <div>
+                                            <div class="alarm-time">07:00</div>
+                                            <div class="alarm-meta">Mon · Wake Window 30m</div>
+                                        </div>
+                                        <div class="alarm-toggle" aria-hidden="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="xp-badge">
+                                <div class="v">+250 XP</div>
+                                <div class="l">Quest Complete</div>
+                            </div>
+
+                            <div class="streak-badge">
+                                <div class="icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8c0-5.39-2.59-10.22-6.5-13.33zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700;color:#fff;font-size:14px;line-height:1;">12 days</div>
+                                    <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:3px;">Streak</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Trust indicators -->
-                    <div class="flex flex-wrap justify-center gap-6 mt-14 reveal delay-2">
-                        <div class="flex items-center gap-2 text-gray-500 text-sm">
-                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                            Privacy First
-                        </div>
-                        <div class="flex items-center gap-2 text-gray-500 text-sm">
-                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Smart Wake Technology
-                        </div>
-                        <div class="flex items-center gap-2 text-gray-500 text-sm">
-                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                            Free to Use
-                        </div>
-                    </div>
+        <!-- Marquee Strip -->
+        <section class="py-8 border-y border-white/5 bg-black/20 relative">
+            <div class="marquee">
+                <div class="marquee-track">
+                    <span class="marquee-item">Smart Wake</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Sleep Cycle Tracking</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">No Snooze</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Gamified Mornings</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">7 Wake Challenges</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Health Connect</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">12 Themes</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Privacy First</span><span class="marquee-item"><span class="sep"></span></span>
+                    <!-- duplicate set for seamless loop -->
+                    <span class="marquee-item">Smart Wake</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Sleep Cycle Tracking</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">No Snooze</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Gamified Mornings</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">7 Wake Challenges</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Health Connect</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">12 Themes</span><span class="marquee-item"><span class="sep"></span></span>
+                    <span class="marquee-item">Privacy First</span><span class="marquee-item"><span class="sep"></span></span>
                 </div>
             </div>
         </section>
@@ -206,35 +305,65 @@
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="glass-card p-8 reveal delay-1">
-                        <div class="feature-icon mb-5">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="holo-card tilt reveal delay-1">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="feature-icon mb-5">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Sleep Cycle Tracking</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Monitors your sleep phases through motion and sound analysis. Detects light, deep, and REM sleep to understand your patterns.
+                            </p>
                         </div>
-                        <h3 class="text-xl font-semibold text-white mb-3">Sleep Cycle Tracking</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Monitors your sleep phases through motion and sound analysis. Detects light, deep, and REM sleep to understand your patterns.
-                        </p>
                     </div>
 
-                    <div class="glass-card p-8 reveal delay-2">
-                        <div class="feature-icon mb-5">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <div class="holo-card tilt reveal delay-2">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="feature-icon mb-5">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white mb-3">Smart Wake Window</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Set a 15, 20, or 30-minute window before your alarm. Nooze wakes you during your lightest sleep phase within that range.
+                            </p>
                         </div>
-                        <h3 class="text-xl font-semibold text-white mb-3">Smart Wake Window</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Set a 15, 20, or 30-minute window before your alarm. Nooze wakes you during your lightest sleep phase within that range.
-                        </p>
                     </div>
 
-                    <div class="glass-card p-8 reveal delay-3">
-                        <div class="feature-icon mb-5">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <div class="holo-card tilt reveal delay-3">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="feature-icon mb-5">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white mb-3">No Snooze. Ever.</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                The snooze button fragments your sleep and makes you groggier. Nooze eliminates it entirely and uses wake challenges instead.
+                            </p>
                         </div>
-                        <h3 class="text-xl font-semibold text-white mb-3">No Snooze. Ever.</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            The snooze button fragments your sleep and makes you groggier. Nooze eliminates it entirely and uses wake challenges instead.
-                        </p>
+                    </div>
+                </div>
+
+                <!-- Metrics strip -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
+                    <div class="metric reveal delay-1">
+                        <div class="num"><span data-counter="0" data-duration="1200">0</span><span class="unit">%</span></div>
+                        <div class="lbl">Snooze Button</div>
+                        <div class="desc">Replaced with wake challenges that get you up.</div>
+                    </div>
+                    <div class="metric reveal delay-2">
+                        <div class="num">15-<span data-counter="30" data-duration="1400">0</span><span class="unit">min</span></div>
+                        <div class="lbl">Smart Window</div>
+                        <div class="desc">Wakes you in your lightest phase, not mid-REM.</div>
+                    </div>
+                    <div class="metric reveal delay-3">
+                        <div class="num"><span data-counter="4" data-duration="1200">0</span></div>
+                        <div class="lbl">Sleep Phases</div>
+                        <div class="desc">Awake, Light, Deep and REM tracked through the night.</div>
+                    </div>
+                    <div class="metric reveal delay-1">
+                        <div class="num"><span data-counter="12" data-duration="1500">0</span></div>
+                        <div class="lbl">Themes</div>
+                        <div class="desc">Six free, six premium — animated and reactive.</div>
                     </div>
                 </div>
             </div>
@@ -255,74 +384,86 @@
                 </div>
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="glass-card p-6 reveal delay-1">
-                        <div class="flex items-start gap-4">
-                            <div class="feature-icon !w-12 !h-12 !rounded-xl">
-                                <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="text-white font-semibold mb-1">Gamification</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed">Earn XP, level up, complete quests, and unlock achievements every morning.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card p-6 reveal delay-2">
-                        <div class="flex items-start gap-4">
-                            <div class="feature-icon !w-12 !h-12 !rounded-xl">
-                                <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="text-white font-semibold mb-1">Social &amp; Duels</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed">Add friends, climb leaderboards, and challenge others to wake duels.</p>
+                    <div class="holo-card tilt reveal delay-1">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-12 !h-12 !rounded-xl">
+                                    <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">Gamification</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">Earn XP, level up, complete quests, and unlock achievements every morning.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="glass-card p-6 reveal delay-3">
-                        <div class="flex items-start gap-4">
-                            <div class="feature-icon !w-12 !h-12 !rounded-xl">
-                                <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="text-white font-semibold mb-1">Health Hub</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed">Connects to Health Connect, Fitbit, Garmin, Oura, Whoop, and more.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card p-6 reveal delay-1">
-                        <div class="flex items-start gap-4">
-                            <div class="feature-icon !w-12 !h-12 !rounded-xl">
-                                <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="text-white font-semibold mb-1">Sleep Aids</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed">Calming soundscapes and ambient noise to help you fall asleep faster.</p>
+                    <div class="holo-card tilt reveal delay-2">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-12 !h-12 !rounded-xl">
+                                    <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">Social &amp; Duels</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">Add friends, climb leaderboards, and challenge others to wake duels.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="glass-card p-6 reveal delay-2">
-                        <div class="flex items-start gap-4">
-                            <div class="feature-icon !w-12 !h-12 !rounded-xl">
-                                <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="text-white font-semibold mb-1">Smart Home</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed">Integrate with Home Assistant to control lights and devices on wake.</p>
+                    <div class="holo-card tilt reveal delay-3">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-12 !h-12 !rounded-xl">
+                                    <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">Health Hub</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">Connects through Health Connect — pulls sleep, heart-rate and SpO₂ from any compatible wearable or app.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="glass-card p-6 reveal delay-3">
-                        <div class="flex items-start gap-4">
-                            <div class="feature-icon !w-12 !h-12 !rounded-xl">
-                                <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    <div class="holo-card tilt reveal delay-1">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-12 !h-12 !rounded-xl">
+                                    <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">Sleep Aids</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">Calming soundscapes and ambient noise to help you fall asleep faster.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-white font-semibold mb-1">12 Themes</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed">6 free and 6 premium animated themes to personalize your experience.</p>
+                        </div>
+                    </div>
+
+                    <div class="holo-card tilt reveal delay-2">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-12 !h-12 !rounded-xl">
+                                    <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">Smart Home</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">Integrate with Home Assistant to control lights and devices on wake.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="holo-card tilt reveal delay-3">
+                        <div class="holo-card-inner tilt-inner">
+                            <div class="flex items-start gap-4">
+                                <div class="feature-icon !w-12 !h-12 !rounded-xl">
+                                    <svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold mb-1">12 Themes</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">6 free and 6 premium animated themes to personalize your experience.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -349,36 +490,36 @@
                 </div>
 
                 <div class="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-                    <div class="text-center reveal delay-1">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <div class="text-center reveal delay-1 step-line">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/30 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(0,188,212,0.15)]">
                             <span class="text-2xl font-bold gradient-text">1</span>
                         </div>
                         <h3 class="text-white font-semibold mb-2">Set Your Alarm</h3>
                         <p class="text-gray-400 text-sm">Choose your wake time and smart window (15, 20, or 30 min).</p>
                     </div>
 
-                    <div class="text-center reveal delay-2">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <div class="text-center reveal delay-2 step-line">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/30 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(0,188,212,0.15)]">
                             <span class="text-2xl font-bold gradient-text">2</span>
                         </div>
                         <h3 class="text-white font-semibold mb-2">Sleep Peacefully</h3>
                         <p class="text-gray-400 text-sm">Nooze monitors your sleep cycles using your phone's sensors.</p>
                     </div>
 
-                    <div class="text-center reveal delay-3">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <div class="text-center reveal delay-3 step-line">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/30 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(0,188,212,0.15)]">
                             <span class="text-2xl font-bold gradient-text">3</span>
                         </div>
                         <h3 class="text-white font-semibold mb-2">Wake at the Right Time</h3>
                         <p class="text-gray-400 text-sm">The alarm triggers during light sleep so you wake refreshed.</p>
                     </div>
 
-                    <div class="text-center reveal delay-1">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <div class="text-center reveal delay-1 step-line">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/30 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(0,188,212,0.15)]">
                             <span class="text-2xl font-bold gradient-text">4</span>
                         </div>
                         <h3 class="text-white font-semibold mb-2">Complete a Challenge</h3>
-                        <p class="text-gray-400 text-sm">Scan an NFC tag or take a photo to prove you're up. Earn XP!</p>
+                        <p class="text-gray-400 text-sm">Solve a quick puzzle or scan a QR to prove you're up. Earn XP!</p>
                     </div>
                 </div>
             </div>
@@ -433,17 +574,18 @@
                     </div>
 
                     <!-- Premium -->
-                    <div class="glass-card p-8 relative overflow-hidden reveal delay-2 gradient-border pulse-glow">
-                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-accent/20 text-accent-light border border-accent/20">
+                    <div class="holo-card reveal delay-2 pulse-glow">
+                      <div class="holo-card-inner relative overflow-hidden" style="padding:32px;">
+                        <span class="inline-block mb-3 px-3 py-1 rounded-full text-[11px] font-semibold bg-accent/20 text-accent-light border border-accent/30 backdrop-blur-sm" style="letter-spacing:0.16em;text-transform:uppercase;">
                             Premium
                         </span>
                         <h3 class="text-xl font-bold text-white mb-1">Nooze Premium</h3>
                         <p class="text-gray-500 text-sm mb-6">The complete sleep experience</p>
                         <div class="flex items-baseline gap-2 mb-1">
-                            <span class="text-4xl font-extrabold text-white">&euro;0.99</span>
+                            <span class="text-4xl font-extrabold text-white">&euro;2.99</span>
                             <span class="text-gray-500">/month</span>
                         </div>
-                        <p class="text-xs text-gray-500 mb-6">or &euro;9.99/year (save 17%)</p>
+                        <p class="text-xs text-gray-500 mb-6">or &euro;14.99/year (save 58%)</p>
                         <ul class="space-y-3 text-gray-400 text-sm">
                             <li class="flex items-center gap-2">
                                 <svg class="w-5 h-5 text-accent-light flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -474,6 +616,7 @@
                                 Support development
                             </li>
                         </ul>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -482,22 +625,30 @@
         <div class="section-divider"></div>
 
         <!-- CTA Section -->
-        <section class="py-24 relative hero-bg">
+        <section class="py-28 relative hero-bg overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid" style="opacity:0.7;"></div>
             <div class="orb orb-2" style="opacity: 0.2;"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">
-                    Ready to Transform Your Mornings?
-                </h2>
-                <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10 reveal delay-1">
-                    Nooze is coming soon to Google Play. In the meantime, learn more about how it works.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4 reveal delay-2">
-                    <a href="features.html" class="btn-primary">
-                        <span>Explore Features</span>
-                    </a>
-                    <a href="about.html" class="btn-outline">
-                        <span>Our Story</span>
-                    </a>
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="holo-card reveal">
+                    <div class="holo-card-inner text-center" style="padding:48px 32px;">
+                        <span class="holo-chip mb-6"><span class="dot"></span> Launch Window</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+                            Ready to <span class="iris-text">Transform</span> Your Mornings?
+                        </h2>
+                        <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10">
+                            Nooze is coming soon to Google Play. In the meantime, learn more about how it works.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <a href="features.html" class="btn-primary">
+                                <span>Explore Features</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </a>
+                            <a href="about.html" class="btn-outline">
+                                <span>Our Story</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

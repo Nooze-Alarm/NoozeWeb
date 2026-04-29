@@ -77,14 +77,18 @@
 
     <main class="flex-1 pt-16">
         <!-- Hero -->
-        <section class="hero-bg py-20 relative">
-            <div class="orb orb-1" style="opacity:0.2;"></div>
-            <div class="orb orb-2" style="opacity:0.15;"></div>
+        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="scanlines"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 reveal">
-                    Development <span class="gradient-text">Roadmap</span>
+                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Where we&rsquo;re heading</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">
+                    Development <span class="iris-text">Roadmap</span>
                 </h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-1">Where we've been and where we're headed. Follow our journey as we build the best alarm app on Android.</p>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">What's built, what's launching, and what's next on the way to making the best alarm on Android.</p>
             </div>
         </section>
 
@@ -99,61 +103,61 @@
                     <div class="flex-1 h-px bg-green-500/20"></div>
                 </div>
                 <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="glass-card-static p-5 reveal delay-1">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             <h4 class="text-white font-medium">Smart Wake Technology</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Hybrid sleep detection with configurable 15/20/30-min wake windows.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-1">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             <h4 class="text-white font-medium">7 Wake Challenges</h4>
                         </div>
-                        <p class="text-gray-400 text-sm">Math, memory, shake, typing, QR scan, photo capture, and NFC tag.</p>
+                        <p class="text-gray-400 text-sm">Math, memory, shake, typing, QR scan, photo capture and NFC scan &mdash; with three difficulty levels. Anagram coming soon.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-2">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             <h4 class="text-white font-medium">Gamification System</h4>
                         </div>
                         <p class="text-gray-400 text-sm">XP, levels, quests, achievements, streak bonuses, and unlockable titles.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-2">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             <h4 class="text-white font-medium">Social Features</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Friend system, leaderboards, wake duels, and activity feed.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-3">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h4 class="text-white font-medium">Health Connect</h4>
+                            <h4 class="text-white font-medium">Health Connect Hub</h4>
                         </div>
-                        <p class="text-gray-400 text-sm">Heart rate, SpO2, respiratory rate, and sleep stage data from wearables.</p>
+                        <p class="text-gray-400 text-sm">Heart rate, SpO₂ and sleep-stage data from any compatible wearable &mdash; Fitbit, Garmin, Oura, Whoop, Samsung Health and more.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-3">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             <h4 class="text-white font-medium">Smart Home</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Home Assistant + webhook support for gradual wake-up lighting.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-1">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             <h4 class="text-white font-medium">12 Themes</h4>
                         </div>
                         <p class="text-gray-400 text-sm">6 free + 6 premium animated gradient themes with full customization.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-2">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h4 class="text-white font-medium">Cloud Sync &amp; Security</h4>
+                            <h4 class="text-white font-medium">Cloud Sync &amp; Privacy</h4>
                         </div>
-                        <p class="text-gray-400 text-sm">Bi-directional Firestore sync, encrypted storage, Google Sign-In.</p>
+                        <p class="text-gray-400 text-sm">Encrypted local storage, opt-in cloud sync for alarms and gamification, biometrics stay on device.</p>
                     </div>
                 </div>
             </div>
@@ -170,7 +174,7 @@
                     <div class="flex-1 h-px bg-primary/20"></div>
                 </div>
                 <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="glass-card p-5 reveal delay-1">
+                    <div class="holo-card holo-card-no-pad roadmap-item pulse-glow reveal delay-1">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
                                 <div class="w-2 h-2 rounded-full bg-primary"></div>
@@ -179,7 +183,7 @@
                         </div>
                         <p class="text-gray-400 text-sm">Final testing, Play Store listing, screenshots, and content rating.</p>
                     </div>
-                    <div class="glass-card p-5 reveal delay-2">
+                    <div class="holo-card holo-card-no-pad roadmap-item pulse-glow reveal delay-2">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
                                 <div class="w-2 h-2 rounded-full bg-primary"></div>
@@ -203,42 +207,42 @@
                     <div class="flex-1 h-px bg-accent/20"></div>
                 </div>
                 <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="glass-card-static p-5 reveal delay-1">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
                             <h4 class="text-white font-medium">Home Screen Widgets</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Glanceable alarm status, next alarm countdown, and sleep stats widgets.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-1">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
                             <h4 class="text-white font-medium">Sleep Coaching</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Personalized tips and insights based on your sleep patterns and trends.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-2">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
                             <h4 class="text-white font-medium">Alarm Sharing</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Share alarm configurations with friends. Sync alarm times for group activities.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-2">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
                             <h4 class="text-white font-medium">Wear OS Companion</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Smartwatch app for silent haptic alarms and direct sleep tracking from your wrist.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-3">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
                             <h4 class="text-white font-medium">More Sleep Sounds</h4>
                         </div>
                         <p class="text-gray-400 text-sm">Expanded soundscape library with binaural beats and ASMR-style tracks.</p>
                     </div>
-                    <div class="glass-card-static p-5 reveal delay-3">
+                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
                         <div class="flex items-center gap-2 mb-2">
                             <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
                             <h4 class="text-white font-medium">Community Challenges</h4>
@@ -252,14 +256,17 @@
         <div class="section-divider"></div>
 
         <!-- Suggest -->
-        <section class="py-20 text-center">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-white mb-4 reveal">Have a Feature Idea?</h2>
-                <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto reveal delay-1">We build Nooze based on what you need. Tell us what's missing.</p>
-                <a href="mailto:noozesupport@gmail.com?subject=Feature%20Suggestion" class="btn-primary reveal delay-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
-                    <span>Suggest a Feature</span>
-                </a>
+        <section class="py-28 relative hero-bg overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid" style="opacity:0.7;"></div>
+            <div class="orb orb-2" style="opacity:0.2;"></div>
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="holo-card reveal"><div class="holo-card-inner text-center" style="padding:48px 32px;">
+                    <span class="holo-chip mb-6"><span class="dot"></span> Your call</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Have a <span class="iris-text">Feature</span> Idea?</h2>
+                    <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10">Nooze gets shaped by the people who use it. If something's missing or could be better, send it over.</p>
+                    <a href="mailto:noozesupport@gmail.com?subject=Feature%20Suggestion" class="btn-primary"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg><span>Suggest a Feature</span></a>
+                </div></div>
             </div>
         </section>
     </main>

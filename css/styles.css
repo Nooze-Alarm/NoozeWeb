@@ -596,3 +596,696 @@ select:focus-visible {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
 }
+
+/* ===========================================================
+   HOLOGRAPHIC TOOLKIT
+   =========================================================== */
+
+/* --- Cyber Grid Background ---------------------------------
+   Animated perspective grid for hero / section backgrounds.
+   Wrap in a container with overflow:hidden. */
+.holo-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        linear-gradient(rgba(0, 188, 212, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 188, 212, 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 30%, transparent 80%);
+    animation: gridDrift 40s linear infinite;
+}
+
+.holo-grid.tilt-grid {
+    transform: perspective(900px) rotateX(58deg) translateY(28%) scale(1.6);
+    transform-origin: 50% 100%;
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to top, #000 10%, transparent 80%);
+    -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 80%);
+    animation: gridScroll 16s linear infinite;
+}
+
+@keyframes gridDrift {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 56px 56px, 56px 56px; }
+}
+
+@keyframes gridScroll {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 0 48px, 48px 0; }
+}
+
+/* --- Aurora Wash --------------------------------------------
+   A slow-drifting iridescent fog used behind hero content. */
+.aurora {
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(40% 30% at 20% 30%, rgba(0, 188, 212, 0.18), transparent 60%),
+        radial-gradient(35% 30% at 80% 25%, rgba(59, 130, 246, 0.14), transparent 60%),
+        radial-gradient(45% 35% at 50% 80%, rgba(14, 116, 144, 0.18), transparent 60%);
+    filter: blur(20px) saturate(120%);
+    animation: auroraDrift 22s ease-in-out infinite alternate;
+    opacity: 0.9;
+}
+
+@keyframes auroraDrift {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(2%, -1.5%, 0) scale(1.05); }
+    100% { transform: translate3d(-2%, 1.5%, 0) scale(1.02); }
+}
+
+/* --- Holographic Card ---------------------------------------
+   A glass card with a rotating conic gradient border,
+   prismatic inner shine and a hover lift.
+
+   Markup:
+   <div class="holo-card"><div class="holo-card-inner">…</div></div>
+*/
+.holo-card {
+    position: relative;
+    border-radius: 18px;
+    padding: 1px;
+    background: conic-gradient(
+        from var(--holo-angle, 0deg),
+        rgba(0, 188, 212, 0.55),
+        rgba(59, 130, 246, 0.5),
+        rgba(168, 85, 247, 0.35),
+        rgba(0, 188, 212, 0.55),
+        rgba(14, 116, 144, 0.5),
+        rgba(0, 188, 212, 0.55)
+    );
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+                box-shadow 0.4s ease,
+                filter 0.4s ease;
+    isolation: isolate;
+    animation: holoSpin 9s linear infinite;
+}
+
+@property --holo-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes holoSpin {
+    to { --holo-angle: 360deg; }
+}
+
+/* Fallback for browsers without @property: rotate via filter hue */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+    .holo-card {
+        background: linear-gradient(135deg, rgba(0, 188, 212, 0.5), rgba(59, 130, 246, 0.4));
+    }
+}
+
+.holo-card-inner {
+    position: relative;
+    border-radius: 17px;
+    background:
+        linear-gradient(180deg, rgba(10, 10, 26, 0.92), rgba(5, 5, 16, 0.95));
+    padding: 28px;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.holo-card-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at var(--mx, 50%) var(--my, 0%),
+            rgba(0, 188, 212, 0.18),
+            transparent 45%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.holo-card-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(115deg,
+            transparent 35%,
+            rgba(255, 255, 255, 0.06) 48%,
+            rgba(255, 255, 255, 0.12) 50%,
+            rgba(255, 255, 255, 0.06) 52%,
+            transparent 65%);
+    background-size: 300% 100%;
+    background-position: 200% 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    transition: background-position 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    z-index: 0;
+}
+
+.holo-card:hover {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 18px 38px rgba(0, 188, 212, 0.18));
+}
+
+.holo-card:hover .holo-card-inner::before { opacity: 1; }
+.holo-card:hover .holo-card-inner::after { background-position: -100% 0; }
+
+.holo-card > * { position: relative; z-index: 1; }
+
+/* Subtle inner content lift */
+.holo-card .holo-card-inner > * { position: relative; z-index: 1; }
+
+/* --- Iridescent Text Accent --------------------------------- */
+.iris-text {
+    background: linear-gradient(110deg,
+        #00bcd4 0%,
+        #26c6da 25%,
+        #60a5fa 50%,
+        #06b6d4 75%,
+        #00bcd4 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: irisShift 7s ease-in-out infinite;
+}
+
+@keyframes irisShift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* --- Neon Pill / Chip --------------------------------------- */
+.holo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    background: linear-gradient(180deg, rgba(0, 188, 212, 0.12), rgba(0, 188, 212, 0.04));
+    border: 1px solid rgba(0, 188, 212, 0.28);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+        0 8px 24px -12px rgba(0, 188, 212, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.holo-chip .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    box-shadow: 0 0 8px var(--primary-light), 0 0 16px rgba(0, 188, 212, 0.6);
+    animation: dotPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* --- Mouse-Tilt Container ----------------------------------- */
+.tilt {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    will-change: transform;
+}
+
+.tilt-inner {
+    transform: translateZ(20px);
+}
+
+/* --- Holographic Phone Mockup ------------------------------- */
+.phone-stage {
+    perspective: 1400px;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+    position: relative;
+}
+
+.phone-stage::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -36px;
+    width: 70%;
+    height: 28px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(0, 188, 212, 0.45), transparent 65%);
+    filter: blur(18px);
+    opacity: 0.7;
+}
+
+.phone {
+    position: relative;
+    border-radius: 44px;
+    padding: 10px;
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02)) border-box,
+        linear-gradient(180deg, #0d0d22, #060614) padding-box;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 40px 80px -20px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 188, 212, 0.12),
+        0 0 80px rgba(0, 188, 212, 0.18);
+    transform: rotateY(-12deg) rotateX(6deg);
+    animation: phoneFloat 8s ease-in-out infinite;
+}
+
+@keyframes phoneFloat {
+    0%, 100% { transform: rotateY(-12deg) rotateX(6deg) translateY(0); }
+    50%      { transform: rotateY(-9deg) rotateX(4deg) translateY(-12px); }
+}
+
+.phone-screen {
+    position: relative;
+    border-radius: 34px;
+    padding: 28px 22px 22px;
+    background:
+        radial-gradient(120% 70% at 50% 0%, rgba(0, 188, 212, 0.22), transparent 60%),
+        linear-gradient(180deg, #050516, #0a0a1f);
+    overflow: hidden;
+    aspect-ratio: 9 / 18;
+    color: #e6f6f9;
+}
+
+/* notch */
+.phone-screen::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92px;
+    height: 22px;
+    background: #000;
+    border-radius: 14px;
+    z-index: 3;
+}
+
+/* scanline */
+.phone-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(255,255,255,0.0) 0px,
+            rgba(255,255,255,0.0) 3px,
+            rgba(0, 188, 212, 0.04) 4px);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+.phone-screen .status {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(230, 246, 249, 0.7);
+    margin-bottom: 26px;
+    letter-spacing: 0.04em;
+}
+
+.phone-screen .clock {
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.phone-screen .clock .time {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    background: linear-gradient(180deg, #ffffff, #8ad8e2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+
+.phone-screen .clock .label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--primary-light);
+    margin-top: 6px;
+    text-transform: uppercase;
+}
+
+/* sleep cycle wave */
+.sleep-wave {
+    margin: 22px -4px 18px;
+    height: 70px;
+    position: relative;
+}
+
+.sleep-wave svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.sleep-wave path.line {
+    stroke: url(#wave-grad);
+    stroke-width: 2;
+    fill: none;
+    filter: drop-shadow(0 0 6px rgba(0, 188, 212, 0.6));
+    stroke-dasharray: 1;
+    pathLength: 1;
+    animation: waveDraw 4s ease-in-out infinite alternate;
+}
+
+@keyframes waveDraw {
+    from { stroke-dashoffset: 1; }
+    to   { stroke-dashoffset: 0; }
+}
+
+.sleep-wave .marker {
+    fill: var(--primary-light);
+    filter: drop-shadow(0 0 6px var(--primary-light));
+    animation: markerSlide 5s ease-in-out infinite alternate;
+}
+
+@keyframes markerSlide {
+    0%   { transform: translateX(8%); }
+    100% { transform: translateX(82%); }
+}
+
+/* phase chips */
+.phase-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.phase-row .phase {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: rgba(230, 246, 249, 0.6);
+}
+
+.phase-row .phase.active {
+    color: #00d8e6;
+    background: rgba(0, 188, 212, 0.12);
+    border-color: rgba(0, 188, 212, 0.4);
+    box-shadow: 0 0 18px rgba(0, 188, 212, 0.25);
+}
+
+/* alarm bottom row */
+.alarm-row {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0, 188, 212, 0.18), rgba(14, 116, 144, 0.06));
+    border: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.alarm-row .alarm-time {
+    font-weight: 700;
+    color: #fff;
+    font-size: 15px;
+}
+
+.alarm-row .alarm-meta {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(230, 246, 249, 0.55);
+    margin-top: 2px;
+}
+
+.alarm-toggle {
+    width: 38px;
+    height: 22px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #00bcd4, #0e7490);
+    position: relative;
+    box-shadow: 0 0 14px rgba(0, 188, 212, 0.45);
+}
+
+.alarm-toggle::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    top: 2px;
+    right: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* xp orb floating next to phone */
+.xp-badge {
+    position: absolute;
+    top: 12%;
+    left: calc(100% - 28px);
+    right: auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(15,15,30,0.92), rgba(5,5,16,0.92));
+    border: 1px solid rgba(0, 188, 212, 0.35);
+    box-shadow: 0 12px 30px -12px rgba(0, 188, 212, 0.5);
+    backdrop-filter: blur(8px);
+    animation: float 5s ease-in-out infinite;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.xp-badge .v {
+    font-weight: 800;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1;
+}
+
+.xp-badge .l {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    margin-top: 4px;
+}
+
+.streak-badge {
+    position: absolute;
+    bottom: 14%;
+    right: calc(100% - 28px);
+    left: auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(15,15,30,0.92), rgba(5,5,16,0.92));
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    box-shadow: 0 12px 30px -12px rgba(59, 130, 246, 0.5);
+    backdrop-filter: blur(8px);
+    animation: float 6s ease-in-out 1s infinite;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.streak-badge .icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    box-shadow: 0 0 14px rgba(59, 130, 246, 0.5);
+}
+
+/* --- Marquee ------------------------------------------------- */
+.marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    gap: 56px;
+    width: max-content;
+    animation: marqueeSlide 40s linear infinite;
+    will-change: transform;
+}
+
+.marquee-track > * { flex-shrink: 0; }
+
+@keyframes marqueeSlide {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.55);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.marquee-item .sep {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+/* --- Metric Tile -------------------------------------------- */
+.metric {
+    position: relative;
+    padding: 24px;
+    border-radius: 18px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    text-align: left;
+}
+
+.metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.55), transparent);
+}
+
+.metric .num {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(180deg, #ffffff, #8ad8e2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.metric .num .unit {
+    font-size: 24px;
+    color: var(--primary-light);
+    -webkit-text-fill-color: var(--primary-light);
+    margin-left: 2px;
+}
+
+.metric .lbl {
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+}
+
+.metric .desc {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+/* --- Step Connector ----------------------------------------- */
+.step-line {
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .step-line::after {
+        content: '';
+        position: absolute;
+        top: 32px;
+        right: -16px;
+        width: 32px;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(0, 188, 212, 0.5), transparent);
+    }
+    .step-line:last-child::after { display: none; }
+}
+
+/* --- Scanlines Overlay (subtle) ----------------------------- */
+.scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        repeating-linear-gradient(180deg,
+            rgba(255,255,255,0.0) 0px,
+            rgba(255,255,255,0.0) 2px,
+            rgba(0, 188, 212, 0.025) 3px);
+    mix-blend-mode: screen;
+}
+
+/* --- Reduced Motion ----------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .holo-card,
+    .iris-text,
+    .phone,
+    .marquee-track,
+    .holo-grid,
+    .aurora,
+    .sleep-wave path.line,
+    .sleep-wave .marker,
+    .xp-badge,
+    .streak-badge { animation: none !important; }
+    .tilt { transform: none !important; }
+}
+
+/* --- holo-card without inner wrapper (e.g. FAQ items) --- */
+.holo-card.holo-card-no-pad {
+    overflow: hidden;
+}
+.holo-card.holo-card-no-pad::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 17px;
+    background: linear-gradient(180deg, rgba(10, 10, 26, 0.92), rgba(5, 5, 16, 0.95));
+    z-index: 0;
+    pointer-events: none;
+}
+.holo-card.holo-card-no-pad > * { position: relative; z-index: 1; }
+
+/* roadmap card padding */
+.holo-card.roadmap-item { padding: 0; }
+.holo-card.roadmap-item > * { padding: 20px; }
+.holo-card.roadmap-item > div + p,
+.holo-card.roadmap-item > p { padding-top: 0; }
+
+/* --- Mobile Tweaks ------------------------------------------ */
+@media (max-width: 768px) {
+    .phone-stage { max-width: 260px; }
+    .xp-badge,
+    .streak-badge { display: none; }
+    .metric .num { font-size: 36px; }
+    .holo-card-inner { padding: 22px; }
+}
