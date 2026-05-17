@@ -445,3 +445,34 @@ document.addEventListener('DOMContentLoaded', function() {
         counters.forEach(function(el) { counterObs.observe(el); });
     }
 });
+
+// --- Launch Ribbon (sitewide) ---
+(function initLaunchBar() {
+    var KEY = 'nooze_launch_bar_dismissed';
+    function setup() {
+        var bar = document.getElementById('launchBar');
+        if (!bar) return;
+        try {
+            if (sessionStorage.getItem(KEY) === '1') {
+                bar.parentNode && bar.parentNode.removeChild(bar);
+                return;
+            }
+        } catch (e) {}
+        document.body.classList.add('launch-bar-visible');
+        window.__dismissLaunchBar = function() {
+            try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+            document.body.classList.remove('launch-bar-visible');
+            bar.style.transition = 'transform 0.35s ease, opacity 0.35s ease';
+            bar.style.transform = 'translateY(-110%)';
+            bar.style.opacity = '0';
+            setTimeout(function() {
+                bar.parentNode && bar.parentNode.removeChild(bar);
+            }, 360);
+        };
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setup);
+    } else {
+        setup();
+    }
+})();
