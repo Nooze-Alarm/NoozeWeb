@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noozealarm.com/sitemap.xml
+
+# Block crawling of internal/private paths
+Disallow: /admin/
+Disallow: /*.json$
