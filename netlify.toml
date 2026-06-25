@@ -1,0 +1,8 @@
+# Netlify build config. Overrides the dashboard settings so Netlify builds the
+# Astro site and serves the generated output instead of the repo root.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
