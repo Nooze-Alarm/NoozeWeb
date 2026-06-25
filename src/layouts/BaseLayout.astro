@@ -1,0 +1,88 @@
+---
+import LaunchBar from '../components/LaunchBar.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
+
+const {
+    title,
+    description,
+    keywords,
+    canonical = '',
+    ogTitle,
+    ogDescription,
+    ogType = 'website',
+    noindex = false,
+    active,
+    footer = 'full',
+} = Astro.props;
+
+const SITE = 'https://noozealarm.com';
+const url = canonical === '' ? SITE + '/' : `${SITE}/${canonical}`;
+const ogT = ogTitle ?? title;
+const ogD = ogDescription ?? description;
+const ogImage = `${SITE}/assets/og-image.jpg`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="author" content="Nooze Alarm" />
+    <link rel="canonical" href={url} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={ogT} />
+    <meta property="og:description" content={ogD} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nooze smart alarm and sleep tracker app" />
+    <meta property="og:site_name" content="Nooze Alarm" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@NoozeAlarm" />
+    <meta name="twitter:title" content={ogT} />
+    <meta name="twitter:description" content={ogD} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#050510" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/tailwind.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <script is:inline>if(sessionStorage.getItem('nooze_pixel_transition'))document.write('<style id="pxl-hide">body{visibility:hidden}</style>')</script>
+
+    <slot name="head" />
+</head>
+<body class="min-h-screen flex flex-col">
+    <canvas id="particles"></canvas>
+    <LaunchBar />
+    <Nav active={active} />
+
+    <slot />
+
+    <BackToTop />
+    <Footer minimal={footer === 'minimal'} />
+
+    <script is:inline src="/js/script.js"></script>
+</body>
+</html>

@@ -42,3 +42,10 @@ docs/
 dev/screenshots/
 dev/check-report.json
 
+
+# Astro generated
+.astro/
+
+# Local dev artifacts (astro check)
+dev/screenshots-astro/
+dev/check-report-astro.json

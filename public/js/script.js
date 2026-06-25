@@ -305,13 +305,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var mobileMenu = document.getElementById('mobileMenu');
 
     if (mobileMenuBtn && mobileMenu) {
+        mobileMenu.id = mobileMenu.id || 'mobileMenu';
+        mobileMenuBtn.setAttribute('aria-controls', mobileMenu.id);
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
         mobileMenuBtn.addEventListener('click', function() {
-            var isHidden = mobileMenu.classList.contains('hidden');
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-            } else {
-                mobileMenu.classList.add('hidden');
-            }
+            var willOpen = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', !willOpen);
+            mobileMenuBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
         });
     }
 

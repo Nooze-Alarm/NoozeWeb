@@ -1,0 +1,204 @@
+---
+// Swipeable Play Store screenshot carousel for the homepage.
+// Images already have their own baked-in captions, so no text overlay.
+const shots = [
+    { src: '/assets/screenshots/01-home.webp', alt: 'Nooze Alarm smart sleep home screen with quick access to alarms, journals, and sleep tools' },
+    { src: '/assets/screenshots/02-alarms.webp', alt: 'Simple alarm management — schedule and toggle your weekly wake-up calls' },
+    { src: '/assets/screenshots/03-sleep.webp', alt: 'Improve sleep quality by tracking bedtime consistency and unlocking daily insights' },
+    { src: '/assets/screenshots/04-insights.webp', alt: 'Expert daily sleep insights with actionable tips to build healthier bedtime habits' },
+    { src: '/assets/screenshots/05-habits.webp', alt: 'Level up your habits — maintain a daily streak and earn dynamic rewards' },
+    { src: '/assets/screenshots/06-challenges.webp', alt: 'Fun weekly sleep challenges to stay consistent and unlock premium rewards' },
+    { src: '/assets/screenshots/07-themes.webp', alt: 'Beautiful night mode themes — switch between midnight, neon, and arctic palettes' },
+    { src: '/assets/screenshots/08-achievements.webp', alt: 'Celebrate your sleep success by collecting badges for healthy morning routines' },
+];
+---
+<section class="py-24 relative" aria-labelledby="screens-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 id="screens-heading" class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">
+                See Nooze <span class="gradient-text">in Action</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
+                A closer look at the alarms, sleep tracking, challenges and themes that make every morning easier.
+            </p>
+        </div>
+
+        <div class="ss-carousel reveal delay-1" data-carousel>
+            <button type="button" class="ss-arrow ss-prev" data-prev aria-label="Previous screenshot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+
+            <div class="ss-track" data-track tabindex="0" role="group" aria-label="App screenshots, swipe to browse">
+                {shots.map((s) => (
+                    <figure class="ss-slide">
+                        <img src={s.src} alt={s.alt} width="950" height="1920" loading="lazy" decoding="async" />
+                    </figure>
+                ))}
+            </div>
+
+            <button type="button" class="ss-arrow ss-next" data-next aria-label="Next screenshot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+
+        <div class="ss-dots" data-dots aria-hidden="true"></div>
+    </div>
+</section>
+
+<style>
+    .ss-carousel {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .ss-track {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding: 1.5rem 0.5rem 1.75rem;
+        flex: 1;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        outline: none;
+    }
+    .ss-track::-webkit-scrollbar { display: none; }
+    .ss-track:focus-visible { outline: 2px solid rgba(0, 188, 212, 0.6); outline-offset: 4px; border-radius: 1.25rem; }
+
+    .ss-slide {
+        position: relative;
+        flex: 0 0 auto;
+        width: 240px;
+        scroll-snap-align: center;
+        margin: 0;
+        transition: z-index 0s 0.05s;
+    }
+    .ss-slide:hover { z-index: 3; }
+
+    .ss-slide img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6), 0 0 40px -20px rgba(0, 188, 212, 0.5);
+        transform-origin: center;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+        will-change: transform;
+    }
+    .ss-slide img:hover {
+        transform: scale(1.12);
+        box-shadow: 0 30px 70px -12px rgba(0, 0, 0, 0.75), 0 0 70px -14px rgba(0, 188, 212, 0.75);
+    }
+
+    .ss-arrow {
+        flex: 0 0 auto;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 9999px;
+        color: #fff;
+        background: rgba(15, 23, 32, 0.7);
+        border: 1px solid rgba(0, 188, 212, 0.3);
+        backdrop-filter: blur(8px);
+        cursor: pointer;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .ss-arrow svg { width: 22px; height: 22px; }
+    .ss-arrow:hover { background: rgba(0, 188, 212, 0.18); border-color: rgba(0, 188, 212, 0.6); }
+    .ss-arrow:active { transform: scale(0.92); }
+    .ss-arrow:disabled { opacity: 0.3; cursor: default; }
+
+    @media (min-width: 768px) {
+        .ss-arrow { display: inline-flex; }
+    }
+
+    .ss-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+    .ss-dots button {
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        border: none;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+        transition: background 0.2s ease, width 0.2s ease;
+    }
+    .ss-dots button.active {
+        width: 24px;
+        background: linear-gradient(90deg, #00bcd4, #06b6d4);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ss-track { scroll-behavior: auto; }
+        .ss-slide img { transition: none; }
+        .ss-slide img:hover { transform: none; }
+    }
+</style>
+
+<script>
+    document.querySelectorAll('[data-carousel]').forEach((root) => {
+        const track = root.querySelector('[data-track]');
+        const prev = root.querySelector('[data-prev]');
+        const next = root.querySelector('[data-next]');
+        const dotsWrap = root.parentElement.querySelector('[data-dots]');
+        const slides = Array.from(track.querySelectorAll('.ss-slide'));
+        if (!slides.length) return;
+
+        const gap = () => parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+        const step = () => slides[0].getBoundingClientRect().width + gap(); // slide width + gap
+
+        prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+        next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+        // Dots — one per slide
+        const dots = slides.map((_, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', `Go to screenshot ${i + 1}`);
+            b.addEventListener('click', () => {
+                track.scrollTo({ left: slides[i].offsetLeft - (track.clientWidth - slides[i].clientWidth) / 2, behavior: 'smooth' });
+            });
+            dotsWrap.appendChild(b);
+            return b;
+        });
+
+        // Sync active dot + arrow disabled state to the centered slide
+        const trackCenter = () => track.scrollLeft + track.clientWidth / 2;
+        const update = () => {
+            let best = 0, bestDist = Infinity;
+            slides.forEach((s, i) => {
+                const c = s.offsetLeft + s.clientWidth / 2;
+                const d = Math.abs(c - trackCenter());
+                if (d < bestDist) { bestDist = d; best = i; }
+            });
+            dots.forEach((d, i) => d.classList.toggle('active', i === best));
+            if (prev) prev.disabled = track.scrollLeft <= 2;
+            if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+        };
+
+        let raf = 0;
+        track.addEventListener('scroll', () => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(update);
+        }, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+
+        // Keyboard support when the track is focused
+        track.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left: step(), behavior: 'smooth' }); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); track.scrollBy({ left: -step(), behavior: 'smooth' }); }
+        });
+    });
+</script>

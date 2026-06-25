@@ -3,6 +3,11 @@
   "version": "2.0.0",
   "description": "Nooze Alarm website - HTML with Tailwind CSS",
   "scripts": {
+    "build:css": "tailwindcss -i dev/tailwind-input.css -o public/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i dev/tailwind-input.css -o public/css/tailwind.css --watch",
+    "dev": "npm run build:css && astro dev",
+    "build": "npm run build:css && astro build",
+    "preview": "astro preview",
     "check": "node dev/check.js"
   },
   "keywords": [
@@ -13,6 +18,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "playwright": "^1.59.1"
+    "playwright": "^1.59.1",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "astro": "^5.18.2"
   }
 }

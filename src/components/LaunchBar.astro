@@ -1,0 +1,15 @@
+---
+// Sitewide "Live Now" launch ribbon. Dismissed via the global script (window.__dismissLaunchBar).
+---
+<a id="launchBar" class="launch-bar" href="https://play.google.com/store/apps/details?id=com.nooze.app" target="_blank" rel="noopener noreferrer">
+    <span class="shine"></span>
+    <span class="pill"><span class="dot"></span>Live Now</span>
+    <span><strong>Nooze Alarm is finally here</strong><span class="hide-sm"> &mdash; wake up smarter starting tonight.</span></span>
+    <span class="arrow">
+        Get it on Google Play
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </span>
+    <button type="button" class="close" aria-label="Dismiss launch banner" onclick="event.preventDefault();event.stopPropagation();window.__dismissLaunchBar&&window.__dismissLaunchBar();">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6"/></svg>
+    </button>
+</a>

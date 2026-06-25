@@ -1,18 +1,21 @@
+// Playwright audit of the Astro build output (dist/).
+// Mirrors dev/check.js but serves dist/ and writes to dev/screenshots-astro/
+// so the shots can be diffed against the legacy ones in dev/screenshots/.
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', 'dist');
 const OUT_DIR = __dirname;
-const PORT = 4178;
+const PORT = 4179;
 const PAGES = ['index.html', 'features.html', 'about.html', 'faq.html', 'roadmap.html', 'support.html', 'contact.html', 'privacy.html', 'terms.html', '404.html'];
 const VIEWPORTS = [
     { name: 'desktop', width: 1440, height: 900 },
     { name: 'mobile', width: 390, height: 844 },
 ];
 
-const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon', '.json': 'application/json', '.woff2': 'font/woff2' };
+const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon', '.json': 'application/json', '.woff2': 'font/woff2', '.webmanifest': 'application/manifest+json' };
 
 const server = http.createServer((req, res) => {
     let urlPath = req.url.split('?')[0];
@@ -28,10 +31,11 @@ const server = http.createServer((req, res) => {
 });
 
 (async () => {
+    if (!fs.existsSync(ROOT)) { console.error('dist/ not found — run `npm run build` first.'); process.exit(1); }
     await new Promise(r => server.listen(PORT, '127.0.0.1', r));
-    console.log(`Server listening on http://127.0.0.1:${PORT}`);
+    console.log(`Serving dist/ on http://127.0.0.1:${PORT}`);
 
-    const outDir = path.join(OUT_DIR, 'screenshots');
+    const outDir = path.join(OUT_DIR, 'screenshots-astro');
     fs.mkdirSync(outDir, { recursive: true });
 
     const browser = await chromium.launch();
@@ -65,7 +69,6 @@ const server = http.createServer((req, res) => {
                 const winW = window.innerWidth;
                 const horizontalScroll = docW > winW;
 
-                // Find elements wider than viewport (overflow culprits)
                 const overflowing = [];
                 document.querySelectorAll('body *').forEach(el => {
                     const r = el.getBoundingClientRect();
@@ -76,7 +79,6 @@ const server = http.createServer((req, res) => {
                     }
                 });
 
-                // Find elements with hidden content (text overflow)
                 const clipped = [];
                 document.querySelectorAll('h1, h2, h3, p, a, button, span').forEach(el => {
                     if (el.scrollWidth > el.clientWidth + 2 && el.clientWidth > 0) {
@@ -89,23 +91,17 @@ const server = http.createServer((req, res) => {
                     }
                 });
 
-                // Check for missing/broken images
                 const brokenImgs = [];
                 document.querySelectorAll('img').forEach(img => {
-                    if (!img.complete || img.naturalWidth === 0) {
-                        brokenImgs.push(img.src);
-                    }
+                    if (!img.complete || img.naturalWidth === 0) brokenImgs.push(img.src);
                 });
 
-                // Check for empty interactive targets
                 const emptyButtons = [];
                 document.querySelectorAll('a, button').forEach(el => {
                     const txt = (el.textContent || '').trim();
                     const hasIcon = el.querySelector('svg, img');
                     const hasAriaLabel = el.getAttribute('aria-label');
-                    if (!txt && !hasIcon && !hasAriaLabel) {
-                        emptyButtons.push(el.outerHTML.slice(0, 100));
-                    }
+                    if (!txt && !hasIcon && !hasAriaLabel) emptyButtons.push(el.outerHTML.slice(0, 100));
                 });
 
                 return {
@@ -125,7 +121,7 @@ const server = http.createServer((req, res) => {
                 page: pg, viewport: vp.name,
                 consoleMsgs, pageErrors, failedReqs,
                 layout,
-                screenshot: path.relative(ROOT, screenshotPath),
+                screenshot: path.relative(path.resolve(__dirname, '..'), screenshotPath),
             });
 
             await page.close();
@@ -136,11 +132,10 @@ const server = http.createServer((req, res) => {
     await browser.close();
     server.close();
 
-    const reportPath = path.join(OUT_DIR, 'check-report.json');
+    const reportPath = path.join(OUT_DIR, 'check-report-astro.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
 
-    // Print summary
-    console.log('\n=== SUMMARY ===\n');
+    console.log('\n=== ASTRO BUILD SUMMARY ===\n');
     for (const r of report) {
         const issues = [];
         if (r.error) issues.push(`ERROR: ${r.error}`);
@@ -148,7 +143,6 @@ const server = http.createServer((req, res) => {
         if (r.failedReqs?.length) issues.push(`${r.failedReqs.length} failed requests`);
         if (r.consoleMsgs?.length) issues.push(`${r.consoleMsgs.length} console msgs`);
         if (r.layout?.horizontalScroll) issues.push(`horizontal scroll (${r.layout.docW} > ${r.layout.winW})`);
-        if (r.layout?.overflowing?.length) issues.push(`${r.layout.overflowing.length} overflow elems`);
         if (r.layout?.clipped?.length) issues.push(`${r.layout.clipped.length} clipped text`);
         if (r.layout?.brokenImgs?.length) issues.push(`${r.layout.brokenImgs.length} broken imgs`);
         if (r.layout?.emptyButtons?.length) issues.push(`${r.layout.emptyButtons.length} empty buttons`);

@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+    title={"Contact Nooze – Support, Feedback & Privacy Policy"}
+    description={"Contact the Nooze team for support, feedback or partnerships, and read our Privacy Policy and Terms & Conditions."}
+    keywords={"contact nooze, nooze support, nooze alarm help, nooze privacy policy, nooze terms and conditions"}
+    canonical={"contact.html"}
+    ogTitle={"Contact Nooze - Get in Touch"}
+    ogDescription={"Reach out to the Nooze team for support, feedback, or partnerships."}
+    active={"contact"}
+>
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Contact\",\"item\":\"https://noozealarm.com/contact.html\"}]}"} />
+  </Fragment>
+
+<main class="flex-1 pt-16">
+        <!-- Hero -->
+        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="scanlines"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <span class="holo-chip mb-6 reveal"><span class="dot"></span> We read everything</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">Get in <span class="iris-text">Touch</span></h1>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">Question, feedback, bug, partnership, anything &mdash; the inbox is open.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Contact Info -->
+        <section class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div class="holo-card tilt reveal"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-3">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Email</h3>
+                        <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline text-sm">noozesupport@gmail.com</a>
+                        <p class="text-gray-400 text-sm mt-3">Typically a 24-48 hour reply.</p>
+                    </div></div>
+
+                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-3">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Community</h3>
+                        <div class="space-y-2 mt-2">
+                            <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">X (Twitter) &mdash; @NoozeAlarm</a>
+                            <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">TikTok &mdash; @nooze.alarm.app</a>
+                            <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">GitHub &mdash; Nooze-Alarm</a>
+                            <a href="https://www.linkedin.com/company/nooze-alarm" target="_blank" rel="noopener" class="block text-gray-400 hover:text-primary text-sm transition-colors">LinkedIn &mdash; Nooze Alarm</a>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Legal -->
+        <section class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center reveal">Legal</h2>
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <a href="privacy.html" class="holo-card tilt reveal block"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-3">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Privacy Policy</h3>
+                        <p class="text-gray-400 text-sm">What we collect, what stays on your device, and your GDPR rights.</p>
+                    </div></a>
+                    <a href="terms.html" class="holo-card tilt reveal delay-1 block"><div class="holo-card-inner tilt-inner">
+                        <div class="feature-icon mb-3">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Terms &amp; Conditions</h3>
+                        <p class="text-gray-400 text-sm">The agreement governing your use of Nooze Alarm.</p>
+                    </div></a>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

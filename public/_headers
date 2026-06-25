@@ -1,0 +1,19 @@
+# Security + caching headers for Netlify / Cloudflare Pages.
+# (For Vercel use vercel.json "headers"; for Apache/Nginx translate to the server config.)
+# These MUST be sent as real HTTP headers — they are ignored inside <meta http-equiv>.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# Long-cache fingerprint-free static assets (adjust if you add a build hash).
+/css/*
+  Cache-Control: public, max-age=86400
+/js/*
+  Cache-Control: public, max-age=86400
+/assets/*
+  Cache-Control: public, max-age=604800

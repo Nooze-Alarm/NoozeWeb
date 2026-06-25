@@ -22,7 +22,7 @@
     --glow-teal: 0 0 30px rgba(14, 116, 144, 0.3);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
     background: var(--bg-deep);
@@ -1064,8 +1064,8 @@ select:focus-visible {
     padding: 10px 14px;
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(15,15,30,0.92), rgba(5,5,16,0.92));
-    border: 1px solid rgba(0, 188, 212, 0.35);
-    box-shadow: 0 12px 30px -12px rgba(0, 188, 212, 0.5);
+    border: 1px solid rgba(0, 188, 212, 0.5);
+    box-shadow: 0 12px 30px -12px rgba(0, 188, 212, 0.5), 0 0 24px -4px rgba(0, 188, 212, 0.45);
     backdrop-filter: blur(8px);
     animation: float 5s ease-in-out infinite;
     z-index: 2;
@@ -1095,8 +1095,8 @@ select:focus-visible {
     padding: 10px 14px;
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(15,15,30,0.92), rgba(5,5,16,0.92));
-    border: 1px solid rgba(59, 130, 246, 0.35);
-    box-shadow: 0 12px 30px -12px rgba(59, 130, 246, 0.5);
+    border: 1px solid rgba(0, 188, 212, 0.35);
+    box-shadow: 0 12px 30px -12px rgba(0, 188, 212, 0.5);
     backdrop-filter: blur(8px);
     animation: float 6s ease-in-out 1s infinite;
     z-index: 2;
@@ -1110,11 +1110,11 @@ select:focus-visible {
     width: 30px;
     height: 30px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    background: linear-gradient(135deg, #06b6d4, #00bcd4);
     display: grid;
     place-items: center;
     color: #fff;
-    box-shadow: 0 0 14px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 14px rgba(0, 188, 212, 0.55);
 }
 
 /* --- Marquee ------------------------------------------------- */
