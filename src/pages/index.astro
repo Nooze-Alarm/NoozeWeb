@@ -13,7 +13,7 @@ import Screenshots from '../components/Screenshots.astro';
 >
 
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Nooze Alarm\",\"operatingSystem\":\"Android\",\"applicationCategory\":\"HealthApplication\",\"description\":\"Intelligent alarm clock and sleep tracker that monitors your sleep cycles, wakes you at the optimal moment, and gamifies your morning routine.\",\"downloadUrl\":\"https://play.google.com/store/apps/details?id=com.nooze.app\",\"installUrl\":\"https://play.google.com/store/apps/details?id=com.nooze.app\",\"offers\":[{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"EUR\",\"availability\":\"https://schema.org/InStock\",\"category\":\"Free\"},{\"@type\":\"Offer\",\"name\":\"Nooze Premium (Monthly)\",\"price\":\"2.99\",\"priceCurrency\":\"EUR\",\"category\":\"subscription\"},{\"@type\":\"Offer\",\"name\":\"Nooze Premium (Yearly)\",\"price\":\"14.99\",\"priceCurrency\":\"EUR\",\"category\":\"subscription\"}],\"author\":{\"@type\":\"Person\",\"name\":\"Teodor Mirchev\"}}"} />
+    <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Nooze Alarm\",\"operatingSystem\":\"Android\",\"applicationCategory\":\"HealthApplication\",\"description\":\"Intelligent alarm clock and sleep tracker that monitors your sleep cycles, wakes you at the optimal moment, and gamifies your morning routine.\",\"offers\":[{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"EUR\",\"availability\":\"https://schema.org/OutOfStock\",\"category\":\"Free\"},{\"@type\":\"Offer\",\"name\":\"Nooze Premium (Monthly)\",\"price\":\"2.99\",\"priceCurrency\":\"EUR\",\"category\":\"subscription\"},{\"@type\":\"Offer\",\"name\":\"Nooze Premium (Yearly)\",\"price\":\"14.99\",\"priceCurrency\":\"EUR\",\"category\":\"subscription\"}],\"author\":{\"@type\":\"Person\",\"name\":\"Teodor Mirchev\"}}"} />
     <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Nooze Alarm\",\"url\":\"https://noozealarm.com\",\"logo\":\"https://noozealarm.com/assets/logo.png\",\"sameAs\":[\"https://x.com/NoozeAlarm\",\"https://www.tiktok.com/@nooze.alarm.app\",\"https://github.com/Nooze-Alarm\",\"https://www.linkedin.com/company/nooze-alarm\"],\"contactPoint\":{\"@type\":\"ContactPoint\",\"email\":\"noozesupport@gmail.com\",\"contactType\":\"customer support\"}}"} />
     <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Nooze Alarm\",\"alternateName\":\"Nooze\",\"url\":\"https://noozealarm.com/\",\"description\":\"Smart alarm clock and sleep tracker for Android that wakes you at the optimal point in your sleep cycle.\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"Nooze Alarm\",\"logo\":\"https://noozealarm.com/assets/logo.png\"}}"} />
   </Fragment>
@@ -33,9 +33,9 @@ import Screenshots from '../components/Screenshots.astro';
                     <!-- Left: copy -->
                     <div class="lg:col-span-7 text-center">
                         <div class="reveal flex justify-center">
-                            <span class="launch-stamp mb-6">
+                            <span class="launch-stamp maintenance mb-6">
                                 <span class="dot"></span>
-                                Now on Google Play · Android
+                                Under Maintenance · Downloads Paused
                             </span>
                         </div>
 
@@ -48,20 +48,25 @@ import Screenshots from '../components/Screenshots.astro';
                         </p>
 
                         <div class="flex flex-wrap justify-center items-center gap-4 reveal delay-3">
-                            <a href="https://play.google.com/store/apps/details?id=com.nooze.app" target="_blank" rel="noopener noreferrer" class="play-badge" aria-label="Get Nooze on Google Play">
+                            <span class="status-badge" role="status" aria-label="Nooze is temporarily unavailable for download">
                                 <span class="icon" aria-hidden="true">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M3.6 1.6c-.3.3-.5.8-.5 1.4v18c0 .6.2 1.1.5 1.4l.1.1L13.8 12 3.7 1.6l-.1.1zM17.4 8.4l-3-1.7L5.3 1.2c-.4-.2-.8-.2-1.1 0l11.4 11.4 1.8-1.8c1-.6 1-1.8 0-2.4zM4.2 22.8c.3.2.7.2 1.1 0l9.1-5.5 3-1.7-2.2-2.2L4.2 22.8z"/></svg>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </span>
                                 <span class="stack">
-                                    <span class="small">Get it on</span>
-                                    <span class="big">Google Play</span>
+                                    <span class="small">Temporarily unavailable</span>
+                                    <span class="big">Ongoing Maintenance</span>
                                 </span>
-                            </a>
+                            </span>
                             <a href="features.html" class="btn-outline">
                                 <span>Explore Features</span>
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                             </a>
                         </div>
+
+                        <p class="text-sm text-gray-500 max-w-xl mx-auto mt-7 reveal delay-3">
+                            Nooze is currently off the Google Play Store while we sort things out. New downloads are paused &mdash; we&rsquo;ll update this page the moment it&rsquo;s back.
+                            <a href="support.html" class="text-primary hover:underline">Questions? Get in touch.</a>
+                        </p>
 
                         <!-- Trust indicators -->
                         <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-12 reveal delay-2">
@@ -522,25 +527,25 @@ import Screenshots from '../components/Screenshots.astro';
             <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="holo-card reveal">
                     <div class="holo-card-inner text-center" style="padding:48px 32px;">
-                        <span class="launch-stamp mb-6"><span class="dot"></span> Out Now</span>
+                        <span class="launch-stamp maintenance mb-6"><span class="dot"></span> Ongoing Maintenance</span>
                         <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
-                            Ready to <span class="iris-text">Transform</span> Your Mornings?
+                            We&rsquo;ll Be Back <span class="iris-text">Soon</span>
                         </h2>
                         <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10">
-                            Nooze Alarm is live on Google Play. Install it tonight &mdash; wake up smarter tomorrow.
+                            Nooze Alarm is temporarily unavailable on Google Play while we work through some maintenance. Downloads are paused for now &mdash; existing installs keep working, and we&rsquo;ll post here as soon as it&rsquo;s live again.
                         </p>
                         <div class="flex flex-wrap justify-center items-center gap-4">
-                            <a href="https://play.google.com/store/apps/details?id=com.nooze.app" target="_blank" rel="noopener noreferrer" class="play-badge" aria-label="Get Nooze on Google Play">
+                            <span class="status-badge" role="status" aria-label="Nooze is temporarily unavailable for download">
                                 <span class="icon" aria-hidden="true">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M3.6 1.6c-.3.3-.5.8-.5 1.4v18c0 .6.2 1.1.5 1.4l.1.1L13.8 12 3.7 1.6l-.1.1zM17.4 8.4l-3-1.7L5.3 1.2c-.4-.2-.8-.2-1.1 0l11.4 11.4 1.8-1.8c1-.6 1-1.8 0-2.4zM4.2 22.8c.3.2.7.2 1.1 0l9.1-5.5 3-1.7-2.2-2.2L4.2 22.8z"/></svg>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </span>
                                 <span class="stack">
-                                    <span class="small">Download on</span>
-                                    <span class="big">Google Play</span>
+                                    <span class="small">Downloads paused</span>
+                                    <span class="big">Under Maintenance</span>
                                 </span>
-                            </a>
-                            <a href="features.html" class="btn-outline">
-                                <span>Explore Features</span>
+                            </span>
+                            <a href="support.html" class="btn-outline">
+                                <span>Contact Support</span>
                             </a>
                         </div>
                     </div>

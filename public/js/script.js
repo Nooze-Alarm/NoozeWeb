@@ -459,6 +459,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (e) {}
         document.body.classList.add('launch-bar-visible');
+
+        // Keep the nav/hero offset in sync with the real ribbon height so a
+        // longer message (or a narrow screen) never overlaps the navbar.
+        function syncHeight() {
+            document.documentElement.style.setProperty('--launch-bar-h', bar.offsetHeight + 'px');
+        }
+        syncHeight();
+        window.addEventListener('resize', syncHeight);
+
         window.__dismissLaunchBar = function() {
             try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
             document.body.classList.remove('launch-bar-visible');

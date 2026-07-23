@@ -1371,6 +1371,7 @@ select:focus-visible {
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
     font-weight: 700;
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -1400,8 +1401,11 @@ select:focus-visible {
     transform: translateY(-50%) rotate(90deg);
 }
 
-body.launch-bar-visible .nav-blur { top: 38px; }
-body.launch-bar-visible .hero-bg.pt-16 { padding-top: 102px; }
+body.launch-bar-visible .nav-blur { top: var(--launch-bar-h, 38px); }
+body.launch-bar-visible .hero-bg.pt-16 { padding-top: calc(64px + var(--launch-bar-h, 38px)); }
+
+/* Shown only on narrow screens — the short form of the ribbon message. */
+.launch-bar .only-sm { display: none; }
 
 @keyframes launchSlide {
     0%   { background-position: 0% 50%; }
@@ -1417,7 +1421,7 @@ body.launch-bar-visible .hero-bg.pt-16 { padding-top: 102px; }
     .launch-bar { font-size: 11.5px; padding: 8px 44px 8px 12px; gap: 8px; }
     .launch-bar .pill { font-size: 9px; padding: 2px 7px; letter-spacing: 0.14em; }
     .launch-bar .hide-sm { display: none; }
-    body.launch-bar-visible .nav-blur { top: 34px; }
+    .launch-bar .only-sm { display: inline; }
 }
 
 /* --- Google Play CTA --------------------------------------- */
@@ -1523,4 +1527,89 @@ body.launch-bar-visible .hero-bg.pt-16 { padding-top: 102px; }
     background: #4ade80;
     box-shadow: 0 0 10px #4ade80, 0 0 22px rgba(74, 222, 128, 0.7);
     animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+/* --- Maintenance state (app temporarily unavailable) -------- */
+.launch-bar.maintenance {
+    background:
+        linear-gradient(90deg,
+            rgba(146, 64, 14, 0.95) 0%,
+            rgba(245, 158, 11, 0.95) 35%,
+            rgba(217, 119, 6, 0.95) 70%,
+            rgba(146, 64, 14, 0.95) 100%);
+    background-size: 200% 100%;
+    box-shadow: 0 6px 24px -10px rgba(245, 158, 11, 0.7);
+}
+
+.launch-bar.maintenance .pill .dot {
+    background: #fbbf24;
+    box-shadow: 0 0 8px #fbbf24, 0 0 16px rgba(251, 191, 36, 0.7);
+}
+
+.launch-stamp.maintenance {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(217, 119, 6, 0.08));
+    border-color: rgba(245, 158, 11, 0.35);
+    box-shadow:
+        0 0 24px -6px rgba(245, 158, 11, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    color: #fde68a;
+}
+
+.launch-stamp.maintenance .dot {
+    background: #fbbf24;
+    box-shadow: 0 0 10px #fbbf24, 0 0 22px rgba(251, 191, 36, 0.7);
+}
+
+/* Status chip that replaces the Google Play button while the app is down. */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 22px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(217, 119, 6, 0.08));
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    box-shadow:
+        0 10px 30px -12px rgba(245, 158, 11, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    color: #fde68a;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: default;
+}
+
+.status-badge .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #fbbf24;
+}
+
+.status-badge .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+}
+
+.status-badge .small {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(253, 230, 138, 0.8);
+}
+
+.status-badge .big {
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    margin-top: 2px;
 }
