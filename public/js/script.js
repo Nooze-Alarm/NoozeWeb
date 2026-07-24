@@ -187,8 +187,6 @@
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
     var particles = [];
-    var mouseX = -1000;
-    var mouseY = -1000;
 
     function resize() {
         canvas.width = window.innerWidth;
@@ -196,12 +194,6 @@
     }
     resize();
     window.addEventListener('resize', resize);
-
-    // Track mouse for interactive glow
-    document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
 
     function createParticle() {
         return {
@@ -235,26 +227,12 @@
             if (p.y < 0) p.y = canvas.height;
             if (p.y > canvas.height) p.y = 0;
 
-            // Mouse interaction - glow brighter near cursor
-            var dx = p.x - mouseX;
-            var dy = p.y - mouseY;
-            var dist = Math.sqrt(dx * dx + dy * dy);
-            var mouseFactor = dist < 150 ? (1 - dist / 150) * 0.5 : 0;
-
-            var alpha = p.opacity * (0.7 + 0.3 * Math.sin(p.pulse)) + mouseFactor;
+            var alpha = p.opacity * (0.7 + 0.3 * Math.sin(p.pulse));
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(0, 188, 212, ' + Math.min(alpha, 1) + ')';
             ctx.fill();
-
-            // Glow effect for nearby particles
-            if (mouseFactor > 0) {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0, 188, 212, ' + (mouseFactor * 0.15) + ')';
-                ctx.fill();
-            }
         });
 
         // Draw connections between close particles
@@ -445,6 +423,82 @@ document.addEventListener('DOMContentLoaded', function() {
         counters.forEach(function(el) { counterObs.observe(el); });
     }
 });
+
+// --- Custom Cursor (dot + trailing ring) ---
+(function initCursor() {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var root = document.documentElement;
+    var dot = document.createElement('div');
+    var ring = document.createElement('div');
+    dot.className = 'nz-cursor-dot';
+    ring.className = 'nz-cursor-ring';
+    dot.setAttribute('aria-hidden', 'true');
+    ring.setAttribute('aria-hidden', 'true');
+
+    function mount() {
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+        root.classList.add('nz-cursor-on');
+    }
+    if (document.body) mount();
+    else document.addEventListener('DOMContentLoaded', mount);
+
+    var x = window.innerWidth / 2;
+    var y = window.innerHeight / 2;
+    var rx = x, ry = y;
+    var scale = 1, targetScale = 1;
+    var pressed = false;
+    var shown = false;
+
+    var HOVER_SELECTOR = 'a, button, [role="button"], label, summary, .cursor-pointer';
+    var SUPPRESS_SELECTOR = 'input, textarea, select';
+
+    document.addEventListener('mousemove', function(e) {
+        x = e.clientX;
+        y = e.clientY;
+        dot.style.setProperty('--nzcx', x + 'px');
+        dot.style.setProperty('--nzcy', y + 'px');
+        if (!shown) {
+            shown = true;
+            rx = x; ry = y;
+            dot.classList.add('is-visible');
+            ring.classList.add('is-visible');
+        }
+    }, { passive: true });
+
+    document.addEventListener('mouseover', function(e) {
+        var t = e.target;
+        if (!(t instanceof Element)) return;
+        var suppress = t.closest(SUPPRESS_SELECTOR);
+        dot.classList.toggle('is-suppressed', !!suppress);
+        ring.classList.toggle('is-suppressed', !!suppress);
+        var hover = !suppress && t.closest(HOVER_SELECTOR);
+        targetScale = hover ? 1.45 : 1;
+        ring.classList.toggle('is-hover', !!hover);
+    });
+
+    document.addEventListener('mousedown', function() { pressed = true; });
+    document.addEventListener('mouseup', function() { pressed = false; });
+
+    document.addEventListener('mouseleave', function() {
+        dot.classList.remove('is-visible');
+        ring.classList.remove('is-visible');
+        shown = false;
+    });
+
+    (function loop() {
+        rx += (x - rx) * 0.18;
+        ry += (y - ry) * 0.18;
+        var goal = pressed ? targetScale * 0.85 : targetScale;
+        scale += (goal - scale) * 0.2;
+        ring.style.setProperty('--nzrx', rx.toFixed(1) + 'px');
+        ring.style.setProperty('--nzry', ry.toFixed(1) + 'px');
+        ring.style.setProperty('--nzrs', scale.toFixed(3));
+        requestAnimationFrame(loop);
+    })();
+})();
 
 // --- Launch Ribbon (sitewide) ---
 (function initLaunchBar() {

@@ -1,0 +1,896 @@
+---
+// Futuristic homepage hero — implemented from the "Nooze Futuristic Homepage
+// Design" handoff. Deliberate deviations from the prototype:
+//  - no meteors ("falling stars"), no cursor-following glow/spotlight
+//  - phone screen shows app status tiles instead of sleep-cycle names
+//  - the spinning-ring logo is replaced by the real logo in the global Nav
+
+// Deterministic pseudo-random so the particle field is stable across builds.
+const rnd = (s) => { const x = Math.sin(s) * 10000; return x - Math.floor(x); };
+const particles = Array.from({ length: 14 }, (_, i) => {
+    const size = (1.5 + rnd(i + 1) * 2.5).toFixed(1);
+    const op = (0.3 + rnd(i + 9) * 0.5).toFixed(2);
+    const dur = (6 + rnd(i + 4) * 8).toFixed(1);
+    const delay = (rnd(i + 6) * 5).toFixed(1);
+    const left = (rnd(i + 2) * 96 + 2).toFixed(1);
+    const top = (rnd(i + 3) * 82 + 6).toFixed(1);
+    const color = i % 3 === 0 ? '#7fb2ff' : '#5fd4e8';
+    return `left:${left}%;top:${top}%;width:${size}px;height:${size}px;background:${color};color:${color};opacity:${op};animation-duration:${dur}s;animation-delay:${delay}s;`;
+});
+
+// Initial waveform path (t = 0) baked in so the SVG never flashes empty.
+const amp = (i, t) => 52 - (Math.sin(i * 0.22 + t) * 13 + Math.sin(i * 0.1 + t * 0.6) * 18 + Math.sin(i * 0.53 + t * 1.2) * 5);
+let waveD = 'M';
+for (let i = 0; i <= 60; i++) {
+    waveD += (i ? ' L ' : '') + ((i / 60) * 340).toFixed(1) + ' ' + amp(i, 0).toFixed(1);
+}
+const fillD = waveD + ' L 340 110 L 0 110 Z';
+const dotCy = amp(60, 0).toFixed(1);
+---
+<section class="nz-hero hero-bg pt-16" id="nzHero">
+    <!-- Decorative background layers -->
+    <div class="nz-aurora nz-aurora-a" aria-hidden="true"></div>
+    <div class="nz-aurora nz-aurora-b" aria-hidden="true"></div>
+    <div class="nz-dotgrid" aria-hidden="true"></div>
+    <div class="nz-floor" aria-hidden="true"></div>
+    <div aria-hidden="true">
+        {particles.map((style) => <span class="nz-particle" style={style}></span>)}
+    </div>
+    <div class="nz-topline" aria-hidden="true"></div>
+
+    <div class="nz-wrap">
+        <!-- Left column: copy -->
+        <div class="nz-copy">
+            <div class="nz-badge reveal">
+                <span class="nz-badge-spin" aria-hidden="true"></span>
+                <span class="nz-badge-inner">
+                    <span class="nz-badge-dot" aria-hidden="true"></span>
+                    UNDER MAINTENANCE &middot; DOWNLOADS PAUSED
+                </span>
+            </div>
+
+            <h1 class="nz-h1 reveal delay-1">
+                <span class="nz-h1-line">Wake Up</span>
+                <span class="nz-h1-grad">Smarter<span class="nz-h1-dot">.</span></span>
+            </h1>
+
+            <p class="nz-lede reveal delay-2">
+                Nooze reads your sleep cycles, wakes you at the perfect moment in your
+                lightest phase, and turns mornings into a rewarding game. No snooze
+                button &mdash; just better wake-ups.
+            </p>
+
+            <div class="nz-cta-row reveal delay-3">
+                <div class="nz-maint" role="status" aria-label="Nooze is temporarily unavailable for download">
+                    <span class="nz-maint-icon" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.4" stroke="#e6ad3f" stroke-width="1.4"/><path d="M8 4.6V8l2.4 1.6" stroke="#e6ad3f" stroke-width="1.4" stroke-linecap="round"/></svg>
+                    </span>
+                    <span class="nz-maint-stack">
+                        <span class="nz-maint-small">Temporarily unavailable</span>
+                        <span class="nz-maint-big">Ongoing Maintenance</span>
+                    </span>
+                </div>
+
+                <a href="features.html" class="nz-cta">
+                    Explore Features
+                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true"><path d="M1 7h16M12 2l6 5-6 5" stroke="#04121a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+
+            <p class="nz-subnote reveal delay-3">
+                Nooze is currently off the Play Store while we sort things out. New
+                downloads are paused &mdash; we&rsquo;ll update this page the moment it&rsquo;s back.
+                <a href="support.html">Questions? Get in touch.</a>
+            </p>
+
+            <div class="nz-chips reveal delay-2">
+                <div class="nz-chip">
+                    <span class="nz-chip-icon" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l5 2v3.2C13 10.5 10.8 13 8 14.5 5.2 13 3 10.5 3 6.7V3.5l5-2Z" stroke="#5fd4e8" stroke-width="1.3" fill="none" stroke-linejoin="round"/><path d="M6 8l1.4 1.4L10.4 6" stroke="#5fd4e8" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    Privacy First
+                </div>
+                <div class="nz-chip">
+                    <span class="nz-chip-icon" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M1 8h3l2-5 3 10 2-5h4" stroke="#5fd4e8" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    Smart Wake Technology
+                </div>
+                <div class="nz-chip">
+                    <span class="nz-chip-icon" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3C9 1 12 1 12 4c0 2.4-4 5.5-4 5.5S4 6.4 4 4c0-3 3-3 4-1Z" stroke="#5fd4e8" stroke-width="1.3" fill="none" stroke-linejoin="round"/></svg>
+                    </span>
+                    Free Core Tier
+                </div>
+            </div>
+        </div>
+
+        <!-- Right column: phone mockup -->
+        <div class="nz-stage reveal-scale delay-2">
+            <div class="nz-phone-glow" aria-hidden="true"></div>
+
+            <div class="nz-scene">
+                <div class="nz-float">
+                    <div class="nz-tilt" id="nzTilt">
+                        <div class="nz-phone">
+                            <span class="nz-sidebtn" style="left:-3px;top:150px;height:34px;" aria-hidden="true"></span>
+                            <span class="nz-sidebtn" style="left:-3px;top:210px;height:58px;" aria-hidden="true"></span>
+                            <span class="nz-sidebtn" style="left:-3px;top:282px;height:58px;" aria-hidden="true"></span>
+                            <span class="nz-sidebtn" style="right:-3px;top:238px;height:82px;" aria-hidden="true"></span>
+
+                            <div class="nz-screen">
+                                <div class="nz-glare" aria-hidden="true"></div>
+
+                                <div class="nz-island" aria-hidden="true">
+                                    <span class="nz-lens"></span>
+                                </div>
+
+                                <div class="nz-statusbar">
+                                    <span>06:42</span><span class="nz-statusbrand">NOOZE</span>
+                                </div>
+
+                                <div class="nz-clockwrap">
+                                    <div class="nz-time">06:42</div>
+                                    <div class="nz-live">
+                                        <span class="nz-live-dot" aria-hidden="true"></span>
+                                        SMART WAKE ACTIVE
+                                    </div>
+                                </div>
+
+                                <div class="nz-wavecard">
+                                    <svg width="100%" height="86" viewBox="0 0 340 110" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
+                                        <defs>
+                                            <linearGradient id="nzwg" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="rgba(95,212,232,.30)"/>
+                                                <stop offset="100%" stop-color="rgba(95,212,232,0)"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path id="nzWaveFill" d={fillD} fill="url(#nzwg)"/>
+                                        <path id="nzWaveLine" d={waveD} fill="none" stroke="#6fdcee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(95,212,232,.55));"/>
+                                        <circle id="nzWaveDot" cx="338" cy={dotCy} r="3.6" fill="#eafcff" style="filter:drop-shadow(0 0 6px #5fd4e8);"/>
+                                    </svg>
+                                </div>
+
+                                <div class="nz-tiles">
+                                    <div class="nz-tile on">
+                                        <span class="lbl">SMART ALARM</span>
+                                        <span class="val"><span class="st" aria-hidden="true"></span>ON</span>
+                                    </div>
+                                    <div class="nz-tile on">
+                                        <span class="lbl">SLEEP TRACKING</span>
+                                        <span class="val"><span class="st" aria-hidden="true"></span>ON</span>
+                                    </div>
+                                    <div class="nz-tile">
+                                        <span class="lbl">WAKE CHALLENGE</span>
+                                        <span class="val">READY</span>
+                                    </div>
+                                    <div class="nz-tile off">
+                                        <span class="lbl">SNOOZE</span>
+                                        <span class="val">OFF</span>
+                                    </div>
+                                </div>
+
+                                <div class="nz-alarmrow">
+                                    <div>
+                                        <div class="nz-alarm-time">07:00</div>
+                                        <div class="nz-alarm-meta">MON &middot; WAKE WINDOW 30M</div>
+                                    </div>
+                                    <button type="button" class="nz-toggle on" id="nzToggle" aria-pressed="true" aria-label="Toggle demo alarm">
+                                        <span class="knob" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nz-xp" id="nzXp" aria-hidden="true">
+                    <div class="nz-xp-v">+250 <span>XP</span></div>
+                    <div class="nz-xp-l">QUEST COMPLETE</div>
+                </div>
+
+                <div class="nz-streak" id="nzStreak" aria-hidden="true">
+                    <span class="nz-streak-icon">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C9 4 11.5 5 11.5 8.2A3.5 3.5 0 0 1 4.5 8.2C4.5 6.6 5.4 6 5.4 6c0 1.4 1 1.7 1 1.7C6 5.5 8 4 8 1.5Z" fill="#eafcff"/></svg>
+                    </span>
+                    <span>
+                        <span class="nz-streak-v">12 days</span>
+                        <span class="nz-streak-l">STREAK</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ===== Hero shell ===== */
+    .nz-hero {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        color: #e8f1f6;
+        background:
+            radial-gradient(1100px 640px at 80% 6%, rgba(38, 120, 150, 0.22), transparent 62%),
+            radial-gradient(900px 620px at 6% 18%, rgba(40, 80, 150, 0.14), transparent 58%),
+            linear-gradient(180deg, #05090f 0%, #04070c 55%, #03060a 100%);
+    }
+
+    /* ===== Background layers ===== */
+    .nz-aurora {
+        position: absolute;
+        border-radius: 50%;
+        z-index: 0;
+        pointer-events: none;
+    }
+    .nz-aurora-a {
+        width: 620px;
+        height: 620px;
+        top: -160px;
+        right: -80px;
+        background: radial-gradient(circle, rgba(56, 158, 184, 0.30), transparent 62%);
+        filter: blur(50px);
+        animation: nzAuroraA 16s ease-in-out infinite;
+    }
+    .nz-aurora-b {
+        width: 520px;
+        height: 520px;
+        bottom: -140px;
+        left: -100px;
+        background: radial-gradient(circle, rgba(58, 96, 178, 0.24), transparent 62%);
+        filter: blur(60px);
+        animation: nzAuroraB 19s ease-in-out infinite;
+    }
+
+    .nz-dotgrid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.5;
+        background-image: radial-gradient(rgba(120, 170, 190, 0.05) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: radial-gradient(1100px 700px at 55% 42%, #000, transparent 82%);
+        -webkit-mask-image: radial-gradient(1100px 700px at 55% 42%, #000, transparent 82%);
+        z-index: 1;
+    }
+
+    .nz-floor {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 46vh;
+        pointer-events: none;
+        z-index: 0;
+        background-image:
+            linear-gradient(rgba(95, 212, 232, 0.13) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(95, 212, 232, 0.13) 1px, transparent 1px);
+        background-size: 72px 72px;
+        transform: perspective(540px) rotateX(66deg);
+        transform-origin: bottom;
+        mask-image: linear-gradient(180deg, transparent 0%, #000 55%, transparent 96%);
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%, transparent 96%);
+    }
+
+    .nz-particle {
+        position: absolute;
+        border-radius: 50%;
+        box-shadow: 0 0 8px currentColor;
+        z-index: 1;
+        animation-name: nzDrift;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+
+    .nz-topline {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+        background: linear-gradient(90deg, transparent, #5fd4e8 35%, #7fb2ff 65%, transparent);
+        box-shadow: 0 0 22px rgba(95, 212, 232, 0.55);
+        opacity: 0.7;
+        z-index: 2;
+    }
+
+    /* ===== Layout ===== */
+    .nz-wrap {
+        position: relative;
+        z-index: 5;
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 46px 40px 80px;
+        display: grid;
+        grid-template-columns: 1.06fr 0.94fr;
+        gap: 32px;
+        align-items: center;
+    }
+
+    /* ===== Badge ===== */
+    .nz-badge {
+        position: relative;
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1.5px;
+        overflow: hidden;
+        margin-bottom: 32px;
+    }
+    .nz-badge-spin {
+        position: absolute;
+        inset: -60%;
+        background: conic-gradient(from 0deg, transparent 0deg, #5fd4e8 40deg, #7fb2ff 80deg, transparent 130deg, transparent 360deg);
+        animation: nzBorderSpin 4s linear infinite;
+    }
+    .nz-badge-inner {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        padding: 9px 18px;
+        border-radius: 999px;
+        background: #0a121b;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        color: #bfe4ee;
+    }
+    .nz-badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #5fe8b0;
+        box-shadow: 0 0 10px #5fe8b0;
+        animation: nzPulseDot 2.4s ease-in-out infinite;
+        flex-shrink: 0;
+    }
+
+    /* ===== Headline ===== */
+    .nz-h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: clamp(48px, 6.8vw, 100px);
+        line-height: 0.92;
+        letter-spacing: -0.038em;
+        margin: 0 0 26px;
+    }
+    .nz-h1-line {
+        display: block;
+        color: #f2f8fb;
+    }
+    .nz-h1-grad {
+        display: block;
+        background: linear-gradient(100deg, #67dcef, #7fb2ff 40%, #67dcef 70%, #8fe6f5);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: nzShimmerText 5s linear infinite;
+    }
+    .nz-h1-dot {
+        color: #5fd4e8;
+        -webkit-text-fill-color: #5fd4e8;
+    }
+
+    .nz-lede {
+        max-width: 470px;
+        font-size: 18.5px;
+        line-height: 1.62;
+        color: #9db2bf;
+        margin: 0 0 38px;
+    }
+
+    /* ===== CTA row ===== */
+    .nz-cta-row {
+        display: flex;
+        align-items: stretch;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 26px;
+    }
+    .nz-maint {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 20px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(224, 168, 63, 0.10), rgba(224, 168, 63, 0.03));
+        border: 1px solid rgba(224, 168, 63, 0.32);
+    }
+    .nz-maint-icon {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: rgba(224, 168, 63, 0.14);
+        border: 1px solid rgba(224, 168, 63, 0.3);
+        flex-shrink: 0;
+    }
+    .nz-maint-stack { display: flex; flex-direction: column; }
+    .nz-maint-small {
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: #e6ad3f;
+        text-transform: uppercase;
+    }
+    .nz-maint-big {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        color: #f0e6d4;
+        margin-top: 2px;
+    }
+    .nz-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: #04121a;
+        padding: 14px 30px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #7ee2f2, #4cc3da);
+        box-shadow: 0 12px 40px rgba(76, 195, 218, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    }
+    .nz-cta:hover {
+        color: #04121a;
+        transform: translateY(-2px);
+        filter: brightness(1.06);
+        box-shadow: 0 16px 46px rgba(76, 195, 218, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.22) inset;
+    }
+
+    .nz-subnote {
+        max-width: 440px;
+        margin: 0 0 36px;
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: #7f94a3;
+    }
+    .nz-subnote a { color: #6fd6ea; }
+    .nz-subnote a:hover { color: #a9ecf7; }
+
+    /* ===== Trust chips ===== */
+    .nz-chips {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+    .nz-chip {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 14px;
+        color: #a7bcc7;
+    }
+    .nz-chip-icon {
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        background: rgba(95, 212, 232, 0.10);
+        border: 1px solid rgba(95, 212, 232, 0.22);
+        flex-shrink: 0;
+    }
+
+    /* ===== Phone stage ===== */
+    .nz-stage {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        perspective: 1300px;
+    }
+    .nz-phone-glow {
+        position: absolute;
+        width: 360px;
+        height: 360px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(95, 212, 232, 0.20), transparent 66%);
+        filter: blur(26px);
+        top: 16%;
+        pointer-events: none;
+    }
+    .nz-scene { position: relative; }
+    .nz-float { animation: nzFloaty 8s ease-in-out infinite; }
+    .nz-tilt {
+        transform-style: preserve-3d;
+        transition: transform 0.18s ease-out;
+    }
+
+    .nz-phone {
+        position: relative;
+        width: 306px;
+        height: 626px;
+        border-radius: 58px;
+        padding: 4px;
+        background: linear-gradient(150deg, #454b54 0%, #191d24 26%, #2a2f37 52%, #12151b 78%, #3a3f47 100%);
+        box-shadow:
+            0 50px 100px rgba(0, 0, 0, 0.62),
+            0 0 0 1px rgba(0, 0, 0, 0.5),
+            0 0 70px rgba(95, 212, 232, 0.12),
+            inset 0 0 2px rgba(255, 255, 255, 0.35);
+    }
+    .nz-sidebtn {
+        position: absolute;
+        width: 3px;
+        border-radius: 3px;
+        background: linear-gradient(180deg, #3a4048, #20262e);
+    }
+    .nz-screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 54px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #0a121b 0%, #070d15 52%, #0a1219 100%);
+        box-shadow: inset 0 0 0 3px #05070a;
+    }
+    .nz-glare {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 6;
+        background: linear-gradient(133deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 16%, transparent 34%);
+    }
+    .nz-island {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 112px;
+        height: 33px;
+        background: #000;
+        border-radius: 17px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 11px;
+    }
+    .nz-lens {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #2a3a4a, #050708);
+        box-shadow: inset 0 0 2px rgba(120, 180, 220, 0.5);
+    }
+    .nz-statusbar {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 28px 0;
+        font-family: 'Space Mono', monospace;
+        font-size: 12.5px;
+        color: #8ba2b0;
+    }
+    .nz-statusbrand { letter-spacing: 0.14em; }
+    .nz-clockwrap {
+        padding: 46px 26px 0;
+        text-align: center;
+    }
+    .nz-time {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 74px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        background: linear-gradient(180deg, #f2f9fc, #a9d8e6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .nz-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: #79cfe0;
+    }
+    .nz-live-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #5fd4e8;
+        box-shadow: 0 0 9px #5fd4e8;
+        animation: nzPulseDot 2s ease-in-out infinite;
+        flex-shrink: 0;
+    }
+
+    .nz-wavecard {
+        margin: 20px 20px 0;
+        padding: 14px 12px 8px;
+        border-radius: 18px;
+        background: rgba(95, 212, 232, 0.045);
+        border: 1px solid rgba(95, 212, 232, 0.14);
+    }
+
+    /* App status tiles (replaces the sleep-cycle selector from the prototype) */
+    .nz-tiles {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+        margin: 14px 20px 0;
+    }
+    .nz-tile {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 9px 12px;
+        border-radius: 12px;
+        background: rgba(120, 170, 190, 0.04);
+        border: 1px solid rgba(120, 170, 190, 0.12);
+    }
+    .nz-tile .lbl {
+        font-family: 'Space Mono', monospace;
+        font-size: 8.5px;
+        letter-spacing: 0.13em;
+        color: #7f94a3;
+        white-space: nowrap;
+    }
+    .nz-tile .val {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        color: #a7bcc7;
+    }
+    .nz-tile .st {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #5fe8b0;
+        box-shadow: 0 0 8px #5fe8b0;
+        flex-shrink: 0;
+    }
+    .nz-tile.on {
+        background: rgba(95, 212, 232, 0.10);
+        border-color: rgba(95, 212, 232, 0.4);
+        box-shadow: 0 0 18px rgba(95, 212, 232, 0.14) inset;
+    }
+    .nz-tile.on .val { color: #c8f2fa; }
+    .nz-tile.off .val { color: #7f94a3; }
+
+    .nz-alarmrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 12px 20px 0;
+        padding: 14px 18px;
+        border-radius: 18px;
+        background: rgba(120, 170, 190, 0.05);
+        border: 1px solid rgba(120, 170, 190, 0.12);
+    }
+    .nz-alarm-time {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 22px;
+        color: #eef6f9;
+    }
+    .nz-alarm-meta {
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        color: #7f94a3;
+        margin-top: 3px;
+    }
+    .nz-toggle {
+        position: relative;
+        width: 52px;
+        height: 30px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        background: rgba(120, 170, 190, 0.18);
+        transition: background 0.25s, box-shadow 0.25s;
+        flex-shrink: 0;
+    }
+    .nz-toggle.on {
+        background: linear-gradient(180deg, #5fd4e8, #3fa8c2);
+        box-shadow: 0 0 16px rgba(95, 212, 232, 0.4);
+    }
+    .nz-toggle .knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        transition: left 0.25s;
+    }
+    .nz-toggle.on .knob { left: 25px; }
+
+    /* ===== Floating badges ===== */
+    .nz-xp {
+        position: absolute;
+        top: 52px;
+        left: calc(100% + 18px);
+        padding: 13px 17px;
+        border-radius: 16px;
+        background: linear-gradient(160deg, #0e1a24, #0a141d);
+        border: 1px solid rgba(95, 212, 232, 0.28);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(95, 212, 232, 0.14);
+        transition: transform 0.2s ease-out;
+        white-space: nowrap;
+    }
+    .nz-xp-v {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 19px;
+        color: #eef6f9;
+    }
+    .nz-xp-v span { color: #5fd4e8; }
+    .nz-xp-l {
+        font-family: 'Space Mono', monospace;
+        font-size: 9.5px;
+        letter-spacing: 0.14em;
+        color: #79cfe0;
+        margin-top: 2px;
+    }
+    .nz-streak {
+        position: absolute;
+        bottom: 100px;
+        right: calc(100% + 18px);
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 12px 16px;
+        border-radius: 16px;
+        background: linear-gradient(160deg, #0e1a24, #0a141d);
+        border: 1px solid rgba(120, 170, 190, 0.20);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s ease-out;
+        white-space: nowrap;
+    }
+    .nz-streak-icon {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: linear-gradient(160deg, #4cc3da, #2f8fb0);
+        flex-shrink: 0;
+    }
+    .nz-streak-v {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        color: #eef6f9;
+    }
+    .nz-streak-l {
+        display: block;
+        font-family: 'Space Mono', monospace;
+        font-size: 9.5px;
+        letter-spacing: 0.14em;
+        color: #8ba2b0;
+        margin-top: 1px;
+    }
+
+    /* ===== Keyframes (Astro keeps keyframes global; nz-prefixed to avoid clashes) ===== */
+    @keyframes nzFloaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+    @keyframes nzPulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
+    @keyframes nzDrift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(6px, -12px); opacity: 0.12; } }
+    @keyframes nzBorderSpin { to { transform: rotate(360deg); } }
+    @keyframes nzAuroraA { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(70px, 50px) scale(1.18); } }
+    @keyframes nzAuroraB { 0%, 100% { transform: translate(0, 0) scale(1.12); } 50% { transform: translate(-60px, -40px) scale(1); } }
+    @keyframes nzShimmerText { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1080px) {
+        .nz-wrap {
+            grid-template-columns: 1fr;
+            gap: 0;
+            padding: 36px 24px 70px;
+        }
+        .nz-copy { text-align: center; }
+        .nz-lede, .nz-subnote { margin-left: auto; margin-right: auto; }
+        .nz-cta-row, .nz-chips { justify-content: center; }
+        .nz-stage { margin-top: 64px; }
+        .nz-xp { left: calc(100% + 10px); }
+        .nz-streak { right: calc(100% + 10px); }
+    }
+    @media (max-width: 560px) {
+        .nz-h1 { font-size: clamp(44px, 13.5vw, 64px); }
+        .nz-badge-inner { font-size: 10.5px; padding: 8px 14px; }
+        .nz-xp, .nz-streak { display: none; }
+        .nz-phone { width: 280px; height: 574px; }
+        .nz-floor { height: 34vh; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .nz-aurora-a, .nz-aurora-b, .nz-particle, .nz-badge-spin,
+        .nz-badge-dot, .nz-live-dot, .nz-float, .nz-h1-grad {
+            animation: none !important;
+        }
+    }
+</style>
+
+<script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+    // --- Waveform: rAF-driven, DOM-mutated, paused when offscreen ---
+    const waveLine = document.getElementById('nzWaveLine');
+    const waveFill = document.getElementById('nzWaveFill');
+    const waveDot = document.getElementById('nzWaveDot');
+    const hero = document.getElementById('nzHero');
+
+    if (!reduceMotion && waveLine && waveFill && waveDot && hero) {
+        let t = 0;
+        let raf = 0;
+        let running = false;
+
+        const amp = (i, tt) =>
+            52 - (Math.sin(i * 0.22 + tt) * 13 + Math.sin(i * 0.1 + tt * 0.6) * 18 + Math.sin(i * 0.53 + tt * 1.2) * 5);
+
+        const buildLine = (tt) => {
+            let s = 'M';
+            for (let i = 0; i <= 60; i++) {
+                s += (i ? ' L ' : '') + ((i / 60) * 340).toFixed(1) + ' ' + amp(i, tt).toFixed(1);
+            }
+            return s;
+        };
+
+        const loop = () => {
+            t += 0.03;
+            const d = buildLine(t);
+            waveLine.setAttribute('d', d);
+            waveFill.setAttribute('d', d + ' L 340 110 L 0 110 Z');
+            waveDot.setAttribute('cy', amp(60, t).toFixed(1));
+            raf = requestAnimationFrame(loop);
+        };
+
+        const io = new IntersectionObserver((entries) => {
+            const visible = entries[0].isIntersecting;
+            if (visible && !running) { running = true; loop(); }
+            else if (!visible && running) { running = false; cancelAnimationFrame(raf); }
+        }, { threshold: 0.05 });
+        io.observe(hero);
+    }
+
+    // --- Phone 3D tilt + floating-badge parallax (desktop pointers only) ---
+    const tilt = document.getElementById('nzTilt');
+    const xp = document.getElementById('nzXp');
+    const streak = document.getElementById('nzStreak');
+
+    if (!reduceMotion && finePointer && hero && tilt) {
+        hero.addEventListener('mousemove', (e) => {
+            const r = hero.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            tilt.style.transform = `rotateY(${px * 15}deg) rotateX(${-py * 11}deg)`;
+            if (xp) xp.style.transform = `translate(${px * 30}px, ${py * 30}px)`;
+            if (streak) streak.style.transform = `translate(${px * -22}px, ${py * -20}px)`;
+        });
+        hero.addEventListener('mouseleave', () => {
+            tilt.style.transform = 'rotateY(0) rotateX(0)';
+            if (xp) xp.style.transform = 'translate(0,0)';
+            if (streak) streak.style.transform = 'translate(0,0)';
+        });
+    }
+
+    // --- Demo alarm toggle ---
+    const toggle = document.getElementById('nzToggle');
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            const on = toggle.classList.toggle('on');
+            toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+    }
+</script>

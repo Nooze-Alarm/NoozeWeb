@@ -27,9 +27,13 @@ html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
     background: var(--bg-deep);
     color: var(--text-secondary);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Hanken Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Hanken Grotesk', system-ui, sans-serif;
 }
 
 /* Subtle noise texture to break smooth gradient look */
@@ -98,9 +102,20 @@ body::before {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.nav-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+}
+
+.nav-brand .accent { color: #5fd4e8; }
+
 .nav-link {
     position: relative;
-    color: var(--text-secondary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: #9db2bf;
     transition: color 0.3s;
 }
 
@@ -111,18 +126,41 @@ body::before {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
+    background: #5fd4e8;
     transition: width 0.3s ease;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+    color: #eaf6fa;
+}
+
 .nav-link.active {
-    color: var(--primary);
+    color: #5fd4e8;
 }
 
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 100%;
+}
+
+.nav-pill {
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: #cfe6ee;
+    padding: 9px 18px;
+    border: 1px solid rgba(120, 170, 190, 0.28);
+    border-radius: 999px;
+    background: rgba(120, 170, 190, 0.04);
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.nav-pill:hover,
+.nav-pill.active {
+    border-color: rgba(95, 212, 232, 0.6);
+    color: #eaf6fa;
+    background: rgba(95, 212, 232, 0.08);
 }
 
 /* --- Hero Background Orbs --- */
@@ -1529,21 +1567,54 @@ body.launch-bar-visible .hero-bg.pt-16 { padding-top: calc(64px + var(--launch-b
     animation: dotPulse 1.5s ease-in-out infinite;
 }
 
-/* --- Maintenance state (app temporarily unavailable) -------- */
+/* --- Maintenance state (app temporarily unavailable) --------
+   Amber gradient + dark ink per the futuristic homepage design. */
 .launch-bar.maintenance {
     background:
-        linear-gradient(90deg,
-            rgba(146, 64, 14, 0.95) 0%,
-            rgba(245, 158, 11, 0.95) 35%,
-            rgba(217, 119, 6, 0.95) 70%,
-            rgba(146, 64, 14, 0.95) 100%);
-    background-size: 200% 100%;
-    box-shadow: 0 6px 24px -10px rgba(245, 158, 11, 0.7);
+        linear-gradient(100deg,
+            #241a0a 0%,
+            #7a5518 42%,
+            #c78e2e 78%,
+            #e6ad3f 100%);
+    background-size: 160% 100%;
+    color: #1e1608;
+    font-weight: 500;
+    border-bottom: none;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    animation: none;
+}
+
+.launch-bar.maintenance::before { content: none; }
+
+.launch-bar.maintenance .shine { display: none; }
+
+.launch-bar.maintenance .pill {
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.16em;
+    color: #1c1305;
+    background: rgba(0, 0, 0, 0.28);
+    border: none;
+    backdrop-filter: none;
 }
 
 .launch-bar.maintenance .pill .dot {
-    background: #fbbf24;
-    box-shadow: 0 0 8px #fbbf24, 0 0 16px rgba(251, 191, 36, 0.7);
+    background: #3a2a0c;
+    box-shadow: none;
+}
+
+.launch-bar.maintenance .arrow {
+    color: #160f04;
+    font-weight: 600;
+}
+
+.launch-bar.maintenance .close {
+    border: none;
+    background: rgba(0, 0, 0, 0.18);
+    color: #1e1608;
+}
+
+.launch-bar.maintenance .close:hover {
+    background: rgba(0, 0, 0, 0.32);
 }
 
 .launch-stamp.maintenance {
@@ -1613,3 +1684,59 @@ body.launch-bar-visible .hero-bg.pt-16 { padding-top: calc(64px + var(--launch-b
     letter-spacing: 0.01em;
     margin-top: 2px;
 }
+
+/* --- Custom Cursor ------------------------------------------
+   Dot + trailing ring. Enabled by script.js only on fine pointers
+   without prefers-reduced-motion; native cursor kept for text fields. */
+html.nz-cursor-on,
+html.nz-cursor-on * { cursor: none !important; }
+
+html.nz-cursor-on input,
+html.nz-cursor-on textarea { cursor: text !important; }
+
+html.nz-cursor-on select { cursor: auto !important; }
+
+.nz-cursor-dot,
+.nz-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.nz-cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: #eafcff;
+    box-shadow: 0 0 10px rgba(95, 212, 232, 0.9);
+    z-index: 10000;
+    transform: translate3d(var(--nzcx, -100px), var(--nzcy, -100px), 0);
+    transition: opacity 0.25s ease;
+    will-change: transform;
+}
+
+.nz-cursor-ring {
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    border: 1.5px solid rgba(95, 212, 232, 0.65);
+    background: rgba(95, 212, 232, 0);
+    z-index: 9999;
+    transform: translate3d(var(--nzrx, -100px), var(--nzry, -100px), 0) scale(var(--nzrs, 1));
+    transition: opacity 0.3s ease, border-color 0.25s ease, background 0.25s ease;
+    will-change: transform;
+}
+
+.nz-cursor-ring.is-hover {
+    border-color: rgba(95, 212, 232, 0.95);
+    background: rgba(95, 212, 232, 0.08);
+}
+
+.nz-cursor-dot.is-visible,
+.nz-cursor-ring.is-visible { opacity: 1; }
+
+.nz-cursor-dot.is-suppressed,
+.nz-cursor-ring.is-suppressed { opacity: 0; }
