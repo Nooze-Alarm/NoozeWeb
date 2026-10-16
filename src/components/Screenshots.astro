@@ -31,7 +31,7 @@ const shots = [
             <div class="ss-track" data-track tabindex="0" role="group" aria-label="App screenshots, swipe to browse">
                 {shots.map((s) => (
                     <figure class="ss-slide">
-                        <img src={s.src} alt={s.alt} width="950" height="1920" loading="lazy" decoding="async" />
+                        <img src={s.src} srcset={s.src.replace('.webp', '-480.webp') + ' 480w, ' + s.src + ' 950w'} sizes="240px" alt={s.alt} width="950" height="1920" loading="lazy" decoding="async" />
                     </figure>
                 ))}
             </div>
@@ -41,7 +41,7 @@ const shots = [
             </button>
         </div>
 
-        <div class="ss-dots" data-dots aria-hidden="true"></div>
+        <div class="ss-dots" data-dots role="group" aria-label="Choose a screenshot"></div>
     </div>
 </section>
 
@@ -64,9 +64,13 @@ const shots = [
         scrollbar-width: none;
         -ms-overflow-style: none;
         outline: none;
+        /* Soft edges instead of slicing the peeking slides. */
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
     }
     .ss-track::-webkit-scrollbar { display: none; }
-    .ss-track:focus-visible { outline: 2px solid rgba(0, 188, 212, 0.6); outline-offset: 4px; border-radius: 1.25rem; }
+    /* The mask would also clip the focus ring, so drop it while focused. */
+    .ss-track:focus-visible { outline: 2px solid rgba(0, 188, 212, 0.6); outline-offset: 4px; border-radius: 1.25rem; -webkit-mask-image: none; mask-image: none; }
 
     .ss-slide {
         position: relative;
@@ -87,7 +91,6 @@ const shots = [
         box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6), 0 0 40px -20px rgba(0, 188, 212, 0.5);
         transform-origin: center;
         transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
-        will-change: transform;
     }
     .ss-slide img:hover {
         transform: scale(1.12);
@@ -125,6 +128,7 @@ const shots = [
         margin-top: 1.5rem;
     }
     .ss-dots button {
+        position: relative;
         width: 8px;
         height: 8px;
         padding: 0;
@@ -133,6 +137,12 @@ const shots = [
         background: rgba(255, 255, 255, 0.25);
         cursor: pointer;
         transition: background 0.2s ease, width 0.2s ease;
+    }
+    /* Invisible hit area: the dot stays 8px but the tap target is 16×24. */
+    .ss-dots button::after {
+        content: '';
+        position: absolute;
+        inset: -8px -4px;
     }
     .ss-dots button.active {
         width: 24px;
@@ -182,7 +192,11 @@ const shots = [
                 const d = Math.abs(c - trackCenter());
                 if (d < bestDist) { bestDist = d; best = i; }
             });
-            dots.forEach((d, i) => d.classList.toggle('active', i === best));
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === best);
+                if (i === best) d.setAttribute('aria-current', 'true');
+                else d.removeAttribute('aria-current');
+            });
             if (prev) prev.disabled = track.scrollLeft <= 2;
             if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
         };
@@ -194,6 +208,16 @@ const shots = [
         }, { passive: true });
         window.addEventListener('resize', update);
         update();
+
+        // Lazy images inside a horizontal scroller only start loading once they
+        // intersect it, so a swiped-in slide could flash blank. Warm them all as
+        // the carousel approaches the viewport.
+        const warm = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting) return;
+            slides.forEach((s) => { const img = s.querySelector('img'); if (img) img.loading = 'eager'; });
+            warm.disconnect();
+        }, { rootMargin: '600px 0px' });
+        warm.observe(root);
 
         // Keyboard support when the track is focused
         track.addEventListener('keydown', (e) => {

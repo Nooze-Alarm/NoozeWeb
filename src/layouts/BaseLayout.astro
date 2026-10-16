@@ -86,7 +86,7 @@ const ogImage = `${SITE}/assets/og-image.jpg`;
     <link rel="stylesheet" href={asset('/css/tailwind.css')} />
     <link rel="stylesheet" href={asset('/css/styles.css')} />
 
-    <script is:inline>if(sessionStorage.getItem('nooze_pixel_transition'))document.write('<style id="pxl-hide">body{visibility:hidden}</style>')</script>
+    <script is:inline>try{if(sessionStorage.getItem('nooze_pixel_transition'))document.write('<style id="pxl-hide">body{visibility:hidden;animation:pxl-show 0s 1.5s forwards}@keyframes pxl-show{to{visibility:visible}}</style>')}catch(e){}</script>
 
     <slot name="head" />
 </head>

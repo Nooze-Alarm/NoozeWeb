@@ -159,19 +159,45 @@
         animateEnter();
     }
 
+    var leaving = false;
+
+    // A page restored from the back/forward cache comes back exactly as it was
+    // left: still covered by the exit animation's canvas. Clear it.
+    window.addEventListener('pageshow', function(e) {
+        if (!e.persisted) return;
+        leaving = false;
+        var cover = document.getElementById('pixelTransition');
+        if (cover) cover.remove();
+        var hideStyle = document.getElementById('pxl-hide');
+        if (hideStyle) hideStyle.remove();
+        document.body.style.visibility = 'visible';
+        try { sessionStorage.removeItem('nooze_pixel_transition'); } catch (err) {}
+    });
+
+    // "features.html", "/features", "/" and "index.html" name pages the same way.
+    function pageKey(path) {
+        var p = (path || '').split('#')[0].split('?')[0].split('/').pop();
+        return (p || 'index.html').replace(/\.html$/, '');
+    }
+
     // Intercept internal nav links after DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
         var links = document.querySelectorAll('a[href]');
-        var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        var currentPage = pageKey(window.location.pathname);
 
         links.forEach(function(link) {
             var href = link.getAttribute('href');
             if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
             if (!href.endsWith('.html') && href !== '/') return;
-            if (href === currentPage) return;
+            if (pageKey(href) === currentPage) return;
+            if (link.target && link.target !== '_self') return;
 
             link.addEventListener('click', function(e) {
+                // New-tab / new-window / download clicks belong to the browser.
+                if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
                 e.preventDefault();
+                if (leaving) return;
+                leaving = true;
                 var rect = link.getBoundingClientRect();
                 var ox = rect.left + rect.width / 2;
                 var oy = rect.top + rect.height / 2;
@@ -266,13 +292,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Scroll Reveal ---
     var revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    // A bottom inset instead of a visible-fraction threshold: a fraction can never
+    // be reached by an element taller than ~10 viewports (long documents, large
+    // text settings), which would leave it invisible for good.
     var revealObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
 
     revealElements.forEach(function(el) {
         revealObserver.observe(el);
@@ -286,10 +316,31 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.id = mobileMenu.id || 'mobileMenu';
         mobileMenuBtn.setAttribute('aria-controls', mobileMenu.id);
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        var menuIcon = mobileMenuBtn.querySelector('path');
+        var ICON_OPEN = 'M4 6h16M4 12h16M4 18h16';
+        var ICON_CLOSE = 'M6 6l12 12M18 6L6 18';
+        var setMenu = function(open) {
+            mobileMenu.classList.toggle('hidden', !open);
+            mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (menuIcon) menuIcon.setAttribute('d', open ? ICON_CLOSE : ICON_OPEN);
+        };
         mobileMenuBtn.addEventListener('click', function() {
-            var willOpen = mobileMenu.classList.contains('hidden');
-            mobileMenu.classList.toggle('hidden', !willOpen);
-            mobileMenuBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+            setMenu(mobileMenu.classList.contains('hidden'));
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                setMenu(false);
+                mobileMenuBtn.focus();
+            }
+        });
+        // pointerdown, not click: iOS doesn't send clicks for taps on plain content.
+        document.addEventListener('pointerdown', function(e) {
+            if (mobileMenu.classList.contains('hidden')) return;
+            if (mobileMenu.contains(e.target) || mobileMenuBtn.contains(e.target)) return;
+            setMenu(false);
+        });
+        window.matchMedia('(min-width: 768px)').addEventListener('change', function(e) {
+            if (e.matches) setMenu(false);
         });
     }
 
@@ -303,14 +354,26 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.faq-item').forEach(function(i) {
                 i.classList.remove('open');
                 i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                var a = i.querySelector('.faq-answer');
+                if (a) a.style.maxHeight = '';
             });
 
-            // Toggle current
+            // Toggle current, opening to the answer's real height (+ its 24px bottom
+            // padding) so long answers and large text settings never get clipped.
             if (!wasOpen) {
                 item.classList.add('open');
                 btn.setAttribute('aria-expanded', 'true');
+                fitFaqAnswer(item);
             }
         });
+    });
+
+    function fitFaqAnswer(item) {
+        var answer = item && item.querySelector('.faq-answer');
+        if (answer) answer.style.maxHeight = (answer.scrollHeight + 24) + 'px';
+    }
+    window.addEventListener('resize', function() {
+        fitFaqAnswer(document.querySelector('.faq-item.open'));
     });
 
     // --- Back to Top ---
@@ -437,10 +500,11 @@ document.addEventListener('DOMContentLoaded', function() {
     dot.setAttribute('aria-hidden', 'true');
     ring.setAttribute('aria-hidden', 'true');
 
+    // The native cursor is only hidden (nz-cursor-on) once the custom one has a
+    // position, on the first mousemove; otherwise a still mouse shows nothing.
     function mount() {
         document.body.appendChild(dot);
         document.body.appendChild(ring);
-        root.classList.add('nz-cursor-on');
     }
     if (document.body) mount();
     else document.addEventListener('DOMContentLoaded', mount);
@@ -465,7 +529,9 @@ document.addEventListener('DOMContentLoaded', function() {
             rx = x; ry = y;
             dot.classList.add('is-visible');
             ring.classList.add('is-visible');
+            root.classList.add('nz-cursor-on');
         }
+        wake();
     }, { passive: true });
 
     document.addEventListener('mouseover', function(e) {
@@ -477,18 +543,24 @@ document.addEventListener('DOMContentLoaded', function() {
         var hover = !suppress && t.closest(HOVER_SELECTOR);
         targetScale = hover ? 1.45 : 1;
         ring.classList.toggle('is-hover', !!hover);
+        wake();
     });
 
-    document.addEventListener('mousedown', function() { pressed = true; });
-    document.addEventListener('mouseup', function() { pressed = false; });
+    document.addEventListener('mousedown', function() { pressed = true; wake(); });
+    document.addEventListener('mouseup', function() { pressed = false; wake(); });
 
     document.addEventListener('mouseleave', function() {
         dot.classList.remove('is-visible');
         ring.classList.remove('is-visible');
+        root.classList.remove('nz-cursor-on');
         shown = false;
     });
 
-    (function loop() {
+    // Ring easing loop. It sleeps once the ring has caught up with the dot, so an
+    // idle mouse costs nothing per frame; any pointer activity wakes it.
+    var raf = 0;
+    function wake() { if (!raf) raf = requestAnimationFrame(loop); }
+    function loop() {
         rx += (x - rx) * 0.18;
         ry += (y - ry) * 0.18;
         var goal = pressed ? targetScale * 0.85 : targetScale;
@@ -496,8 +568,9 @@ document.addEventListener('DOMContentLoaded', function() {
         ring.style.setProperty('--nzrx', rx.toFixed(1) + 'px');
         ring.style.setProperty('--nzry', ry.toFixed(1) + 'px');
         ring.style.setProperty('--nzrs', scale.toFixed(3));
-        requestAnimationFrame(loop);
-    })();
+        var settled = Math.abs(x - rx) < 0.1 && Math.abs(y - ry) < 0.1 && Math.abs(goal - scale) < 0.001;
+        raf = settled ? 0 : requestAnimationFrame(loop);
+    }
 })();
 
 // --- Launch Ribbon (sitewide) ---

@@ -41,7 +41,7 @@ const dotCy = amp(60, 0).toFixed(1);
     <div class="nz-wrap">
         <!-- Left column: copy -->
         <div class="nz-copy">
-            <div class="nz-badge reveal">
+            <div class="nz-badge nz-in">
                 <span class="nz-badge-spin" aria-hidden="true"></span>
                 <span class="nz-badge-inner">
                     <span class="nz-badge-dot" aria-hidden="true"></span>
@@ -49,18 +49,18 @@ const dotCy = amp(60, 0).toFixed(1);
                 </span>
             </div>
 
-            <h1 class="nz-h1 reveal delay-1">
+            <h1 class="nz-h1 nz-in nz-d1">
                 <span class="nz-h1-line">Wake Up</span>
                 <span class="nz-h1-grad">Smarter<span class="nz-h1-dot">.</span></span>
             </h1>
 
-            <p class="nz-lede reveal delay-2">
+            <p class="nz-lede nz-in nz-d2">
                 Nooze reads your sleep cycles, wakes you at the perfect moment in your
                 lightest phase, and turns mornings into a rewarding game. No snooze
                 button &mdash; just better wake-ups.
             </p>
 
-            <div class="nz-cta-row reveal delay-3">
+            <div class="nz-cta-row nz-in nz-d3">
                 <div class="nz-maint" role="status" aria-label="Nooze is temporarily unavailable for download">
                     <span class="nz-maint-icon" aria-hidden="true">
                         <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.4" stroke="#e6ad3f" stroke-width="1.4"/><path d="M8 4.6V8l2.4 1.6" stroke="#e6ad3f" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -77,13 +77,13 @@ const dotCy = amp(60, 0).toFixed(1);
                 </a>
             </div>
 
-            <p class="nz-subnote reveal delay-3">
+            <p class="nz-subnote nz-in nz-d3">
                 Nooze is currently off the Play Store while we sort things out. New
                 downloads are paused &mdash; we&rsquo;ll update this page the moment it&rsquo;s back.
                 <a href="support.html">Questions? Get in touch.</a>
             </p>
 
-            <div class="nz-chips reveal delay-2">
+            <div class="nz-chips nz-in nz-d3">
                 <div class="nz-chip">
                     <span class="nz-chip-icon" aria-hidden="true">
                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l5 2v3.2C13 10.5 10.8 13 8 14.5 5.2 13 3 10.5 3 6.7V3.5l5-2Z" stroke="#5fd4e8" stroke-width="1.3" fill="none" stroke-linejoin="round"/><path d="M6 8l1.4 1.4L10.4 6" stroke="#5fd4e8" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -106,7 +106,7 @@ const dotCy = amp(60, 0).toFixed(1);
         </div>
 
         <!-- Right column: phone mockup -->
-        <div class="nz-stage reveal-scale delay-2">
+        <div class="nz-stage nz-in-scale nz-d2">
             <div class="nz-phone-glow" aria-hidden="true"></div>
 
             <div class="nz-scene">
@@ -791,6 +791,20 @@ const dotCy = amp(60, 0).toFixed(1);
     @keyframes nzAuroraB { 0%, 100% { transform: translate(0, 0) scale(1.12); } 50% { transform: translate(-60px, -40px) scale(1); } }
     @keyframes nzShimmerText { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
+    /* Entrance plays from CSS on first paint instead of waiting for the scroll
+       observer, so the headline (the LCP element) is never parked at opacity 0. */
+    .nz-in { animation: nzIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+    .nz-in-scale { animation: nzInScale 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+    .nz-d1 { animation-delay: 0.08s; }
+    .nz-d2 { animation-delay: 0.16s; }
+    .nz-d3 { animation-delay: 0.24s; }
+    @keyframes nzIn { from { opacity: 0; transform: translateY(18px); } }
+    @keyframes nzInScale { from { opacity: 0; transform: scale(0.96); } }
+
+    /* Hold the float still while the pointer is on the phone so its controls
+       are a steady target. */
+    .nz-stage:hover .nz-float { animation-play-state: paused; }
+
     /* ===== Responsive ===== */
     @media (max-width: 1080px) {
         .nz-wrap {
@@ -815,7 +829,8 @@ const dotCy = amp(60, 0).toFixed(1);
 
     @media (prefers-reduced-motion: reduce) {
         .nz-aurora-a, .nz-aurora-b, .nz-particle, .nz-badge-spin,
-        .nz-badge-dot, .nz-live-dot, .nz-float, .nz-h1-grad {
+        .nz-badge-dot, .nz-live-dot, .nz-float, .nz-h1-grad,
+        .nz-in, .nz-in-scale {
             animation: none !important;
         }
     }
