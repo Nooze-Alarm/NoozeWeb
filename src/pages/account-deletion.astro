@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+    title={"Delete your account – Nooze Sleep Tracker &amp; Alarm"}
+    description={"How to delete your Nooze account and data, in the app or by email, and what is deleted."}
+    keywords={"contact nooze, nooze support, nooze alarm help, nooze privacy policy, nooze terms and conditions"}
+    canonical={"account-deletion.html"}
+>
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Delete your account\",\"item\":\"https://noozealarm.com/account-deletion.html\"}]}"} />
+  </Fragment>
+
+<main class="flex-1 pt-16">
+        <section class="hero-bg pt-32 pb-16 relative overflow-hidden">
+            <div class="aurora"></div>
+            <div class="holo-grid tilt-grid"></div>
+            <div class="orb orb-1"></div>
+            <div class="scanlines"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Your data, your control</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">Delete your <span class="iris-text">account</span></h1>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">Remove your account and everything stored with it, in the app or by email.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="py-20" id="account-deletion">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="holo-card"><div class="holo-card-inner" style="padding:40px;">
+                    <h2 class="text-2xl font-bold text-white mb-6">Delete your Nooze account</h2>
+                    <div class="space-y-6 text-gray-400 text-sm leading-relaxed">
+<p class="mt-2">This page explains how to delete your account and data for the Android app "Nooze Sleep Tracker &amp; Alarm" by Nooze.</p>
+
+<div>
+<h3 class="text-white font-semibold mb-2">Option 1: in the app</h3>
+<ol class="list-decimal pl-5 space-y-1 mt-2">
+    <li>Open Nooze and go to the <strong class="text-gray-200">Profile</strong> tab.</li>
+    <li>Scroll to the bottom and tap <strong class="text-gray-200">Delete Account</strong>.</li>
+    <li>Confirm.</li>
+</ol>
+<p class="mt-2">Your account and cloud data are deleted immediately.</p>
+</div>
+
+<div>
+<h3 class="text-white font-semibold mb-2">Option 2: by email, without the app</h3>
+<ol class="list-decimal pl-5 space-y-1 mt-2">
+    <li>Send an email to <a class="text-primary hover:underline" href="mailto:noozealarm@gmail.com?subject=Delete%20my%20Nooze%20account">noozealarm@gmail.com</a> with the subject "Delete my Nooze account".</li>
+    <li>Send it from the email address your Nooze account uses, so we can confirm the account is yours.</li>
+</ol>
+<p class="mt-2">We delete the account within 30 days and reply to confirm.</p>
+</div>
+
+<div>
+<h3 class="text-white font-semibold mb-2">What is deleted</h3>
+<ul class="list-disc pl-5 space-y-1 mt-2">
+    <li>Your account: email address, display name, username and avatar</li>
+    <li>Your profile choices, level, XP, streaks, achievements and quest completions</li>
+    <li>Your friendships, friend requests, wake duels and activity feed entries</li>
+    <li>Your leaderboard entries</li>
+    <li>Your journal entry dates</li>
+    <li>Your subscription record in our database</li>
+    <li>Your wake-up buddy links, missed wake-up check records and notification tokens</li>
+    <li>Squads you own; you are removed from other squads</li>
+</ul>
+</div>
+
+<div>
+<h3 class="text-white font-semibold mb-2">What is not deleted by us</h3>
+<ul class="list-disc pl-5 space-y-1 mt-2">
+    <li><strong class="text-gray-200">Data on your phone.</strong> Sleep sessions, recordings, alarms and journal text are stored only on your device. Deleting your account in the app clears them; if you delete by email, clear the app's storage in Android settings or uninstall the app.</li>
+    <li><strong class="text-gray-200">Your Google Play subscription.</strong> Deleting your account does not cancel a subscription. Cancel it in Google Play under Payments and subscriptions. Google keeps its own purchase records under its policies.</li>
+    <li><strong class="text-gray-200">Analytics and crash data</strong> held by Firebase is not linked to your account and expires within 14 months.</li>
+</ul>
+</div>
+
+<div>
+<h3 class="text-white font-semibold mb-2">Deleting some data without deleting your account</h3>
+<p class="mt-2">Sleep sessions, recordings and journal entries exist only on your device and can be removed there. To have other data removed while keeping your account, email us at the address above.</p>
+
+<p class="mt-2">See also the <a class="text-primary hover:underline" href="/privacy">privacy policy</a>.</p>
+</div>
+                </div></div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>
