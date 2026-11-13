@@ -3,7 +3,7 @@ module.exports = {
     content: ['./src/**/*.{astro,html,js}'],
     theme: {
         extend: {
-            fontFamily: { sans: ['Hanken Grotesk', 'system-ui', 'sans-serif'] },
+            fontFamily: { sans: ['Schibsted Grotesk', 'system-ui', 'sans-serif'] },
             colors: {
                 gray: { 500: '#828a99' },
                 primary: { DEFAULT: '#00bcd4', dark: '#0097a7', light: '#26c6da' },

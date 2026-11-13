@@ -1,0 +1,17 @@
+---
+// The one download CTA: opens the Google Play listing. Text-only (no store artwork).
+import { launch } from '../data/launch';
+const { size = 'md', label = 'Get it on Google Play', variant = 'primary', class: cls = '' } = Astro.props;
+---
+<a
+    href={launch.playUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class:list={['nz-btn', 'nz-btn--icon', `nz-btn--${variant}`, size === 'sm' && 'nz-btn--sm', cls]}
+>
+    <span>{label}</span>
+    <span class="nz-btn-icon" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+    </span>
+    <span class="sr-only"> (opens Google Play)</span>
+</a>

@@ -1,13 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const email = 'noozealarm@gmail.com';
+
+// Brand glyphs identify each platform (same marks as the footer).
+const social = [
+    { name: 'X', handle: '@NoozeAlarm', href: 'https://x.com/NoozeAlarm', d: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
+    { name: 'TikTok', handle: '@nooze.alarm.app', href: 'https://www.tiktok.com/@nooze.alarm.app', d: 'M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13a8.28 8.28 0 005.58 2.16V11.7a4.83 4.83 0 01-3.77-1.93V6.69h3.77z' },
+    { name: 'GitHub', handle: 'Nooze-Alarm', href: 'https://github.com/Nooze-Alarm', d: 'M12 2C6.48 2 2 6.58 2 12.26c0 4.49 2.87 8.3 6.84 9.64.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 012.5-.34c.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z' },
+    { name: 'LinkedIn', handle: 'nooze-alarm', href: 'https://www.linkedin.com/company/nooze-alarm', d: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' },
+    { name: 'Ko-fi', handle: 'noozealarm', href: 'https://ko-fi.com/noozealarm', d: 'M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z' },
+];
+
+const legal = [
+    { href: 'privacy.html', title: 'Privacy policy', body: 'What we collect, what stays on your device, and your rights under the GDPR.' },
+    { href: 'terms.html', title: 'Terms and conditions', body: 'The agreement that governs your use of Nooze Alarm.' },
+    { href: 'account-deletion.html', title: 'Delete your account', body: 'Remove your account and its cloud data, in the app or by email.' },
+];
 ---
 <BaseLayout
-    title={"Contact Nooze – Support, Feedback & Privacy Policy"}
-    description={"Contact the Nooze team for support, feedback or partnerships, and read our Privacy Policy and Terms & Conditions."}
+    title={"Contact the developer | Nooze Alarm"}
+    description={"Contact the Nooze developer for support, feedback or partnerships, and find the Privacy Policy, Terms and Conditions and account deletion steps."}
     keywords={"contact nooze, nooze support, nooze alarm help, nooze privacy policy, nooze terms and conditions"}
     canonical={"contact.html"}
-    ogTitle={"Contact Nooze - Get in Touch"}
-    ogDescription={"Reach out to the Nooze team for support, feedback, or partnerships."}
+    ogTitle={"Contact the Nooze developer"}
+    ogDescription={"Reach the Nooze developer for support, feedback or partnerships."}
     active={"contact"}
 >
 
@@ -15,75 +33,157 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Contact\",\"item\":\"https://noozealarm.com/contact.html\"}]}"} />
   </Fragment>
 
-<main class="flex-1 pt-16">
-        <!-- Hero -->
-        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid"></div>
-            <div class="orb orb-1"></div>
-            <div class="orb orb-2"></div>
-            <div class="scanlines"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <span class="holo-chip mb-6 reveal"><span class="dot"></span> We read everything</span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">Get in <span class="iris-text">Touch</span></h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">Question, feedback, bug, partnership, anything &mdash; the inbox is open.</p>
+<main id="main" class="flex-1">
+    <PageHeader
+        compact
+        title="Write to the person who built it."
+        lede="Questions, bug reports, ideas or partnerships. Nooze is made by one developer in Bulgaria, and every email gets read."
+    />
+
+    <section class="c-mail" aria-labelledby="c-mail-title">
+        <div class="nz-container">
+            <h2 class="nz-meta c-label" id="c-mail-title">Email</h2>
+            <a class="c-address" href={`mailto:${email}`} data-copy-source>noozealarm<wbr />@gmail.com</a>
+            <div class="c-mail-row">
+                <button class="nz-btn nz-btn--ghost nz-btn--sm c-copy" type="button" data-copy={email} hidden>
+                    <svg class="c-copy-ico c-copy-ico--copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.25" y="5.25" width="8" height="8" rx="1.75" /><path d="M10.75 5.25V3.5a1.25 1.25 0 0 0-1.25-1.25H3.5A1.25 1.25 0 0 0 2.25 3.5v6c0 .69.56 1.25 1.25 1.25h1.75" /></svg>
+                    <svg class="c-copy-ico c-copy-ico--done" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" /></svg>
+                    <span data-copy-label>Copy address</span>
+                </button>
+                <p class="nz-meta c-reply">Typically a reply within <span class="c-nowrap">24–48 hours</span></p>
+                <span class="sr-only" role="status" data-copy-status></span>
             </div>
-        </section>
+            <p class="c-tip">Reporting a bug? Mention your phone model, Android version and what you were doing when it happened. Quick question? The <a class="nz-link" href="/faq.html">FAQ</a> might already have it.</p>
+        </div>
+    </section>
 
-        <div class="section-divider"></div>
-
-        <!-- Contact Info -->
-        <section class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid sm:grid-cols-2 gap-5">
-                    <div class="holo-card tilt reveal"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-3">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        </div>
-                        <h2 class="text-white font-semibold mb-1">Email</h2>
-                        <a href="mailto:noozesupport@gmail.com" class="inline-block py-1 text-primary hover:underline text-sm">noozesupport@gmail.com</a>
-                        <p class="text-gray-400 text-sm mt-3">Typically a 24-48 hour reply.</p>
-                    </div></div>
-
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-3">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        </div>
-                        <h2 class="text-white font-semibold mb-1">Community</h2>
-                        <div class="space-y-2 mt-2">
-                            <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="block py-1 text-gray-400 hover:text-primary text-sm transition-colors">X (Twitter) &mdash; @NoozeAlarm</a>
-                            <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="block py-1 text-gray-400 hover:text-primary text-sm transition-colors">TikTok &mdash; @nooze.alarm.app</a>
-                            <a href="https://github.com/Nooze-Alarm" target="_blank" rel="noopener" class="block py-1 text-gray-400 hover:text-primary text-sm transition-colors">GitHub &mdash; Nooze-Alarm</a>
-                            <a href="https://www.linkedin.com/company/nooze-alarm" target="_blank" rel="noopener" class="block py-1 text-gray-400 hover:text-primary text-sm transition-colors">LinkedIn &mdash; Nooze Alarm</a>
-                        </div>
-                    </div></div>
-                </div>
+    <section class="c-more">
+        <div class="nz-container c-grid">
+            <div>
+                <h2 class="c-title" id="c-social-title">Elsewhere</h2>
+                <ul class="c-rows" aria-labelledby="c-social-title">
+                    {social.map((s) => (
+                        <li>
+                            <a class="c-row" href={s.href} target="_blank" rel="noopener noreferrer">
+                                <svg class="c-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={s.d} /></svg>
+                                <span class="c-row-name">{s.name}</span>
+                                <span class="c-row-handle">{s.handle}</span>
+                                <svg class="c-row-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" /></svg>
+                                <span class="sr-only"> (opens in a new tab)</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
             </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Legal -->
-        <section class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-2xl font-bold text-white mb-6 text-center reveal">Legal</h2>
-                <div class="grid sm:grid-cols-2 gap-5">
-                    <a href="privacy.html" class="holo-card tilt reveal block"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-3">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-1">Privacy Policy</h3>
-                        <p class="text-gray-400 text-sm">What we collect, what stays on your device, and your GDPR rights.</p>
-                    </div></a>
-                    <a href="terms.html" class="holo-card tilt reveal delay-1 block"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-3">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        </div>
-                        <h3 class="text-white font-semibold mb-1">Terms &amp; Conditions</h3>
-                        <p class="text-gray-400 text-sm">The agreement governing your use of Nooze Alarm.</p>
-                    </div></a>
-                </div>
+            <div>
+                <h2 class="c-title" id="c-legal-title">Legal</h2>
+                <ul class="c-rows" aria-labelledby="c-legal-title">
+                    {legal.map((l) => (
+                        <li>
+                            <a class="c-row c-row--doc" href={l.href}>
+                                <span class="c-row-name">{l.title}</span>
+                                <span class="c-row-body">{l.body}</span>
+                                <svg class="c-row-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+</main>
 </BaseLayout>
+
+<script>
+    // Copy-to-clipboard: the button only appears when the Clipboard API exists;
+    // without JS the address is still a plain mailto link.
+    const btn = document.querySelector<HTMLButtonElement>('[data-copy]');
+    if (btn && navigator.clipboard && window.isSecureContext) {
+        const label = btn.querySelector('[data-copy-label]')!;
+        const status = document.querySelector('[data-copy-status]')!;
+        let timer = 0;
+        btn.hidden = false;
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(btn.dataset.copy || '');
+                btn.classList.add('is-done');
+                label.textContent = 'Copied';
+                status.textContent = 'Email address copied to the clipboard';
+            } catch {
+                // Fall back to selecting the address so it can be copied by hand.
+                const src = document.querySelector('[data-copy-source]');
+                const sel = window.getSelection();
+                if (src && sel) { const r = document.createRange(); r.selectNodeContents(src); sel.removeAllRanges(); sel.addRange(r); }
+                label.textContent = 'Press Ctrl+C';
+            }
+            clearTimeout(timer);
+            timer = window.setTimeout(() => {
+                btn.classList.remove('is-done');
+                label.textContent = 'Copy address';
+                status.textContent = '';
+            }, 2200);
+        });
+    }
+</script>
+
+<style>
+    .c-mail { padding-block: clamp(64px, 9vw, 128px) clamp(48px, 6vw, 80px); }
+    .c-label { margin: 0 0 18px; }
+    .c-address {
+        display: inline-block; max-width: 100%;
+        font-family: var(--font-display); font-weight: 600;
+        font-size: clamp(30px, 7.2vw, 104px); line-height: 1; letter-spacing: -0.045em;
+        color: var(--fg);
+        padding-bottom: 0.08em;
+        background: linear-gradient(var(--red), var(--red)) 0 100% / 0 2px no-repeat;
+        transition: background-size 0.6s var(--ease-out);
+    }
+    .c-address:hover { background-size: 100% 2px; }
+    .c-address:focus-visible { outline-offset: 8px; border-radius: 10px; }
+    .c-mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 32px; }
+    .c-reply { margin: 0; }
+    .c-nowrap { white-space: nowrap; }
+    .c-copy { gap: 10px; }
+    .c-copy-ico { width: 15px; height: 15px; flex: none; }
+    .c-copy-ico--done { display: none; color: var(--red); }
+    .c-copy.is-done .c-copy-ico--copy { display: none; }
+    .c-copy.is-done .c-copy-ico--done { display: block; }
+    .c-tip { margin: 28px 0 0; max-width: 60ch; font-size: 15.5px; color: var(--fg-2); }
+
+    .c-more { padding-block: clamp(32px, 4vw, 56px) var(--section); }
+    .c-grid {
+        display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+        gap: clamp(48px, 7vw, 112px); align-items: start;
+        padding-top: clamp(48px, 6vw, 80px); border-top: 1px solid var(--line);
+    }
+    .c-title { margin: 0 0 22px; font-size: clamp(24px, 2.2vw, 30px); font-weight: 600; letter-spacing: -0.025em; }
+
+    .c-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-2); }
+    .c-rows li { border-bottom: 1px solid var(--line); }
+    .c-row {
+        display: grid; grid-template-columns: 20px minmax(0, auto) minmax(0, 1fr) 16px; align-items: center; gap: 16px;
+        min-height: 64px; padding: 16px 0;
+        color: var(--fg-2);
+        transition: color 0.25s var(--ease-out);
+    }
+    .c-glyph { width: 17px; height: 17px; color: var(--fg-3); transition: color 0.25s var(--ease-out); }
+    .c-row-name { font-family: var(--font-display); font-size: clamp(19px, 1.5vw, 21px); font-weight: 600; letter-spacing: -0.02em; color: var(--fg); }
+    .c-row-handle { justify-self: end; font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-3); letter-spacing: 0; overflow-wrap: anywhere; text-align: right; transition: color 0.25s var(--ease-out); }
+    .c-row-arrow { width: 16px; height: 16px; color: var(--fg-3); transition: transform 0.45s var(--ease-out), color 0.25s var(--ease-out); }
+    .c-row:hover .c-glyph, .c-row:hover .c-row-handle { color: var(--fg-2); }
+    .c-row:hover .c-row-arrow { color: var(--red); transform: translate(2px, -2px); }
+
+    .c-row--doc { grid-template-columns: minmax(0, 1fr) 16px; gap: 4px 16px; padding: 20px 0; }
+    .c-row--doc .c-row-name { grid-column: 1; }
+    .c-row--doc .c-row-body { grid-column: 1; font-size: 14.5px; line-height: 1.5; color: var(--fg-2); }
+    .c-row--doc .c-row-arrow { grid-column: 2; grid-row: 1 / span 2; }
+    .c-row--doc:hover .c-row-arrow { transform: translateX(3px); }
+
+    @media (max-width: 900px) {
+        .c-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 420px) {
+        .c-row { gap: 12px; }
+        .c-row-handle { font-size: 11.5px; }
+    }
+</style>

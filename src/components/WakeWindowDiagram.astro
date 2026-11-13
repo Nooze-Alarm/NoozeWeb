@@ -1,0 +1,391 @@
+---
+// Smart wake window, drawn on one example night. Shared by the homepage and Features so
+// both pages show the same night, the same window and the same ring time.
+// The axis runs 06:25 to 07:05 (minutes past 06:00). The movement trace is a made-up,
+// smooth example drawn at build time; the caption labels it as illustrative.
+// The 15 / 20 / 30 choice is a real radio group and CSS does the layout. One instance
+// per page: the radio ids are fixed so the sibling selectors below can reach them.
+interface Props {
+    /** Show the Sunrise Wake note in the caption. Features explains it in its own copy. */
+    sunNote?: boolean;
+}
+const { sunNote = true } = Astro.props;
+
+const T0 = 25, T1 = 65;
+const pct = (m: number) => ((m - T0) / (T1 - T0)) * 100;
+const bump = (t: number, c: number, w: number, h: number) => h * Math.exp(-(((t - c) / w) ** 2));
+const movement = (t: number) =>
+    0.13 + 0.022 * Math.sin(t * 1.3) + 0.01 * Math.sin(t * 4.1 + 1.1)
+    + bump(t, 28, 1.7, 0.12) + bump(t, 35, 1.9, 0.2) + bump(t, 42, 1.6, 0.62)
+    + bump(t, 48, 1.9, 0.14) + bump(t, 53, 1.7, 0.42) + bump(t, 58.5, 1.9, 0.18) + bump(t, 63, 2, 0.26);
+const yOf = (t: number) => 90 - movement(t) * 84; // 0..100, top = more movement
+const VB = 400;
+const pts: [number, number][] = [];
+for (let t = T0; t <= T1 + 1e-6; t += 0.5) pts.push([(pct(t) / 100) * VB, yOf(t)]);
+const f = (n: number) => n.toFixed(2);
+let tracePath = `M${f(pts[0][0])} ${f(pts[0][1])}`;
+for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] ?? p2;
+    tracePath += ` C${f(p1[0] + (p2[0] - p0[0]) / 6)} ${f(p1[1] + (p2[1] - p0[1]) / 6)} ${f(p2[0] - (p3[0] - p1[0]) / 6)} ${f(p2[1] - (p3[1] - p1[1]) / 6)} ${f(p2[0])} ${f(p2[1])}`;
+}
+const areaPath = `${tracePath} L${VB} 100 L0 100 Z`;
+const ticks = Array.from({ length: T1 - T0 + 1 }, (_, i) => T0 + i);
+const axisLabels = [30, 35, 40, 45, 50, 55, 60];
+const hhmm = (m: number) => `0${6 + Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
+// Window options: where the window starts, how much of the 30-minute band shows, and
+// the estimated lighter moment Nooze would pick inside it on this example night.
+const windows = [
+    { min: 15, start: 45, ring: 53 },
+    { min: 20, start: 40, ring: 42 },
+    { min: 30, start: 30, ring: 42, checked: true },
+];
+// One label per distinct ring time, so switching between options that ring at the same
+// minute leaves the label untouched.
+const ringTimes = [...new Set(windows.map((w) => w.ring))].map((ring) => ({
+    ring,
+    cls: ['ww-rt', ...windows.filter((w) => w.ring === ring).map((w) => `ww-rt--${w.min}`)].join(' '),
+}));
+// Every position the CSS needs, as unitless percentages of the plot width/height.
+const figVars = [
+    `--wa:${pct(30)}`, `--wb:${pct(60)}`, `--sun:${(3 / (T1 - T0)) * 100}`,
+    ...windows.flatMap((w) => [
+        `--wl-${w.min}:${pct(w.start)}`, `--ws-${w.min}:${(w.min / 30).toFixed(4)}`,
+        `--ring-${w.min}:${pct(w.ring)}`, `--ry-${w.min}:${yOf(w.ring).toFixed(2)}`,
+    ]),
+].join(';');
+---
+<div class="ww-box nz-reveal" data-ww>
+    {windows.map((w) => (
+        <input class="ww-in" type="radio" name="ww-len" id={`wwLen${w.min}`} value={w.min} data-ring={w.ring} checked={w.checked} />
+    ))}
+
+    <div class="nz-panel ww-panel">
+        <div class="nz-panel-core ww-core">
+            <div class="ww-bar">
+                <p class="ww-eg">Example: a 07:00 alarm</p>
+                <fieldset class="ww-seg">
+                    <legend class="sr-only">Wake window length</legend>
+                    <span class="ww-seg-k ww-seg-k--lead" aria-hidden="true">Window</span>
+                    <span class="ww-seg-opts">
+                        <span class="ww-seg-thumb" aria-hidden="true"></span>
+                        {windows.map((w) => (
+                            <label for={`wwLen${w.min}`}>{w.min}<span class="sr-only"> minutes</span></label>
+                        ))}
+                    </span>
+                    <span class="ww-seg-k" aria-hidden="true">min</span>
+                </fieldset>
+            </div>
+
+            <figure class="ww-fig" style={figVars}>
+                <div class="ww-fig-grid">
+                    <div class="ww-plot">
+                        <!-- Window bracket -->
+                        <div class="ww-bracket" aria-hidden="true">
+                            <span class="ww-bracket-line"></span>
+                            <span class="ww-bracket-label">
+                                {windows.map((w) => <span class={`ww-wl ww-wl--${w.min}`}>{w.min} min window</span>)}
+                            </span>
+                        </div>
+
+                        <div class="ww-lanes">
+                            <span class="ww-band" aria-hidden="true"></span>
+                            <span class="ww-edge" aria-hidden="true"><i></i></span>
+                            <span class="ww-alarm" aria-hidden="true"></span>
+
+                            <div class="ww-lane ww-lane--move">
+                                <span class="ww-lane-in">Movement <em>Illustrative</em></span>
+                                <div class="ww-wipe" aria-hidden="true">
+                                    <div class="ww-wipe-in">
+                                        <svg class="ww-trace" viewBox={`0 0 ${VB} 100`} preserveAspectRatio="none" focusable="false">
+                                            <defs>
+                                                <linearGradient id="wwTraceFill" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="0" stop-color="currentColor" stop-opacity="0.16" />
+                                                    <stop offset="1" stop-color="currentColor" stop-opacity="0" />
+                                                </linearGradient>
+                                            </defs>
+                                            <path d={areaPath} fill="url(#wwTraceFill)" />
+                                            <path d={tracePath} fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ww-lane ww-lane--sun">
+                                <span class="ww-lane-in">Sunrise Wake</span>
+                                <span class="ww-sun" aria-hidden="true"><i></i></span>
+                            </div>
+
+                            <!-- The estimated lighter moment -->
+                            <div class="ww-ring" aria-hidden="true">
+                                <span class="ww-ring-line"></span>
+                                <span class="ww-ring-y">
+                                    <span class="ww-ring-dot"></span>
+                                    <span class="ww-ring-label">
+                                        <b>
+                                            {ringTimes.map((r) => <span class={r.cls}>{hhmm(r.ring)}</span>)}
+                                        </b>
+                                        Rings
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Time axis -->
+                        <div class="ww-axis" aria-hidden="true">
+                            <svg class="ww-ticks" viewBox={`0 0 ${VB} 10`} preserveAspectRatio="none" focusable="false">
+                                {ticks.map((m) => {
+                                    const x = (pct(m) / 100) * VB;
+                                    return <line x1={x} x2={x} y1="0" y2={m % 5 === 0 ? 10 : 5} stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" class={m % 5 === 0 ? 'is-major' : undefined} />;
+                                })}
+                            </svg>
+                            {axisLabels.map((m) => (
+                                <span class:list={['ww-axis-t', m % 10 === 5 && 'is-minor', m === 60 && 'is-alarm']} style={`--x:${pct(m)}`}>
+                                    {hhmm(m)}{m === 60 && <small>alarm</small>}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <figcaption class:list={['ww-fig-cap', !sunNote && 'ww-fig-cap--solo']}>
+                    <span class="ww-fig-cap-in">
+                        <span aria-live="polite">
+                            {windows.map((w) => (
+                                <span class={`ww-cap ww-cap--${w.min}`}>
+                                    With a {w.min}-minute window, Nooze starts looking at {hhmm(w.start)} and rings at {hhmm(w.ring)}, an estimated lighter moment on this example night.
+                                </span>
+                            ))}
+                        </span>
+                        The movement trace is illustrative. Estimates are approximate and for general wellness.
+                    </span>
+                    {sunNote && (
+                        <span class="ww-fig-cap-sun">
+                            <strong>Sunrise Wake</strong> warms your screen from dark into a soft glow, so a pitch-dark room does not end in a bright flash.
+                        </span>
+                    )}
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</div>
+
+<style>
+    .ww-box { position: relative; margin-top: clamp(48px, 6vw, 80px); }
+    .ww-in { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    .ww-core { padding: clamp(20px, 3vw, 40px); }
+
+    .ww-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
+    .ww-eg { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--fg-3); }
+
+    /* Segmented control (same look as the homepage billing toggle) */
+    .ww-seg { display: inline-flex; align-items: center; gap: 12px; margin: 0; padding: 0; border: 0; min-width: 0; }
+    .ww-seg-k { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); }
+    .ww-seg-opts {
+        position: relative; display: inline-grid; grid-template-columns: repeat(3, 52px);
+        padding: 4px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); background: rgba(255, 255, 255, 0.02);
+    }
+    .ww-seg-opts label {
+        position: relative; z-index: 1; display: grid; place-items: center; height: 44px; border-radius: 999px; cursor: pointer;
+        font-family: var(--font-mono); font-size: 13px; color: var(--fg-2); font-variant-numeric: tabular-nums;
+        transition: color 0.25s var(--ease-out);
+        -webkit-tap-highlight-color: transparent; user-select: none;
+    }
+    .ww-seg-opts label:hover { color: var(--fg); }
+    .ww-seg-thumb {
+        position: absolute; top: 4px; left: 4px; width: 52px; height: 44px; border-radius: 999px; background: var(--fg);
+        transform: translateX(104px); transition: transform 0.45s var(--ease-out);
+    }
+    #wwLen15:checked ~ .ww-panel .ww-seg-thumb { transform: translateX(0); }
+    #wwLen20:checked ~ .ww-panel .ww-seg-thumb { transform: translateX(52px); }
+    #wwLen15:checked ~ .ww-panel label[for='wwLen15'],
+    #wwLen20:checked ~ .ww-panel label[for='wwLen20'],
+    #wwLen30:checked ~ .ww-panel label[for='wwLen30'] { color: var(--ink-0); }
+    .ww-in:focus-visible ~ .ww-panel .ww-seg-opts { outline: 2px solid var(--fg); outline-offset: 3px; }
+    .ww-seg-opts label:active { transform: scale(0.96); }
+
+    /* The figure: values per window option */
+    .ww-fig { --wl: var(--wl-30); --ws: var(--ws-30); --ring: var(--ring-30); --ring-y: var(--ry-30); }
+    #wwLen15:checked ~ .ww-panel .ww-fig { --wl: var(--wl-15); --ws: var(--ws-15); --ring: var(--ring-15); --ring-y: var(--ry-15); }
+    #wwLen20:checked ~ .ww-panel .ww-fig { --wl: var(--wl-20); --ws: var(--ws-20); --ring: var(--ring-20); --ring-y: var(--ry-20); }
+
+    .ww-fig { margin: clamp(28px, 3vw, 40px) 0 0; }
+    .ww-fig-grid { padding-left: 150px; }
+    .ww-plot { position: relative; }
+
+    /* Window bracket */
+    .ww-bracket { position: relative; height: 30px; }
+    .ww-bracket-line {
+        position: absolute; left: calc(var(--wa) * 1%); width: calc((var(--wb) - var(--wa)) * 1%); top: 8px; height: 8px;
+        border: 1px solid var(--line-3); border-bottom: 0; border-radius: 2px 2px 0 0;
+        transform-origin: right; transform: scaleX(var(--ws)); transition: transform 0.7s var(--ease-io);
+    }
+    .ww-bracket-label {
+        position: absolute; right: calc((100 - var(--wb)) * 1%); top: -6px;
+        display: grid; padding: 0 0 0 10px; background: var(--ink-2);
+        font-family: var(--font-mono); font-size: 11.5px; color: var(--fg); white-space: nowrap;
+    }
+    .ww-wl { grid-area: 1 / 1; text-align: right; opacity: 0; transition: opacity 0.3s var(--ease-out); }
+
+    .ww-lanes { position: relative; }
+    .ww-lane { position: relative; }
+    .ww-lane--move { height: clamp(190px, 21vw, 280px); border-bottom: 1px solid var(--line-2); }
+    .ww-lane--sun { height: 46px; border-bottom: 1px solid var(--line-2); }
+    .ww-lane-in {
+        position: absolute; right: calc(100% + 22px); top: 0; width: 128px; z-index: 1;
+        display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+        font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3);
+    }
+    .ww-lane-in em {
+        font-style: normal; text-transform: none; letter-spacing: 0.02em; color: var(--fg-2);
+        padding: 4px 8px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--line-2); background: rgba(255, 255, 255, 0.025);
+    }
+    .ww-lane--sun .ww-lane-in { top: 50%; transform: translateY(-50%); }
+
+    .ww-band {
+        position: absolute; left: calc(var(--wa) * 1%); width: calc((var(--wb) - var(--wa)) * 1%); top: 0; bottom: 0; pointer-events: none;
+        background: linear-gradient(180deg, rgba(236, 238, 242, 0.06), rgba(236, 238, 242, 0.025));
+        transform-origin: right; transform: scaleX(var(--ws)); transition: transform 0.7s var(--ease-io);
+    }
+    .ww-edge { position: absolute; inset: 0; pointer-events: none; transform: translateX(calc(var(--wl) * 1%)); transition: transform 0.7s var(--ease-io); }
+    .ww-edge i { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--line-3); }
+    .ww-alarm { position: absolute; left: calc(var(--wb) * 1%); top: 0; bottom: 0; width: 1px; background: var(--fg-3); opacity: 0.7; }
+
+    .ww-wipe { position: absolute; inset: 0; overflow: hidden; }
+    .ww-wipe, .ww-wipe-in { transition: transform 1.6s var(--ease-io) 0.15s; }
+    .ww-wipe-in { position: absolute; inset: 0; }
+    .ww-trace { display: block; width: 100%; height: 100%; color: var(--fg); overflow: visible; }
+    .ww-trace path[fill='none'] { opacity: 0.85; }
+
+    .ww-sun { position: absolute; inset: 0; transform: translateX(calc(var(--ring) * 1%)); transition: transform 0.7s var(--ease-io); }
+    .ww-sun i {
+        position: absolute; left: 0; width: calc(var(--sun) * 1%); top: 50%; height: 10px; margin-top: -5px; border-radius: 0 2px 2px 0;
+        background: linear-gradient(90deg, rgba(255, 74, 61, 0.3), rgba(255, 196, 176, 0.85) 55%, rgba(255, 236, 226, 0.95));
+        -webkit-mask-image: linear-gradient(90deg, #000 75%, transparent); mask-image: linear-gradient(90deg, #000 75%, transparent);
+        transform-origin: left; transition: transform 0.9s var(--ease-out) 2.3s, opacity 0.5s var(--ease-out) 2.3s;
+    }
+
+    /* The ring marker. While it travels between ring times the script fades it out
+       (first ~30% of the move) and back in (last ~30%), so the dot never cuts across
+       empty space. The new time fades in late, once the dot has arrived. */
+    .ww-ring { position: absolute; inset: 0; pointer-events: none; transform: translateX(calc(var(--ring) * 1%)); transition: transform 0.7s var(--ease-io); }
+    .ww-ring-line {
+        position: absolute; left: -0.75px; top: -30px; bottom: 0; width: 1.5px; background: var(--red);
+        transform-origin: bottom; transition: transform 0.8s var(--ease-out) 1.5s;
+    }
+    .ww-ring-y {
+        position: absolute; left: 0; right: 0; top: 0; height: clamp(190px, 21vw, 280px);
+        transform: translateY(calc(var(--ring-y) * 1%)); transition: transform 0.7s var(--ease-io);
+    }
+    .ww-ring-dot {
+        position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%;
+        background: var(--red); box-shadow: 0 0 0 4px var(--ink-2), 0 0 0 5px var(--red-line);
+        transition: transform 0.5s var(--ease-spring) 2.1s, opacity 0.3s var(--ease-out) 2.1s;
+    }
+    .ww-ring-label {
+        position: absolute; left: 16px; top: -9px; display: flex; gap: 8px; align-items: baseline; white-space: nowrap;
+        font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-2);
+        padding: 2px 8px 2px 4px; background: linear-gradient(90deg, var(--ink-2) 70%, transparent);
+        transition: opacity 0.5s var(--ease-out) 2.25s, transform 0.5s var(--ease-out) 2.25s;
+    }
+    .ww-ring-label b { display: grid; font-weight: 500; color: var(--red); font-variant-numeric: tabular-nums; }
+    .ww-rt { grid-area: 1 / 1; opacity: 0; transition: opacity 0.15s var(--ease-out); }
+    #wwLen15:checked ~ .ww-panel .ww-rt--15, #wwLen20:checked ~ .ww-panel .ww-rt--20, #wwLen30:checked ~ .ww-panel .ww-rt--30 {
+        opacity: 1; transition: opacity 0.2s var(--ease-out) 0.38s;
+    }
+
+    #wwLen15:checked ~ .ww-panel .ww-wl--15, #wwLen20:checked ~ .ww-panel .ww-wl--20, #wwLen30:checked ~ .ww-panel .ww-wl--30 { opacity: 1; }
+    .ww-cap { display: none; }
+    #wwLen15:checked ~ .ww-panel .ww-cap--15, #wwLen20:checked ~ .ww-panel .ww-cap--20, #wwLen30:checked ~ .ww-panel .ww-cap--30 { display: inline; }
+
+    /* Axis */
+    .ww-axis { position: relative; height: 40px; color: var(--fg-3); }
+    .ww-ticks { display: block; width: 100%; height: 10px; }
+    .ww-ticks line { opacity: 0.55; }
+    .ww-ticks line.is-major { opacity: 1; }
+    .ww-axis-t {
+        position: absolute; top: 16px; left: calc(var(--x) * 1%); transform: translateX(-50%);
+        display: grid; justify-items: center; font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3);
+        font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .ww-axis-t.is-alarm { color: var(--fg); }
+    .ww-axis-t small { font-size: 11.5px; color: var(--fg-3); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+
+    .ww-fig-cap {
+        display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 16px clamp(24px, 4vw, 64px);
+        margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.55; color: var(--fg-3);
+    }
+    .ww-fig-cap--solo { grid-template-columns: minmax(0, 1fr); }
+    .ww-fig-cap-in { display: block; max-width: 70ch; }
+    .ww-fig-cap-sun { display: block; color: var(--fg-2); max-width: 46ch; }
+    .ww-fig-cap-sun strong { font-weight: 600; }
+    @media (max-width: 760px) { .ww-fig-cap { grid-template-columns: minmax(0, 1fr); } }
+
+    /* Reveal choreography (plays once when the panel enters) */
+    :global(html.js) .ww-box:not(.is-in) .ww-wipe { transform: translateX(-100%); }
+    :global(html.js) .ww-box:not(.is-in) .ww-wipe-in { transform: translateX(100%); }
+    :global(html.js) .ww-box:not(.is-in) .ww-sun i { transform: scaleX(0); opacity: 0; }
+    :global(html.js) .ww-box:not(.is-in) .ww-ring-line { transform: scaleY(0); }
+    :global(html.js) .ww-box:not(.is-in) .ww-ring-dot { transform: scale(0.4); opacity: 0; }
+    :global(html.js) .ww-box:not(.is-in) .ww-ring-label { transform: translateX(-6px); opacity: 0; }
+    /* After the first play, option changes move straight away */
+    .ww-box.is-played .ww-sun i, .ww-box.is-played .ww-ring-line,
+    .ww-box.is-played .ww-ring-dot, .ww-box.is-played .ww-ring-label { transition-delay: 0s; }
+
+    @media (max-width: 760px) {
+        .ww-fig-grid { padding-left: 0; }
+        .ww-lane-in {
+            right: auto; left: 0; top: 8px; width: auto; flex-direction: row; align-items: center; gap: 8px; font-size: 11.5px; letter-spacing: 0.08em;
+            padding: 2px 8px 2px 0; background: var(--ink-2); border-radius: 0 6px 6px 0;
+        }
+        .ww-lane-in em { font-size: 11.5px; padding: 3px 7px; }
+        .ww-lane--sun .ww-lane-in { top: 6px; transform: none; }
+        .ww-lane--sun { height: 56px; }
+        .ww-sun i { top: auto; bottom: 10px; margin-top: 0; height: 8px; }
+        .ww-lane--move { height: 220px; }
+        .ww-ring-y { height: 220px; }
+        .ww-ring-line { top: 0; }
+        .ww-axis-t.is-minor { display: none; }
+        .ww-bar { flex-direction: column; align-items: flex-start; }
+    }
+    /* Below 360px the control and both labels no longer fit; the bracket still says "window" */
+    @media (max-width: 359px) { .ww-seg-k--lead { display: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ww-band, .ww-edge, .ww-bracket-line, .ww-wipe, .ww-wipe-in, .ww-sun, .ww-sun i, .ww-ring, .ww-ring-line, .ww-ring-y,
+        .ww-ring-dot, .ww-ring-label, .ww-rt, .ww-seg-thumb { transition: none !important; }
+    }
+</style>
+
+<script>
+    document.querySelectorAll<HTMLElement>('[data-ww]').forEach((box) => {
+        // Mark the diagram as played once its entrance has run, so later option changes
+        // respond at once instead of replaying the staged delays.
+        const played = () => box.classList.add('is-played');
+        const mo = new MutationObserver(() => {
+            if (!box.classList.contains('is-in')) return;
+            mo.disconnect();
+            window.setTimeout(played, 2800);
+        });
+        mo.observe(box, { attributes: true, attributeFilter: ['class'] });
+
+        // Fade the ring marker out over the first 30% of a move and back in over the
+        // last 30%. Skipped when the ring time does not change (20 and 30 minutes ring
+        // at the same moment) and when reduced motion is on (the marker jumps).
+        const ring = box.querySelector<HTMLElement>('.ww-ring');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let current = box.querySelector<HTMLInputElement>('.ww-in:checked')?.dataset.ring;
+        let hop: Animation | undefined;
+        box.addEventListener('change', (e) => {
+            const input = e.target as HTMLInputElement;
+            if (!input.classList.contains('ww-in')) return;
+            const moved = input.dataset.ring !== current;
+            current = input.dataset.ring;
+            if (box.classList.contains('is-in')) played();
+            if (!moved || !ring || reduce.matches || typeof ring.animate !== 'function') return;
+            hop?.cancel();
+            hop = ring.animate(
+                [{ opacity: 1 }, { opacity: 0, offset: 0.3 }, { opacity: 0, offset: 0.7 }, { opacity: 1 }],
+                { duration: 700 },
+            );
+        });
+    });
+</script>

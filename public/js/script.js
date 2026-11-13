@@ -1,614 +1,143 @@
-// ===== Nooze Website - Main Script =====
+// ===== Nooze website: global script =====
+// Nav, mobile menu, scroll reveals, back-to-top, FAQ accordion.
 
-// --- Page Pixelation Transition ---
-(function initPageTransition() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    var PIXEL = 20;
-    var WAVE_DURATION = 280;
-    var PIXEL_ANIM = 100;
-    var BG_COLORS = ['#050510', '#060614', '#070718', '#08081c', '#0a0a1a', '#0b0b1e'];
-    var ACCENTS = ['rgba(0,188,212,0.5)', 'rgba(14,116,144,0.4)', 'rgba(59,130,246,0.35)'];
-
-    function pickColor() {
-        if (Math.random() < 0.07) return ACCENTS[Math.floor(Math.random() * ACCENTS.length)];
-        return BG_COLORS[Math.floor(Math.random() * BG_COLORS.length)];
-    }
-
-    function makeCanvas() {
-        var c = document.createElement('canvas');
-        c.id = 'pixelTransition';
-        c.width = window.innerWidth;
-        c.height = window.innerHeight;
-        document.body.appendChild(c);
-        return c;
-    }
-
-    function buildGrid(ox, oy, w, h) {
-        var cols = Math.ceil(w / PIXEL);
-        var rows = Math.ceil(h / PIXEL);
-        var maxDist = Math.sqrt(w * w + h * h);
-        var grid = [];
-        for (var r = 0; r < rows; r++) {
-            for (var c = 0; c < cols; c++) {
-                var cx = c * PIXEL + PIXEL / 2;
-                var cy = r * PIXEL + PIXEL / 2;
-                var d = Math.sqrt((cx - ox) * (cx - ox) + (cy - oy) * (cy - oy));
-                grid.push({
-                    x: c * PIXEL,
-                    y: r * PIXEL,
-                    delay: (d / maxDist) * WAVE_DURATION + Math.random() * 25,
-                    color: pickColor()
-                });
-            }
-        }
-        return grid;
-    }
-
-    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-    function easeIn(t) { return t * t * t; }
-
-    // EXIT: pixels grow in from click point, then navigate
-    function animateExit(originX, originY, url) {
-        var canvas = makeCanvas();
-        var ctx = canvas.getContext('2d');
-        var grid = buildGrid(originX, originY, canvas.width, canvas.height);
-        var start = performance.now();
-
-        function draw(now) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            var elapsed = now - start;
-            var done = true;
-
-            for (var i = 0; i < grid.length; i++) {
-                var p = grid[i];
-                var local = elapsed - p.delay;
-                if (local <= 0) { done = false; continue; }
-                var t = Math.min(1, local / PIXEL_ANIM);
-                t = easeOut(t);
-                if (t < 1) done = false;
-                var sz = PIXEL * t;
-                var off = (PIXEL - sz) / 2;
-                ctx.globalAlpha = t;
-                ctx.fillStyle = p.color;
-                ctx.fillRect(p.x + off, p.y + off, sz, sz);
-            }
-
-            if (!done) {
-                requestAnimationFrame(draw);
-            } else {
-                // Fill solid to prevent gaps
-                ctx.globalAlpha = 1;
-                for (var i = 0; i < grid.length; i++) {
-                    ctx.fillStyle = grid[i].color;
-                    ctx.fillRect(grid[i].x, grid[i].y, PIXEL, PIXEL);
-                }
-                sessionStorage.setItem('nooze_pixel_transition', '1');
-                window.location.href = url;
-            }
-        }
-
-        requestAnimationFrame(draw);
-    }
-
-    // ENTER: pixels shrink out from center, revealing the page
-    function animateEnter() {
-        var canvas = makeCanvas();
-        var ctx = canvas.getContext('2d');
-        var ox = canvas.width / 2;
-        var oy = canvas.height / 2;
-        var grid = buildGrid(ox, oy, canvas.width, canvas.height);
-
-        // Draw initial solid cover
-        for (var i = 0; i < grid.length; i++) {
-            ctx.fillStyle = grid[i].color;
-            ctx.fillRect(grid[i].x, grid[i].y, PIXEL, PIXEL);
-        }
-
-        // Reveal body (hidden by inline head script to prevent flash)
-        document.body.style.visibility = 'visible';
-        var hideStyle = document.getElementById('pxl-hide');
-        if (hideStyle) hideStyle.remove();
-
-        var start = performance.now();
-
-        function draw(now) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            var elapsed = now - start;
-            var alive = false;
-
-            for (var i = 0; i < grid.length; i++) {
-                var p = grid[i];
-                var local = elapsed - p.delay;
-                if (local <= 0) {
-                    ctx.globalAlpha = 1;
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(p.x, p.y, PIXEL, PIXEL);
-                    alive = true;
-                    continue;
-                }
-                var t = Math.min(1, local / PIXEL_ANIM);
-                t = easeIn(t);
-                if (t >= 1) continue; // fully gone
-                alive = true;
-                var alpha = 1 - t;
-                var sz = PIXEL * (1 - t);
-                var off = (PIXEL - sz) / 2;
-                ctx.globalAlpha = alpha;
-                ctx.fillStyle = p.color;
-                ctx.fillRect(p.x + off, p.y + off, sz, sz);
-            }
-
-            if (alive) {
-                requestAnimationFrame(draw);
-            } else {
-                canvas.remove();
-            }
-        }
-
-        // Tiny delay so the page content renders underneath
-        requestAnimationFrame(function() {
-            start = performance.now();
-            requestAnimationFrame(draw);
-        });
-    }
-
-    // If arriving from a transition, play the enter animation immediately
-    if (sessionStorage.getItem('nooze_pixel_transition')) {
-        sessionStorage.removeItem('nooze_pixel_transition');
-        animateEnter();
-    }
-
-    var leaving = false;
-
-    // A page restored from the back/forward cache comes back exactly as it was
-    // left: still covered by the exit animation's canvas. Clear it.
-    window.addEventListener('pageshow', function(e) {
-        if (!e.persisted) return;
-        leaving = false;
-        var cover = document.getElementById('pixelTransition');
-        if (cover) cover.remove();
-        var hideStyle = document.getElementById('pxl-hide');
-        if (hideStyle) hideStyle.remove();
-        document.body.style.visibility = 'visible';
-        try { sessionStorage.removeItem('nooze_pixel_transition'); } catch (err) {}
-    });
-
-    // "features.html", "/features", "/" and "index.html" name pages the same way.
-    function pageKey(path) {
-        var p = (path || '').split('#')[0].split('?')[0].split('/').pop();
-        return (p || 'index.html').replace(/\.html$/, '');
-    }
-
-    // Intercept internal nav links after DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
-        var links = document.querySelectorAll('a[href]');
-        var currentPage = pageKey(window.location.pathname);
-
-        links.forEach(function(link) {
-            var href = link.getAttribute('href');
-            if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
-            if (!href.endsWith('.html') && href !== '/') return;
-            if (pageKey(href) === currentPage) return;
-            if (link.target && link.target !== '_self') return;
-
-            link.addEventListener('click', function(e) {
-                // New-tab / new-window / download clicks belong to the browser.
-                if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-                e.preventDefault();
-                if (leaving) return;
-                leaving = true;
-                var rect = link.getBoundingClientRect();
-                var ox = rect.left + rect.width / 2;
-                var oy = rect.top + rect.height / 2;
-                animateExit(ox, oy, href);
-            });
-        });
-    });
-})();
-
-// --- Particle Canvas ---
-(function initParticles() {
-    var canvas = document.getElementById('particles');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var particles = [];
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    function createParticle() {
-        return {
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 2 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.3,
-            speedY: (Math.random() - 0.5) * 0.3,
-            opacity: Math.random() * 0.5 + 0.1,
-            pulse: Math.random() * Math.PI * 2
-        };
-    }
-
-    // Create initial particles
-    var count = Math.min(80, Math.floor(window.innerWidth / 20));
-    for (var i = 0; i < count; i++) {
-        particles.push(createParticle());
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(function(p) {
-            p.x += p.speedX;
-            p.y += p.speedY;
-            p.pulse += 0.01;
-
-            // Wrap around
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-
-            var alpha = p.opacity * (0.7 + 0.3 * Math.sin(p.pulse));
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 188, 212, ' + Math.min(alpha, 1) + ')';
-            ctx.fill();
-        });
-
-        // Draw connections between close particles
-        for (var i = 0; i < particles.length; i++) {
-            for (var j = i + 1; j < particles.length; j++) {
-                var dx = particles[i].x - particles[j].x;
-                var dy = particles[i].y - particles[j].y;
-                var dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = 'rgba(0, 188, 212, ' + (0.05 * (1 - dist / 120)) + ')';
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
-
-        requestAnimationFrame(animate);
-    }
-
-    // Only animate if user hasn't opted for reduced motion
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        animate();
-    }
-})();
-
-// --- DOM Ready ---
-document.addEventListener('DOMContentLoaded', function() {
-
-    // --- Scroll Reveal ---
-    var revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    // A bottom inset instead of a visible-fraction threshold: a fraction can never
-    // be reached by an element taller than ~10 viewports (long documents, large
-    // text settings), which would leave it invisible for good.
-    var revealObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
-
-    revealElements.forEach(function(el) {
-        revealObserver.observe(el);
-    });
-
-    // --- Mobile Menu ---
-    var mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenu.id = mobileMenu.id || 'mobileMenu';
-        mobileMenuBtn.setAttribute('aria-controls', mobileMenu.id);
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        var menuIcon = mobileMenuBtn.querySelector('path');
-        var ICON_OPEN = 'M4 6h16M4 12h16M4 18h16';
-        var ICON_CLOSE = 'M6 6l12 12M18 6L6 18';
-        var setMenu = function(open) {
-            mobileMenu.classList.toggle('hidden', !open);
-            mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            if (menuIcon) menuIcon.setAttribute('d', open ? ICON_CLOSE : ICON_OPEN);
-        };
-        mobileMenuBtn.addEventListener('click', function() {
-            setMenu(mobileMenu.classList.contains('hidden'));
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                setMenu(false);
-                mobileMenuBtn.focus();
-            }
-        });
-        // pointerdown, not click: iOS doesn't send clicks for taps on plain content.
-        document.addEventListener('pointerdown', function(e) {
-            if (mobileMenu.classList.contains('hidden')) return;
-            if (mobileMenu.contains(e.target) || mobileMenuBtn.contains(e.target)) return;
-            setMenu(false);
-        });
-        window.matchMedia('(min-width: 768px)').addEventListener('change', function(e) {
-            if (e.matches) setMenu(false);
-        });
-    }
-
-    // --- FAQ Accordion ---
-    document.querySelectorAll('.faq-question').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var item = btn.closest('.faq-item');
-            var wasOpen = item.classList.contains('open');
-
-            // Close all
-            document.querySelectorAll('.faq-item').forEach(function(i) {
-                i.classList.remove('open');
-                i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                var a = i.querySelector('.faq-answer');
-                if (a) a.style.maxHeight = '';
-            });
-
-            // Toggle current, opening to the answer's real height (+ its 24px bottom
-            // padding) so long answers and large text settings never get clipped.
-            if (!wasOpen) {
-                item.classList.add('open');
-                btn.setAttribute('aria-expanded', 'true');
-                fitFaqAnswer(item);
-            }
-        });
-    });
-
-    function fitFaqAnswer(item) {
-        var answer = item && item.querySelector('.faq-answer');
-        if (answer) answer.style.maxHeight = (answer.scrollHeight + 24) + 'px';
-    }
-    window.addEventListener('resize', function() {
-        fitFaqAnswer(document.querySelector('.faq-item.open'));
-    });
-
-    // --- Back to Top ---
-    var backToTopBtn = document.getElementById('backToTop');
-    if (backToTopBtn) {
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 400) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-
-        backToTopBtn.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // --- Smooth Scroll for Anchor Links ---
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            var href = anchor.getAttribute('href');
-            if (href !== '#' && href.length > 1) {
-                var target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }
-        });
-    });
-
-    // --- Navbar scroll effect ---
-    var nav = document.querySelector('nav');
-    if (nav) {
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 20) {
-                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
-            } else {
-                nav.style.boxShadow = '';
-            }
-        });
-    }
-
-    // --- Holo Card: cursor-tracked spotlight + 3D tilt ---
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduceMotion) {
-        var coarse = window.matchMedia('(pointer: coarse)').matches;
-
-        document.querySelectorAll('.holo-card').forEach(function(card) {
-            var inner = card.querySelector('.holo-card-inner') || card;
-            card.addEventListener('pointermove', function(e) {
-                var r = card.getBoundingClientRect();
-                var x = ((e.clientX - r.left) / r.width) * 100;
-                var y = ((e.clientY - r.top) / r.height) * 100;
-                inner.style.setProperty('--mx', x + '%');
-                inner.style.setProperty('--my', y + '%');
-            });
-        });
-
-        if (!coarse) {
-            document.querySelectorAll('.tilt').forEach(function(el) {
-                var rect;
-                el.addEventListener('pointerenter', function() {
-                    rect = el.getBoundingClientRect();
-                });
-                el.addEventListener('pointermove', function(e) {
-                    if (!rect) rect = el.getBoundingClientRect();
-                    var px = (e.clientX - rect.left) / rect.width - 0.5;
-                    var py = (e.clientY - rect.top) / rect.height - 0.5;
-                    var rx = (-py * 8).toFixed(2);
-                    var ry = (px * 10).toFixed(2);
-                    el.style.transform = 'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
-                });
-                el.addEventListener('pointerleave', function() {
-                    el.style.transform = '';
-                });
-            });
-        }
-    }
-
-    // --- Animated Counters ---
-    var counters = document.querySelectorAll('[data-counter]');
-    if (counters.length) {
-        var counterObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (!entry.isIntersecting) return;
-                var el = entry.target;
-                if (el.dataset.counted) return;
-                el.dataset.counted = '1';
-
-                var target = parseFloat(el.dataset.counter);
-                var decimals = parseInt(el.dataset.decimals || '0', 10);
-                var dur = parseInt(el.dataset.duration || '1500', 10);
-                var start = performance.now();
-
-                function tick(now) {
-                    var t = Math.min(1, (now - start) / dur);
-                    var eased = 1 - Math.pow(1 - t, 3);
-                    var v = target * eased;
-                    el.textContent = decimals > 0 ? v.toFixed(decimals) : Math.round(v).toString();
-                    if (t < 1) requestAnimationFrame(tick);
-                    else el.textContent = decimals > 0 ? target.toFixed(decimals) : Math.round(target).toString();
-                }
-                requestAnimationFrame(tick);
-                counterObs.unobserve(el);
-            });
-        }, { threshold: 0.4 });
-
-        counters.forEach(function(el) { counterObs.observe(el); });
-    }
-});
-
-// --- Custom Cursor (dot + trailing ring) ---
-(function initCursor() {
-    if (!window.matchMedia('(pointer: fine)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
+(function () {
     var root = document.documentElement;
-    var dot = document.createElement('div');
-    var ring = document.createElement('div');
-    dot.className = 'nz-cursor-dot';
-    ring.className = 'nz-cursor-ring';
-    dot.setAttribute('aria-hidden', 'true');
-    ring.setAttribute('aria-hidden', 'true');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // The native cursor is only hidden (nz-cursor-on) once the custom one has a
-    // position, on the first mousemove; otherwise a still mouse shows nothing.
-    function mount() {
-        document.body.appendChild(dot);
-        document.body.appendChild(ring);
+    function ready(fn) {
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+        else fn();
     }
-    if (document.body) mount();
-    else document.addEventListener('DOMContentLoaded', mount);
 
-    var x = window.innerWidth / 2;
-    var y = window.innerHeight / 2;
-    var rx = x, ry = y;
-    var scale = 1, targetScale = 1;
-    var pressed = false;
-    var shown = false;
-
-    var HOVER_SELECTOR = 'a, button, [role="button"], label, summary, .cursor-pointer';
-    var SUPPRESS_SELECTOR = 'input, textarea, select';
-
-    document.addEventListener('mousemove', function(e) {
-        x = e.clientX;
-        y = e.clientY;
-        dot.style.setProperty('--nzcx', x + 'px');
-        dot.style.setProperty('--nzcy', y + 'px');
-        if (!shown) {
-            shown = true;
-            rx = x; ry = y;
-            dot.classList.add('is-visible');
-            ring.classList.add('is-visible');
-            root.classList.add('nz-cursor-on');
+    ready(function () {
+        // --- Scroll reveal (.nz-reveal, plus legacy .reveal*) ---
+        // [data-stagger] staggers its .nz-reveal children by index.
+        document.querySelectorAll('[data-stagger]').forEach(function (group) {
+            group.querySelectorAll('.nz-reveal').forEach(function (el, i) {
+                if (!el.style.getPropertyValue('--d')) el.style.setProperty('--d', String(i));
+            });
+        });
+        var revealEls = document.querySelectorAll('.nz-reveal, .reveal, .reveal-left, .reveal-right, .reveal-scale');
+        if (reduce || !('IntersectionObserver' in window)) {
+            revealEls.forEach(function (el) { el.classList.add('is-in', 'visible'); });
+        } else {
+            // A bottom inset, not a visible fraction: very tall elements still trigger.
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    e.target.classList.add('is-in', 'visible');
+                    io.unobserve(e.target);
+                });
+            }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+            revealEls.forEach(function (el) { io.observe(el); });
         }
-        wake();
-    }, { passive: true });
 
-    document.addEventListener('mouseover', function(e) {
-        var t = e.target;
-        if (!(t instanceof Element)) return;
-        var suppress = t.closest(SUPPRESS_SELECTOR);
-        dot.classList.toggle('is-suppressed', !!suppress);
-        ring.classList.toggle('is-suppressed', !!suppress);
-        var hover = !suppress && t.closest(HOVER_SELECTOR);
-        targetScale = hover ? 1.45 : 1;
-        ring.classList.toggle('is-hover', !!hover);
-        wake();
-    });
-
-    document.addEventListener('mousedown', function() { pressed = true; wake(); });
-    document.addEventListener('mouseup', function() { pressed = false; wake(); });
-
-    document.addEventListener('mouseleave', function() {
-        dot.classList.remove('is-visible');
-        ring.classList.remove('is-visible');
-        root.classList.remove('nz-cursor-on');
-        shown = false;
-    });
-
-    // Ring easing loop. It sleeps once the ring has caught up with the dot, so an
-    // idle mouse costs nothing per frame; any pointer activity wakes it.
-    var raf = 0;
-    function wake() { if (!raf) raf = requestAnimationFrame(loop); }
-    function loop() {
-        rx += (x - rx) * 0.18;
-        ry += (y - ry) * 0.18;
-        var goal = pressed ? targetScale * 0.85 : targetScale;
-        scale += (goal - scale) * 0.2;
-        ring.style.setProperty('--nzrx', rx.toFixed(1) + 'px');
-        ring.style.setProperty('--nzry', ry.toFixed(1) + 'px');
-        ring.style.setProperty('--nzrs', scale.toFixed(3));
-        var settled = Math.abs(x - rx) < 0.1 && Math.abs(y - ry) < 0.1 && Math.abs(goal - scale) < 0.001;
-        raf = settled ? 0 : requestAnimationFrame(loop);
-    }
-})();
-
-// --- Launch Ribbon (sitewide) ---
-(function initLaunchBar() {
-    var KEY = 'nooze_launch_bar_dismissed';
-    function setup() {
-        var bar = document.getElementById('launchBar');
-        if (!bar) return;
-        try {
-            if (sessionStorage.getItem(KEY) === '1') {
-                bar.parentNode && bar.parentNode.removeChild(bar);
-                return;
+        // --- Nav: denser glass once the page scrolls ---
+        var nav = document.querySelector('[data-nav]');
+        var topBtn = document.getElementById('backToTop');
+        // Phone download dock: shows once the hero button has scrolled away,
+        // hides while the closing CTA or the footer is on screen.
+        var dock = document.querySelector('[data-dock]');
+        var heroBtn = document.querySelector('.hx .nz-btn');
+        var heroVis = !!heroBtn;
+        var blockers = document.querySelectorAll('.nz-cta, .nz-footer');
+        var blocked = new Map();
+        if (dock && 'IntersectionObserver' in window) {
+            var dockIo = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.target === heroBtn) heroVis = e.isIntersecting;
+                    else blocked.set(e.target, e.isIntersecting);
+                });
+                onScroll();
+            });
+            if (heroBtn) dockIo.observe(heroBtn);
+            blockers.forEach(function (el) { dockIo.observe(el); });
+        }
+        var ticking = false;
+        function onScroll() {
+            ticking = false;
+            var y = window.scrollY || window.pageYOffset;
+            if (nav) nav.classList.toggle('is-scrolled', y > 24);
+            if (topBtn) topBtn.classList.toggle('is-on', y > 900);
+            if (dock) {
+                var past = heroBtn ? !heroVis && y > 200 : y > 480;
+                var hidden = false;
+                blocked.forEach(function (v) { if (v) hidden = true; });
+                dock.classList.toggle('is-on', past && !hidden);
             }
-        } catch (e) {}
-        document.body.classList.add('launch-bar-visible');
-
-        // Keep the nav/hero offset in sync with the real ribbon height so a
-        // longer message (or a narrow screen) never overlaps the navbar.
-        function syncHeight() {
-            document.documentElement.style.setProperty('--launch-bar-h', bar.offsetHeight + 'px');
         }
-        syncHeight();
-        window.addEventListener('resize', syncHeight);
+        window.addEventListener('scroll', function () {
+            if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+        }, { passive: true });
+        onScroll();
+        if (topBtn) topBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        });
 
-        window.__dismissLaunchBar = function() {
-            try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
-            document.body.classList.remove('launch-bar-visible');
-            bar.style.transition = 'transform 0.35s ease, opacity 0.35s ease';
-            bar.style.transform = 'translateY(-110%)';
-            bar.style.opacity = '0';
-            setTimeout(function() {
-                bar.parentNode && bar.parentNode.removeChild(bar);
-            }, 360);
-        };
-    }
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setup);
-    } else {
-        setup();
-    }
+        // --- Mobile menu ---
+        var burger = document.querySelector('[data-burger]');
+        var menu = document.querySelector('[data-menu]');
+        if (burger && menu) {
+            var focusables = menu.querySelectorAll('a');
+            // While the menu is open, everything behind it is out of reach (focus stays in the menu).
+            var behind = document.querySelectorAll('#main, .nz-footer, #backToTop, [data-dock], .nz-skip');
+            var setMenu = function (open) {
+                root.classList.toggle('nz-menu-open', open);
+                behind.forEach(function (el) { el.inert = open; });
+                burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+                burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+                focusables.forEach(function (a) { a.tabIndex = open ? 0 : -1; });
+                if (open && focusables[0]) setTimeout(function () { focusables[0].focus({ preventScroll: true }); }, 60);
+            };
+            burger.addEventListener('click', function () {
+                setMenu(!root.classList.contains('nz-menu-open'));
+            });
+            menu.addEventListener('click', function (e) {
+                if (e.target.closest('a')) setMenu(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && root.classList.contains('nz-menu-open')) {
+                    setMenu(false);
+                    burger.focus();
+                }
+            });
+            window.matchMedia('(min-width: 861px)').addEventListener('change', function (e) {
+                if (e.matches) setMenu(false);
+            });
+        }
+
+        // --- FAQ accordion (legacy .faq-item markup) ---
+        function fitFaqAnswer(item) {
+            var answer = item && item.querySelector('.faq-answer');
+            if (answer) answer.style.maxHeight = (answer.scrollHeight + 24) + 'px';
+        }
+        document.querySelectorAll('.faq-question').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var item = btn.closest('.faq-item');
+                var wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(function (i) {
+                    i.classList.remove('open');
+                    var q = i.querySelector('.faq-question');
+                    if (q) q.setAttribute('aria-expanded', 'false');
+                    var a = i.querySelector('.faq-answer');
+                    if (a) a.style.maxHeight = '';
+                });
+                if (!wasOpen) {
+                    item.classList.add('open');
+                    btn.setAttribute('aria-expanded', 'true');
+                    fitFaqAnswer(item);
+                }
+            });
+        });
+        window.addEventListener('resize', function () {
+            fitFaqAnswer(document.querySelector('.faq-item.open'));
+        });
+
+        // --- Legacy counters: show the final value (no count-up) ---
+        document.querySelectorAll('[data-counter]').forEach(function (el) {
+            var d = parseInt(el.dataset.decimals || '0', 10);
+            el.textContent = parseFloat(el.dataset.counter).toFixed(d);
+        });
+    });
 })();

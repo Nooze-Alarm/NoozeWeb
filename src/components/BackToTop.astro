@@ -1,6 +1,11 @@
 ---
-// Scroll-to-top button; visibility toggled by the global script.
+// Desktop: scroll-to-top button. Phones (<=760px): a docked Google Play pill instead.
+// Visibility of both is toggled by the global script.
+import PlayButton from './PlayButton.astro';
 ---
-<button id="backToTop" class="back-to-top" aria-label="Back to top">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+<button id="backToTop" class="nz-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13.5V2.5M3.5 7 8 2.5 12.5 7" /></svg>
 </button>
+<div class="nz-dock" data-dock>
+    <PlayButton />
+</div>

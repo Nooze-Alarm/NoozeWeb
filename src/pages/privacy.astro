@@ -1,10 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+// Section list drives both the h2s and the table of contents (`toc` is an optional shorter label).
+const sections = [
+    { id: 'on-device', title: 'Data that stays on your device' },
+    { id: 'cloud', title: 'Data stored in the cloud when you have an account', toc: 'Cloud data with an account' },
+    { id: 'health-connect', title: 'Health Connect' },
+    { id: 'microphone', title: 'Microphone' },
+    { id: 'camera', title: 'Camera' },
+    { id: 'analytics', title: 'Analytics, crash and error reports' },
+    { id: 'providers', title: 'Service providers' },
+    { id: 'legal-basis', title: 'Why we process your data (GDPR)' },
+    { id: 'security', title: 'Security' },
+    { id: 'retention', title: 'How long we keep data' },
+    { id: 'deletion', title: 'Deleting your account and data' },
+    { id: 'rights', title: 'Your rights' },
+    { id: 'children', title: 'Children' },
+    { id: 'medical', title: 'Medical disclaimer' },
+    { id: 'changes', title: 'Changes to this policy' },
+    { id: 'contact', title: 'Contact' },
+];
+const pad = (i) => String(i + 1).padStart(2, '0');
+const idx = (id) => sections.findIndex((s) => s.id === id);
+const n = (id) => pad(idx(id));
+const t = (id) => sections[idx(id)].title;
 ---
 <BaseLayout
-    title={"Privacy Policy – Nooze Sleep Tracker &amp; Alarm"}
+    title={"Privacy policy | Nooze Alarm"}
     description={"How Nooze collects, uses and protects your data. Sleep, sensor, microphone and Health Connect data stay on your device."}
-    keywords={"contact nooze, nooze support, nooze alarm help, nooze privacy policy, nooze terms and conditions"}
+    keywords={"nooze privacy policy, nooze data, sleep tracker privacy, health connect privacy, nooze gdpr"}
     canonical={"privacy.html"}
 >
 
@@ -12,176 +37,298 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Privacy Policy\",\"item\":\"https://noozealarm.com/privacy.html\"}]}"} />
   </Fragment>
 
-<main class="flex-1 pt-16">
-        <section class="hero-bg pt-32 pb-16 relative overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid"></div>
-            <div class="orb orb-1"></div>
-            <div class="scanlines"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Your data, your control</span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">Privacy <span class="iris-text">Policy</span></h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">What we collect, what stays on your device, and your rights under the GDPR.</p>
+<main id="main" class="flex-1">
+    <PageHeader
+        compact
+        title="Privacy policy"
+        lede="What Nooze Sleep Tracker &amp; Alarm collects, what stays on your device, and your rights under the GDPR."
+    >
+        <dl class="legal-meta">
+            <div><dt>Last updated</dt><dd><time datetime="2026-10-23">October 23, 2026</time></dd></div>
+            <div><dt>Applies to</dt><dd>com.noozealarm.app</dd></div>
+            <div><dt>Contact</dt><dd><a class="nz-link" href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a></dd></div>
+        </dl>
+    </PageHeader>
+
+    <div class="nz-container legal">
+        <aside class="legal-aside">
+            <nav class="legal-toc" aria-label="Contents" data-spy>
+                <p class="nz-meta legal-toc-label">Contents</p>
+                <ol>
+                    {sections.map((s, i) => (
+                        <li><a href={`#${s.id}`}><span class="legal-toc-n">{pad(i)}</span><span>{s.toc ?? s.title}</span></a></li>
+                    ))}
+                </ol>
+            </nav>
+        </aside>
+
+        <details class="legal-toc-m">
+            <summary><span>Contents</span><span class="legal-toc-m-count">{sections.length} sections</span><span class="legal-toc-m-icon" aria-hidden="true"></span></summary>
+            <nav aria-label="Contents">
+                <ol>
+                    {sections.map((s, i) => (
+                        <li><a href={`#${s.id}`}><span class="legal-toc-n">{pad(i)}</span><span>{s.toc ?? s.title}</span></a></li>
+                    ))}
+                </ol>
+            </nav>
+        </details>
+
+        <article class="nz-prose legal-body" id="privacy">
+            <p>This policy covers the Android app “Nooze Sleep Tracker &amp; Alarm” (package <code>com.noozealarm.app</code>), referred to below as “Nooze” or “the app”. Nooze is developed and operated by an independent developer based in Bulgaria (“we”). It explains what data the app handles, where that data lives, and what you can do about it.</p>
+
+            <div class="legal-summary">
+                <p><strong>In short:</strong> your sleep data, sensor data, microphone audio, Health Connect data, alarms and journal text stay on your phone and are never uploaded. If you create an account, we store your profile, your game progress (XP, achievements, quests) and your social activity (friends, wake duels) so they work across devices and with friends. We do not show ads and we do not sell data.</p>
             </div>
-        </section>
 
-        <div class="section-divider"></div>
+            <section class="legal-sec" id="on-device">
+                <h2><span class="sec-n">{n('on-device')}</span>{t('on-device')}</h2>
+                <p>The following is stored only on your phone, in a database encrypted with SQLCipher (AES-256). It is not sent to us or to anyone else:</p>
+                <ul>
+                    <li>Sleep sessions: bedtime, wake time, duration, estimated sleep phases, the approximate sleep quality score, snore and noise event counts, and your notes</li>
+                    <li>Movement data from the accelerometer</li>
+                    <li>Microphone sound levels, and the short clips saved when a snore or noise event is detected</li>
+                    <li>Data read from Health Connect (see section 3)</li>
+                    <li>Your alarms and their settings</li>
+                    <li>Journal entries: mood, energy, notes, dreams and tags</li>
+                    <li>Photos taken for the photo wake-up challenge, which are kept briefly in the app’s cache and then deleted</li>
+                    <li>Smart home connection details and access tokens</li>
+                    <li>Calendar data, if you turn on the calendar features: the app reads your phone’s calendar to skip alarms on public holidays, ring earlier on busy days and mention your first event in the morning briefing. Only holiday dates and the start time of each day’s first event are cached on your device</li>
+                    <li>Your morning routine checklist and the city you chose for the morning briefing</li>
+                </ul>
+                <p>This data is removed when you clear the app’s data or uninstall the app.</p>
+            </section>
 
-        <section class="py-20" id="privacy">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="holo-card"><div class="holo-card-inner" style="padding:40px;">
-                    <h2 class="text-2xl font-bold text-white mb-6">Privacy Policy for Nooze Sleep Tracker &amp; Alarm</h2>
-                    <p class="text-gray-500 text-sm mb-6">Last updated: October 23, 2026</p>
-                    <div class="space-y-6 text-gray-400 text-sm leading-relaxed">
-<p class="mt-2">This policy covers the Android app "Nooze Sleep Tracker &amp; Alarm" (package <code class="text-gray-300">com.noozealarm.app</code>), referred to below as "Nooze" or "the app". Nooze is developed and operated by an independent developer based in Bulgaria ("we"). It explains what data the app handles, where that data lives, and what you can do about it.</p>
+            <section class="legal-sec" id="cloud">
+                <h2><span class="sec-n">{n('cloud')}</span>{t('cloud')}</h2>
+                <p>You can use Nooze as a guest, in which case nothing in this section applies. If you create an account, the following is stored in Google Firebase:</p>
+                <ul class="defs">
+                    <li><strong>Account:</strong> email address, display name, optional username and avatar. If you use Google Sign-In, we receive your name and email from Google. Passwords are handled by Firebase Authentication; the app also keeps a bcrypt hash on your device, never the password itself.</li>
+                    <li><strong>Profile choices:</strong> selected theme, background, title and avatar.</li>
+                    <li><strong>Game progress:</strong> level, XP and the list of XP awards, streaks, unlocked achievements and completed quests. These are calculated on your device from your activity in the app, for example dismissing an alarm on time or tracking a night. The underlying sleep measurements are not uploaded.</li>
+                    <li><strong>Social:</strong> friend requests and friendships, wake duels and their scores, and activity feed entries such as “reached level 5”. Feed entries are deleted automatically after 14 days.</li>
+                    <li><strong>Leaderboards:</strong> your display name, avatar, level and score on the XP, streak and achievement boards.</li>
+                    <li><strong>Journal entry dates:</strong> only the date and identifier of each journal entry, so that an entry’s place can be restored after you sign in again. The content of the entry is not uploaded.</li>
+                    <li><strong>Wake-up buddy:</strong> if you ask a friend to be your wake-up buddy and they accept, we store that link. When you do not confirm a wake-up check, we record that it was missed (the time only) and send your buddy one notification that day. These records are deleted after 7 days. Either of you can end the link at any time.</li>
+                    <li><strong>Squads:</strong> the squad name, its members and invitations, and the shared streak, which our servers calculate from whether each member finished a wake-up that day.</li>
+                    <li><strong>Reports and blocks:</strong> if you report another user, we store your user ID, their user ID, where in the app you reported them (for example a leaderboard or a squad) and the reason you picked from a fixed list. There is no free-text field. Reports are kept so we can review them and act against abuse, the person you report cannot see them, and they are deleted when you delete your account. If you block someone, we store their user ID and the time in your block list. It is private: only you can see it. A person you blocked can no longer send you friend requests, wake duels, wake-up buddy or squad invitations.</li>
+                    <li><strong>Notification token:</strong> a Firebase Cloud Messaging token for your device, used only to deliver wake-up buddy notifications. It is removed when you sign out or delete your account.</li>
+                    <li><strong>Subscription:</strong> if you buy Premium, the Google Play purchase token, product, expiry date and renewal status, used to verify your subscription.</li>
+                </ul>
+                <p><strong>What other users can see:</strong> your display name, username, avatar, level, streak, selected title and background, your leaderboard position, and your public feed entries. Friends can also see wake duels you share with them. Other users cannot see your email address. Someone who already knows your exact email address, username or display name can use it to send you a friend request. Members of a squad you are in, and people you invite, see the squad name, its members and the shared streak. A wake-up buddy you chose receives your display name in the notification about a missed wake-up check.</p>
+            </section>
 
-<div class="rounded-lg border border-primary/40 p-4">
-<p class="mt-2"><strong class="text-gray-200">In short:</strong> your sleep data, sensor data, microphone audio, Health Connect data, alarms and journal text stay on your phone and are never uploaded. If you create an account, we store your profile, your game progress (XP, achievements, quests) and your social activity (friends, wake duels) so they work across devices and with friends. We do not show ads and we do not sell data.</p>
-</div>
+            <section class="legal-sec" id="health-connect">
+                <h2><span class="sec-n">{n('health-connect')}</span>{t('health-connect')}</h2>
+                <p>Connecting Health Connect is optional. If you grant access, Nooze <strong>reads</strong> two data types:</p>
+                <ul>
+                    <li><strong>Sleep sessions</strong>, including sleep stages recorded by your wearable, to build your sleep timeline and choose a lighter moment for Smart Wake</li>
+                    <li><strong>Heart rate</strong>, as an input to the approximate sleep phase estimate and to show your wearable’s latest and resting heart rate</li>
+                </ul>
+                <p>Nooze does not write any data to Health Connect. Data read from Health Connect is processed and stored on your device only. It is not uploaded, not shared with third parties, not used for advertising, and no person at Nooze can access it. You can revoke access at any time in Health Connect or in your phone’s settings, and the app keeps working with phone sensors only.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">1. Data that stays on your device</h3>
-<p class="mt-2">The following is stored only on your phone, in a database encrypted with SQLCipher (AES-256). It is not sent to us or to anyone else:</p>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li>Sleep sessions: bedtime, wake time, duration, estimated sleep phases, the approximate sleep quality score, snore and noise event counts, and your notes</li>
-    <li>Movement data from the accelerometer</li>
-    <li>Microphone sound levels, and the short clips saved when a snore or noise event is detected</li>
-    <li>Data read from Health Connect (see section 3)</li>
-    <li>Your alarms and their settings</li>
-    <li>Journal entries: mood, energy, notes, dreams and tags</li>
-    <li>Photos taken for the photo wake-up challenge, which are kept briefly in the app's cache and then deleted</li>
-    <li>Smart home connection details and access tokens</li>
-    <li>Calendar data, if you turn on the calendar features: the app reads your phone's calendar to skip alarms on public holidays, ring earlier on busy days and mention your first event in the morning briefing. Only holiday dates and the start time of each day's first event are cached on your device</li>
-    <li>Your morning routine checklist and the city you chose for the morning briefing</li>
-</ul>
-<p class="mt-2">This data is removed when you clear the app's data or uninstall the app.</p>
-</div>
+            <section class="legal-sec" id="microphone">
+                <h2><span class="sec-n">{n('microphone')}</span>{t('microphone')}</h2>
+                <p>The voice wake-up challenge, if you choose it, listens for the sentence shown on screen using your phone’s on-device speech recognizer. The audio is not saved and not uploaded.</p>
+                <p>Sleep tracking can optionally use the microphone to estimate snoring and noise during the night. The app asks for your consent before requesting the permission. Audio is analysed on your device. Short clips of detected events are saved on your device so you can play them back in the Recordings screen, and you can delete them there. No audio is uploaded. If you decline, sleep tracking still works using motion only. If you share a bed, please tell your partner that the microphone may be active overnight.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">2. Data stored in the cloud when you have an account</h3>
-<p class="mt-2">You can use Nooze as a guest, in which case nothing in this section applies. If you create an account, the following is stored in Google Firebase:</p>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li><strong class="text-gray-200">Account:</strong> email address, display name, optional username and avatar. If you use Google Sign-In, we receive your name and email from Google. Passwords are handled by Firebase Authentication; the app also keeps a bcrypt hash on your device, never the password itself.</li>
-    <li><strong class="text-gray-200">Profile choices:</strong> selected theme, background, title and avatar.</li>
-    <li><strong class="text-gray-200">Game progress:</strong> level, XP and the list of XP awards, streaks, unlocked achievements and completed quests. These are calculated on your device from your activity in the app, for example dismissing an alarm on time or tracking a night. The underlying sleep measurements are not uploaded.</li>
-    <li><strong class="text-gray-200">Social:</strong> friend requests and friendships, wake duels and their scores, and activity feed entries such as "reached level 5". Feed entries are deleted automatically after 14 days.</li>
-    <li><strong class="text-gray-200">Leaderboards:</strong> your display name, avatar, level and score on the XP, streak and achievement boards.</li>
-    <li><strong class="text-gray-200">Journal entry dates:</strong> only the date and identifier of each journal entry, so that an entry's place can be restored after you sign in again. The content of the entry is not uploaded.</li>
-    <li><strong class="text-gray-200">Wake-up buddy:</strong> if you ask a friend to be your wake-up buddy and they accept, we store that link. When you do not confirm a wake-up check, we record that it was missed (the time only) and send your buddy one notification that day. These records are deleted after 7 days. Either of you can end the link at any time.</li>
-    <li><strong class="text-gray-200">Squads:</strong> the squad name, its members and invitations, and the shared streak, which our servers calculate from whether each member finished a wake-up that day.</li>
-    <li><strong class="text-gray-200">Reports and blocks:</strong> if you report another user, we store your user ID, their user ID, where in the app you reported them (for example a leaderboard or a squad) and the reason you picked from a fixed list. There is no free-text field. Reports are kept so we can review them and act against abuse, the person you report cannot see them, and they are deleted when you delete your account. If you block someone, we store their user ID and the time in your block list. It is private: only you can see it. A person you blocked can no longer send you friend requests, wake duels, wake-up buddy or squad invitations.</li>
-    <li><strong class="text-gray-200">Notification token:</strong> a Firebase Cloud Messaging token for your device, used only to deliver wake-up buddy notifications. It is removed when you sign out or delete your account.</li>
-    <li><strong class="text-gray-200">Subscription:</strong> if you buy Premium, the Google Play purchase token, product, expiry date and renewal status, used to verify your subscription.</li>
-</ul>
-<p class="mt-2"><strong class="text-gray-200">What other users can see:</strong> your display name, username, avatar, level, streak, selected title and background, your leaderboard position, and your public feed entries. Friends can also see wake duels you share with them. Other users cannot see your email address. Someone who already knows your exact email address, username or display name can use it to send you a friend request. Members of a squad you are in, and people you invite, see the squad name, its members and the shared streak. A wake-up buddy you chose receives your display name in the notification about a missed wake-up check.</p>
-</div>
+            <section class="legal-sec" id="camera">
+                <h2><span class="sec-n">{n('camera')}</span>{t('camera')}</h2>
+                <p>The camera is used only for the QR code and photo wake-up challenges. Images are processed on your device and are not uploaded.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">3. Health Connect</h3>
-<p class="mt-2">Connecting Health Connect is optional. If you grant access, Nooze <strong class="text-gray-200">reads</strong> two data types:</p>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li><strong class="text-gray-200">Sleep sessions</strong>, including sleep stages recorded by your wearable, to build your sleep timeline and choose a lighter moment for Smart Wake</li>
-    <li><strong class="text-gray-200">Heart rate</strong>, as an input to the approximate sleep phase estimate and to show your wearable's latest and resting heart rate</li>
-</ul>
-<p class="mt-2">Nooze does not write any data to Health Connect. Data read from Health Connect is processed and stored on your device only. It is not uploaded, not shared with third parties, not used for advertising, and no person at Nooze can access it. You can revoke access at any time in Health Connect or in your phone's settings, and the app keeps working with phone sensors only.</p>
-</div>
+            <section class="legal-sec" id="analytics">
+                <h2><span class="sec-n">{n('analytics')}</span>{t('analytics')}</h2>
+                <ul>
+                    <li><strong>Firebase Analytics</strong> records usage events such as screens viewed, an alarm being created or dismissed, a challenge type, sign-in, or a level-up, together with an app-instance identifier. It does not receive sleep, health or audio data. The advertising ID is not used; the permission for it is removed from the app.</li>
+                    <li><strong>Firebase Crashlytics</strong> receives crash reports and reports of errors that occur inside the app, with device model, Android version and app version, so that we can fix them.</li>
+                </ul>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">4. Microphone</h3>
-<p class="mt-2">The voice wake-up challenge, if you choose it, listens for the sentence shown on screen using your phone's on-device speech recognizer. The audio is not saved and not uploaded.</p>
-<p class="mt-2">Sleep tracking can optionally use the microphone to estimate snoring and noise during the night. The app asks for your consent before requesting the permission. Audio is analysed on your device. Short clips of detected events are saved on your device so you can play them back in the Recordings screen, and you can delete them there. No audio is uploaded. If you decline, sleep tracking still works using motion only. If you share a bed, please tell your partner that the microphone may be active overnight.</p>
-</div>
+            <section class="legal-sec" id="providers">
+                <h2><span class="sec-n">{n('providers')}</span>{t('providers')}</h2>
+                <ul>
+                    <li><strong>Google Firebase</strong> (Authentication, Cloud Firestore, Cloud Functions, Analytics, Crashlytics, App Check, Remote Config), provided by Google Ireland Limited, for accounts, cloud storage and diagnostics</li>
+                    <li><strong>Firebase Cloud Messaging</strong>, provided by Google, to deliver wake-up buddy notifications</li>
+                    <li><strong>The Norwegian Meteorological Institute (MET Norway)</strong>, for the Premium morning briefing. Your phone’s geocoding service (provided by Google on most phones) turns the city you type into coordinates, and the app sends those coordinates, rounded to about 10 km, to api.met.no to get the forecast. No account, name or device identifier is sent. Weather data from MET Norway is licensed under CC BY 4.0.</li>
+                    <li><strong>Google Play Billing</strong> for subscription purchases. We never receive your card or payment details.</li>
+                    <li><strong>Smart home services</strong> you choose to connect (Home Assistant, Tuya or Tellur, or your own webhook). When an event you picked occurs (an alarm firing or being dismissed, sleep tracking starting, or the app estimating that you have fallen asleep), the app sends the action you configured to that service. The message holds the event name, the time and, for alarms, an internal alarm ID. It never holds sleep or health measurements. Nothing is sent unless you set it up.</li>
+                </ul>
+                <p>Firebase may process data on servers outside the EU/EEA. Google provides safeguards for such transfers, including Standard Contractual Clauses.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">5. Camera</h3>
-<p class="mt-2">The camera is used only for the QR code and photo wake-up challenges. Images are processed on your device and are not uploaded.</p>
-</div>
+            <section class="legal-sec" id="legal-basis">
+                <h2><span class="sec-n">{n('legal-basis')}</span>{t('legal-basis')}</h2>
+                <ul>
+                    <li><strong>To provide the service you asked for</strong> (Art. 6(1)(b)): your account, sync, social features and subscription</li>
+                    <li><strong>Legitimate interest</strong> (Art. 6(1)(f)): analytics, crash and error reports, and protecting the service against abuse</li>
+                    <li><strong>Consent</strong> (Art. 6(1)(a) and Art. 9(2)(a)): microphone access and Health Connect access, both of which you can withdraw at any time</li>
+                </ul>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">6. Analytics, crash and error reports</h3>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li><strong class="text-gray-200">Firebase Analytics</strong> records usage events such as screens viewed, an alarm being created or dismissed, a challenge type, sign-in, or a level-up, together with an app-instance identifier. It does not receive sleep, health or audio data. The advertising ID is not used; the permission for it is removed from the app.</li>
-    <li><strong class="text-gray-200">Firebase Crashlytics</strong> receives crash reports and reports of errors that occur inside the app, with device model, Android version and app version, so that we can fix them.</li>
-</ul>
-</div>
+            <section class="legal-sec" id="security">
+                <h2><span class="sec-n">{n('security')}</span>{t('security')}</h2>
+                <ul>
+                    <li>The on-device database is encrypted with SQLCipher (AES-256); its key is protected by the Android Keystore</li>
+                    <li>Network traffic is encrypted in transit</li>
+                    <li>Cloud data is protected by access rules that limit each account to its own data, plus the public profile fields listed in section 2</li>
+                    <li>Premium status, leaderboards and admin flags can only be written by our servers</li>
+                </ul>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">7. Service providers</h3>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li><strong class="text-gray-200">Google Firebase</strong> (Authentication, Cloud Firestore, Cloud Functions, Analytics, Crashlytics, App Check, Remote Config), provided by Google Ireland Limited, for accounts, cloud storage and diagnostics</li>
-    <li><strong class="text-gray-200">Firebase Cloud Messaging</strong>, provided by Google, to deliver wake-up buddy notifications</li>
-    <li><strong class="text-gray-200">The Norwegian Meteorological Institute (MET Norway)</strong>, for the Premium morning briefing. Your phone's geocoding service (provided by Google on most phones) turns the city you type into coordinates, and the app sends those coordinates, rounded to about 10 km, to api.met.no to get the forecast. No account, name or device identifier is sent. Weather data from MET Norway is licensed under CC BY 4.0.</li>
-    <li><strong class="text-gray-200">Google Play Billing</strong> for subscription purchases. We never receive your card or payment details.</li>
-    <li><strong class="text-gray-200">Smart home services</strong> you choose to connect (Home Assistant, Tuya or Tellur, or your own webhook). When an event you picked occurs (an alarm firing or being dismissed, sleep tracking starting, or the app estimating that you have fallen asleep), the app sends the action you configured to that service. The message holds the event name, the time and, for alarms, an internal alarm ID. It never holds sleep or health measurements. Nothing is sent unless you set it up.</li>
-</ul>
-<p class="mt-2">Firebase may process data on servers outside the EU/EEA. Google provides safeguards for such transfers, including Standard Contractual Clauses.</p>
-</div>
+            <section class="legal-sec" id="retention">
+                <h2><span class="sec-n">{n('retention')}</span>{t('retention')}</h2>
+                <ul>
+                    <li>Cloud data is kept while your account exists and is deleted when you delete the account</li>
+                    <li>Activity feed entries are deleted after 14 days</li>
+                    <li>Missed wake-up check records are deleted after 7 days</li>
+                    <li>Analytics data is kept by Firebase for up to 14 months</li>
+                    <li>Google Play keeps its own records of purchases under Google’s policies</li>
+                </ul>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">8. Why we process your data (GDPR)</h3>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li><strong class="text-gray-200">To provide the service you asked for</strong> (Art. 6(1)(b)): your account, sync, social features and subscription</li>
-    <li><strong class="text-gray-200">Legitimate interest</strong> (Art. 6(1)(f)): analytics, crash and error reports, and protecting the service against abuse</li>
-    <li><strong class="text-gray-200">Consent</strong> (Art. 6(1)(a) and Art. 9(2)(a)): microphone access and Health Connect access, both of which you can withdraw at any time</li>
-</ul>
-</div>
+            <section class="legal-sec" id="deletion">
+                <h2><span class="sec-n">{n('deletion')}</span>{t('deletion')}</h2>
+                <ul class="defs">
+                    <li><strong>In the app:</strong> open the Profile tab, scroll to the bottom and tap Delete Account. This immediately deletes your account and all cloud data listed in section 2, and clears your data from the device.</li>
+                    <li><strong>Without the app:</strong> follow the steps on the <a href="account-deletion.html">account deletion page</a>.</li>
+                    <li><strong>On-device data only:</strong> clear the app’s storage in Android settings, or uninstall the app.</li>
+                </ul>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">9. Security</h3>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li>The on-device database is encrypted with SQLCipher (AES-256); its key is protected by the Android Keystore</li>
-    <li>Network traffic is encrypted in transit</li>
-    <li>Cloud data is protected by access rules that limit each account to its own data, plus the public profile fields listed in section 2</li>
-    <li>Premium status, leaderboards and admin flags can only be written by our servers</li>
-</ul>
-</div>
+            <section class="legal-sec" id="rights">
+                <h2><span class="sec-n">{n('rights')}</span>{t('rights')}</h2>
+                <p>You can ask us for access to your data, a copy of it, correction, deletion, or restriction of processing, and you can object to processing or withdraw consent. Write to the address in section 16; we reply within 30 days. If you are in the EEA you may also complain to your data protection authority. In Bulgaria this is the Commission for Personal Data Protection (CPDP), 2 Prof. Tsvetan Lazarov Blvd., 1592 Sofia, <a href="https://www.cpdp.bg" target="_blank" rel="noopener noreferrer">www.cpdp.bg</a>.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">10. How long we keep data</h3>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li>Cloud data is kept while your account exists and is deleted when you delete the account</li>
-    <li>Activity feed entries are deleted after 14 days</li>
-    <li>Missed wake-up check records are deleted after 7 days</li>
-    <li>Analytics data is kept by Firebase for up to 14 months</li>
-    <li>Google Play keeps its own records of purchases under Google's policies</li>
-</ul>
-</div>
+            <section class="legal-sec" id="children">
+                <h2><span class="sec-n">{n('children')}</span>{t('children')}</h2>
+                <p>Nooze is intended for people aged 16 and over. We do not knowingly collect data from anyone younger. If you believe a younger person has created an account, contact us and we will delete it.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">11. Deleting your account and data</h3>
-<ul class="list-disc pl-5 space-y-1 mt-2">
-    <li><strong class="text-gray-200">In the app:</strong> open the Profile tab, scroll to the bottom and tap Delete Account. This immediately deletes your account and all cloud data listed in section 2, and clears your data from the device.</li>
-    <li><strong class="text-gray-200">Without the app:</strong> follow the steps on the <a class="text-primary hover:underline" href="/account-deletion">account deletion page</a>.</li>
-    <li><strong class="text-gray-200">On-device data only:</strong> clear the app's storage in Android settings, or uninstall the app.</li>
-</ul>
-</div>
+            <section class="legal-sec" id="medical">
+                <h2><span class="sec-n">{n('medical')}</span>{t('medical')}</h2>
+                <p><strong>Nooze is not a medical device.</strong> Sleep phases, sleep quality scores, snoring detection and heart-rate values shown in the app are approximations for general wellness and informational purposes only. Nooze does not diagnose, treat, cure or prevent any disease or medical condition and is not a substitute for professional medical advice. If you have concerns about your sleep or health, consult a qualified healthcare professional.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">12. Your rights</h3>
-<p class="mt-2">You can ask us for access to your data, a copy of it, correction, deletion, or restriction of processing, and you can object to processing or withdraw consent. Write to the address in section 16; we reply within 30 days. If you are in the EEA you may also complain to your data protection authority. In Bulgaria this is the Commission for Personal Data Protection (CPDP), 2 Prof. Tsvetan Lazarov Blvd., 1592 Sofia, <a class="text-primary hover:underline" href="https://www.cpdp.bg">www.cpdp.bg</a>.</p>
-</div>
+            <section class="legal-sec" id="changes">
+                <h2><span class="sec-n">{n('changes')}</span>{t('changes')}</h2>
+                <p>If we change this policy in a way that affects how your data is handled, we will tell you in the app before the change takes effect. The date at the top shows when the policy was last updated.</p>
+            </section>
 
-<div>
-<h3 class="text-white font-semibold mb-2">13. Children</h3>
-<p class="mt-2">Nooze is intended for people aged 16 and over. We do not knowingly collect data from anyone younger. If you believe a younger person has created an account, contact us and we will delete it.</p>
-</div>
-
-<div>
-<h3 class="text-white font-semibold mb-2">14. Medical disclaimer</h3>
-<p class="mt-2"><strong class="text-gray-200">Nooze is not a medical device.</strong> Sleep phases, sleep quality scores, snoring detection and heart-rate values shown in the app are approximations for general wellness and informational purposes only. Nooze does not diagnose, treat, cure or prevent any disease or medical condition and is not a substitute for professional medical advice. If you have concerns about your sleep or health, consult a qualified healthcare professional.</p>
-</div>
-
-<div>
-<h3 class="text-white font-semibold mb-2">15. Changes to this policy</h3>
-<p class="mt-2">If we change this policy in a way that affects how your data is handled, we will tell you in the app before the change takes effect. The date at the top shows when the policy was last updated.</p>
-</div>
-
-<div>
-<h3 class="text-white font-semibold mb-2">16. Contact</h3>
-<p class="mt-2"><strong class="text-gray-200">Email:</strong> <a class="text-primary hover:underline" href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a></p>
-</div>
-                </div></div>
-            </div>
-        </section>
-    </main>
+            <section class="legal-sec" id="contact">
+                <h2><span class="sec-n">{n('contact')}</span>{t('contact')}</h2>
+                <p><strong>Email:</strong> <a href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a></p>
+            </section>
+        </article>
+    </div>
+</main>
 </BaseLayout>
+
+<script>
+    // Table of contents: highlight the section under the reading line; close the mobile list after a jump.
+    const toc = document.querySelector('[data-spy]');
+    if (toc && 'IntersectionObserver' in window) {
+        const links = new Map();
+        toc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+            const sec = document.getElementById(a.hash.slice(1));
+            if (sec) links.set(sec, a);
+        });
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                if (!e.isIntersecting) return;
+                links.forEach((a) => a.removeAttribute('aria-current'));
+                links.get(e.target)?.setAttribute('aria-current', 'true');
+            });
+        }, { rootMargin: '-20% 0px -75% 0px' });
+        links.forEach((_, sec) => io.observe(sec));
+    }
+    const mobile = document.querySelector<HTMLDetailsElement>('.legal-toc-m');
+    mobile?.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('a')) mobile.open = false;
+    });
+</script>
+
+<style>
+    /* ---- Legal document layout (shared by privacy, terms, account deletion) ---- */
+
+    .legal-meta { display: flex; flex-wrap: wrap; gap: 18px 48px; margin: 44px 0 0; }
+    .legal-meta div { display: grid; gap: 8px; }
+    .legal-meta dt { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); }
+    .legal-meta dd { margin: 0; font-family: var(--font-mono); font-size: 13px; color: var(--fg-2); }
+
+    .legal {
+        display: grid; grid-template-columns: 252px minmax(0, 1fr);
+        gap: clamp(48px, 7vw, 112px); align-items: start;
+        padding-block: clamp(56px, 7vw, 104px) var(--section);
+    }
+    .legal-aside { position: sticky; top: calc(var(--nav-h) + 32px); }
+    .legal-toc { max-height: calc(100vh - var(--nav-h) - 64px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+    .legal-toc-label { margin: 0 0 14px; }
+    .legal-toc ol, .legal-toc-m ol { list-style: none; margin: 0; padding: 0; }
+    .legal-toc ol { border-left: 1px solid var(--line); }
+    .legal-toc a, .legal-toc-m a {
+        position: relative;
+        display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: baseline; gap: 6px;
+        min-height: 40px; padding: 9px 0 9px 18px;
+        font-size: 14.5px; line-height: 1.4; color: var(--fg-3);
+        transition: color 0.25s var(--ease-out);
+    }
+    .legal-toc a::before {
+        content: ''; position: absolute; left: -1px; top: 8px; bottom: 8px; width: 2px; border-radius: 1px;
+        background: var(--red); transform: scaleY(0); transition: transform 0.4s var(--ease-out);
+    }
+    .legal-toc a:hover, .legal-toc-m a:hover { color: var(--fg); }
+    .legal-toc a[aria-current] { color: var(--fg); }
+    .legal-toc a[aria-current]::before { transform: scaleY(1); }
+    .legal-toc-n { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); font-variant-numeric: tabular-nums; }
+    .legal-toc a[aria-current] .legal-toc-n { color: var(--red); }
+
+    /* Mobile contents: a closed disclosure above the text */
+    .legal-toc-m { display: none; border-block: 1px solid var(--line-2); }
+    .legal-toc-m summary {
+        display: flex; align-items: center; gap: 14px; min-height: 56px;
+        list-style: none; cursor: pointer; color: var(--fg); font-weight: 600;
+    }
+    .legal-toc-m summary::-webkit-details-marker { display: none; }
+    .legal-toc-m-count { margin-left: auto; font-family: var(--font-mono); font-size: 12px; font-weight: 400; color: var(--fg-3); }
+    .legal-toc-m-icon { position: relative; width: 28px; height: 28px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); transition: transform 0.5s var(--ease-spring); }
+    .legal-toc-m-icon::before, .legal-toc-m-icon::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; margin: -0.75px 0 0 -5px; background: var(--fg-2); border-radius: 1px; }
+    .legal-toc-m-icon::after { transform: rotate(90deg); }
+    .legal-toc-m[open] .legal-toc-m-icon { transform: rotate(45deg); }
+    .legal-toc-m nav { padding-bottom: 12px; }
+    .legal-toc-m a { padding-left: 0; min-height: 44px; }
+
+    /* Prose */
+    .legal-body { max-width: 70ch; }
+    .legal-body > :first-child { margin-top: 0; }
+    .legal-sec { scroll-margin-top: calc(var(--nav-h) + 16px); }
+    .legal-sec > * + * { margin-top: 1.1em; }
+    .legal-sec h2 + * { margin-top: 0.8em; }
+    .sec-n { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--fg-3); font-variant-numeric: tabular-nums; }
+    .legal-body code { font-family: var(--font-mono); font-size: 0.82em; padding: 2px 7px; border-radius: 6px; background: var(--ink-2); box-shadow: inset 0 0 0 1px var(--line); color: var(--fg); overflow-wrap: anywhere; }
+    .legal-body a { overflow-wrap: anywhere; }
+
+    .legal-summary {
+        position: relative; margin-block: 2em 0.4em; padding: 24px 28px 24px 30px;
+        border-radius: var(--r-md); background: var(--ink-1); box-shadow: inset 0 0 0 1px var(--line-2);
+        font-size: 18px; line-height: 1.6; color: var(--fg-2);
+    }
+    .legal-summary::before { content: ''; position: absolute; left: 0; top: 24px; width: 3px; height: 28px; border-radius: 0 2px 2px 0; background: var(--red); }
+    .legal-summary p { margin: 0; }
+
+    /* Lists whose items start with a run-in label ("Account: ...") get more air between items */
+    .defs > li + li { margin-top: 0.9em; }
+
+    @media (max-width: 1023px) {
+        .legal { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 40px; }
+        .legal-aside { display: none; }
+        .legal-toc-m { display: block; }
+    }
+    @media (max-width: 520px) {
+        .legal-meta { gap: 16px 32px; }
+        .legal-summary { padding: 20px 20px 20px 22px; font-size: 17px; }
+        .legal-body { font-size: 16.5px; }
+    }
+</style>

@@ -1,228 +1,226 @@
 ---
-// Swipeable Play Store screenshot carousel for the homepage.
-// Images already have their own baked-in captions, so no text overlay.
+// Homepage: real app screens. Each image is the screen area cropped out of a Play Store
+// screenshot (store caption and phone outline removed), so the captions here are our own.
+// Images run off the bottom like the store frames do; the bezel fades out to match.
 const shots = [
-    { src: '/assets/screenshots/01-home.webp', alt: 'Nooze Alarm smart sleep home screen with quick access to alarms, journals, and sleep tools' },
-    { src: '/assets/screenshots/02-alarms.webp', alt: 'Simple alarm management — schedule and toggle your weekly wake-up calls' },
-    { src: '/assets/screenshots/03-sleep.webp', alt: 'Improve sleep quality by tracking bedtime consistency and unlocking daily insights' },
-    { src: '/assets/screenshots/04-insights.webp', alt: 'Expert daily sleep insights with actionable tips to build healthier bedtime habits' },
-    { src: '/assets/screenshots/05-habits.webp', alt: 'Level up your habits — maintain a daily streak and earn dynamic rewards' },
-    { src: '/assets/screenshots/06-challenges.webp', alt: 'Fun weekly sleep challenges to stay consistent and unlock premium rewards' },
-    { src: '/assets/screenshots/07-themes.webp', alt: 'Beautiful night mode themes — switch between midnight, neon, and arctic palettes' },
-    { src: '/assets/screenshots/08-achievements.webp', alt: 'Celebrate your sleep success by collecting badges for healthy morning routines' },
+    { file: '01-challenge', title: 'Solve it to stop it', body: 'No snooze button. A quick sum switches the alarm off.', alt: 'Nooze wake-up screen showing a math challenge, 12 + 37, with an answer field and a Submit button' },
+    { file: '02-challenges', title: 'Pick your wake-up challenge', body: 'Choose the challenge and difficulty for each alarm.', alt: 'Add alarm screen with Smart Wake and Sunrise Wake switches and a grid of challenge types: math, memory, shake, typing, QR scan and photo' },
+    { file: '03-home', title: 'Your morning at a glance', body: 'Next alarm, streak and last night on one screen.', alt: 'Nooze home screen with a clock face, the next alarm at 9:00 AM, streak and wake ease stats, and last night’s sleep time' },
+    { file: '04-alarms', title: 'Every alarm in one place', body: 'Switch them on and off with one tap.', alt: 'Alarm list with alarms at 6:00, 7:00 and 9:00 AM, each with an on or off switch and a difficulty label' },
+    { file: '05-sleep', title: 'Track your nights', body: 'Estimates from your phone. Not a medical device.', alt: 'Sleep screen with a sleep tip, shortcuts to sleep aids, journal, sleep analytics and recordings, and a note that Nooze is not a medical device' },
+    { file: '06-wind-down', title: 'Wind down for the night', body: 'Guided breathing and sleep sounds before bed.', alt: 'Breathing exercise screen set to the 4-7-8 pattern, with a large circle that reads Hold 6' },
 ];
 ---
-<section class="py-24 relative" aria-labelledby="screens-heading">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 id="screens-heading" class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">
-                See Nooze <span class="gradient-text">in Action</span>
-            </h2>
-            <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
-                A closer look at the alarms, sleep tracking, challenges and themes that make every morning easier.
-            </p>
-        </div>
-
-        <div class="ss-carousel reveal delay-1" data-carousel>
-            <button type="button" class="ss-arrow ss-prev" data-prev aria-label="Previous screenshot">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-
-            <div class="ss-track" data-track tabindex="0" role="group" aria-label="App screenshots, swipe to browse">
-                {shots.map((s) => (
-                    <figure class="ss-slide">
-                        <img src={s.src} srcset={s.src.replace('.webp', '-480.webp') + ' 480w, ' + s.src + ' 950w'} sizes="240px" alt={s.alt} width="950" height="1920" loading="lazy" decoding="async" />
-                    </figure>
-                ))}
+<section class="nz-section hm-screens" aria-labelledby="screensTitle">
+    <div class="nz-container">
+        <div class="nz-head nz-head--row nz-reveal">
+            <h2 class="nz-h2" id="screensTitle">Straight from the app.</h2>
+            <p class="nz-lede hm-screens-lede">Real screens from the version on Google Play today. No mock-ups.</p>
+            <div class="nz-head-action hm-rail-nav">
+                <button type="button" class="hm-rail-btn" data-rail-prev aria-controls="hmRail" aria-label="Previous screens" aria-disabled="true">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8h-11M7 3.5 2.5 8 7 12.5" /></svg>
+                </button>
+                <button type="button" class="hm-rail-btn" data-rail-next aria-controls="hmRail" aria-label="Next screens">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+                </button>
             </div>
-
-            <button type="button" class="ss-arrow ss-next" data-next aria-label="Next screenshot">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </button>
         </div>
+    </div>
 
-        <div class="ss-dots" data-dots role="group" aria-label="Choose a screenshot"></div>
+    <div class="hm-rail nz-reveal" id="hmRail" data-rail tabindex="0" role="region" aria-label="App screens, scroll sideways to see more">
+        <ul class="hm-track">
+            {shots.map((s, i) => (
+                <li class="hm-shot" style={`--i:${i}`} data-shot>
+                    <figure>
+                        <div class="hm-bezel">
+                            <img
+                                src={`/assets/screens/${s.file}.webp`}
+                                srcset={`/assets/screens/${s.file}-400.webp 400w, /assets/screens/${s.file}.webp 640w`}
+                                sizes="(max-width: 760px) 70vw, 320px"
+                                width="640" height="1093"
+                                alt={s.alt}
+                                loading="lazy" decoding="async" draggable="false"
+                            />
+                        </div>
+                        <figcaption>
+                            <span class="hm-shot-title">{s.title}</span>
+                            <span class="hm-shot-body">{s.body}</span>
+                        </figcaption>
+                    </figure>
+                </li>
+            ))}
+        </ul>
+    </div>
+
+    <div class="nz-container">
+        <div class="hm-progress" aria-hidden="true"><span data-rail-thumb></span></div>
     </div>
 </section>
 
 <style>
-    .ss-carousel {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+    .hm-screens { overflow: hidden; }
+    .hm-screens-lede { text-wrap: balance; }
+    .hm-rail-nav { display: flex; gap: 10px; }
+    .hm-rail-btn {
+        display: grid; place-items: center; width: 52px; height: 52px; border-radius: 999px; border: 0; cursor: pointer;
+        color: var(--fg); background: rgba(255, 255, 255, 0.02); box-shadow: inset 0 0 0 1px var(--line-2);
+        transition: background-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), opacity 0.25s var(--ease-out), transform 0.16s var(--ease-out);
+        -webkit-tap-highlight-color: transparent;
+    }
+    .hm-rail-btn svg { width: 16px; height: 16px; }
+    .hm-rail-btn:active { transform: scale(0.95); }
+    .hm-rail-btn[aria-disabled='true'] { opacity: 0.35; cursor: default; }
+    .hm-rail-btn[aria-disabled='true']:active { transform: none; }
+    @media (hover: hover) and (pointer: fine) {
+        .hm-rail-btn:not([aria-disabled='true']):hover { background: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px var(--line-3); }
     }
 
-    .ss-track {
-        display: flex;
-        gap: 0.5rem;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        padding: 1.5rem 0.5rem 1.75rem;
-        flex: 1;
+    /* The rail starts on the container's left edge and runs off the right of the screen */
+    .hm-rail {
+        --edge: max(var(--gutter), calc((100% - var(--container)) / 2));
+        margin-top: clamp(44px, 5vw, 72px);
+        overflow-x: auto; overflow-y: hidden;
+        scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge);
+        overscroll-behavior-x: contain;
         scrollbar-width: none;
-        -ms-overflow-style: none;
-        outline: none;
-        /* Soft edges instead of slicing the peeking slides. */
-        -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
-        mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+        cursor: grab;
+        border-radius: 0; outline-offset: -2px;
     }
-    .ss-track::-webkit-scrollbar { display: none; }
-    /* The mask would also clip the focus ring, so drop it while focused. */
-    .ss-track:focus-visible { outline: 2px solid rgba(0, 188, 212, 0.6); outline-offset: 4px; border-radius: 1.25rem; -webkit-mask-image: none; mask-image: none; }
-
-    .ss-slide {
-        position: relative;
-        flex: 0 0 auto;
-        width: 240px;
-        scroll-snap-align: center;
-        margin: 0;
-        transition: z-index 0s 0.05s;
-    }
-    .ss-slide:hover { z-index: 3; }
-
-    .ss-slide img {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: 1.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6), 0 0 40px -20px rgba(0, 188, 212, 0.5);
-        transform-origin: center;
-        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
-    }
-    .ss-slide img:hover {
-        transform: scale(1.12);
-        box-shadow: 0 30px 70px -12px rgba(0, 0, 0, 0.75), 0 0 70px -14px rgba(0, 188, 212, 0.75);
+    .hm-rail::-webkit-scrollbar { display: none; }
+    .hm-rail.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+    .hm-track {
+        display: flex; gap: clamp(20px, 2.4vw, 36px);
+        list-style: none; margin: 0; padding: 0 var(--edge) 4px;
+        width: max-content;
     }
 
-    .ss-arrow {
-        flex: 0 0 auto;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 9999px;
-        color: #fff;
-        background: rgba(15, 23, 32, 0.7);
-        border: 1px solid rgba(0, 188, 212, 0.3);
-        backdrop-filter: blur(8px);
-        cursor: pointer;
-        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-    .ss-arrow svg { width: 22px; height: 22px; }
-    .ss-arrow:hover { background: rgba(0, 188, 212, 0.18); border-color: rgba(0, 188, 212, 0.6); }
-    .ss-arrow:active { transform: scale(0.92); }
-    .ss-arrow:disabled { opacity: 0.3; cursor: default; }
+    .hm-shot { width: clamp(240px, 23vw, 320px); flex: none; scroll-snap-align: start; }
+    .hm-shot figure { margin: 0; }
 
-    @media (min-width: 768px) {
-        .ss-arrow { display: inline-flex; }
+    /* Same frame as the screens on features.html (20px radius, --line-2 hairline, soft
+       shadow). These screens are cut off at the bottom, so the frame fades out there. */
+    .hm-bezel {
+        position: relative; padding: 0 1px;
+        -webkit-mask-image: linear-gradient(180deg, #000 66%, transparent 97%);
+        mask-image: linear-gradient(180deg, #000 66%, transparent 97%);
+        transition: transform 0.5s var(--ease-out);
+    }
+    .hm-bezel img {
+        display: block; width: 100%; height: auto; margin-top: 1px; -webkit-user-drag: none;
+        border-radius: 20px 20px 0 0; background: var(--ink-2);
+        box-shadow: 0 0 0 1px var(--line-2), 0 40px 80px -40px rgba(0, 0, 0, 0.9);
+    }
+    @media (hover: hover) and (pointer: fine) {
+        .hm-rail:not(.is-dragging) .hm-shot:hover .hm-bezel { transform: translateY(-6px); }
     }
 
-    .ss-dots {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-top: 1.5rem;
-    }
-    .ss-dots button {
-        position: relative;
-        width: 8px;
-        height: 8px;
-        padding: 0;
-        border: none;
-        border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.25);
-        cursor: pointer;
-        transition: background 0.2s ease, width 0.2s ease;
-    }
-    /* Invisible hit area: the dot stays 8px but the tap target is 16×24. */
-    .ss-dots button::after {
-        content: '';
-        position: absolute;
-        inset: -8px -4px;
-    }
-    .ss-dots button.active {
-        width: 24px;
-        background: linear-gradient(90deg, #00bcd4, #06b6d4);
-    }
+    .hm-shot figcaption { display: grid; gap: 6px; margin-top: -4px; position: relative; padding-right: 8px; }
+    .hm-shot-title { font-family: var(--font-display); font-size: clamp(19px, 1.5vw, 22px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--fg); }
+    .hm-shot-body { font-size: 14.5px; line-height: 1.5; color: var(--fg-2); max-width: 30ch; }
 
+    .hm-progress { position: relative; height: 1px; margin-top: clamp(36px, 4vw, 56px); background: var(--line-2); overflow: hidden; }
+    .hm-progress span { position: absolute; left: 0; top: 0; height: 1px; width: 30%; background: var(--fg); transform-origin: left; will-change: transform; }
+
+    /* Entrance: the shots rise in sequence when the rail enters */
+    .hm-shot { transition: opacity 0.8s var(--ease-out), transform 1s var(--ease-out); transition-delay: calc(var(--i) * 70ms); }
+    :global(html.js) .hm-rail.nz-reveal { opacity: 1; transform: none; }
+    :global(html.js) .hm-rail:not(.is-in) .hm-shot { opacity: 0; transform: translateY(32px); }
+
+    @media (max-width: 760px) {
+        .hm-rail-nav { display: none; }
+        .hm-shot { width: 70vw; max-width: 300px; }
+    }
     @media (prefers-reduced-motion: reduce) {
-        .ss-track { scroll-behavior: auto; }
-        .ss-slide img { transition: none; }
-        .ss-slide img:hover { transform: none; }
+        .hm-shot, .hm-bezel { transition: none; }
+        :global(html.js) .hm-rail:not(.is-in) .hm-shot { opacity: 1; transform: none; }
     }
 </style>
 
 <script>
-    document.querySelectorAll('[data-carousel]').forEach((root) => {
-        const track = root.querySelector('[data-track]');
-        const prev = root.querySelector('[data-prev]');
-        const next = root.querySelector('[data-next]');
-        const dotsWrap = root.parentElement.querySelector('[data-dots]');
-        const slides = Array.from(track.querySelectorAll('.ss-slide'));
-        if (!slides.length) return;
+    const rail = document.querySelector<HTMLElement>('[data-rail]');
+    if (rail) {
+        const shots = Array.from(rail.querySelectorAll<HTMLElement>('[data-shot]'));
+        const prev = document.querySelector<HTMLButtonElement>('[data-rail-prev]');
+        const next = document.querySelector<HTMLButtonElement>('[data-rail-next]');
+        const thumb = document.querySelector<HTMLElement>('[data-rail-thumb]');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const behavior: ScrollBehavior = reduce ? 'auto' : 'smooth';
 
-        const gap = () => parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
-        const step = () => slides[0].getBoundingClientRect().width + gap(); // slide width + gap
-
-        prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-        next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-
-        // Dots — one per slide
-        const dots = slides.map((_, i) => {
-            const b = document.createElement('button');
-            b.type = 'button';
-            b.setAttribute('aria-label', `Go to screenshot ${i + 1}`);
-            b.addEventListener('click', () => {
-                track.scrollTo({ left: slides[i].offsetLeft - (track.clientWidth - slides[i].clientWidth) / 2, behavior: 'smooth' });
-            });
-            dotsWrap.appendChild(b);
-            return b;
-        });
-
-        // Sync active dot + arrow disabled state to the centered slide
-        const trackCenter = () => track.scrollLeft + track.clientWidth / 2;
-        const update = () => {
-            let best = 0, bestDist = Infinity;
-            slides.forEach((s, i) => {
-                const c = s.offsetLeft + s.clientWidth / 2;
-                const d = Math.abs(c - trackCenter());
-                if (d < bestDist) { bestDist = d; best = i; }
-            });
-            dots.forEach((d, i) => {
-                d.classList.toggle('active', i === best);
-                if (i === best) d.setAttribute('aria-current', 'true');
-                else d.removeAttribute('aria-current');
-            });
-            if (prev) prev.disabled = track.scrollLeft <= 2;
-            if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+        const maxScroll = () => rail.scrollWidth - rail.clientWidth;
+        const stops = () => shots.map((s) => Math.min(s.offsetLeft - shots[0].offsetLeft, maxScroll()));
+        const nearest = (x: number) => {
+            const all = stops();
+            return all.reduce((best, s, i) => (Math.abs(s - x) < Math.abs(all[best] - x) ? i : best), 0);
         };
 
-        let raf = 0;
-        track.addEventListener('scroll', () => {
-            cancelAnimationFrame(raf);
-            raf = requestAnimationFrame(update);
-        }, { passive: true });
-        window.addEventListener('resize', update);
+        let frame = 0;
+        const update = () => {
+            frame = 0;
+            const max = maxScroll();
+            const x = rail.scrollLeft;
+            prev?.setAttribute('aria-disabled', String(x <= 2));
+            next?.setAttribute('aria-disabled', String(x >= max - 2));
+            if (thumb) {
+                const f = Math.min(1, rail.clientWidth / rail.scrollWidth);
+                thumb.style.width = `${f * 100}%`;
+                const p = max > 0 ? x / max : 0;
+                thumb.style.transform = `translateX(${p * ((1 - f) / f) * 100}%)`;
+            }
+        };
+        const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+        rail.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
         update();
 
-        // Lazy images inside a horizontal scroller only start loading once they
-        // intersect it, so a swiped-in slide could flash blank. Warm them all as
-        // the carousel approaches the viewport.
-        const warm = new IntersectionObserver((entries) => {
-            if (!entries[0].isIntersecting) return;
-            slides.forEach((s) => { const img = s.querySelector('img'); if (img) img.loading = 'eager'; });
-            warm.disconnect();
-        }, { rootMargin: '600px 0px' });
-        warm.observe(root);
+        const go = (dir: 1 | -1) => {
+            const all = stops();
+            const i = nearest(rail.scrollLeft);
+            const target = all[Math.max(0, Math.min(all.length - 1, i + dir))];
+            rail.scrollTo({ left: target, behavior });
+        };
+        prev?.addEventListener('click', () => { if (prev.getAttribute('aria-disabled') !== 'true') go(-1); });
+        next?.addEventListener('click', () => { if (next.getAttribute('aria-disabled') !== 'true') go(1); });
 
-        // Keyboard support when the track is focused
-        track.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left: step(), behavior: 'smooth' }); }
-            if (e.key === 'ArrowLeft') { e.preventDefault(); track.scrollBy({ left: -step(), behavior: 'smooth' }); }
+        // Mouse drag (touch and trackpads scroll natively). Snap is paused while dragging,
+        // then the rail settles on the nearest screen, carried a little by the flick.
+        let drag: { id: number; x: number; left: number; moved: boolean; lastX: number; lastT: number; v: number } | null = null;
+        const endDrag = () => {
+            if (!drag) return;
+            const wasMoved = drag.moved;
+            const v = drag.v;
+            drag = null;
+            if (!wasMoved) return;
+            const all = stops();
+            const projected = rail.scrollLeft - v * 180;
+            const target = all[nearest(projected)];
+            rail.scrollTo({ left: target, behavior });
+            let done = false;
+            const release = () => { if (done) return; done = true; rail.classList.remove('is-dragging'); };
+            rail.addEventListener('scrollend', release, { once: true });
+            window.setTimeout(release, 700);
+        };
+        rail.addEventListener('pointerdown', (e) => {
+            if (e.pointerType !== 'mouse' || e.button !== 0) return;
+            drag = { id: e.pointerId, x: e.clientX, left: rail.scrollLeft, moved: false, lastX: e.clientX, lastT: performance.now(), v: 0 };
         });
-    });
+        rail.addEventListener('pointermove', (e) => {
+            if (!drag || e.pointerId !== drag.id) return;
+            const dx = e.clientX - drag.x;
+            if (!drag.moved) {
+                if (Math.abs(dx) < 5) return;
+                drag.moved = true;
+                rail.setPointerCapture(e.pointerId);
+                rail.classList.add('is-dragging');
+            }
+            const now = performance.now();
+            const dt = Math.max(1, now - drag.lastT);
+            drag.v = 0.8 * ((e.clientX - drag.lastX) / dt) + 0.2 * drag.v;
+            drag.lastX = e.clientX;
+            drag.lastT = now;
+            rail.scrollLeft = drag.left - dx;
+        });
+        rail.addEventListener('pointerup', endDrag);
+        rail.addEventListener('pointercancel', endDrag);
+        rail.addEventListener('lostpointercapture', endDrag);
+    }
 </script>

@@ -1,187 +1,375 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { launch } from '../data/launch';
+
+// One source for the visible Q&A and the FAQPage JSON-LD, so they never drift apart.
+// Answers are HTML (one string per paragraph); the JSON-LD gets the same text without tags.
+const mail = '<a class="nz-link" href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a>';
+
+const topics = [
+    {
+        id: 'alarm',
+        title: 'The alarm',
+        items: [
+            {
+                id: 'what-is-nooze',
+                q: 'What is Nooze?',
+                a: [
+                    'Nooze is a no-snooze alarm clock and sleep tracker for Android. To turn an alarm off, you complete a short wake-up challenge. It also estimates how you slept using your phone’s sensors or a compatible wearable, can ring at an estimated lighter moment inside a wake window you choose, and rewards on-time mornings with XP, streaks and wake duels with friends.',
+                ],
+            },
+            {
+                id: 'no-snooze',
+                q: 'Why is there no snooze button?',
+                a: [
+                    'By design. The alarm only stops when you finish one of nine wake-up challenges: math, memory, shake, steps, reading a sentence aloud (on supported phones), scanning a QR code or barcode, tapping an NFC tag, typing or a photo task. You set the difficulty for each alarm: easy, medium or hard.',
+                    'QR, photo and NFC challenges offer a math problem after 2 minutes, so you’re never stuck. A few minutes after you dismiss the alarm, a wake-up check asks if you’re still up. Ignore it and the alarm rings again.',
+                ],
+            },
+            {
+                id: 'smart-wake',
+                q: 'How does smart wake work?',
+                a: [
+                    'Pick a wake window of 15, 20 or 30 minutes for an alarm. Nooze looks for an estimated lighter moment of sleep inside that window and rings then, using your phone’s motion sensor, the optional microphone or a connected wearable. These are estimates, not measurements. If it can’t pick out a clear one but did notice some movement or sound, it rings in the last few minutes of the window. If it notices nothing at all, the alarm rings at the time you set.',
+                    'Sunrise Wake can also warm your screen from dark into a soft sunrise glow, so you are not met by a bright flash.',
+                ],
+            },
+            {
+                id: 'xp-and-friends',
+                q: 'How do XP, streaks and friends work?',
+                a: [
+                    'Getting up on time earns XP. Streaks, achievements, journal entries and your morning routine checklist add more, and leaderboards for XP, streaks and achievements show how you compare.',
+                    'Add friends to start wake duels: whoever gets up on time more often wins. You can also pick a wake-up buddy, who gets one nudge if you miss your wake-up check, or join a squad of up to four that shares a streak.',
+                ],
+            },
+            {
+                id: 'smart-home',
+                q: 'Does Nooze work with smart home devices?',
+                a: [
+                    'Yes, with Premium. Nooze connects to Home Assistant, Tuya, Tellur or any webhook. Choose an event, such as an alarm ringing or being dismissed, sleep tracking starting, or Nooze estimating that you’ve fallen asleep, and the action it should trigger, like switching on the lights. The message carries the event and the time, never sleep or health data.',
+                ],
+            },
+        ],
+    },
+    {
+        id: 'sleep',
+        title: 'Sleep tracking',
+        items: [
+            {
+                id: 'sleep-tracking',
+                q: 'How does sleep tracking work?',
+                a: [
+                    'Leave your phone near the bed overnight. Nooze uses its motion sensor and, if you allow it, the microphone, or sleep and heart-rate data from a compatible band or watch through Health Connect.',
+                    'In the morning you see your sleep duration, estimated sleep phases, an approximate sleep quality score and any snoring or noise events, with weekly trends and bedtime consistency over time. A shared-bed mode helps when you sleep next to someone, and a wearable-only mode relies on your watch’s data alone.',
+                ],
+            },
+            {
+                id: 'wearables',
+                q: 'Does Nooze work with my watch or fitness band?',
+                a: [
+                    'If your band, watch or its app writes sleep or heart-rate data to Android Health Connect, Nooze can read it. It reads only those two data types, never writes anything back, and keeps the data on your phone. Health Connect is optional; without it, Nooze uses your phone’s sensors.',
+                    'There’s also a Wear OS companion with a next-alarm tile, and your alarm can ring on the watch.',
+                ],
+            },
+            {
+                id: 'medical',
+                q: 'Is Nooze a medical device?',
+                a: [
+                    'No. Nooze is a wellness app. Sleep phases, the sleep quality score, snoring and noise events and heart-rate values are estimates for general wellness, not medical advice. If you’re worried about your sleep or health, talk to a doctor.',
+                ],
+            },
+        ],
+    },
+    {
+        id: 'account',
+        title: 'Account and privacy',
+        items: [
+            {
+                id: 'sync',
+                q: 'What syncs if I sign in on another phone?',
+                a: [
+                    'Your profile and progress, not your sleep data. Sign in with Google or email and your profile, XP, streaks, achievements, friends, duels and squads come with you. Alarms, sleep sessions, recordings, Health Connect data and journal text stay on the phone they were made on.',
+                    'You don’t need an account at all: Nooze works as a guest.',
+                ],
+            },
+            {
+                id: 'privacy',
+                q: 'Is my data private and secure?',
+                a: [
+                    'Sensor, microphone, calendar and Health Connect data stay on your phone, along with your alarms and journal text, in an encrypted database. If you create an account, your profile, XP and social activity are stored so they work across phones and with friends.',
+                    'There are no ads and no data sales. Usage analytics never receive sleep, health or audio data. The <a class="nz-link" href="privacy.html">privacy policy</a> lists everything.',
+                ],
+            },
+            {
+                id: 'delete-account',
+                q: 'How do I delete my account?',
+                a: [
+                    'In the app, open the Profile tab, scroll to the bottom and tap Delete Account. Your account and cloud data are deleted straight away. Without the app, email ' + mail + ' from your account’s address with the subject “Delete my Nooze account” and it’s done within 30 days.',
+                    'Deleting your account doesn’t cancel a Google Play subscription, so cancel that in Google Play. The <a class="nz-link" href="account-deletion.html">account deletion page</a> has the details.',
+                ],
+            },
+        ],
+    },
+    {
+        id: 'pricing',
+        title: 'Pricing and platforms',
+        items: [
+            {
+                id: 'free',
+                q: 'Is Nooze free?',
+                a: [
+                    'Yes, with no ads. The free version includes unlimited alarms with smart wake, all nine wake-up challenges, the wake-up check, sleep tracking with weekly trends, XP, streaks, friends, wake duels and 6 themes.',
+                    'Premium is optional: €1.99 a month or €13.99 a year, about 41% less than paying monthly. It adds 6 more themes with animated backgrounds, advanced sleep analytics, the full sleep sound library, smart home integrations and a spoken morning briefing with the weather, your next alarm and your first event of the day. Cancel any time in Google Play.',
+                ],
+            },
+            {
+                id: 'platforms',
+                q: 'Which platforms does Nooze support?',
+                a: [
+                    `Android. Nooze Sleep Tracker &amp; Alarm is out now on <a class="nz-link" href="${launch.playUrl}" target="_blank" rel="noopener noreferrer">Google Play</a>, with a Wear OS companion for your watch. An iPhone version is in the works.`,
+                ],
+            },
+        ],
+    },
+];
+
+const total = topics.reduce((n, t) => n + t.items.length, 0);
+const pad = (n) => String(n).padStart(2, '0');
+const plain = (html) => html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
+
+const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: topics.flatMap((t) =>
+        t.items.map((it) => ({
+            '@type': 'Question',
+            name: it.q,
+            acceptedAnswer: { '@type': 'Answer', text: it.a.map(plain).join(' ') },
+        })),
+    ),
+};
+const crumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://noozealarm.com/' },
+        { '@type': 'ListItem', position: 2, name: 'FAQ', item: 'https://noozealarm.com/faq.html' },
+    ],
+};
 ---
 <BaseLayout
-    title={"Nooze FAQ – Smart Alarm & Sleep Tracker Questions Answered"}
-    description={"Answers to common questions about Nooze: smart wake technology, sleep tracking accuracy, gamification, health integrations, pricing, privacy and more."}
-    keywords={"nooze faq, smart alarm questions, sleep tracker help, alarm app faq, nooze pricing, nooze privacy, sleep cycle alarm questions"}
+    title={"FAQ: smart alarm and sleep tracker questions | Nooze Alarm"}
+    description={"Answers to common questions about Nooze: wake-up challenges, smart wake, sleep tracking, wearables, privacy, account deletion and Premium pricing."}
+    keywords={"nooze faq, smart alarm questions, sleep tracker help, alarm app faq, nooze pricing, nooze privacy, sleep tracker and alarm questions"}
     canonical={"faq.html"}
-    ogTitle={"Nooze FAQ - Common Questions About the Smart Alarm App"}
-    ogDescription={"Find answers to common questions about Nooze, the intelligent alarm and sleep tracker for Android."}
+    ogTitle={"Nooze FAQ: questions about the no-snooze alarm"}
+    ogDescription={"Answers to common questions about Nooze, the no-snooze alarm and sleep tracker for Android."}
     active={"faq"}
 >
 
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"What is Nooze?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Nooze is a smart alarm clock and sleep tracker for Android. It monitors your sleep cycles using your phone's sensors, wakes you during light sleep for a more refreshed feeling, and gamifies your morning routine with XP, levels, and challenges.\"}},{\"@type\":\"Question\",\"name\":\"Which platforms does Nooze support?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Nooze is currently available for Android. It's built natively for the best performance and integrates with Android's Health Connect platform.\"}},{\"@type\":\"Question\",\"name\":\"How does the smart wake technology work?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Nooze uses your phone's accelerometer and microphone to detect sleep phases. You set a smart wake window (15, 20, or 30 minutes before your alarm). Nooze monitors your sleep and triggers the alarm when it detects you're in light sleep within that window, resulting in a more natural wake-up.\"}},{\"@type\":\"Question\",\"name\":\"Is Nooze free to use?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes! All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes, and cloud sync. Nooze Premium adds animated themes, premium backgrounds, exclusive titles, and advanced analytics for €2.99/month or €14.99/year.\"}},{\"@type\":\"Question\",\"name\":\"Why is there no snooze button?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"By design. Sleep science shows that hitting snooze fragments your sleep and actually makes you groggier. Instead, Nooze offers 7 wake challenges (math, memory, shake, typing, QR scan, photo capture, NFC scan — with anagram coming soon) across 3 difficulty levels to ensure you're fully awake, and rewards you with XP for getting up.\"}},{\"@type\":\"Question\",\"name\":\"Does Nooze track my sleep automatically?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes. Place your phone near your bed and Nooze monitors your sleep using motion and sound analysis. For more detailed data, it also integrates with Health Connect and wearable devices like Fitbit, Garmin, Oura, Whoop, Polar, Withings, and Suunto.\"}},{\"@type\":\"Question\",\"name\":\"What health devices does Nooze support?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Nooze integrates with Android Health Connect, which aggregates data from your wearables and fitness apps like Fitbit, Samsung Health, Google Fit, Garmin, Oura, Whoop, and more. This provides heart rate, SpO2, respiratory rate, and sleep stage data.\"}},{\"@type\":\"Question\",\"name\":\"How does the gamification work?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"You earn XP for waking up on time (10-50 XP), writing journal entries (5 XP), and maintaining streaks (up to 30 XP bonus). XP lets you level up, complete quests, unlock achievements, and earn exclusive titles.\"}},{\"@type\":\"Question\",\"name\":\"Can I sync across multiple devices?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes. Sign in with Google or email, and your alarms, sleep data, and profile sync in real-time across all your Android devices via the cloud. The app also works fully offline with local storage.\"}},{\"@type\":\"Question\",\"name\":\"Is my data private and secure?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Privacy is a top priority. Your data is encrypted and stored securely. We prioritize local storage, never sell your information, and give you full control to delete your data at any time through the app.\"}},{\"@type\":\"Question\",\"name\":\"Does Nooze work with smart home devices?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes! Nooze integrates with Home Assistant and supports generic webhooks. You can automate lights, control devices, and create gradual wake-up lighting scenes when your alarm triggers.\"}},{\"@type\":\"Question\",\"name\":\"How do I contact support?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Email us at noozesupport@gmail.com or use the Contact page on this website. You can also reach us on X (@NoozeAlarm) or TikTok (@nooze.alarm.app).\"}}]}"} />
-    <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"FAQ\",\"item\":\"https://noozealarm.com/faq.html\"}]}"} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(crumbLd)} />
   </Fragment>
 
-<main class="flex-1 pt-16">
-        <!-- Hero -->
-        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid"></div>
-            <div class="orb orb-1"></div>
-            <div class="orb orb-3"></div>
-            <div class="scanlines"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Quick answers</span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">
-                    Frequently Asked <span class="iris-text">Questions</span>
-                </h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">
-                    Everything you need to know about Nooze.
-                </p>
+<main id="main" class="flex-1">
+    <PageHeader
+        compact
+        title="Frequently asked questions"
+        lede="How the no-snooze alarm works, where your sleep data lives and what Premium adds."
+    />
+
+    <section class="faq nz-section--tight">
+        <div class="nz-container faq-grid">
+            <aside class="faq-aside">
+                <nav class="faq-index" aria-label="FAQ topics" data-spy>
+                    <p class="nz-meta faq-index-label">{total} questions, 4 topics</p>
+                    <ol>
+                        {topics.map((t) => (
+                            <li>
+                                <a href={`#${t.id}`}>
+                                    <span class="faq-index-name">{t.title}</span>
+                                    <span class="faq-index-count">{pad(t.items.length)}</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ol>
+                </nav>
+            </aside>
+
+            <div class="faq-body">
+                {topics.map((t) => (
+                    <section class="faq-group" id={t.id} aria-labelledby={`${t.id}-title`}>
+                        <h2 class="faq-group-title" id={`${t.id}-title`}>{t.title}</h2>
+                        <div class="faq-list">
+                            {t.items.map((it, i) => (
+                                <details class="qa" id={it.id} open={t.id === 'alarm' && i === 0}>
+                                    <summary>
+                                        <span class="qa-q">{it.q}</span>
+                                        <span class="qa-icon" aria-hidden="true"></span>
+                                    </summary>
+                                    <div class="qa-a">
+                                        {it.a.map((p) => <p set:html={p} />)}
+                                    </div>
+                                </details>
+                            ))}
+                        </div>
+                    </section>
+                ))}
+
+                <div class="faq-ask">
+                    <p class="faq-ask-q">Didn’t find your answer?</p>
+                    <p class="faq-ask-body">
+                        Email <a class="nz-link" href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a>. The developer usually replies within 24–48 hours.
+                    </p>
+                </div>
             </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- FAQ Accordion -->
-        <section class="py-20">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-
-                <div class="faq-item holo-card holo-card-no-pad reveal">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">What is Nooze?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Nooze is a smart alarm clock and sleep tracker for Android. It monitors your sleep cycles using your phone's motion and microphone (plus wearable data when available), wakes you during light sleep for a more refreshed start, and gamifies your morning with XP, levels, achievements and friendly duels &mdash; minus a snooze button.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">Which platforms does Nooze support?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Android only at launch. Nooze is built natively for Android (Kotlin / Jetpack Compose) and integrates with Health Connect, the OS-level hub that exposes wearable data from Fitbit, Garmin, Oura, Whoop, Samsung Health and others. iOS is not on the roadmap right now.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">How does the smart wake technology work?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">You pick a smart wake window of 15, 20 or 30 minutes per alarm. Inside that window Nooze checks recent sleep stage data &mdash; fused from your phone's motion, ambient sound and any connected wearable &mdash; and fires the alarm as soon as you're already in Light or REM sleep. If you stay deep, the alarm just rings at its original time.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">Is Nooze free to use?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">All core features are free: unlimited alarms, smart wake, sleep tracking, gamification, social features, 6 themes and cloud sync. Nooze Premium (&euro;2.99/month or &euro;14.99/year &mdash; saves about 58%) unlocks sleep aids, smart-home triggers, advanced analytics, 6 animated themes, premium backgrounds and exclusive titles &amp; badges.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">Why is there no snooze button?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">By design. Hitting snooze fragments your sleep and trains the brain to dread mornings. Instead, Nooze offers seven wake challenges &mdash; math, memory, shake, typing, QR scan, photo capture and NFC scan &mdash; with anagram on the way. Three difficulty levels. The alarm only stops when you finish one. The harder you finish, the more XP. The brand name itself is a play on the word.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-3">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">Does Nooze track my sleep automatically?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes. Place your phone near the bed and Nooze runs an overnight tracking session, sampling motion, sound and (if you wear one) heart-rate data every 30 seconds. It distinguishes Awake, Light, Deep and REM stages, and produces a quality score, cycle count and wake-ease rating for the morning. There's also a shared-bed mode that ignores your partner's movement and a wearable-only mode if you trust your watch over the phone.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-3">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">What health devices does Nooze support?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Nooze plugs into Android Health Connect, which aggregates data from compatible wearables and fitness apps &mdash; Fitbit, Samsung Health, Google Fit, Garmin, Oura, Whoop and more. From there Nooze can read sleep stages, heart rate and SpO₂. If a device or app supports Health Connect, it works with Nooze.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">How does the gamification work?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Every wake earns XP &mdash; 10 base, plus bonuses for finishing a challenge, finishing it fast, or nailing a perfect wake (up to 50 max). Journal entries give 3 XP. Each daily streak day adds 5 XP. Achievements grant 50 XP, and winning a wake duel adds 100 XP. XP fuels levels, unlocks titles and badges, and feeds your friends&rsquo; activity feed.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-1">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">Can I sync across multiple devices?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes. Sign in with Google or email and your alarms, profile, gamification, friends and feed sync across your Android devices. Raw biometrics (the half-minute sleep samples, snore clips, heart-rate readings) stay on each device &mdash; only summary stats sync. The app also works fully offline; it syncs when you're back online.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">Is my data private and secure?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes. Local data is encrypted at rest. Sleep biometrics, snore recordings and journal notes stay on your device. Cloud sync is opt-in and only carries the minimum needed for cross-device continuity (alarms, achievements, friends). We never sell data, and you can delete everything from settings.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-2">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">Does Nooze work with smart home devices?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Yes (Premium). Nooze integrates with Home Assistant and generic webhooks. Trigger lights, blinds, kettles or any other device when your alarm fires &mdash; or set up a gradual lighting scene that ramps up alongside the volume.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item holo-card holo-card-no-pad reveal delay-3">
-                    <h2><button class="faq-question w-full text-left flex justify-between items-center p-6" aria-expanded="false">
-                        <span class="text-lg font-semibold text-white pr-4">How do I contact support?</span>
-                        <svg class="w-5 h-5 text-primary faq-chevron flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button></h2>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 leading-relaxed">Email us at <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a> or use the <a href="contact.html" class="text-primary hover:underline">Contact page</a>. You can also reach us on <a href="https://x.com/NoozeAlarm" target="_blank" rel="noopener" class="text-primary hover:underline">X (@NoozeAlarm)</a> or <a href="https://www.tiktok.com/@nooze.alarm.app" target="_blank" rel="noopener" class="text-primary hover:underline">TikTok (@nooze.alarm.app)</a>.</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- CTA -->
-        <section class="py-28 relative hero-bg overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid" style="opacity:0.7;"></div>
-            <div class="orb orb-2" style="opacity:0.2;"></div>
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="holo-card reveal"><div class="holo-card-inner text-center" style="padding:48px 32px;">
-                    <span class="holo-chip mb-6"><span class="dot"></span> Still curious</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Still Have <span class="iris-text">Questions?</span></h2>
-                    <p class="text-gray-400 text-lg mb-10">If something's not covered here, drop us a line &mdash; we read everything.</p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a href="mailto:noozesupport@gmail.com" class="btn-primary"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Email Support</span></a>
-                        <a href="features.html" class="btn-outline"><span>Browse Features</span></a>
-                    </div>
-                </div></div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
+</main>
 </BaseLayout>
+
+<script>
+    // Deep links: open the targeted question (and keep it open on hash changes).
+    function openFromHash() {
+        const id = decodeURIComponent(location.hash.slice(1));
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el instanceof HTMLDetailsElement) el.open = true;
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+
+    // Topic index: mark the topic currently under the reading line.
+    const nav = document.querySelector('[data-spy]');
+    if (nav && 'IntersectionObserver' in window) {
+        const links = new Map();
+        nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+            const target = document.getElementById(a.hash.slice(1));
+            if (target) links.set(target, a);
+        });
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                if (!e.isIntersecting) return;
+                links.forEach((a) => a.removeAttribute('aria-current'));
+                links.get(e.target)?.setAttribute('aria-current', 'true');
+            });
+        }, { rootMargin: '-30% 0px -65% 0px' });
+        links.forEach((_, target) => io.observe(target));
+    }
+</script>
+
+<style>
+
+    .faq { padding-top: clamp(56px, 7vw, 104px); }
+    .faq-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+        gap: clamp(40px, 6vw, 96px);
+        align-items: start;
+    }
+    .faq-aside { position: sticky; top: calc(var(--nav-h) + 40px); }
+
+    /* Topic index */
+    .faq-index-label { margin: 0 0 18px; }
+    .faq-index ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .faq-index li { border-bottom: 1px solid var(--line); }
+    .faq-index a {
+        position: relative;
+        display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+        min-height: 52px; padding: 15px 0;
+        color: var(--fg-2); font-size: 16px; font-weight: 500;
+        transition: color 0.25s var(--ease-out), padding-left 0.45s var(--ease-out);
+    }
+    .faq-index a::before {
+        content: ''; position: absolute; left: 0; top: 50%;
+        width: 14px; height: 2px; margin-top: -1px; border-radius: 1px;
+        background: var(--red);
+        transform: scaleX(0); transform-origin: left;
+        transition: transform 0.45s var(--ease-out);
+    }
+    .faq-index a:hover { color: var(--fg); }
+    .faq-index a[aria-current] { color: var(--fg); padding-left: 26px; }
+    .faq-index a[aria-current]::before { transform: scaleX(1); }
+    .faq-index-count { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); font-variant-numeric: tabular-nums; }
+
+    /* Questions */
+    .faq-group { scroll-margin-top: calc(var(--nav-h) + 24px); }
+    .faq-group + .faq-group { margin-top: clamp(64px, 7vw, 104px); }
+    .faq-group-title {
+        margin: 0 0 22px;
+        font-size: clamp(26px, 2.4vw, 34px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1;
+    }
+    .faq-list { border-top: 1px solid var(--line-2); }
+
+    .qa { border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--nav-h) + 24px); }
+    .qa summary {
+        display: grid; grid-template-columns: minmax(0, 1fr) 32px; align-items: center; gap: 24px;
+        min-height: 44px; padding: 24px 0;
+        list-style: none; cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .qa summary::-webkit-details-marker { display: none; }
+    .qa summary::marker { content: ''; }
+    .qa-q {
+        font-family: var(--font-display); font-size: clamp(19px, 1.55vw, 22px); font-weight: 500;
+        letter-spacing: -0.015em; line-height: 1.3; color: var(--fg);
+    }
+    .qa-icon {
+        position: relative; width: 32px; height: 32px; border-radius: 999px;
+        color: var(--fg-2); box-shadow: inset 0 0 0 1px var(--line-2);
+        transition: transform 0.55s var(--ease-spring), color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+    }
+    .qa-icon::before, .qa-icon::after {
+        content: ''; position: absolute; left: 50%; top: 50%;
+        width: 12px; height: 1.5px; margin: -0.75px 0 0 -6px; border-radius: 1px;
+        background: currentColor;
+    }
+    .qa-icon::after { transform: rotate(90deg); }
+    .qa summary:hover .qa-icon { color: var(--fg); box-shadow: inset 0 0 0 1px var(--line-3); }
+    .qa[open] .qa-icon { transform: rotate(45deg); color: var(--red); box-shadow: inset 0 0 0 1px var(--red-line); }
+
+    .qa-a { padding: 0 56px 30px 0; max-width: 64ch; color: var(--fg-2); }
+    .qa-a :global(p) { margin: 0; }
+    .qa-a :global(p + p) { margin-top: 0.9em; }
+
+    /* Smooth open where the browser can animate to height: auto (Chromium 131+). */
+    @supports selector(::details-content) {
+        @media (prefers-reduced-motion: no-preference) {
+            .qa { interpolate-size: allow-keywords; }
+            .qa::details-content {
+                block-size: 0; overflow-y: clip;
+                transition: block-size 0.5s var(--ease-out), content-visibility 0.5s allow-discrete;
+            }
+            .qa[open]::details-content { block-size: auto; }
+        }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+        .qa[open] .qa-a { animation: qa-in 0.5s var(--ease-out) both; }
+    }
+    @keyframes qa-in { from { opacity: 0; transform: translateY(-6px); } }
+
+    /* Closing prompt */
+    .faq-ask {
+        display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 8px 32px; align-items: baseline;
+        margin-top: clamp(64px, 7vw, 104px); padding-top: 28px;
+        border-top: 1px solid var(--line-2);
+    }
+    .faq-ask-q { margin: 0; font-family: var(--font-display); font-size: clamp(22px, 1.9vw, 26px); font-weight: 600; letter-spacing: -0.02em; color: var(--fg); }
+    .faq-ask-body { margin: 0; color: var(--fg-2); }
+
+    @media (max-width: 900px) {
+        .faq-grid { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+        .faq-aside { position: static; }
+        .faq-index ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; }
+        .faq-index a[aria-current] { padding-left: 0; }
+        .faq-index a[aria-current]::before { transform: scaleX(0); }
+        .faq-ask { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 520px) {
+        .qa summary { gap: 16px; padding: 20px 0; }
+        .qa-a { padding-right: 0; }
+        .faq-index a { font-size: 15px; }
+    }
+</style>

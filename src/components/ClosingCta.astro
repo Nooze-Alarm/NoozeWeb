@@ -1,0 +1,25 @@
+---
+// Shared closing call to action. Pages may override the title/lede/secondary link.
+import PlayButton from './PlayButton.astro';
+const {
+    title = 'Set it tonight. <br />Get up tomorrow.',
+    lede = 'Nooze is free on Android. Premium is optional, and you can cancel any time in Google Play.',
+    secondary = { href: '/features.html', label: 'See every feature' },
+} = Astro.props;
+---
+<section class="nz-section nz-cta" aria-labelledby="nzCtaTitle">
+    <div class="nz-container nz-cta-inner nz-reveal">
+        <img class="nz-cta-mark" src="/assets/logo-160.webp" alt="" width="72" height="72" loading="lazy" />
+        <h2 class="nz-h2" id="nzCtaTitle" set:html={title} />
+        <p class="nz-lede">{lede}</p>
+        <div class="nz-btn-group" style="justify-content:center">
+            <PlayButton />
+            {secondary && (
+                <a class="nz-arrowlink" href={secondary.href}>
+                    <span>{secondary.label}</span>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+                </a>
+            )}
+        </div>
+    </div>
+</section>

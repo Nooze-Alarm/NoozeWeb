@@ -1,212 +1,310 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { launch } from '../data/launch';
+
+// Reverse chronological: what's next sits above the red "now" line, what's shipped below it.
+// Only items that are really planned go in `planned`; anything in the store listing is shipped.
+const planned = [
+    { title: 'iPhone version', body: 'Nooze for iOS is in the works. No date yet.' },
+    { title: 'Anagram challenge', body: 'A tenth wake-up challenge: unscramble a word to switch off your alarm.' },
+    { title: 'Sleep coaching', body: 'Simple, personalised suggestions based on your tracked sleep and wake times. General wellness tips, not medical advice.' },
+    { title: 'Alarm sharing', body: 'Share alarm set-ups with friends, and line up alarm times for group plans.' },
+    { title: 'More sleep sounds', body: 'A bigger sound library, with more soundscapes, binaural beats and ASMR-style tracks.' },
+    { title: 'Community challenges', body: 'Weekly challenges where everyone using Nooze competes for rewards together.' },
+];
+
+const now = [
+    {
+        title: 'Google Play release',
+        body: 'Nooze Sleep Tracker & Alarm is live and free to download on Android.',
+        link: { href: launch.playUrl, label: 'Open on Google Play', external: true },
+    },
+    {
+        title: 'Premium subscriptions',
+        body: 'Optional monthly (€1.99) and yearly (€13.99) plans through Google Play Billing. Cancel any time in Google Play.',
+    },
+];
+
+const shipped = [
+    {
+        group: 'Waking up',
+        items: [
+            { title: 'Smart wake', body: 'Set a 15, 20 or 30-minute window and Nooze picks an estimated lighter moment of sleep inside it to ring.' },
+            { title: 'Nine wake-up challenges', body: 'Math, memory, shake, steps, read a sentence aloud, QR or barcode, NFC tag, typing and photo, each with easy, medium and hard levels.' },
+            { title: 'Wake-up check', body: 'A few minutes after the alarm, Nooze asks if you’re still up. Ignore it and the alarm rings again.' },
+            { title: 'Naps', body: 'One-tap 20, 30 or 45-minute naps.' },
+        ],
+    },
+    {
+        group: 'Streaks and friends',
+        items: [
+            { title: 'XP and achievements', body: 'XP, levels, quests, achievements, streak bonuses and unlockable titles.' },
+            { title: 'Friends and wake duels', body: 'Friends, leaderboards, an activity feed and wake duels: whoever gets up on time more often wins.' },
+            { title: 'Wake-up buddy', body: 'A friend who gets one nudge if you miss your wake-up check.' },
+            { title: 'Squads', body: 'Up to four people sharing one streak.' },
+        ],
+    },
+    {
+        group: 'Sleep and privacy',
+        items: [
+            { title: 'Health Connect', body: 'Sleep and heart-rate data from Health Connect, with a compatible band or watch.' },
+            { title: 'Privacy and cloud sync', body: 'Encrypted local storage. Sensor, microphone and Health Connect data stay on your phone; with an account, your profile, XP and social activity sync.' },
+        ],
+    },
+    {
+        group: 'Around your phone',
+        items: [
+            { title: 'Widgets and lock screen', body: 'Home-screen widgets, plus a live countdown to your next alarm on the lock screen.' },
+            { title: 'Wear OS companion', body: 'A next-alarm tile, and alarms that ring on your watch.' },
+            { title: 'Smart home', body: 'Home Assistant, Tuya, Tellur or any webhook, for example to bring the lights up as you wake.', premium: true },
+            { title: 'Twelve themes', body: 'Six free themes, plus six more and animated backgrounds with Premium.' },
+        ],
+    },
+];
+
+const shippedCount = now.length + shipped.reduce((n, g) => n + g.items.length, 0);
 ---
 <BaseLayout
-    title={"Nooze Roadmap – Upcoming Smart Alarm Features"}
+    title={"Roadmap: what’s built and what’s next | Nooze Alarm"}
     description={"See what's next for Nooze: upcoming features, improvements and the development roadmap for the smart alarm and sleep tracker app."}
     keywords={"nooze roadmap, nooze upcoming features, nooze development, alarm app roadmap"}
     canonical={"roadmap.html"}
-    ogTitle={"Nooze Roadmap - What's Coming Next"}
+    ogTitle={"Nooze roadmap: what’s built and what’s next"}
     ogDescription={"See what's planned for Nooze: upcoming features, improvements, and the development roadmap."}
+    active={"roadmap"}
 >
 
   <Fragment slot="head">
     <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Roadmap\",\"item\":\"https://noozealarm.com/roadmap.html\"}]}"} />
   </Fragment>
 
-<main class="flex-1 pt-16">
-        <!-- Hero -->
-        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid"></div>
-            <div class="orb orb-1"></div>
-            <div class="orb orb-2"></div>
-            <div class="scanlines"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Where we&rsquo;re heading</span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">
-                    Development <span class="iris-text">Roadmap</span>
-                </h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">What's built, what's launching, and what's next on the way to making the best alarm on Android.</p>
-            </div>
-        </section>
+<main id="main" class="flex-1">
+    <PageHeader
+        title="What’s built, and what’s&nbsp;next."
+        lede="Nooze is live on Google Play. Here’s everything in the app today, and the ideas queued up after it."
+    >
+        <dl class="rm-sum">
+            <div><dt>Shipped</dt><dd>{shippedCount}</dd></div>
+            <div><dt>Planned</dt><dd>{planned.length}</dd></div>
+            <div><dt>Updated</dt><dd>Nov 2026</dd></div>
+        </dl>
+    </PageHeader>
 
-        <div class="section-divider"></div>
+    <section class="nz-section rm" aria-label="Roadmap timeline">
+        <div class="nz-container">
 
-        <!-- Completed -->
-        <section class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center gap-3 mb-10 reveal">
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    <h2 class="text-2xl font-bold text-white">Shipped</h2>
-                    <div class="flex-1 h-px bg-green-500/20"></div>
+            <!-- Planned: dashed rail -->
+            <div class="rm-group rm-group--planned" aria-labelledby="rmPlanned">
+                <div class="rm-aside">
+                    <div class="rm-aside-in">
+                        <p class="rm-state">Planned</p>
+                        <h2 class="rm-h" id="rmPlanned">Next up</h2>
+                        <p class="rm-note">No fixed dates. Order can change.</p>
+                    </div>
                 </div>
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">Smart Wake Technology</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Hybrid sleep detection with configurable 15/20/30-min wake windows.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">7 Wake Challenges</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Math, memory, shake, typing, QR scan, photo capture and NFC scan &mdash; with three difficulty levels. Anagram coming soon.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">Gamification System</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">XP, levels, quests, achievements, streak bonuses, and unlockable titles.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">Social Features</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Friend system, leaderboards, wake duels, and activity feed.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">Health Connect Hub</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Heart rate, SpO₂ and sleep-stage data from any compatible wearable &mdash; Fitbit, Garmin, Oura, Whoop, Samsung Health and more.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">Smart Home</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Home Assistant + webhook support for gradual wake-up lighting.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">12 Themes</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">6 free + 6 premium animated gradient themes with full customization.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
-                        <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="text-white font-medium">Cloud Sync &amp; Privacy</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Encrypted local storage, opt-in cloud sync for alarms and gamification, biometrics stay on device.</p>
-                    </div>
+                <div class="rm-track">
+                    <ul class="rm-list" data-stagger>
+                        {planned.map((it) => (
+                            <li class="rm-item nz-reveal">
+                                <h3 class="rm-item-title">{it.title}</h3>
+                                <p class="rm-item-body">{it.body}</p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
-        </section>
 
-        <div class="section-divider"></div>
-
-        <!-- In Progress -->
-        <section class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center gap-3 mb-10 reveal">
-                    <div class="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
-                    <h2 class="text-2xl font-bold text-white">In Progress</h2>
-                    <div class="flex-1 h-px bg-primary/20"></div>
+            <!-- Now: the red line -->
+            <div class="rm-group rm-group--now" aria-labelledby="rmNow">
+                <span class="rm-nowline" aria-hidden="true"></span>
+                <div class="rm-aside">
+                    <div class="rm-aside-in">
+                        <p class="rm-state rm-state--now"><span class="nz-live-dot" aria-hidden="true"></span>Now</p>
+                        <h2 class="rm-h" id="rmNow">Live on Google Play</h2>
+                        <p class="rm-note">November 2026</p>
+                    </div>
                 </div>
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="holo-card holo-card-no-pad roadmap-item pulse-glow reveal delay-1">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
-                                <div class="w-2 h-2 rounded-full bg-primary"></div>
-                            </div>
-                            <h3 class="text-white font-medium">Return to Google Play</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Maintenance work to bring Nooze back to the Play Store. Existing installs keep working in the meantime.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item pulse-glow reveal delay-2">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
-                                <div class="w-2 h-2 rounded-full bg-primary"></div>
-                            </div>
-                            <h3 class="text-white font-medium">Premium Subscriptions</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Google Play Billing integration for monthly and yearly premium plans.</p>
-                    </div>
+                <div class="rm-track">
+                    <ul class="rm-list">
+                        {now.map((it) => (
+                            <li class="rm-item">
+                                <h3 class="rm-item-title">{it.title}</h3>
+                                <div class="rm-item-body">
+                                    <p>{it.body}</p>
+                                    {it.link && (
+                                        <a class="nz-arrowlink rm-item-link" href={it.link.href} target="_blank" rel="noopener noreferrer">
+                                            <span>{it.link.label}</span>
+                                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+                                            <span class="sr-only"> (opens Google Play)</span>
+                                        </a>
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
-        </section>
 
-        <div class="section-divider"></div>
-
-        <!-- Planned -->
-        <section class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center gap-3 mb-10 reveal">
-                    <div class="w-3 h-3 rounded-full bg-accent-light"></div>
-                    <h2 class="text-2xl font-bold text-white">Planned</h2>
-                    <div class="flex-1 h-px bg-accent/20"></div>
-                </div>
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
-                            <h3 class="text-white font-medium">Home Screen Widgets</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Glanceable alarm status, next alarm countdown, and sleep stats widgets.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-1">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
-                            <h3 class="text-white font-medium">Sleep Coaching</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Personalized tips and insights based on your sleep patterns and trends.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
-                            <h3 class="text-white font-medium">Alarm Sharing</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Share alarm configurations with friends. Sync alarm times for group activities.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-2">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
-                            <h3 class="text-white font-medium">Wear OS Companion</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Smartwatch app for silent haptic alarms and direct sleep tracking from your wrist.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
-                            <h3 class="text-white font-medium">More Sleep Sounds</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Expanded soundscape library with binaural beats and ASMR-style tracks.</p>
-                    </div>
-                    <div class="holo-card holo-card-no-pad roadmap-item reveal delay-3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-5 h-5 rounded-full border-2 border-accent-light/50"></div>
-                            <h3 class="text-white font-medium">Community Challenges</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">Global weekly challenges where all users compete for rewards together.</p>
+            <!-- Shipped: solid rail, grouped -->
+            <div class="rm-group rm-group--shipped" aria-labelledby="rmShipped">
+                <div class="rm-aside">
+                    <div class="rm-aside-in">
+                        <p class="rm-state">Shipped</p>
+                        <h2 class="rm-h" id="rmShipped">In the app today</h2>
+                        <p class="rm-note">Free unless marked Premium.</p>
                     </div>
                 </div>
+                <div class="rm-track">
+                    {shipped.map((g) => (
+                        <div class="rm-cluster">
+                            <h3 class="rm-cluster-h">{g.group}</h3>
+                            <ul class="rm-list" data-stagger>
+                                {g.items.map((it) => (
+                                    <li class="rm-item nz-reveal">
+                                        <h4 class="rm-item-title">
+                                            {it.title}
+                                            {it.premium && <span class="nz-tag rm-tag">Premium</span>}
+                                        </h4>
+                                        <p class="rm-item-body">{it.body}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </section>
 
-        <div class="section-divider"></div>
+        </div>
+    </section>
 
-        <!-- Suggest -->
-        <section class="py-28 relative hero-bg overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid" style="opacity:0.7;"></div>
-            <div class="orb orb-2" style="opacity:0.2;"></div>
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="holo-card reveal"><div class="holo-card-inner text-center" style="padding:48px 32px;">
-                    <span class="holo-chip mb-6"><span class="dot"></span> Your call</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Have a <span class="iris-text">Feature</span> Idea?</h2>
-                    <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10">Nooze gets shaped by the people who use it. If something's missing or could be better, send it over.</p>
-                    <a href="mailto:noozesupport@gmail.com?subject=Feature%20Suggestion" class="btn-primary"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg><span>Suggest a Feature</span></a>
-                </div></div>
-            </div>
-        </section>
-    </main>
+    <!-- Feature ideas -->
+    <section class="nz-section nz-cta" aria-labelledby="rmAskTitle">
+        <div class="nz-container nz-cta-inner nz-reveal">
+            <h2 class="nz-h2" id="rmAskTitle">Have a feature idea?</h2>
+            <p class="nz-lede">Nooze gets shaped by the people who use it. If something’s missing or could be better, send it over.</p>
+            <a class="nz-btn nz-btn--primary nz-btn--icon" href="mailto:noozealarm@gmail.com?subject=Feature%20suggestion">
+                <span>Suggest a feature</span>
+                <span class="nz-btn-icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+                </span>
+            </a>
+            <p class="nz-cta-note">Opens your email app, addressed to noozealarm@gmail.com</p>
+        </div>
+    </section>
+</main>
 </BaseLayout>
+
+<style>
+    /* ---- Header summary ---- */
+    .rm-sum { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0; margin: 44px 0 0; }
+    .rm-sum > div { padding: 2px 28px 2px 0; }
+    .rm-sum > div + div { padding-left: 28px; border-left: 1px solid var(--line-2); }
+    .rm-sum dt { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); }
+    .rm-sum dd { margin: 8px 0 0; font-family: var(--font-display); font-size: 28px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; color: var(--fg); font-variant-numeric: tabular-nums; }
+
+    /* ---- Timeline ----
+       One continuous rail. Above the red "now" line it is dashed (not built yet),
+       below it solid (shipped). Each row gets a minute tick on the rail. */
+    .rm { --aside: clamp(230px, 26vw, 340px); --gap: clamp(32px, 4.5vw, 64px); --rail-x: var(--aside); padding-bottom: 0; }
+    .rm-group--shipped .rm-track { padding-bottom: clamp(64px, 7vw, 96px); }
+    .rm-group { position: relative; display: grid; grid-template-columns: var(--aside) minmax(0, 1fr); }
+    .rm-group::after {
+        content: ''; position: absolute; top: 0; bottom: 0; left: var(--rail-x); width: 1px;
+        background: var(--line-3);
+    }
+    .rm-group--planned::after { background: repeating-linear-gradient(to bottom, var(--line-3) 0 4px, transparent 4px 10px); }
+    .rm-group--shipped::after { background: linear-gradient(to bottom, var(--line-3) calc(100% - 140px), transparent); }
+
+    .rm-aside { padding-right: var(--gap); }
+    .rm-aside-in { position: sticky; top: calc(var(--nav-h) + 40px); padding-bottom: 40px; }
+    .rm-track { padding: 0 0 clamp(72px, 8vw, 112px) var(--gap); min-width: 0; }
+
+    .rm-state {
+        display: inline-flex; align-items: center; gap: 10px; margin: 0;
+        font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3);
+    }
+    .rm-state--now { color: var(--red); }
+    .rm-h { margin: 16px 0 0; font-size: clamp(26px, 2.3vw, 34px); line-height: 1.05; letter-spacing: -0.03em; }
+    .rm-note { margin: 12px 0 0; font-size: 14.5px; color: var(--fg-3); }
+
+    .rm-list { list-style: none; margin: 0; padding: 0; }
+    .rm-item {
+        position: relative;
+        display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 6px 32px; align-items: baseline;
+        padding: 22px 0; border-bottom: 1px solid var(--line);
+    }
+    .rm-list > .rm-item:first-child { padding-top: 4px; }
+    /* minute tick on the rail, level with the title */
+    .rm-item::before {
+        content: ''; position: absolute; top: 34px; left: calc(-1 * var(--gap) - 5px);
+        width: 11px; height: 1px; background: var(--fg-3);
+    }
+    .rm-list > .rm-item:first-child::before { top: 16px; }
+    .rm-group--planned .rm-item::before { background: var(--line-3); }
+    .rm-item-title {
+        margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
+        font-family: var(--font-display); font-size: clamp(19px, 1.5vw, 22px); font-weight: 600;
+        letter-spacing: -0.02em; line-height: 1.25; color: var(--fg);
+    }
+    .rm-group--planned .rm-item-title { color: var(--fg-2); }
+    .rm-item-body { margin: 0; color: var(--fg-2); font-size: 16px; line-height: 1.6; max-width: 52ch; }
+    .rm-item-body p { margin: 0; }
+    .rm-item-link { margin-top: 10px; padding: 10px 0; }
+    .rm-tag { padding: 4px 8px; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* Shipped clusters: a longer five-minute tick per group */
+    .rm-cluster + .rm-cluster { margin-top: clamp(40px, 4vw, 56px); }
+    .rm-cluster-h {
+        position: relative; margin: 0 0 14px;
+        font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-2);
+    }
+    .rm-cluster-h::before {
+        content: ''; position: absolute; top: 50%; left: calc(-1 * var(--gap) - 9px);
+        width: 19px; height: 2px; margin-top: -1px; background: var(--fg-2);
+    }
+    .rm-cluster .rm-list { border-top: 1px solid var(--line); }
+    .rm-cluster .rm-list > .rm-item:first-child { padding-top: 22px; }
+    .rm-cluster .rm-list > .rm-item:first-child::before { top: 34px; }
+
+    /* Now: a red current-time line across the timeline, with a dot on the rail */
+    .rm-group--now { padding-top: clamp(44px, 5vw, 64px); }
+    .rm-group--now .rm-aside-in { position: static; }
+    .rm-nowline {
+        position: absolute; left: 0; right: 0; top: 0; height: 1px;
+        background: linear-gradient(to right, var(--red-line), var(--red) var(--rail-x), var(--red-line));
+    }
+    .rm-nowline::after {
+        content: ''; position: absolute; top: -4px; left: calc(var(--rail-x) - 4px);
+        width: 9px; height: 9px; border-radius: 50%; background: var(--red);
+        box-shadow: 0 0 0 4px var(--ink-0);
+    }
+    .rm-group--now .rm-item::before { background: var(--fg-2); }
+
+    /* Ask block */
+    .nz-cta .nz-btn { margin-top: 4px; }
+
+    @media (max-width: 900px) {
+        .rm { --gap: 28px; --rail-x: 0px; }
+        .rm-group { grid-template-columns: minmax(0, 1fr); padding-left: var(--gap); }
+        .rm-aside { padding-right: 0; }
+        .rm-aside-in { position: static; padding-bottom: 28px; }
+        .rm-track { padding-left: 0; }
+        .rm-item { grid-template-columns: minmax(0, 1fr); }
+        .rm-group--now { padding-top: 40px; }
+        .rm-nowline { background: linear-gradient(to right, var(--red), var(--red-line)); }
+        .rm-nowline::after { left: -4px; }
+        /* status labels sit on the rail too */
+        .rm-state::before {
+            content: ''; position: absolute; left: -5px; margin-top: 0; width: 11px; height: 1px; background: var(--fg-3);
+        }
+        .rm-state--now::before { display: none; }
+    }
+    @media (max-width: 520px) {
+        .rm-sum > div { padding-right: 16px; }
+        .rm-sum > div + div { padding-left: 16px; }
+        .rm-sum dd { font-size: 22px; }
+    }
+</style>

@@ -3,8 +3,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import LaunchBar from '../components/LaunchBar.astro';
 import Nav from '../components/Nav.astro';
+import Splash from '../components/Splash.astro';
 import Footer from '../components/Footer.astro';
 import BackToTop from '../components/BackToTop.astro';
 
@@ -73,26 +73,28 @@ const ogImage = `${SITE}/assets/og-image.jpg`;
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#050510" />
+    <meta name="theme-color" content="#06080d" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- Fonts: self-hosted (no third-party requests) -->
+    <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <link rel="stylesheet" href={asset('/css/tailwind.css')} />
-    <link rel="stylesheet" href={asset('/css/styles.css')} />
+    <link rel="stylesheet" href={asset('/css/site.css')} />
 
-    <script is:inline>try{if(sessionStorage.getItem('nooze_pixel_transition'))document.write('<style id="pxl-hide">body{visibility:hidden;animation:pxl-show 0s 1.5s forwards}@keyframes pxl-show{to{visibility:visible}}</style>')}catch(e){}</script>
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <script is:inline>try{var nzN=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0],nzT=nzN?nzN.type:'navigate';if(nzT==='navigate'&&!sessionStorage.getItem('nz_splash')&&(location.pathname==='/'||location.pathname==='/index.html')&&!document.hidden&&location.search.indexOf('nosplash')<0)document.documentElement.classList.add('nz-splash-on');sessionStorage.setItem('nz_splash','1')}catch(e){}</script>
 
+    <noscript><style>.reveal,.reveal-left,.reveal-right,.reveal-scale,.nz-reveal{opacity:1!important;transform:none!important}</style></noscript>
     <slot name="head" />
 </head>
 <body class="min-h-screen flex flex-col">
-    <canvas id="particles"></canvas>
-    <LaunchBar />
+    <a class="nz-skip" href="#main">Skip to content</a>
+    <Splash />
     <Nav active={active} />
 
     <slot />

@@ -1,10 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+// Section list drives both the h2s and the table of contents.
+const sections = [
+    { id: 'provider', title: 'Service provider' },
+    { id: 'service', title: 'Description of service' },
+    { id: 'acceptance', title: 'Acceptance of terms' },
+    { id: 'account', title: 'User account' },
+    { id: 'license', title: 'License to use' },
+    { id: 'premium', title: 'Paid services (Nooze Premium)' },
+    { id: 'permissions', title: 'Device permissions' },
+    { id: 'availability', title: 'Availability' },
+    { id: 'liability', title: 'Limitation of liability' },
+    { id: 'smart-home', title: 'Smart home integration' },
+    { id: 'ip', title: 'Intellectual property' },
+    { id: 'conduct', title: 'Prohibited conduct' },
+    { id: 'termination', title: 'Termination' },
+    { id: 'changes', title: 'Changes to the Terms' },
+    { id: 'law', title: 'Governing law and jurisdiction' },
+    { id: 'contact', title: 'Contact' },
+];
+const pad = (i) => String(i + 1).padStart(2, '0');
+const idx = (id) => sections.findIndex((s) => s.id === id);
+const n = (id) => pad(idx(id));
+const t = (id) => sections[idx(id)].title;
 ---
 <BaseLayout
-    title={"Terms & Conditions – Nooze Alarm"}
+    title={"Terms and conditions | Nooze Alarm"}
     description={"The Terms and Conditions governing your use of the Nooze Alarm application."}
-    keywords={"contact nooze, nooze support, nooze alarm help, nooze privacy policy, nooze terms and conditions"}
+    keywords={"nooze terms and conditions, nooze terms of use, nooze premium subscription terms, nooze alarm legal"}
     canonical={"terms.html"}
 >
 
@@ -12,161 +37,265 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Terms and Conditions\",\"item\":\"https://noozealarm.com/terms.html\"}]}"} />
   </Fragment>
 
-<main class="flex-1 pt-16">
-        <section class="hero-bg pt-32 pb-16 relative overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid"></div>
-            <div class="orb orb-1"></div>
-            <div class="scanlines"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <span class="holo-chip mb-6 reveal"><span class="dot"></span> The fine print</span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 reveal delay-1 tracking-tight">Terms &amp; <span class="iris-text">Conditions</span></h1>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto reveal delay-2">The agreement that governs your use of Nooze Alarm.</p>
-            </div>
-        </section>
+<main id="main" class="flex-1">
+    <PageHeader
+        compact
+        title="Terms and conditions"
+        lede="The Terms and Conditions of Use for Nooze Alarm: the agreement that governs your use of the app."
+    >
+        <dl class="legal-meta">
+            <div><dt>Last updated</dt><dd><time datetime="2026-04-11">April 11, 2026</time></dd></div>
+            <div><dt>Governing law</dt><dd>Republic of Bulgaria</dd></div>
+            <div><dt>Contact</dt><dd><a class="nz-link" href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a></dd></div>
+        </dl>
+    </PageHeader>
 
-        <div class="section-divider"></div>
+    <div class="nz-container legal">
+        <aside class="legal-aside">
+            <nav class="legal-toc" aria-label="Contents" data-spy>
+                <p class="nz-meta legal-toc-label">Contents</p>
+                <ol>
+                    {sections.map((s, i) => (
+                        <li><a href={`#${s.id}`}><span class="legal-toc-n">{pad(i)}</span><span>{s.title}</span></a></li>
+                    ))}
+                </ol>
+            </nav>
+        </aside>
 
-        <section class="py-20" id="terms">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="holo-card"><div class="holo-card-inner" style="padding:40px;">
-                    <h2 class="text-2xl font-bold text-white mb-6">Terms and Conditions of Use for Nooze Alarm</h2>
-                    <p class="text-gray-500 text-sm mb-6">Last updated: April 11, 2026</p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Please read these Terms and Conditions (&ldquo;Terms&rdquo;) carefully before using the Nooze Alarm mobile application (&ldquo;Application&rdquo;). By tapping &ldquo;I Accept&rdquo;, you confirm that you have read, understood, and agree to be bound by these Terms. If you do not agree, you may not use the Application.</p>
+        <details class="legal-toc-m">
+            <summary><span>Contents</span><span class="legal-toc-m-count">{sections.length} sections</span><span class="legal-toc-m-icon" aria-hidden="true"></span></summary>
+            <nav aria-label="Contents">
+                <ol>
+                    {sections.map((s, i) => (
+                        <li><a href={`#${s.id}`}><span class="legal-toc-n">{pad(i)}</span><span>{s.title}</span></a></li>
+                    ))}
+                </ol>
+            </nav>
+        </details>
 
-                    <div class="space-y-6 text-gray-400 text-sm leading-relaxed">
-                        <!-- 1. Service Provider -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">1. Service Provider</h3>
-                            <p>Nooze Alarm is provided by its developer under the laws of the Republic of Bulgaria (&ldquo;Provider&rdquo;). Contact: <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a>.</p>
-                        </div>
+        <article class="nz-prose legal-body" id="terms">
+            <p class="legal-intro">Please read these Terms and Conditions (“Terms”) carefully before using the Nooze Alarm mobile application (“Application”). By tapping “I Accept”, you confirm that you have read, understood, and agree to be bound by these Terms. If you do not agree, you may not use the Application.</p>
 
-                        <!-- 2. Description of Service -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">2. Description of Service</h3>
-                            <p class="mb-2">Nooze Alarm is an application for alarm management, sleep tracking, and gamification of daily habits. The Application offers:</p>
-                            <ul class="list-disc list-inside space-y-1 ml-2">
-                                <li>Alarm setup and management (no snooze by design);</li>
-                                <li>Sleep recording and analysis via accelerometer, microphone, and Health Connect;</li>
-                                <li>Smart wake (wakes you during light sleep within your chosen window);</li>
-                                <li>Sleep and mood journal;</li>
-                                <li>Achievement, level, and quest system;</li>
-                                <li>Social features (friends, leaderboards, wake duels);</li>
-                                <li>Sleep sounds and bedtime reminders;</li>
-                                <li>Smart home integration;</li>
-                                <li>Paid Premium features (&ldquo;Nooze Premium&rdquo;).</li>
-                            </ul>
-                        </div>
+            <section class="legal-sec" id="provider">
+                <h2><span class="sec-n">{n('provider')}</span>{t('provider')}</h2>
+                <p>Nooze Alarm is provided by its developer under the laws of the Republic of Bulgaria (“Provider”). Contact: <a href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a>.</p>
+            </section>
 
-                        <!-- 3. Acceptance of Terms -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">3. Acceptance of Terms</h3>
-                            <p>Access to and use of the Application is provided on the condition that you accept and comply with these Terms. The Terms apply to all visitors, users, and other persons accessing or using the Application. The minimum age to use the Application is 16 years.</p>
-                        </div>
+            <section class="legal-sec" id="service">
+                <h2><span class="sec-n">{n('service')}</span>{t('service')}</h2>
+                <p>Nooze Alarm is an application for alarm management, sleep tracking, and gamification of daily habits. The Application offers:</p>
+                <ul>
+                    <li>Alarm setup and management (no snooze by design);</li>
+                    <li>Sleep recording and analysis via accelerometer, microphone, and Health Connect;</li>
+                    <li>Smart wake (rings at an estimated lighter moment of sleep within your chosen wake window);</li>
+                    <li>Sleep and mood journal;</li>
+                    <li>Achievement, level, and quest system;</li>
+                    <li>Social features (friends, leaderboards, wake duels);</li>
+                    <li>Sleep sounds and bedtime reminders;</li>
+                    <li>Smart home integration;</li>
+                    <li>Paid Premium features (“Nooze Premium”).</li>
+                </ul>
+            </section>
 
-                        <!-- 4. User Account -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">4. User Account</h3>
-                            <p class="mb-2"><strong class="text-white">4.1.</strong> Upon registration you provide true, accurate, and complete information. You are responsible for maintaining the confidentiality of your password.</p>
-                            <p class="mb-2"><strong class="text-white">4.2.</strong> It is prohibited to use another person&rsquo;s credentials, share your account with third parties, or register accounts for fraudulent purposes.</p>
-                            <p><strong class="text-white">4.3.</strong> Upon account deletion, all personal data will be irreversibly deleted in accordance with Art. 17 of the GDPR (Regulation (EU) 2016/679).</p>
-                        </div>
+            <section class="legal-sec" id="acceptance">
+                <h2><span class="sec-n">{n('acceptance')}</span>{t('acceptance')}</h2>
+                <p>Access to and use of the Application is provided on the condition that you accept and comply with these Terms. The Terms apply to all visitors, users, and other persons accessing or using the Application. The minimum age to use the Application is 16 years.</p>
+            </section>
 
-                        <!-- 5. License to Use -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">5. License to Use</h3>
-                            <p>The Provider grants you a limited, non-exclusive, non-transferable license to install and use the Application on one mobile device for personal, non-commercial purposes. Decompiling, reverse engineering, distributing, or commercializing the Application without the Provider&rsquo;s express written consent is prohibited.</p>
-                        </div>
+            <section class="legal-sec" id="account">
+                <h2><span class="sec-n">{n('account')}</span>{t('account')}</h2>
+                <div class="clauses">
+                    <p class="clause"><span class="clause-n">4.1</span><span>Upon registration you provide true, accurate, and complete information. You are responsible for maintaining the confidentiality of your password.</span></p>
+                    <p class="clause"><span class="clause-n">4.2</span><span>It is prohibited to use another person’s credentials, share your account with third parties, or register accounts for fraudulent purposes.</span></p>
+                    <p class="clause"><span class="clause-n">4.3</span><span>Upon account deletion, all personal data will be irreversibly deleted in accordance with Art. 17 of the GDPR (Regulation (EU) 2016/679).</span></p>
+                </div>
+            </section>
 
-                        <!-- 6. Paid Services (Nooze Premium) -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">6. Paid Services (Nooze Premium)</h3>
-                            <p class="mb-2"><strong class="text-white">6.1.</strong> Nooze Premium is a subscription service providing additional features for a monthly or annual fee.</p>
-                            <p class="mb-2"><strong class="text-white">6.2.</strong> Prices are set in the Application and are subject to change with 30 days&rsquo; notice.</p>
-                            <p class="mb-2"><strong class="text-white">6.3.</strong> Payments are processed through Google Play Billing. The Provider does not store payment card data.</p>
-                            <p class="mb-2"><strong class="text-white">6.4.</strong> Subscriptions may be cancelled at any time. Upon cancellation, Premium features remain active until the end of the paid period.</p>
-                            <p><strong class="text-white">6.5.</strong> The right of withdrawal (14 days) is governed in accordance with applicable consumer protection law. For digital content where you have explicitly consented to immediate access, the right of withdrawal may not apply.</p>
-                        </div>
+            <section class="legal-sec" id="license">
+                <h2><span class="sec-n">{n('license')}</span>{t('license')}</h2>
+                <p>The Provider grants you a limited, non-exclusive, non-transferable license to install and use the Application on one mobile device for personal, non-commercial purposes. Decompiling, reverse engineering, distributing, or commercializing the Application without the Provider’s express written consent is prohibited.</p>
+            </section>
 
-                        <!-- 7. Device Permissions -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">7. Device Permissions</h3>
-                            <p class="mb-2">The Application may request the following permissions:</p>
-                            <ul class="list-disc list-inside space-y-1 ml-2">
-                                <li><strong class="text-white">Microphone</strong> &ndash; for snore detection at your discretion;</li>
-                                <li><strong class="text-white">Alarms / Exact Alarms</strong> &ndash; to ring the alarm at the precise time;</li>
-                                <li><strong class="text-white">Notifications</strong> &ndash; for reminders and alarms;</li>
-                                <li><strong class="text-white">Accelerometer</strong> &ndash; for tracking movement during sleep;</li>
-                                <li><strong class="text-white">Internet</strong> &ndash; for synchronisation and social features.</li>
-                            </ul>
-                            <p class="mt-2">Each permission is granted voluntarily. Denying a permission may limit certain features but does not block use of the Application.</p>
-                        </div>
+            <section class="legal-sec" id="premium">
+                <h2><span class="sec-n">{n('premium')}</span>{t('premium')}</h2>
+                <div class="clauses">
+                    <p class="clause"><span class="clause-n">6.1</span><span>Nooze Premium is a subscription service providing additional features for a monthly or annual fee.</span></p>
+                    <p class="clause"><span class="clause-n">6.2</span><span>Prices are set in the Application and are subject to change with 30 days’ notice.</span></p>
+                    <p class="clause"><span class="clause-n">6.3</span><span>Payments are processed through Google Play Billing. The Provider does not store payment card data.</span></p>
+                    <p class="clause"><span class="clause-n">6.4</span><span>Subscriptions may be cancelled at any time. Upon cancellation, Premium features remain active until the end of the paid period.</span></p>
+                    <p class="clause"><span class="clause-n">6.5</span><span>The right of withdrawal (14 days) is governed in accordance with applicable consumer protection law. For digital content where you have explicitly consented to immediate access, the right of withdrawal may not apply.</span></p>
+                </div>
+            </section>
 
-                        <!-- 8. Availability -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">8. Availability</h3>
-                            <p>The Application depends on your device hardware, operating system, and Android alarm scheduling APIs. We make no guarantee that alarms will fire under all conditions (e.g. battery optimisation, manufacturer-specific restrictions, or OS updates may affect alarm delivery). It is your responsibility to verify critical alarms and, where necessary, use a secondary alarm device.</p>
-                        </div>
+            <section class="legal-sec" id="permissions">
+                <h2><span class="sec-n">{n('permissions')}</span>{t('permissions')}</h2>
+                <p>The Application may request the following permissions:</p>
+                <ul>
+                    <li><strong>Microphone</strong>: for optional sound-based sleep estimates and snoring/noise events;</li>
+                    <li><strong>Alarms / Exact Alarms</strong>: to ring the alarm at the precise time;</li>
+                    <li><strong>Notifications</strong>: for reminders and alarms;</li>
+                    <li><strong>Accelerometer</strong>: for tracking movement during sleep;</li>
+                    <li><strong>Internet</strong>: for synchronisation and social features.</li>
+                </ul>
+                <p>Each permission is granted voluntarily. Denying a permission may limit certain features but does not block use of the Application.</p>
+            </section>
 
-                        <!-- 9. Limitation of Liability -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">9. Limitation of Liability</h3>
-                            <p class="mb-2"><strong class="text-white">9.1.</strong> The Application is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without any warranties.</p>
-                            <p class="mb-2"><strong class="text-white">9.2.</strong> To the maximum extent permitted by applicable law, the Provider is not liable for direct or indirect damages resulting from the use or inability to use the Application, including loss of data, lost profits, or missed alarms.</p>
-                            <p><strong class="text-white">9.3.</strong> Nooze Alarm does not replace medical or health advice. Sleep-tracking data is informational and is not a diagnostic tool.</p>
-                        </div>
+            <section class="legal-sec" id="availability">
+                <h2><span class="sec-n">{n('availability')}</span>{t('availability')}</h2>
+                <p>The Application depends on your device hardware, operating system, and Android alarm scheduling APIs. We make no guarantee that alarms will fire under all conditions (e.g. battery optimisation, manufacturer-specific restrictions, or OS updates may affect alarm delivery). It is your responsibility to verify critical alarms and, where necessary, use a secondary alarm device.</p>
+            </section>
 
-                        <!-- 10. Smart Home Integration -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">10. Smart Home Integration</h3>
-                            <p>If you choose to enable Smart Home integration, the Application will send event data (alarm fired, sleep started/ended) to third-party platforms explicitly selected and configured by you (e.g. Home Assistant, custom webhooks). The Provider has no control over those platforms&rsquo; data practices. No smart home data is sent without your explicit configuration.</p>
-                        </div>
+            <section class="legal-sec" id="liability">
+                <h2><span class="sec-n">{n('liability')}</span>{t('liability')}</h2>
+                <div class="clauses">
+                    <p class="clause"><span class="clause-n">9.1</span><span>The Application is provided “as is” and “as available” without any warranties.</span></p>
+                    <p class="clause"><span class="clause-n">9.2</span><span>To the maximum extent permitted by applicable law, the Provider is not liable for direct or indirect damages resulting from the use or inability to use the Application, including loss of data, lost profits, or missed alarms.</span></p>
+                    <p class="clause"><span class="clause-n">9.3</span><span>Nooze is not a medical device. Sleep phases, sleep quality scores, snoring detection and any heart-rate values shown in the app are approximations for general wellness and informational purposes only. Nooze does not diagnose, treat, cure or prevent any disease or medical condition and is not a substitute for professional medical advice.</span></p>
+                </div>
+            </section>
 
-                        <!-- 11. Intellectual Property -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">11. Intellectual Property</h3>
-                            <p>All rights in the Application, including source code, design, graphics, logo, the name &ldquo;Nooze Alarm&rdquo;, and content, belong to the Provider or to licensors and are protected by applicable copyright and intellectual property law.</p>
-                        </div>
+            <section class="legal-sec" id="smart-home">
+                <h2><span class="sec-n">{n('smart-home')}</span>{t('smart-home')}</h2>
+                <p>If you choose to enable Smart Home integration, the Application will send event data (alarm fired, sleep started/ended) to third-party platforms explicitly selected and configured by you (e.g. Home Assistant, custom webhooks). The Provider has no control over those platforms’ data practices. No smart home data is sent without your explicit configuration.</p>
+            </section>
 
-                        <!-- 12. Prohibited Conduct -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">12. Prohibited Conduct</h3>
-                            <p class="mb-2">When using the Application the following are prohibited:</p>
-                            <ul class="list-disc list-inside space-y-1 ml-2">
-                                <li>Infringement of third-party rights;</li>
-                                <li>Posting unlawful, offensive, discriminatory, or harmful content;</li>
-                                <li>Attempts at unauthorised access to servers or data;</li>
-                                <li>Use of bots, scrapers, or automated scripts;</li>
-                                <li>Abuse of payment systems or filing unjustified chargebacks.</li>
-                            </ul>
-                        </div>
+            <section class="legal-sec" id="ip">
+                <h2><span class="sec-n">{n('ip')}</span>{t('ip')}</h2>
+                <p>All rights in the Application, including source code, design, graphics, logo, the name “Nooze Alarm”, and content, belong to the Provider or to licensors and are protected by applicable copyright and intellectual property law.</p>
+            </section>
 
-                        <!-- 13. Termination -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">13. Termination</h3>
-                            <p>The Provider reserves the right to suspend or terminate your access to the Application immediately, without notice, if you breach these Terms. Upon termination your right to use the Application ceases immediately.</p>
-                        </div>
+            <section class="legal-sec" id="conduct">
+                <h2><span class="sec-n">{n('conduct')}</span>{t('conduct')}</h2>
+                <p>When using the Application the following are prohibited:</p>
+                <ul>
+                    <li>Infringement of third-party rights;</li>
+                    <li>Posting unlawful, offensive, discriminatory, or harmful content;</li>
+                    <li>Attempts at unauthorised access to servers or data;</li>
+                    <li>Use of bots, scrapers, or automated scripts;</li>
+                    <li>Abuse of payment systems or filing unjustified chargebacks.</li>
+                </ul>
+            </section>
 
-                        <!-- 14. Changes to the Terms -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">14. Changes to the Terms</h3>
-                            <p>The Provider may update these Terms. For material changes you will be notified via the Application or by email no less than 14 days before they take effect. Continuing to use the Application after that date constitutes acceptance of the new Terms.</p>
-                        </div>
+            <section class="legal-sec" id="termination">
+                <h2><span class="sec-n">{n('termination')}</span>{t('termination')}</h2>
+                <p>The Provider reserves the right to suspend or terminate your access to the Application immediately, without notice, if you breach these Terms. Upon termination your right to use the Application ceases immediately.</p>
+            </section>
 
-                        <!-- 15. Governing Law and Jurisdiction -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">15. Governing Law and Jurisdiction</h3>
-                            <p>These Terms are governed by and construed in accordance with the laws of the Republic of Bulgaria. All disputes shall be referred to the competent court in the Republic of Bulgaria. Users may also refer disputes to the relevant consumer protection authority or an alternative dispute resolution body in accordance with applicable law and EU Directive 2013/11/EU.</p>
-                        </div>
+            <section class="legal-sec" id="changes">
+                <h2><span class="sec-n">{n('changes')}</span>{t('changes')}</h2>
+                <p>The Provider may update these Terms. For material changes you will be notified via the Application or by email no less than 14 days before they take effect. Continuing to use the Application after that date constitutes acceptance of the new Terms.</p>
+            </section>
 
-                        <!-- 16. Contact -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">16. Contact</h3>
-                            <p>For questions about these Terms contact us at: <a href="mailto:noozesupport@gmail.com" class="text-primary hover:underline">noozesupport@gmail.com</a></p>
-                        </div>
-                    </div>
-                </div></div>
-            </div>
-        </section>
-    </main>
+            <section class="legal-sec" id="law">
+                <h2><span class="sec-n">{n('law')}</span>{t('law')}</h2>
+                <p>These Terms are governed by and construed in accordance with the laws of the Republic of Bulgaria. All disputes shall be referred to the competent court in the Republic of Bulgaria. Users may also refer disputes to the relevant consumer protection authority or an alternative dispute resolution body in accordance with applicable law and EU Directive 2013/11/EU.</p>
+            </section>
+
+            <section class="legal-sec" id="contact">
+                <h2><span class="sec-n">{n('contact')}</span>{t('contact')}</h2>
+                <p>For questions about these Terms contact us at: <a href="mailto:noozealarm@gmail.com">noozealarm@gmail.com</a></p>
+            </section>
+        </article>
+    </div>
+</main>
 </BaseLayout>
+
+<script>
+    // Table of contents: highlight the section under the reading line; close the mobile list after a jump.
+    const toc = document.querySelector('[data-spy]');
+    if (toc && 'IntersectionObserver' in window) {
+        const links = new Map();
+        toc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+            const sec = document.getElementById(a.hash.slice(1));
+            if (sec) links.set(sec, a);
+        });
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                if (!e.isIntersecting) return;
+                links.forEach((a) => a.removeAttribute('aria-current'));
+                links.get(e.target)?.setAttribute('aria-current', 'true');
+            });
+        }, { rootMargin: '-20% 0px -75% 0px' });
+        links.forEach((_, sec) => io.observe(sec));
+    }
+    const mobile = document.querySelector<HTMLDetailsElement>('.legal-toc-m');
+    mobile?.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('a')) mobile.open = false;
+    });
+</script>
+
+<style>
+    /* ---- Legal document layout (same as privacy.astro and account-deletion.astro) ---- */
+
+    .legal-meta { display: flex; flex-wrap: wrap; gap: 18px 48px; margin: 44px 0 0; }
+    .legal-meta div { display: grid; gap: 8px; }
+    .legal-meta dt { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); }
+    .legal-meta dd { margin: 0; font-family: var(--font-mono); font-size: 13px; color: var(--fg-2); }
+
+    .legal {
+        display: grid; grid-template-columns: 252px minmax(0, 1fr);
+        gap: clamp(48px, 7vw, 112px); align-items: start;
+        padding-block: clamp(56px, 7vw, 104px) var(--section);
+    }
+    .legal-aside { position: sticky; top: calc(var(--nav-h) + 32px); }
+    .legal-toc { max-height: calc(100vh - var(--nav-h) - 64px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+    .legal-toc-label { margin: 0 0 14px; }
+    .legal-toc ol, .legal-toc-m ol { list-style: none; margin: 0; padding: 0; }
+    .legal-toc ol { border-left: 1px solid var(--line); }
+    .legal-toc a, .legal-toc-m a {
+        position: relative;
+        display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: baseline; gap: 6px;
+        min-height: 40px; padding: 9px 0 9px 18px;
+        font-size: 14.5px; line-height: 1.4; color: var(--fg-3);
+        transition: color 0.25s var(--ease-out);
+    }
+    .legal-toc a::before {
+        content: ''; position: absolute; left: -1px; top: 8px; bottom: 8px; width: 2px; border-radius: 1px;
+        background: var(--red); transform: scaleY(0); transition: transform 0.4s var(--ease-out);
+    }
+    .legal-toc a:hover, .legal-toc-m a:hover { color: var(--fg); }
+    .legal-toc a[aria-current] { color: var(--fg); }
+    .legal-toc a[aria-current]::before { transform: scaleY(1); }
+    .legal-toc-n { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); font-variant-numeric: tabular-nums; }
+    .legal-toc a[aria-current] .legal-toc-n { color: var(--red); }
+
+    .legal-toc-m { display: none; border-block: 1px solid var(--line-2); }
+    .legal-toc-m summary {
+        display: flex; align-items: center; gap: 14px; min-height: 56px;
+        list-style: none; cursor: pointer; color: var(--fg); font-weight: 600;
+    }
+    .legal-toc-m summary::-webkit-details-marker { display: none; }
+    .legal-toc-m-count { margin-left: auto; font-family: var(--font-mono); font-size: 12px; font-weight: 400; color: var(--fg-3); }
+    .legal-toc-m-icon { position: relative; width: 28px; height: 28px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); transition: transform 0.5s var(--ease-spring); }
+    .legal-toc-m-icon::before, .legal-toc-m-icon::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; margin: -0.75px 0 0 -5px; background: var(--fg-2); border-radius: 1px; }
+    .legal-toc-m-icon::after { transform: rotate(90deg); }
+    .legal-toc-m[open] .legal-toc-m-icon { transform: rotate(45deg); }
+    .legal-toc-m nav { padding-bottom: 12px; }
+    .legal-toc-m a { padding-left: 0; min-height: 44px; }
+
+    .legal-body { max-width: 70ch; }
+    .legal-body > :first-child { margin-top: 0; }
+    .legal-intro { font-size: 18.5px; line-height: 1.6; color: var(--fg); }
+    .legal-sec { scroll-margin-top: calc(var(--nav-h) + 16px); }
+    .legal-sec > * + * { margin-top: 1.1em; }
+    .legal-sec h2 + * { margin-top: 0.8em; }
+    .sec-n { display: block; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--fg-3); font-variant-numeric: tabular-nums; }
+    .legal-body a { overflow-wrap: anywhere; }
+
+    /* Numbered clauses: a hanging mono number column */
+    .clause { display: grid; grid-template-columns: 2.6em minmax(0, 1fr); gap: 0 14px; margin: 0; }
+    .clause + .clause { margin-top: 0.9em; }
+    .clause-n { padding-top: 0.28em; font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-3); font-variant-numeric: tabular-nums; }
+
+    @media (max-width: 1023px) {
+        .legal { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 40px; }
+        .legal-aside { display: none; }
+        .legal-toc-m { display: block; }
+    }
+    @media (max-width: 520px) {
+        .legal-meta { gap: 16px 32px; }
+        .legal-body { font-size: 16.5px; }
+        .legal-intro { font-size: 17.5px; }
+        .clause { grid-template-columns: 2.4em minmax(0, 1fr); gap: 0 10px; }
+    }
+</style>

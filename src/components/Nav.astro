@@ -1,44 +1,48 @@
 ---
+// Floating island nav. Mobile: full-screen menu with staggered links.
+// Open/close, Escape and scroll state are handled in public/js/script.js.
+import PlayButton from './PlayButton.astro';
 const { active } = Astro.props;
 const links = [
-    { href: 'index.html', label: 'Home', key: 'home' },
-    { href: 'features.html', label: 'Features', key: 'features' },
-    { href: 'about.html', label: 'About', key: 'about' },
-    { href: 'faq.html', label: 'FAQ', key: 'faq' },
-    { href: 'contact.html', label: 'Contact', key: 'contact' },
+    { href: '/features.html', label: 'Features', key: 'features' },
+    { href: '/#pricing', label: 'Pricing', key: 'pricing' },
+    { href: '/about.html', label: 'About', key: 'about' },
+    { href: '/roadmap.html', label: 'Roadmap', key: 'roadmap' },
+    { href: '/faq.html', label: 'FAQ', key: 'faq' },
 ];
+const menu = [
+    { href: '/', label: 'Home', key: 'home' },
+    ...links,
+    { href: '/support.html', label: 'Support us', key: 'support' },
+    { href: '/contact.html', label: 'Contact', key: 'contact' },
+];
+const cur = (k) => (k === active ? 'page' : undefined);
 ---
-<nav class="nav-blur fixed top-0 w-full z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-[1fr_auto_1fr] items-center h-16 gap-4">
-            <a href="index.html" class="nav-brand flex items-center gap-3 text-xl font-bold text-white tracking-tight justify-self-start">
-                <img src="/assets/logo.png" alt="Nooze" width="34" height="34" class="w-[34px] h-[34px] rounded-lg" />
-                <span class="whitespace-nowrap">Nooze <span class="accent">Alarm</span></span>
-            </a>
-
-            <div class="hidden md:flex items-center gap-5 lg:gap-8 justify-self-center col-start-2">
-                {links.map((l) => (
-                    <a href={l.href} class={l.key === active ? 'nav-link active' : 'nav-link'}>{l.label}</a>
-                ))}
-            </div>
-
-            <div class="flex items-center gap-3 justify-self-end col-start-3">
-                <a href="support.html" class={active === 'support' ? 'nav-pill active hidden md:inline-flex' : 'nav-pill hidden md:inline-flex'}>Support Us</a>
-                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-primary p-2" aria-label="Toggle menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
+<header class="nz-nav" data-nav>
+    <nav class="nz-nav-bar" aria-label="Main">
+        <a href="/" class="nz-brand" aria-label="Nooze Alarm home" aria-current={cur('home')}>
+            <img src="/assets/logo-64.webp" srcset="/assets/logo-64.webp 1x, /assets/logo-96.webp 1.5x" alt="" width="30" height="30" />
+            <span class="nz-lockup">Nooze <span>Alarm</span></span>
+        </a>
+        <ul class="nz-nav-links">
+            {links.map((l) => <li><a href={l.href} aria-current={cur(l.key)}>{l.label}</a></li>)}
+        </ul>
+        <div class="nz-nav-end">
+            <PlayButton size="sm" label="Get the app" />
+            <button class="nz-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nzMenu" data-burger>
+                <span></span><span></span>
+            </button>
         </div>
-
-        <div id="mobileMenu" class="hidden md:hidden pb-4">
-            <div class="flex flex-col gap-3 pt-2">
-                {links.map((l) => (
-                    <a href={l.href} class={l.key === active ? 'text-primary font-medium py-2' : 'text-gray-300 hover:text-primary py-2 transition-colors'}>{l.label}</a>
-                ))}
-                <a href="support.html" class={active === 'support' ? 'text-primary font-medium py-2' : 'text-gray-300 hover:text-primary py-2 transition-colors'}>Support Us</a>
-            </div>
-        </div>
+    </nav>
+</header>
+<nav class="nz-menu" id="nzMenu" aria-label="Menu" data-menu>
+    <ul>
+        {menu.map((l, i) => (
+            <li><a href={l.href} aria-current={cur(l.key)} style={`--i:${i}`} tabindex="-1">{l.label}</a></li>
+        ))}
+    </ul>
+    <div class="nz-menu-foot">
+        <PlayButton />
+        <p class="nz-meta" style="margin-top:18px">Free on Android. <a class="nz-link" href="mailto:noozealarm@gmail.com" tabindex="-1">noozealarm@gmail.com</a></p>
     </div>
 </nav>

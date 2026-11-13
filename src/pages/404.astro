@@ -1,38 +1,132 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// A station-clock face stopped at 4:04. The red second hand keeps sweeping
+// (58.5 s round, then a short pause at twelve, like a Swiss railway clock).
+const ticks = Array.from({ length: 60 }, (_, i) => i);
+const HOUR = 4 * 30 + 4 * 0.5; // 122 deg
+const MINUTE = 4 * 6;          // 24 deg
 ---
 <BaseLayout
-    title={"404 - Page Not Found | Nooze Alarm"}
+    title={"Page not found | Nooze Alarm"}
     description={"The page you're looking for doesn't exist. Head back to Nooze Alarm's homepage."}
     canonical={""}
     noindex={true}
     footer={"minimal"}
 >
 
-<main class="flex-1 flex items-center justify-center hero-bg relative pt-16 overflow-hidden">
-        <div class="aurora"></div>
-        <div class="holo-grid tilt-grid"></div>
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="scanlines"></div>
-
-        <div class="text-center px-4 relative z-10 max-w-2xl">
-            <span class="holo-chip mb-6 reveal"><span class="dot"></span> Lost in the dark</span>
-            <h1 class="text-[10rem] sm:text-[12rem] font-extrabold leading-none mb-2 reveal delay-1 tracking-tighter">
-                <span class="iris-text">404</span>
-            </h1>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 reveal delay-2">Page Not Found</h2>
-            <p class="text-lg text-gray-400 mb-10 max-w-md mx-auto reveal delay-3">
-                Looks like this page hit snooze. Head home, or skip ahead to features.
-            </p>
-            <div class="flex flex-wrap gap-4 justify-center reveal delay-3">
-                <a href="index.html" class="btn-primary">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    <span>Go Home</span>
+<main id="main" class="flex-1 nf">
+    <div class="nz-container nf-grid">
+        <div class="nf-copy">
+            <p class="nz-kicker">Error 404</p>
+            <h1 class="nf-title">Looks like this page hit snooze.</h1>
+            <p class="nz-lede nf-lede">The address may be mistyped, or the page has moved. Here’s the way back.</p>
+            <p class="nz-meta nf-path" data-path hidden></p>
+            <div class="nz-btn-group nf-actions">
+                <!-- Root-relative links: this page is served for any missing path, however deep. -->
+                <a class="nz-btn nz-btn--primary nz-btn--icon" href="/">
+                    <span>Home</span>
+                    <span class="nz-btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>
+                    </span>
                 </a>
-                <a href="features.html" class="btn-outline"><span>See Features</span></a>
+                <a class="nz-btn nz-btn--ghost" href="/features.html">Features</a>
             </div>
         </div>
-    </main>
+
+        <div class="nf-clock-wrap">
+            <svg class="nf-clock" viewBox="0 0 400 400" role="img" aria-label="A clock stopped at 4:04">
+                <defs>
+                    <radialGradient id="nf-face-fill" cx="50%" cy="38%" r="70%">
+                        <stop class="nf-stop-a" offset="0" />
+                        <stop class="nf-stop-b" offset="1" />
+                    </radialGradient>
+                </defs>
+                <circle class="nf-bezel" cx="200" cy="200" r="199" />
+                <circle class="nf-face" cx="200" cy="200" r="190" />
+                {ticks.map((i) => (
+                    <line
+                        class={i % 5 === 0 ? 'nf-tick nf-tick--hour' : 'nf-tick'}
+                        x1="200" y1="22" x2="200" y2={i % 5 === 0 ? 62 : 36}
+                        transform={`rotate(${i * 6} 200 200)`}
+                    />
+                ))}
+                <text class="nf-readout" x="200" y="296" text-anchor="middle">4:04</text>
+                <line class="nf-hand nf-hand--hour" x1="200" y1="226" x2="200" y2="104" transform={`rotate(${HOUR} 200 200)`} />
+                <line class="nf-hand nf-hand--minute" x1="200" y1="232" x2="200" y2="40" transform={`rotate(${MINUTE} 200 200)`} />
+                <g class="nf-sec">
+                    <line x1="200" y1="252" x2="200" y2="64" />
+                    <circle cx="200" cy="72" r="12" />
+                    <circle cx="200" cy="200" r="6" />
+                </g>
+            </svg>
+        </div>
+    </div>
+</main>
 </BaseLayout>
+
+<script>
+    // Echo the missing path so a mistyped link is easy to spot.
+    const el = document.querySelector<HTMLElement>('[data-path]');
+    const path = decodeURIComponent(location.pathname);
+    if (el && path && path !== '/' && !/\/404(\.html)?$/.test(path)) {
+        el.textContent = `Nothing lives at ${path}`;
+        el.hidden = false;
+    }
+</script>
+
+<style>
+    .nf {
+        display: grid; align-items: center;
+        padding-block: calc(var(--nav-h) + clamp(40px, 6vw, 80px)) clamp(56px, 7vw, 96px);
+        position: relative; overflow: hidden; isolation: isolate;
+    }
+    .nf::before {
+        content: ''; position: absolute; inset: 0; z-index: -1;
+        background: radial-gradient(50% 60% at 78% 45%, rgba(59, 140, 255, 0.06), transparent 70%);
+    }
+    .nf-grid {
+        display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+        gap: clamp(40px, 6vw, 96px); align-items: center;
+    }
+    .nf-title {
+        margin: 0;
+        font-size: clamp(42px, 5.6vw, 84px); font-weight: 600; line-height: 0.98; letter-spacing: -0.04em;
+        max-width: 12ch;
+    }
+    .nf-lede { margin-top: 28px; }
+    .nf-path { margin: 18px 0 0; overflow-wrap: anywhere; }
+    .nf-actions { margin-top: 40px; }
+
+    .nf-clock-wrap { justify-self: end; width: 100%; max-width: 500px; }
+    .nf-clock { display: block; width: 100%; height: auto; overflow: visible; }
+    .nf-bezel { fill: var(--ink-0); stroke: var(--line-2); stroke-width: 1; }
+    .nf-face { fill: url(#nf-face-fill); stroke: var(--line); stroke-width: 1; }
+    .nf-stop-a { stop-color: var(--ink-3); }
+    .nf-stop-b { stop-color: var(--ink-1); }
+    .nf-tick { stroke: var(--fg-3); stroke-width: 2; }
+    .nf-tick--hour { stroke: var(--fg-2); stroke-width: 7; }
+    .nf-readout { fill: var(--fg-3); font-family: var(--font-mono); font-size: 19px; letter-spacing: 0.06em; }
+    .nf-hand { stroke: var(--fg); }
+    .nf-hand--hour { stroke-width: 13; }
+    .nf-hand--minute { stroke-width: 9; }
+    .nf-sec { transform-origin: 200px 200px; transform: rotate(152deg); }
+    .nf-sec line { stroke: var(--red); stroke-width: 3; stroke-linecap: round; }
+    .nf-sec circle { fill: var(--red); }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .nf-sec { animation: nf-sweep 60s linear infinite; animation-delay: -25.3s; }
+    }
+    /* 58.5 s sweep, 1.5 s hold at twelve */
+    @keyframes nf-sweep {
+        0% { transform: rotate(0deg); }
+        97.5%, 100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 860px) {
+        .nf { align-items: start; }
+        .nf-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+        .nf-clock-wrap { order: -1; justify-self: start; max-width: min(64vw, 280px); }
+        .nf-title { max-width: 14ch; }
+    }
+</style>

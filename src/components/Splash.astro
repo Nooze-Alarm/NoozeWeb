@@ -1,0 +1,335 @@
+---
+// The Nooze mark, ported from the app (NoozeClockIntro + NoozeClockLoader + SplashScreen).
+//
+// window.NoozeMark(canvas) draws the logo at the canvas's CSS size: the 1.4 s intro (the logo
+// drawing itself as a clock being set), the running loader, or the finished mark with any
+// second-hand angle. The hero uses it for its live mark.
+//
+// The splash: plays on the first page of a visit and on every reload; never on back/forward or
+// when moving between pages of the site. Hidden unless the head script in BaseLayout adds
+// .nz-splash-on, so no-JS visitors never see it; a CSS failsafe clears it after 5 s whatever
+// happens. The intro plays, the loader laps once more only if the page is still loading, then
+// the mark flies into the hero mark ([data-splash-target]) when that is on screen, otherwise
+// into the nav logo. Tap, click, scroll or any key skips it. ?nosplash turns it off (QA).
+// Events: nz:splash-land (detail.target, as the mark arrives) and nz:splash-done.
+---
+<div id="nz-splash" aria-hidden="true">
+    <div class="nz-splash-bg"></div>
+    <div class="nz-splash-stage">
+        <canvas class="nz-splash-mark" width="208" height="208"></canvas>
+        <span class="nz-splash-word">Nooze Alarm</span>
+    </div>
+</div>
+
+<style is:global>
+    #nz-splash { display: none; }
+    .nz-splash-on #nz-splash {
+        position: fixed; inset: 0; z-index: 2147483000;
+        display: flex; align-items: center; justify-content: center;
+        animation: nz-splash-failsafe 0.3s 5s forwards;
+    }
+    .nz-splash-bg { position: absolute; inset: 0; background: #06080d; }
+    .nz-splash-stage { position: relative; display: flex; flex-direction: column; align-items: center; }
+    .nz-splash-mark { display: block; width: 208px; height: 208px; transform-origin: 50% 50%; }
+    .nz-splash-word {
+        margin-top: 20px; padding-left: 2px; /* tracking trails the last letter; re-centre it */
+        font: 700 28px/1.2 'Nooze Lockup', 'Bricolage Grotesque', system-ui, sans-serif;
+        letter-spacing: 2px; color: #fff; white-space: nowrap;
+        text-shadow: 0 0 7px rgba(59, 140, 255, 0.9);
+        opacity: 0; transform: translateY(8px);
+    }
+    /* Hold the page's own entrance animations until the splash starts to lift. */
+    .nz-splash-on:not(.nz-splash-out) body > :not(#nz-splash),
+    .nz-splash-on:not(.nz-splash-out) body > :not(#nz-splash) * { animation-play-state: paused !important; }
+    @keyframes nz-splash-failsafe { to { opacity: 0; visibility: hidden; } }
+    @media print { #nz-splash { display: none !important; } }
+</style>
+
+<script is:inline>
+(function () {
+    // ================= NoozeMark: the logo drawing, same constants as NoozeClockLoader.kt =================
+    var INTRO = 1400, LAP = 1050, ENTER = 260, MIN_START = 420, MIN_DUR = 600;
+    var MINUTE_REST = 61, SECOND_REST = 211, RECOIL_DEG = 14, RECOIL_SPAN = 110, OVERSHOOT = 1.6;
+    var BLOCK_STARTS = [15.5, 30, 44, 57.5, 70.5, 84.6], BLOCK_SWEEPS = [11.5, 11, 10.5, 10, 9.5, 1.4];
+    var GLOW = '0,96,208', HI = '59,140,255', HAND = '#F80000';
+    var D2R = Math.PI / 180;
+
+    function bezier(x1, y1, x2, y2) {
+        function at(t, p1, p2) { return ((1 - 3 * p2 + 3 * p1) * t + (3 * p2 - 6 * p1)) * t * t + 3 * p1 * t; }
+        return function (x) {
+            if (x <= 0) return 0;
+            if (x >= 1) return 1;
+            var lo = 0, hi = 1, t = x;
+            for (var i = 0; i < 24; i++) {
+                var v = at(t, x1, x2);
+                if (Math.abs(v - x) < 1e-5) break;
+                if (v < x) lo = t; else hi = t;
+                t = (lo + hi) / 2;
+            }
+            return at(t, y1, y2);
+        };
+    }
+    var lapEase = bezier(0.4, 0, 0.2, 1), loopEase = bezier(0.65, 0, 0.35, 1);
+    function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+    function easeOutCubic(x) { var u = 1 - clamp(x); return 1 - u * u * u; }
+    function backOut(x) { var u = clamp(x) - 1; return 1 + (OVERSHOOT + 1) * u * u * u + OVERSHOOT * u * u; }
+    function secondAngle(pen) {
+        if (pen <= SECOND_REST) return pen;
+        var v = clamp((pen - SECOND_REST) / RECOIL_SPAN);
+        return SECOND_REST + RECOIL_DEG * Math.sin(v * Math.PI) * (1 - v) * (1 - v);
+    }
+    function rgba(c, a) { return 'rgba(' + c + ',' + a + ')'; }
+
+    window.NoozeMark = function (canvas) {
+        var main = canvas.getContext && canvas.getContext('2d');
+        if (!main) return null;
+        var ctx = main;
+        var S = canvas.getBoundingClientRect().width || canvas.width;
+        var base = Math.min(window.devicePixelRatio || 1, 3), dpr = base;
+        var M = S / 2, R = S * 0.40;
+        function polar(deg, rad) { return [M + rad * Math.sin(deg * D2R), M - rad * Math.cos(deg * D2R)]; }
+
+        var haloR = R * 1.25, cc = polar(5, R * 0.935), cometR = R * 0.34, halo, comet;
+        function gradients() {
+            halo = ctx.createRadialGradient(M, M, 0, M, M, haloR);
+            halo.addColorStop(0, rgba(GLOW, 0.10)); halo.addColorStop(0.52, rgba(GLOW, 0.18));
+            halo.addColorStop(0.68, rgba(HI, 0.50)); halo.addColorStop(0.80, rgba(GLOW, 0.50)); halo.addColorStop(1, rgba(GLOW, 0));
+            comet = ctx.createRadialGradient(cc[0], cc[1], 0, cc[0], cc[1], cometR);
+            comet.addColorStop(0, rgba(HI, 0.9)); comet.addColorStop(0.45, rgba(HI, 0.32)); comet.addColorStop(1, rgba(HI, 0));
+        }
+        var ringR = R * 0.925, ringW = R * 0.15;
+        var arrow = [polar(-3, R * 1.085), polar(12.5, R * 0.935), polar(-3, R * 0.79)];
+        var faceR = R * 0.83, faceW = Math.max(R * 0.028, 1);
+        var step = R >= 48 ? 1 : R >= 14 ? 5 : 15, tickDeg = step * 6, ticks = [];
+        for (var n = 0; n < 60 / step; n++) {
+            var minute = n * step, quarter = minute % 15 === 0, five = minute % 5 === 0;
+            var outer = R * 0.755, inner = outer - R * (quarter ? 0.155 : five ? 0.085 : 0.05);
+            var s = Math.sin(minute * 6 * D2R), c = -Math.cos(minute * 6 * D2R);
+            ticks.push({
+                x1: M + s * inner, y1: M + c * inner, x2: M + s * outer, y2: M + c * outer,
+                w: quarter ? Math.max(R * 0.085, 1.5) : five ? Math.max(R * 0.024, 1) : Math.max(R * 0.014, 0.75),
+                rest: quarter ? 1 : five ? 0.9 : 0.6
+            });
+        }
+        var half = Math.max(R * 0.04, 1), needleBase = M - R * 0.06;
+        var secW = Math.max(R * 0.02, 1), hubR = R * 0.085, hubW = Math.max(R * 0.036, 1);
+
+        function turn(deg) { ctx.translate(M, M); ctx.rotate(deg * D2R); ctx.translate(-M, -M); }
+        function grow(k) { ctx.translate(M, M); ctx.scale(k, k); ctx.translate(-M, -M); }
+        function arc(rad, startDeg, sweepDeg) {
+            ctx.beginPath(); ctx.arc(M, M, rad, (startDeg - 90) * D2R, (startDeg - 90 + sweepDeg) * D2R); ctx.stroke();
+        }
+        function needle(len) {
+            ctx.beginPath(); ctx.moveTo(M - half, needleBase); ctx.lineTo(M, M - len); ctx.lineTo(M + half, needleBase); ctx.closePath(); ctx.fill();
+        }
+        function drawDial(pen, glow, flash) {
+            if (glow > 0) { ctx.globalAlpha = glow; ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(M, M, haloR, 0, 7); ctx.fill(); }
+            ctx.lineCap = 'butt';
+            if (pen > 0) { ctx.globalAlpha = 0.9; ctx.strokeStyle = 'rgb(' + HI + ')'; ctx.lineWidth = faceW; arc(faceR, 0, Math.min(pen, 360)); }
+            ctx.strokeStyle = '#fff';
+            for (var i = 0; i < ticks.length; i++) {
+                var behind = pen - i * tickDeg;
+                if (behind <= 0) break;
+                var t = ticks[i], fresh = clamp(1 - behind / 40);
+                ctx.globalAlpha = t.rest + (1 - t.rest) * fresh * flash;
+                ctx.lineWidth = t.w;
+                ctx.beginPath(); ctx.moveTo(t.x1, t.y1); ctx.lineTo(t.x2, t.y2); ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+        function drawRing(pen, headA, cometA) {
+            if (cometA > 0) {
+                ctx.save(); turn(pen); ctx.globalAlpha = cometA; ctx.fillStyle = comet;
+                ctx.beginPath(); ctx.arc(cc[0], cc[1], cometR, 0, 7); ctx.fill(); ctx.restore();
+            }
+            var written = pen - 3;
+            ctx.lineCap = 'butt'; ctx.lineWidth = ringW; ctx.globalAlpha = 1;
+            for (var i = 0; i < BLOCK_STARTS.length; i++) {
+                var sweep = Math.min(written - BLOCK_STARTS[i], BLOCK_SWEEPS[i]);
+                if (sweep <= 0) break;
+                ctx.strokeStyle = i === 5 ? 'rgb(' + HI + ')' : '#fff';
+                arc(ringR, BLOCK_STARTS[i], sweep);
+            }
+            var solid = written + 1 - 90;
+            if (solid > 0) { ctx.strokeStyle = '#fff'; arc(ringR, 90, solid); }
+            if (headA > 0) {
+                ctx.save(); turn(pen); ctx.globalAlpha = headA; ctx.fillStyle = '#fff';
+                ctx.beginPath(); ctx.moveTo(arrow[0][0], arrow[0][1]); ctx.lineTo(arrow[1][0], arrow[1][1]); ctx.lineTo(arrow[2][0], arrow[2][1]);
+                ctx.closePath(); ctx.fill(); ctx.restore();
+            }
+        }
+        function drawNeedles(minuteAngle, k, alpha) {
+            if (alpha <= 0) return;
+            ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = HAND; grow(k);
+            needle(R * 0.41); turn(minuteAngle); needle(R * 0.62); ctx.restore();
+        }
+        function drawSecond(angle, k, alpha) {
+            if (alpha <= 0) return;
+            ctx.save(); ctx.globalAlpha = alpha; ctx.strokeStyle = HAND; grow(k);
+            ctx.save(); turn(angle); ctx.lineCap = 'round'; ctx.lineWidth = secW;
+            ctx.beginPath(); ctx.moveTo(M, M - R * 0.10); ctx.lineTo(M, M - R * 0.62); ctx.stroke(); ctx.restore();
+            ctx.lineWidth = hubW; ctx.beginPath(); ctx.arc(M, M, hubR, 0, 7); ctx.stroke(); ctx.restore();
+        }
+        function size() { canvas.width = Math.round(S * dpr); canvas.height = Math.round(S * dpr); }
+        function clear() { ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, S, S); }
+
+        // The dial, ring and hour/minute hands never move once drawn, so the ticking hero
+        // paints them once into a layer and only redraws the second hand per frame.
+        var layer = null;
+        function staticLayer() {
+            layer = document.createElement('canvas');
+            layer.width = canvas.width; layer.height = canvas.height;
+            ctx = layer.getContext('2d'); gradients(); clear();
+            drawDial(360, 1, 0); drawRing(360, 1, 0); drawNeedles(MINUTE_REST, 1, 1);
+            ctx = main; gradients();
+        }
+        size(); gradients();
+
+        return {
+            size: S,
+            /** Renders the backing store k times sharper, for a mark about to be scaled up. */
+            oversample: function (k) { dpr = base * Math.max(1, k); size(); layer = null; },
+            drawIntro: function (f) {
+                var ms = clamp(f) * INTRO, lap = lapEase(clamp(ms / LAP)), pen = lap * 360;
+                var heat = 1 - lap * lap * lap, enter = easeOutCubic(ms / ENTER), k = 0.6 + 0.4 * enter;
+                clear();
+                drawDial(pen, lap * lap, heat);
+                drawRing(pen, enter, heat * enter);
+                drawNeedles(MINUTE_REST * backOut((ms - MIN_START) / MIN_DUR), k, enter);
+                drawSecond(secondAngle(pen), k, enter);
+            },
+            drawLoop: function (phase, cometA) {
+                clear();
+                drawDial(360, 1, 0); drawNeedles(MINUTE_REST, 1, 1);
+                ctx.save(); turn(360 * loopEase(phase)); drawRing(360, 1, cometA); ctx.restore();
+                ctx.save(); turn(SECOND_REST + 360 * phase); drawSecond(0, 1, 1); ctx.restore();
+            },
+            /** The finished mark with the second hand at `angle` clock degrees (211 = the logo). */
+            drawStatic: function (angle) {
+                if (!layer) staticLayer();
+                ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(layer, 0, 0);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                drawSecond(angle == null ? SECOND_REST : angle, 1, 1);
+            }
+        };
+    };
+
+    // ================= The splash =================
+    var root = document.documentElement;
+    var el = document.getElementById('nz-splash');
+    if (!el) return;
+    if (!root.classList.contains('nz-splash-on')) { el.parentNode.removeChild(el); return; }
+    try { sessionStorage.setItem('nz_splash', '1'); } catch (e) {}
+
+    var canvas = el.querySelector('canvas');
+    var word = el.querySelector('.nz-splash-word');
+    var bg = el.querySelector('.nz-splash-bg');
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var START_DELAY = 90, LOOP = 1500, STATIC_HOLD = 400, WORD_FROM = 650, WORD_TO = 1100;
+    var wordEase = bezier(0.23, 1, 0.32, 1);
+
+    function signal(name, detail) {
+        try { window.dispatchEvent(new CustomEvent(name, { detail: detail || {} })); } catch (e) {}
+    }
+    function finish() {
+        if (el.parentNode) el.parentNode.removeChild(el);
+        root.classList.remove('nz-splash-on', 'nz-splash-out');
+        signal('nz:splash-done');
+    }
+    var mark = window.NoozeMark(canvas);
+    if (!mark) { finish(); return; }
+
+    function showWord(x) {
+        var v = wordEase(clamp(x));
+        word.style.opacity = v;
+        word.style.transform = 'translateY(' + ((1 - v) * 8).toFixed(2) + 'px)';
+    }
+
+    // The hero mark when it is fully on screen, otherwise the nav logo.
+    function pickTarget(a) {
+        var t = document.querySelector('[data-splash-target]');
+        if (t) {
+            var r = t.getBoundingClientRect();
+            if (r.width > 0 && r.top >= 0 && r.bottom <= window.innerHeight) return { el: t, rect: r, k: r.width / a.width };
+        }
+        var n = document.querySelector('.nav-brand img');
+        if (n) {
+            var b = n.getBoundingClientRect();
+            // The drawn ring spans ~87% of the canvas; the icon's clock about 80% of the icon.
+            if (b.width > 0 && b.bottom > 0) return { el: n, rect: b, k: (b.width * 0.8) / (a.width * 0.87) };
+        }
+        return null;
+    }
+
+    // ---- exit: the mark flies to its target while the black lifts ----
+    var exiting = false;
+    function exit(quick) {
+        if (exiting) return;
+        exiting = true;
+        root.classList.add('nz-splash-out');
+        el.style.pointerEvents = 'none';
+        removeSkip();
+        showWord(1);
+        var a = canvas.getBoundingClientRect(), target = reduce ? null : pickTarget(a);
+        if (target && target.k > 1) mark.oversample(target.k);
+        mark.drawIntro(1);
+        if (!el.animate) { finish(); return; }
+        var anims = [];
+        if (reduce) {
+            anims.push(el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: 'ease-out', fill: 'forwards' }));
+        } else if (target) {
+            var b = target.rect, k = target.k, out = quick ? 0.7 : 1;
+            var dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2);
+            var fly = Math.round((k > 1 ? 760 : 620) * out);
+            anims.push(canvas.animate(
+                [{ transform: 'none' }, { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + k + ')' }],
+                { duration: fly, easing: 'cubic-bezier(0.65,0,0.35,1)', fill: 'forwards' }));
+            anims.push(canvas.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, delay: fly - 140, easing: 'ease-out', fill: 'forwards' }));
+            anims.push(word.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: 180, easing: 'ease-out', fill: 'forwards' }));
+            anims.push(bg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 520 * out, delay: 100 * out, easing: 'cubic-bezier(0.23,1,0.32,1)', fill: 'forwards' }));
+            setTimeout(function () { signal('nz:splash-land', { target: target.el }); }, fly - 140);
+        } else {
+            anims.push(el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(1.03)' }], { duration: 300, easing: 'cubic-bezier(0.23,1,0.32,1)', fill: 'forwards' }));
+        }
+        Promise.all(anims.map(function (x) { return x.finished; })).then(finish, finish);
+    }
+    function skip() { exit(true); }
+    var skipEvents = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
+    function removeSkip() { skipEvents.forEach(function (e) { window.removeEventListener(e, skip, true); }); }
+    skipEvents.forEach(function (e) { window.addEventListener(e, skip, { capture: true, passive: true }); });
+
+    if (reduce) {
+        // Same as the app with animations off: the finished mark, a short hold, done.
+        mark.drawIntro(1); showWord(1);
+        setTimeout(function () { exit(false); }, STATIC_HOLD);
+        return;
+    }
+
+    // ---- intro, then at most one loader lap that docks at 12 ----
+    var t0 = 0, loopStart = 0;
+    function frame(now) {
+        if (exiting) return;
+        if (!t0) t0 = now + START_DELAY;
+        var ms = now - t0;
+        if (ms < INTRO) {
+            mark.drawIntro(clamp(ms / INTRO));
+            showWord((ms - WORD_FROM) / (WORD_TO - WORD_FROM));
+            requestAnimationFrame(frame);
+            return;
+        }
+        if (!loopStart) {
+            // Only if the page has not even been parsed yet does the loader lap once more.
+            if (document.readyState !== 'loading') { exit(false); return; }
+            loopStart = now;
+        }
+        var p = (now - loopStart) / LOOP;
+        if (p >= 1) { exit(false); return; }
+        // Comet fades in off the intro and back out before the ring docks.
+        mark.drawLoop(p, 0.7 * Math.min(1, p / 0.18) * clamp((1 - p) / 0.3));
+        requestAnimationFrame(frame);
+    }
+    showWord(0);
+    requestAnimationFrame(frame);
+})();
+</script>

@@ -1,13 +1,105 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import WakeWindowDiagram from '../components/WakeWindowDiagram.astro';
+
+const chapters = [
+    { id: 'challenges', n: '01', label: 'No-snooze alarms and challenges' },
+    { id: 'your-week', n: '02', label: 'Alarms that fit your week' },
+    { id: 'smart-wake', n: '03', label: 'Smart wake and Sunrise Wake' },
+    { id: 'sleep', n: '04', label: 'Sleep tracking, estimated' },
+    { id: 'accountable', n: '05', label: 'Staying accountable' },
+    { id: 'more', n: '06', label: 'Naps, watch and the rest' },
+];
+
+const challengeGroups = [
+    {
+        title: 'Wake your head',
+        items: [
+            { name: 'Math', desc: 'Solve a few sums before it goes quiet.' },
+            { name: 'Memory', desc: 'Watch a sequence, then repeat it back.' },
+            { name: 'Typing', desc: 'Type a short phrase exactly as shown.' },
+            { name: 'Read aloud', desc: 'Say the sentence on screen out loud.', note: 'On supported phones' },
+        ],
+    },
+    {
+        title: 'Get your body going',
+        items: [
+            { name: 'Shake', desc: 'Shake the phone until you hit the target.' },
+            { name: 'Steps', desc: 'Walk a set number of steps.' },
+        ],
+    },
+    {
+        title: 'Get out of bed',
+        items: [
+            { name: 'QR or barcode', desc: 'Scan a code you keep in another room, like a cereal box in the kitchen.' },
+            { name: 'NFC tag', desc: 'Tap the phone on a tag stuck somewhere across the room.' },
+            { name: 'Photo task', desc: 'Get up and take the photo the task asks for.' },
+        ],
+        fallback: true,
+    },
+];
+
+const week = [
+    { t: 'Skip just the next one', b: 'Day off tomorrow? Skip the next ring and leave the rest of the schedule alone.' },
+    { t: 'Vacation pause', b: 'Pause alarms while you are away, without deleting or rebuilding anything.' },
+    { t: 'Public holidays', b: 'Skip the public holidays found in your phone’s calendar.' },
+    { t: 'Early starts', b: 'On days that begin with an early event, the alarm can ring earlier.' },
+    { t: 'A sound for each day', b: 'Give every day its own alarm sound, so Saturday never sounds like Monday.' },
+    { t: 'Home time zone', b: 'Travelling? Keep your alarms on home time.' },
+    { t: 'Other apps and your voice', b: 'Other apps and your voice assistant can set alarms and naps in Nooze.' },
+];
+
+const readouts = [
+    { t: 'Sleep duration', b: 'How long you slept, night by night.' },
+    { t: 'Estimated sleep phases', b: 'Lighter and deeper stretches across the night.' },
+    { t: 'Approximate sleep score', b: 'One number per night, to compare with other nights.' },
+    { t: 'Snoring and noise events', b: 'Moments the microphone picked up sound, if you turned it on.' },
+    { t: 'Weekly trends', b: 'Duration and bedtime consistency across the week.' },
+    { t: 'Advanced sleep analytics', b: 'More detail for people who like to dig in.', premium: true },
+];
+
+const circles = [
+    { n: 1, who: 'Just you', t: 'XP and achievements', b: 'Earn XP and unlock achievements for getting up on time. Tick off a morning routine checklist for extra XP.' },
+    { n: 2, who: 'You and one friend', t: 'Duels and buddies', b: 'In a wake duel, whoever gets up on time more often wins. A wake-up buddy gets one nudge if you miss your wake-up check.' },
+    { n: 4, who: 'Up to four', t: 'Squads', b: 'Team up in a squad of up to four and keep one shared streak alive.' },
+    { n: 9, who: 'All your friends', t: 'Leaderboards', b: 'Add friends and climb leaderboards for XP, streaks and achievements.' },
+];
+
+const extras = [
+    { t: 'Naps', b: 'One tap starts a 20, 30 or 45-minute nap.' },
+    { t: 'Widgets and lock screen', b: 'Home-screen widgets, plus a live countdown on the lock screen.' },
+    { t: 'Wear OS', b: 'A watch companion with a next-alarm tile. Alarms can ring on your wrist.' },
+    { t: 'Sleep sounds', b: 'Sounds to fall asleep to. The full library comes with Premium.' },
+    { t: 'Breathing exercise', b: 'Wind down before bed with 4-7-8, box or coherent breathing.' },
+    { t: 'Morning journal', b: 'Note how you slept and how you feel while it is still fresh.' },
+    { t: 'Themes', b: 'Six free themes. Premium adds six more, with animated backgrounds.' },
+    { t: 'No ads', b: 'None on the free plan, none on Premium.' },
+    { t: 'Smart home', b: 'Switch on lights or run a scene at wake-up through Home Assistant, Tuya, Tellur or any webhook.', premium: true },
+    { t: 'Morning briefing', b: 'A spoken rundown of the weather, your next alarm and the first event of the day.', premium: true },
+];
+
+// Built-in column checked against Google Clock and Samsung Clock, November 2026.
+const compare = [
+    { f: 'Snooze button', n: 'None', t: 'Yes' },
+    { f: 'Switching it off', n: 'Finish one of nine challenges', t: 'Tap or swipe' },
+    { f: 'If you fall back asleep', n: 'The wake-up check brings the alarm back', t: 'Nothing happens' },
+    { f: 'Smart wake window', n: '15, 20 or 30 minutes', t: 'No, only on some smartwatches' },
+    { f: 'Skip public holidays automatically', n: 'Yes, from your phone calendar', t: 'Samsung only, in a few countries' },
+    { f: 'Sleep tracking', n: 'Estimated, phone or Health Connect', t: 'Basic, or a separate app' },
+    { f: 'Streaks, friends and wake duels', n: 'Yes', t: 'No' },
+];
+
+const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg>';
 ---
 <BaseLayout
-    title={"Nooze Features – Smart Wake, Sleep Tracking & Wake Challenges"}
-    description={"Explore Nooze features: smart wake windows, hybrid sleep tracking, 7 wake challenges (NFC, math, photo & more), gamification, social duels and 12 themes."}
-    keywords={"smart alarm features, sleep cycle tracker, wake up challenges, gamified alarm app, sleep stage detection, smart wake window, no snooze alarm, nfc alarm, math alarm"}
+    title={"Features: no-snooze alarm, wake-up challenges and smart wake | Nooze Alarm"}
+    description={"Every Nooze feature: no-snooze alarms with nine wake-up challenges, a smart wake window, estimated sleep tracking, wake duels, naps, widgets and Wear OS."}
+    keywords={"no snooze alarm, alarm clock with challenges, wake up challenges, smart wake window, sleep tracker android, nfc alarm, qr code alarm, math alarm, wake duels, alarm app features"}
     canonical={"features.html"}
-    ogTitle={"Nooze Features - Smart Alarm & Sleep Tracker"}
-    ogDescription={"Smart wake, hybrid sleep tracking, 6 wake challenges, gamification, social duels and more."}
+    ogTitle={"Nooze features: no-snooze alarms, wake-up challenges and smart wake"}
+    ogDescription={"Nine wake-up challenges, a smart wake window, estimated sleep tracking, wake duels and more. Free on Google Play."}
     active={"features"}
 >
 
@@ -15,329 +107,506 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <script type="application/ld+json" set:html={"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://noozealarm.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Features\",\"item\":\"https://noozealarm.com/features.html\"}]}"} />
   </Fragment>
 
-<main class="flex-1">
-        <section class="hero-bg pt-32 pb-20 relative overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid"></div>
-            <div class="orb orb-1"></div>
-            <div class="orb orb-3"></div>
-            <div class="scanlines"></div>
+<main id="main" class="flex-1">
+    <PageHeader
+        title="Everything Nooze does, except snooze."
+        lede="Nine wake-up challenges, alarms that fit your week, a smart wake window and friends who keep you honest. Premium extras are marked."
+    >
+        <nav class="fx-index" aria-label="On this page">
+            <ol>
+                {chapters.map((c) => (
+                    <li><a href={`#${c.id}`}><span class="fx-index-n">{c.n}</span><span class="fx-index-l">{c.label}</span></a></li>
+                ))}
+            </ol>
+        </nav>
+    </PageHeader>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                <span class="holo-chip mb-6 reveal"><span class="dot"></span> Built around your sleep</span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 reveal delay-1 tracking-tight">
-                    Every <span class="iris-text">Feature</span><span class="text-white">,</span> Built to Wake You Better
-                </h1>
-                <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto reveal delay-2 leading-relaxed">
-                    Smart wake windows, hybrid sleep detection, seven wake challenges, gamification, social duels and 12 themes — all in one Android app, no snooze button anywhere.
-                </p>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="py-24 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-14">
-                    <span class="holo-chip mb-4 reveal"><span class="dot"></span> Core technology</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">Smart Wake <span class="gradient-text-cyan">Window</span></h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
-                        Pick a 15, 20 or 30 minute window before your alarm. Nooze fires when you're already in light sleep, never mid-REM.
-                    </p>
+    <!-- 01: No snooze + the nine challenges -->
+    <section id="challenges" class="nz-section" aria-labelledby="ch1">
+        <div class="nz-container">
+            <div class="fx-intro">
+                <div class="fx-head nz-reveal">
+                    <p class="fx-num">01</p>
+                    <h2 id="ch1" class="nz-h2 fx-title">No snooze. Nine ways to prove you are up.</h2>
+                    <p class="nz-lede">To switch an alarm off, you finish a wake-up challenge. Pick the challenge and how hard it is for each alarm.</p>
                 </div>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-                        <h3 class="text-xl font-semibold text-white mb-3">15 / 20 / 30 min</h3>
-                        <p class="text-gray-400 leading-relaxed">Choose how loose the window is per alarm. Tighter for fixed schedules, wider for weekends.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg></div>
-                        <h3 class="text-xl font-semibold text-white mb-3">Hybrid Detection</h3>
-                        <p class="text-gray-400 leading-relaxed">Combines wearable data, motion and ambient sound. Higher confidence wins; quiet nights still get tracked.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
-                        <h3 class="text-xl font-semibold text-white mb-3">Gradual Volume Ramp</h3>
-                        <p class="text-gray-400 leading-relaxed">Volume rises softly across the last few minutes so you ease into the morning instead of jolting awake.</p>
-                    </div></div>
+                <div class="fx-pair" data-stagger>
+                    <figure class="fx-shot nz-reveal">
+                        <img src="/assets/screens/02-challenges.webp" srcset="/assets/screens/02-challenges-400.webp 400w, /assets/screens/02-challenges.webp 640w" sizes="(max-width: 640px) 46vw, 240px" width="640" height="1093" loading="lazy" decoding="async" alt="The Nooze add-alarm screen: Sunrise wake and Smart Wake switches, then a wake-up challenge picker with math, memory, shake, typing, QR scan and photo." />
+                        <figcaption>Pick a challenge</figcaption>
+                    </figure>
+                    <figure class="fx-shot nz-reveal">
+                        <img src="/assets/screens/01-challenge.webp" srcset="/assets/screens/01-challenge-400.webp 400w, /assets/screens/01-challenge.webp 640w" sizes="(max-width: 640px) 46vw, 240px" width="640" height="1093" loading="lazy" decoding="async" alt="A math wake-up challenge in Nooze, problem 1 of 3: 12 + 37, with an answer field and a submit button." />
+                        <figcaption>Solve it to switch off</figcaption>
+                    </figure>
                 </div>
             </div>
-        </section>
 
-        <div class="section-divider"></div>
-
-        <section class="py-24 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-14">
-                    <span class="holo-chip mb-4 reveal"><span class="dot"></span> No snooze, ever</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">Seven Wake <span class="gradient-text">Challenges</span></h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
-                        The alarm only stops when you prove you're awake. Pick one, mix several, choose a difficulty.
-                    </p>
-                </div>
-
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">Math</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Solve quick problems scaled to your difficulty.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h10M4 18h10"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">Memory</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Repeat a sequence — short-term memory wakes you fast.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">Shake</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Shake the phone to a target — gets blood moving instantly.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5h2l1 7h12l1-7h2M5 21h2m10 0h2M9 12v5m6-5v5"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">Typing</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Type a phrase accurately — no autocorrect to lean on.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">QR Scan</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Stick a QR in the kitchen — you have to leave bed to scan it.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.66-.9l.82-1.2A2 2 0 0110.07 4h3.86a2 2 0 011.66.9l.82 1.2A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">Photo</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Snap a target object Nooze recognises — proves you're up and moving.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M5.281 13.575a9.5 9.5 0 0113.438 0M2.45 10.745a13.5 13.5 0 0119.1 0M12 20h.01"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">NFC Scan</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Tap an NFC tag stuck across the room. The alarm only stops once your phone touches it.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-1 opacity-80"><div class="holo-card-inner tilt-inner relative">
-                        <span class="absolute top-3 right-3 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-accent/20 text-accent-light border border-accent/30" style="letter-spacing:0.14em;text-transform:uppercase;">Coming Soon</span>
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h10"/></svg></div>
-                        <h3 class="text-white font-semibold mb-1">Anagram</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Unscramble a word — light cognitive load, surprisingly effective.</p>
-                    </div></div>
-                </div>
-
-                <p class="text-center text-gray-500 mt-10 text-sm reveal">Combine multiple challenges in one alarm. Pick easy, medium or hard. The harder you finish, the more XP.</p>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="py-24 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="reveal">
-                        <span class="holo-chip mb-4"><span class="dot"></span> Hybrid sleep detection</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Tracks <span class="gradient-text-cyan">Four Sleep Phases</span></h2>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                            Awake, Light, Deep and REM — detected through your phone's motion and microphone, fused with wearable data when you have one.
-                        </p>
-                        <ul class="space-y-3 text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Confidence-weighted detection: wearable &gt; on-body sensor fusion &gt; nightstand mic.</li>
-                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Shared-bed mode raises the threshold so a partner's movement isn't logged as yours.</li>
-                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Wearable-only mode skips on-phone sensors entirely if you trust your watch.</li>
-                            <li class="flex items-start gap-3"><span class="text-primary mt-1">▸</span> Snore and sleep-talk events surfaced in your morning summary.</li>
-                        </ul>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 reveal-scale">
-                        <div class="metric"><div class="num"><span data-counter="4" data-duration="1200">0</span></div><div class="lbl">Sleep Phases</div><div class="desc">Awake · Light · Deep · REM</div></div>
-                        <div class="metric"><div class="num"><span data-counter="30" data-duration="1500">0</span><span class="unit">s</span></div><div class="lbl">Sample Rate</div><div class="desc">A new data point every half-minute.</div></div>
-                        <div class="metric"><div class="num"><span data-counter="100" data-duration="1800">0</span><span class="unit">%</span></div><div class="lbl">On-Device</div><div class="desc">Raw biometrics never leave your phone.</div></div>
-                        <div class="metric"><div class="num">∞</div><div class="lbl">History</div><div class="desc">Quality, cycles and wake-ease scored every night.</div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="py-24 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-14">
-                    <span class="holo-chip mb-4 reveal"><span class="dot"></span> Mornings, made fun</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal"><span class="gradient-text">Gamification</span> &amp; Streaks</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal delay-1">
-                        Earn XP for every wake, journal entry and streak day. Level up. Unlock achievements and titles.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg></div>
-                        <h3 class="text-xl font-semibold text-white mb-3">XP &amp; Levels</h3>
-                        <p class="text-gray-400 leading-relaxed">Up to 50 XP per wake (challenge bonus + speed + perfect). 3 XP per journal. 5 XP per streak day. 50 XP per achievement.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143z"/></svg></div>
-                        <h3 class="text-xl font-semibold text-white mb-3">Quests &amp; Achievements</h3>
-                        <p class="text-gray-400 leading-relaxed">Daily quests refresh every morning. Long-term achievements unlock for streaks, perfect wakes and milestones.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon mb-5"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8c0-5.39-2.59-10.22-6.5-13.33z"/></svg></div>
-                        <h3 class="text-xl font-semibold text-white mb-3">Streaks &amp; Widget</h3>
-                        <p class="text-gray-400 leading-relaxed">Daily wake streak surfaced everywhere — including a home-screen widget so it's the first thing you see.</p>
-                    </div></div>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="py-24 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-10 items-center">
-                    <div class="reveal-right">
-                        <span class="holo-chip mb-4"><span class="dot"></span> Compete &amp; cheer</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Friends, Leaderboards &amp; <span class="gradient-text">Wake Duels</span></h2>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                            Add friends, see who's killing their streak and challenge anyone to a duel: first to nail their wake routine wins.
-                        </p>
-                        <div class="grid sm:grid-cols-2 gap-4">
-                            <div class="glass-card p-5"><h3 class="text-white font-semibold mb-1">Activity Feed</h3><p class="text-gray-400 text-sm">See friends' achievements, streak milestones and duel results.</p></div>
-                            <div class="glass-card p-5"><h3 class="text-white font-semibold mb-1">Wake Duels</h3><p class="text-gray-400 text-sm">Challenge a friend over a date range. 100 XP for the winner.</p></div>
-                            <div class="glass-card p-5"><h3 class="text-white font-semibold mb-1">Leaderboards</h3><p class="text-gray-400 text-sm">Friends-only ladder. No public scoreboards, no harassment surface.</p></div>
-                            <div class="glass-card p-5"><h3 class="text-white font-semibold mb-1">Anti-Farming</h3><p class="text-gray-400 text-sm">One active duel per pair. No looping challenges to grind XP.</p></div>
+            <div class="fx-chal" data-stagger>
+                {challengeGroups.map((g) => (
+                    <div class="fx-chal-group nz-reveal">
+                        <div class="fx-chal-gh">
+                            <h3 class="fx-chal-gt">{g.title}</h3>
+                            <span class="nz-meta">{g.items.length} {g.items.length === 1 ? 'challenge' : 'challenges'}</span>
                         </div>
+                        <dl class="fx-chal-list">
+                            {g.items.map((c) => (
+                                <div class="fx-chal-item">
+                                    <dt class="fx-chal-name">{c.name}</dt>
+                                    <dd class="fx-chal-desc">{c.desc}{c.note && <span class="fx-chal-note">{c.note}</span>}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                        {g.fallback && (
+                            <p class="fx-fallback">
+                                <span class="fx-fallback-t nz-mono" aria-hidden="true">2:00</span>
+                                <span>Tag missing? After two minutes, scan, NFC and photo challenges offer a math problem instead, so you are never stuck.</span>
+                            </p>
+                        )}
                     </div>
-                    <div class="reveal-left">
-                        <div class="holo-card"><div class="holo-card-inner" style="padding:32px;">
-                            <div class="text-xs uppercase tracking-widest text-primary mb-3">Wake Duel — 7 days</div>
-                            <div class="flex items-center justify-between mb-6">
-                                <div><div class="text-white font-bold">You</div><div class="text-3xl font-extrabold gradient-text">5,420</div><div class="text-xs text-gray-500">XP this week</div></div>
-                                <div class="text-2xl font-bold text-gray-500">vs</div>
-                                <div class="text-right"><div class="text-white font-bold">Alex</div><div class="text-3xl font-extrabold text-gray-300">4,890</div><div class="text-xs text-gray-500">XP this week</div></div>
+                ))}
+            </div>
+
+            <div class="fx-after">
+                <div class="nz-reveal">
+                    <h3 class="nz-h3">Easy, medium or hard</h3>
+                    <p class="fx-p">Set the difficulty per alarm. Easy for gentle weekdays, hard for the mornings you know you will fight it.</p>
+                    <div class="nz-tags fx-diff">
+                        <span class="nz-tag">Easy</span><span class="nz-tag">Medium</span><span class="nz-tag">Hard</span>
+                    </div>
+                </div>
+                <div class="nz-reveal" style="--d:1">
+                    <h3 class="nz-h3">Then, the wake-up check</h3>
+                    <p class="fx-p">Turn it on and Nooze makes sure you stayed up. Ignore it and the alarm comes back.</p>
+                    <ol class="fx-seq">
+                        <li><b>Alarm rings</b><span>No snooze button on the screen.</span></li>
+                        <li><b>Challenge done</b><span>The alarm goes quiet.</span></li>
+                        <li><b>Still up?</b><span>A few minutes later, Nooze asks.</span></li>
+                        <li><b>No answer</b><span>The alarm rings again.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02: Alarms that fit your week -->
+    <section id="your-week" class="nz-section fx-ch" aria-labelledby="ch2">
+        <div class="nz-container nz-split">
+            <div class="nz-split-head fx-head nz-reveal">
+                <p class="fx-num">02</p>
+                <h2 id="ch2" class="nz-h2 fx-title">Alarms that fit your week.</h2>
+                <p class="nz-lede">Real weeks have holidays, early meetings and trips. Nooze plans around them, so you are not editing alarms at midnight.</p>
+                <p class="fx-aside">Unlimited alarms, all on the free plan.</p>
+            </div>
+            <ul class="nz-rows fx-week" data-stagger>
+                {week.map((r) => (
+                    <li class="nz-row nz-reveal">
+                        <h3 class="nz-row-title">{r.t}</h3>
+                        <p class="nz-row-body">{r.b}</p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </section>
+
+    <!-- 03: Smart wake + Sunrise Wake -->
+    <section id="smart-wake" class="nz-section nz-band" aria-labelledby="ch3">
+        <div class="nz-container">
+            <div class="fx-head nz-reveal">
+                <p class="fx-num">03</p>
+                <h2 id="ch3" class="nz-h2 fx-title">A window, not a single minute.</h2>
+                <p class="nz-lede">Set a 15, 20 or 30-minute window before your alarm. Nooze picks an estimated lighter moment of sleep inside it to ring.</p>
+            </div>
+
+            <WakeWindowDiagram sunNote={false} />
+
+            <div class="fx-twocol" data-stagger>
+                <div class="nz-reveal">
+                    <h3 class="nz-h3">How it picks the moment</h3>
+                    <p class="fx-p">Nooze estimates how light your sleep is from your phone’s motion sensor and optional microphone, or from a band or watch through Health Connect. The window ends at your alarm time.</p>
+                </div>
+                <div class="nz-reveal">
+                    <h3 class="nz-h3">Sunrise Wake</h3>
+                    <p class="fx-p">Your wake-up screen starts dark and warms into a soft glow, like a small sunrise on the nightstand. Kind to dark winter mornings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04: Sleep tracking, estimated -->
+    <section id="sleep" class="nz-section" aria-labelledby="ch4">
+        <div class="nz-container nz-split">
+            <div class="nz-split-head fx-head nz-reveal">
+                <p class="fx-num">04</p>
+                <h2 id="ch4" class="nz-h2 fx-title">Your night, estimated.</h2>
+                <p class="nz-lede">Track with your phone, or with a band or watch through Health Connect. Every number is an estimate, and labelled as one.</p>
+                <figure class="fx-shot fx-shot--head">
+                    <img src="/assets/screens/05-sleep.webp" srcset="/assets/screens/05-sleep-400.webp 400w, /assets/screens/05-sleep.webp 640w" sizes="(max-width: 640px) 62vw, 240px" width="640" height="1093" loading="lazy" decoding="async" alt="The Nooze sleep screen: a bedtime reminder, a sleep tip, tiles for sleep aids, journal, sleep analytics and recordings, and a note that Nooze is not a medical device." />
+                    <figcaption>The sleep tab</figcaption>
+                </figure>
+            </div>
+
+            <div class="fx-stack">
+                <div class="fx-src nz-reveal">
+                    <div>
+                        <h3 class="fx-sub">Your phone</h3>
+                        <p class="fx-p">The motion sensor, plus the microphone if you allow it. No extra hardware.</p>
+                    </div>
+                    <span class="fx-src-or" aria-hidden="true">or</span>
+                    <div>
+                        <h3 class="fx-sub">Health Connect</h3>
+                        <p class="fx-p">Sleep and heart-rate data from a compatible band or watch.</p>
+                    </div>
+                </div>
+
+                <div class="nz-reveal">
+                    <h3 class="fx-sub fx-sub--gap">What you see each morning</h3>
+                    <dl class="fx-grid">
+                        {readouts.map((r) => (
+                            <div>
+                                <dt>{r.t}{r.premium && <span class="nz-tag nz-tag--red fx-prem">Premium</span>}</dt>
+                                <dd>{r.b}</dd>
                             </div>
-                            <div class="h-2 rounded-full bg-white/5 overflow-hidden mb-2"><div class="h-full bg-gradient-to-r from-primary to-accent-light" style="width:53%"></div></div>
-                            <div class="flex justify-between text-xs text-gray-500"><span>3 days left</span><span class="text-primary">+100 XP if you win</span></div>
-                        </div></div>
+                        ))}
+                    </dl>
+                </div>
+
+                <div class="nz-reveal">
+                    <h3 class="fx-sub fx-sub--gap">Two modes for real bedrooms</h3>
+                    <dl class="fx-grid">
+                        <div>
+                            <dt>Shared bed</dt>
+                            <dd>Tuned so a partner’s tossing and turning is less likely to count as yours.</dd>
+                        </div>
+                        <div>
+                            <dt>Wearable only</dt>
+                            <dd>Leave the phone sensors out and use your band or watch data alone.</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div class="fx-notes nz-reveal">
+                    <div>
+                        <p class="fx-notes-t">Stays on your phone</p>
+                        <p>Sensor, microphone and Health Connect data stay on the device. No ads, no data sales.</p>
+                    </div>
+                    <div>
+                        <p class="fx-notes-t">For general wellness</p>
+                        <p>Nooze is not a medical device. Phases, scores and noise events are estimates to help you spot patterns, not medical advice.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <div class="section-divider"></div>
-
-        <section class="py-24 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-14">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">And <span class="gradient-text-cyan">Much More</span></h2>
-                </div>
-
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Health Hub</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Connects through Health Connect — pulls sleep, heart-rate and SpO₂ data from compatible wearables and apps.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Smart Home</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Trigger lights, blinds and devices on wake via Home Assistant. Bring up your bedroom on your schedule.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Sleep Aids</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Calming soundscapes — rain, ocean, white noise — to help you drift off. Auto-fade so they don't run all night.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Sleep Journal</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Log mood, energy, dreams and notes against each session. Patterns surface over weeks, not screenshots.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Cross-Device Sync</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Your alarms, gamification and friends sync across phones. Raw biometrics stay local on each device.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">12 Themes</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Six free, six premium animated themes. Pick a vibe — from minimal mono to reactive auroras.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-1"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Privacy First</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Sleep biometrics never leave your device. Local data is encrypted at rest. Cloud sync is opt-in and minimal.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-2"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z M9.5 9.5l5 5m0-5l-5 5"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Bedtime Reminders</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Optional bedtime nudge with a Quick Settings tile to start the night with one tap.</p>
-                    </div></div>
-                    <div class="holo-card tilt reveal delay-3"><div class="holo-card-inner tilt-inner">
-                        <div class="feature-icon !w-12 !h-12 !rounded-xl mb-4"><svg class="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v18l7-4 7 4V3"/></svg></div>
-                        <h3 class="text-white font-semibold mb-2">Survives Reboots</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Alarms reschedule themselves after device boot or app update — no &quot;forgot to ring&quot; surprises.</p>
-                    </div></div>
-                </div>
+    <!-- 05: Stay accountable -->
+    <section id="accountable" class="nz-section fx-ch" aria-labelledby="ch5">
+        <div class="nz-container">
+            <div class="fx-head nz-reveal">
+                <p class="fx-num">05</p>
+                <h2 id="ch5" class="nz-h2 fx-title">Friends make it harder to sleep in.</h2>
+                <p class="nz-lede">Earn XP for getting up on time. Then bring in a friend, a buddy or a squad, and sleeping in stops being private.</p>
             </div>
-        </section>
 
-        <div class="section-divider"></div>
+            <ol class="fx-circle" data-stagger>
+                {circles.map((c) => (
+                    <li class="nz-reveal">
+                        <svg class="fx-people" viewBox={`0 0 ${c.n * 18} 16`} width={c.n * 18} height="16" aria-hidden="true">
+                            {Array.from({ length: c.n }, (_, i) => (
+                                i === 0
+                                    ? <circle cx="8" cy="8" r="6" fill="var(--red)" />
+                                    : <circle cx={8 + i * 18} cy="8" r="5.25" fill="none" stroke="currentColor" stroke-width="1.5" opacity={c.n > 4 ? Math.max(0.25, 1 - (i - 1) * 0.1) : 1} />
+                            ))}
+                        </svg>
+                        <p class="fx-circle-k">{c.who}</p>
+                        <h3 class="nz-h3">{c.t}</h3>
+                        <p class="fx-p">{c.b}</p>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
 
-        <section class="py-24 relative">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal">How Nooze <span class="gradient-text">Compares</span></h2>
-                    <p class="text-gray-400 reveal delay-1">A quick look against a typical alarm + tracking stack.</p>
-                </div>
-
-                <div class="holo-card reveal delay-2"><div class="holo-card-inner" style="padding:0;overflow:hidden;">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="border-b border-white/10">
-                                    <th class="text-left p-4 text-gray-400 font-medium">Feature</th>
-                                    <th class="p-4 text-primary font-semibold">Nooze</th>
-                                    <th class="p-4 text-gray-500">Typical Alarm</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-gray-300">
-                                <tr class="border-b border-white/5"><td class="p-4">Smart wake window</td><td class="p-4 text-center text-primary">15 / 20 / 30 min</td><td class="p-4 text-center text-gray-500">—</td></tr>
-                                <tr class="border-b border-white/5"><td class="p-4">Snooze button</td><td class="p-4 text-center text-primary font-semibold">Removed</td><td class="p-4 text-center text-gray-500">Always</td></tr>
-                                <tr class="border-b border-white/5"><td class="p-4">Wake challenges</td><td class="p-4 text-center text-primary">7 types</td><td class="p-4 text-center text-gray-500">0–1</td></tr>
-                                <tr class="border-b border-white/5"><td class="p-4">Sleep stage tracking</td><td class="p-4 text-center text-primary">Hybrid (4 stages)</td><td class="p-4 text-center text-gray-500">Often missing</td></tr>
-                                <tr class="border-b border-white/5"><td class="p-4">Gamification &amp; streaks</td><td class="p-4 text-center text-primary">XP / quests / titles</td><td class="p-4 text-center text-gray-500">—</td></tr>
-                                <tr class="border-b border-white/5"><td class="p-4">Social &amp; duels</td><td class="p-4 text-center text-primary">Friends &amp; duels</td><td class="p-4 text-center text-gray-500">—</td></tr>
-                                <tr class="border-b border-white/5"><td class="p-4">Smart home trigger</td><td class="p-4 text-center text-primary">Home Assistant</td><td class="p-4 text-center text-gray-500">—</td></tr>
-                                <tr><td class="p-4">Biometrics in cloud</td><td class="p-4 text-center text-primary font-semibold">Stay on device</td><td class="p-4 text-center text-gray-500">Often uploaded</td></tr>
-                            </tbody>
-                        </table>
+    <!-- 06: Naps, watch, sounds and the rest -->
+    <section id="more" class="nz-section fx-ch" aria-labelledby="ch6">
+        <div class="nz-container nz-split">
+            <div class="nz-split-head fx-head nz-reveal">
+                <p class="fx-num">06</p>
+                <h2 id="ch6" class="nz-h2 fx-title">Naps, watches, sounds and the rest.</h2>
+                <p class="nz-lede">The extras around the alarm itself, from bedtime to the first coffee.</p>
+                <p class="fx-aside">Premium is €1.99 a month or €13.99 a year, about 41% less than monthly. Cancel any time in Google Play.</p>
+            </div>
+            <dl class="fx-grid fx-grid--more" data-stagger>
+                {extras.map((x) => (
+                    <div class="nz-reveal">
+                        <dt>{x.t}{x.premium && <span class="nz-tag nz-tag--red fx-prem">Premium</span>}</dt>
+                        <dd>{x.b}</dd>
                     </div>
-                </div></div>
-            </div>
-        </section>
+                ))}
+            </dl>
+        </div>
+    </section>
 
-        <div class="section-divider"></div>
-
-        <section class="py-28 relative hero-bg overflow-hidden">
-            <div class="aurora"></div>
-            <div class="holo-grid tilt-grid" style="opacity:0.7;"></div>
-            <div class="orb orb-2" style="opacity:0.2;"></div>
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="holo-card reveal"><div class="holo-card-inner text-center" style="padding:48px 32px;">
-                    <span class="launch-stamp maintenance mb-6"><span class="dot"></span> Ongoing Maintenance</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to <span class="iris-text">Wake Up</span> Better?</h2>
-                    <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10">Nooze Alarm is temporarily unavailable on Google Play while we work through some maintenance. Existing installs keep working &mdash; we&rsquo;ll post here the moment downloads are back.</p>
-                    <div class="flex flex-wrap justify-center items-center gap-4">
-                        <span class="status-badge" role="status" aria-label="Nooze is temporarily unavailable for download">
-                            <span class="icon" aria-hidden="true">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </span>
-                            <span class="stack">
-                                <span class="small">Downloads paused</span>
-                                <span class="big">Under Maintenance</span>
-                            </span>
-                        </span>
-                        <a href="about.html" class="btn-outline"><span>Our Story</span></a>
-                    </div>
-                </div></div>
+    <!-- Comparison -->
+    <section id="compare" class="nz-section nz-band" aria-labelledby="cmpTitle">
+        <div class="nz-container">
+            <div class="fx-head nz-reveal">
+                <h2 id="cmpTitle" class="nz-h2 fx-title">Nooze next to your phone’s clock.</h2>
+                <p class="nz-lede">A fair look against the clock app your phone came with.</p>
             </div>
-        </section>
-    </main>
+            <div class="fx-cmp-wrap nz-reveal" role="region" aria-labelledby="cmpTitle" tabindex="0">
+                <table class="fx-cmp">
+                    <colgroup><col class="fx-cmp-c1" /><col /><col /></colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col"><span class="sr-only">Feature</span></th>
+                            <th scope="col" class="is-nooze">Nooze</th>
+                            <th scope="col">Built-in clock app</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {compare.map((r) => (
+                            <tr>
+                                <th scope="row">{r.f}</th>
+                                <td class="is-nooze">{r.n}</td>
+                                <td>{r.t}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <p class="fx-cmp-note nz-reveal">Checked against Google Clock and Samsung Clock in November 2026. Some other alarm apps cover a few of these too.</p>
+        </div>
+    </section>
+
+    <ClosingCta secondary={{ href: '/faq.html', label: 'Read the FAQ' }} />
+</main>
 </BaseLayout>
+
+<style>
+    /* ---------- In-page index (inside the page header) ---------- */
+    .fx-index { margin-top: clamp(48px, 6vw, 88px); }
+    .fx-index ol {
+        list-style: none; margin: 0; padding: 0;
+        display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 20px;
+    }
+    .fx-index li { border-top: 1px solid var(--line-2); min-width: 0; }
+    .fx-index a {
+        position: relative; display: flex; flex-direction: column; gap: 10px;
+        min-height: 44px; padding: 18px 8px 8px 0;
+        font-size: 15px; line-height: 1.35; color: var(--fg-2);
+        transition: color 0.25s var(--ease-out);
+    }
+    .fx-index a::before {
+        content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--fg);
+        transform: scaleX(0); transform-origin: left; transition: transform 0.55s var(--ease-out);
+    }
+    .fx-index a:hover { color: var(--fg); }
+    .fx-index a:hover::before { transform: scaleX(1); }
+    .fx-index-n { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); font-variant-numeric: tabular-nums; transition: color 0.25s var(--ease-out); }
+    .fx-index a:hover .fx-index-n { color: var(--red); }
+    @media (max-width: 1000px) { .fx-index ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 560px) {
+        .fx-index ol { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+        .fx-index a { padding: 14px 4px 14px 0; font-size: 14.5px; gap: 6px; }
+    }
+
+    /* ---------- Chapter scaffolding ---------- */
+    .fx-ch { border-top: 1px solid var(--line); }
+    .fx-num {
+        display: flex; align-items: center; gap: 14px; margin: 0 0 26px;
+        font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--fg-3);
+        font-variant-numeric: tabular-nums;
+    }
+    .fx-num::after { content: ''; width: 44px; height: 1px; background: var(--line-3); }
+    .fx-head { max-width: 780px; }
+    .fx-title { font-size: clamp(34px, 4vw, 58px); line-height: 1.02; }
+    .fx-head .nz-lede { margin-top: 24px; }
+    .fx-aside { margin: 28px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--fg-2); max-width: 38ch; }
+    .fx-p { margin: 12px 0 0; color: var(--fg-2); font-size: 16px; line-height: 1.6; max-width: 56ch; }
+
+    /* Real app screenshots: bare, hairline-edged, no device frame */
+    .fx-shot { margin: 0; }
+    .fx-shot img {
+        display: block; width: 100%; height: auto; border-radius: 20px; background: var(--ink-2);
+        box-shadow: 0 0 0 1px var(--line-2), 0 40px 80px -40px rgba(0, 0, 0, 0.9);
+    }
+    .fx-shot figcaption { margin-top: 14px; font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); }
+    .fx-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 56px clamp(40px, 6vw, 96px); align-items: end; }
+    .fx-pair { display: grid; grid-template-columns: repeat(2, 220px); gap: 20px; align-items: start; }
+    .fx-pair .fx-shot:nth-child(2) { margin-top: 56px; }
+    /* Sized so the sticky head still fits a laptop viewport */
+    .fx-shot--head { width: clamp(150px, calc((100svh - 440px) / 1.708), 240px); margin-top: 44px; }
+    @media (max-width: 900px) {
+        .fx-intro { grid-template-columns: minmax(0, 1fr); }
+        .fx-pair { grid-template-columns: repeat(2, minmax(0, 220px)); gap: 14px; }
+        .fx-pair .fx-shot:nth-child(2) { margin-top: 36px; }
+        .fx-shot--head { width: min(240px, 62%); margin-top: 36px; }
+    }
+
+    /* ---------- 02: week rows (title and body, no index column) ---------- */
+    .fx-week .nz-row { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+    @media (max-width: 760px) {
+        .fx-week .nz-row { grid-template-columns: minmax(0, 1fr); }
+        .fx-week .nz-row-body { grid-column: auto; }
+    }
+
+    /* ---------- 01: challenge board ---------- */
+    .fx-chal {
+        margin-top: clamp(56px, 7vw, 96px);
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px clamp(24px, 3.5vw, 56px);
+        align-items: start;
+    }
+    .fx-chal-group { border-top: 1px solid var(--line-3); padding-top: 20px; }
+    .fx-chal-gh { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+    .fx-chal-gt { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg-2); margin: 0; }
+    .fx-chal-list { margin: 0; }
+    .fx-chal-item { padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .fx-chal-item:last-child { border-bottom: 0; }
+    .fx-chal-name { font-family: var(--font-display); font-size: clamp(24px, 2.1vw, 30px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--fg); }
+    .fx-chal-desc { margin: 6px 0 0; font-size: 15.5px; line-height: 1.55; color: var(--fg-2); }
+    .fx-chal-note { display: block; margin-top: 6px; font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); }
+    .fx-fallback {
+        display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: start;
+        margin: 8px 0 0; padding: 18px 0 0; border-top: 1px dashed var(--line-2);
+        font-size: 14.5px; line-height: 1.55; color: var(--fg-2);
+    }
+    .fx-fallback-t { font-size: 22px; line-height: 1.1; color: var(--red); letter-spacing: -0.02em; }
+
+    .fx-after {
+        margin-top: clamp(64px, 8vw, 112px); padding-top: clamp(32px, 4vw, 48px); border-top: 1px solid var(--line);
+        display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px clamp(40px, 6vw, 96px);
+    }
+    .fx-diff { margin-top: 22px; }
+    .fx-seq {
+        list-style: none; margin: 32px 0 0; padding: 0;
+        display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .fx-seq li { position: relative; padding: 28px 18px 0 0; }
+    .fx-seq li::before { content: ''; position: absolute; left: 0; right: 0; top: 4px; height: 1px; background: var(--line-3); }
+    .fx-seq li::after {
+        content: ''; position: absolute; left: 0; top: 0; width: 9px; height: 9px; border-radius: 50%;
+        background: var(--ink-0); box-shadow: inset 0 0 0 1.5px var(--fg-2);
+    }
+    .fx-seq li:last-child::before { background: linear-gradient(to right, var(--red-line), transparent); }
+    .fx-seq li:last-child::after { background: var(--red); box-shadow: 0 0 0 4px var(--red-soft); }
+    .fx-seq b { display: block; font-size: 15.5px; color: var(--fg); font-weight: 600; }
+    .fx-seq span { display: block; margin-top: 4px; font-size: 14.5px; line-height: 1.5; color: var(--fg-2); }
+
+    @media (max-width: 1000px) {
+        .fx-chal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .fx-chal-group:last-child { grid-column: 1 / -1; }
+        .fx-after { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 640px) {
+        .fx-chal { grid-template-columns: minmax(0, 1fr); }
+        .fx-seq { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+        .fx-seq li { padding: 0 0 0 30px; }
+        .fx-seq li::before { left: 4px; right: auto; top: 14px; bottom: -22px; width: 1px; height: auto; }
+        .fx-seq li:last-child::before { display: none; }
+        .fx-seq li::after { top: 6px; }
+    }
+
+    /* ---------- 03: notes under the diagram ---------- */
+    .fx-twocol {
+        margin-top: clamp(48px, 6vw, 72px);
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px clamp(40px, 6vw, 96px);
+    }
+    .fx-twocol > div { border-top: 1px solid var(--line-2); padding-top: 24px; }
+    @media (max-width: 760px) { .fx-twocol { grid-template-columns: minmax(0, 1fr); } }
+
+    /* ---------- 04: sleep tracking ---------- */
+    .fx-stack { display: grid; gap: clamp(48px, 6vw, 72px); min-width: 0; }
+    .fx-sub { font-size: clamp(20px, 1.6vw, 23px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--fg); margin: 0; }
+    .fx-sub--gap { margin-bottom: 8px; }
+    /* Same columns as .fx-grid below, so both pairs start on the same x */
+    .fx-src {
+        position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 3vw, 44px);
+        border-top: 1px solid var(--line-3);
+    }
+    .fx-src::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; margin-left: -0.5px; background: var(--line); }
+    .fx-src > div { padding: 26px 0 0; }
+    .fx-src-or {
+        position: absolute; left: 50%; top: -13px; transform: translateX(-50%);
+        display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+        background: var(--ink-0); box-shadow: inset 0 0 0 1px var(--line-3);
+        font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-2);
+    }
+
+    .fx-grid { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 3vw, 44px); }
+    .fx-grid > div { padding: 22px 0 24px; border-top: 1px solid var(--line); }
+    .fx-grid dt {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+        font-family: var(--font-display); font-size: 19px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; color: var(--fg);
+    }
+    .fx-grid dd { margin: 8px 0 0; font-size: 15.5px; line-height: 1.55; color: var(--fg-2); max-width: 42ch; }
+    .fx-prem { padding: 4px 8px; font-size: 11.5px; letter-spacing: 0.04em; }
+
+    .fx-notes {
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px clamp(24px, 3vw, 44px);
+        padding: clamp(22px, 2.6vw, 32px); border-radius: var(--r-md);
+        background: rgba(255, 255, 255, 0.02); box-shadow: inset 0 0 0 1px var(--line-2);
+    }
+    .fx-notes p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--fg-2); }
+    .fx-notes .fx-notes-t {
+        margin-bottom: 8px; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3);
+    }
+    @media (max-width: 640px) {
+        .fx-src { grid-template-columns: minmax(0, 1fr); }
+        .fx-src::before { display: none; }
+        .fx-src > div:last-child { border-top: 1px solid var(--line); }
+        .fx-src-or { position: relative; z-index: 1; left: auto; top: auto; transform: none; margin: 26px 0 -13px; }
+        .fx-grid, .fx-notes { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* ---------- 05: circles ---------- */
+    .fx-circle {
+        list-style: none; margin: clamp(56px, 7vw, 96px) 0 0; padding: 0;
+        display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px clamp(20px, 3vw, 44px);
+    }
+    .fx-circle li { border-top: 1px solid var(--line-3); padding-top: 26px; min-width: 0; }
+    .fx-people { display: block; height: 16px; width: auto; max-width: 100%; color: var(--fg-3); margin-bottom: 30px; overflow: visible; }
+    .fx-circle-k { margin: 0 0 10px; font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); }
+    @media (max-width: 1000px) { .fx-circle { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .fx-circle { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+
+    /* ---------- 06: extras ---------- */
+    .fx-grid--more > div { padding: 24px 0 26px; }
+    @media (max-width: 760px) {
+        .fx-grid.fx-grid--more { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(16px, 4vw, 28px); }
+        .fx-grid--more > div { padding: 18px 0 20px; min-width: 0; }
+        .fx-grid--more dt { font-size: 16.5px; gap: 6px 8px; }
+        .fx-grid--more dd { margin-top: 6px; font-size: 14px; line-height: 1.5; }
+    }
+
+    /* ---------- Comparison ---------- */
+    .fx-cmp-wrap { margin-top: clamp(40px, 5vw, 64px); max-width: 1000px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .fx-cmp-wrap:focus-visible { outline-offset: 6px; }
+    .fx-cmp { width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.45; }
+    .fx-cmp-c1 { width: 38%; }
+    .fx-cmp th, .fx-cmp td { text-align: left; vertical-align: top; padding: 18px 24px 18px 0; border-bottom: 1px solid var(--line); }
+    .fx-cmp thead th {
+        padding-top: 0; padding-bottom: 16px; border-bottom: 1px solid var(--line-3);
+        font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3);
+    }
+    .fx-cmp thead th.is-nooze { color: var(--fg); }
+    .fx-cmp thead th.is-nooze::before {
+        content: ''; display: inline-block; vertical-align: middle; width: 14px; height: 2px; margin: -2px 10px 0 0; border-radius: 1px; background: var(--red);
+    }
+    .fx-cmp tbody th { font-weight: 500; color: var(--fg-2); }
+    .fx-cmp td { color: var(--fg-2); }
+    .fx-cmp td.is-nooze { color: var(--fg); font-weight: 500; }
+    .fx-cmp tbody tr:last-child > * { border-bottom: 0; }
+    .fx-cmp-note { margin: 28px 0 0; font-size: 14.5px; color: var(--fg-2); max-width: 60ch; }
+    @media (max-width: 640px) {
+        .fx-cmp { font-size: 14.5px; }
+        .fx-cmp-c1 { width: 34%; }
+        .fx-cmp th, .fx-cmp td { padding: 14px 14px 14px 0; }
+        .fx-cmp thead th { font-size: 11.5px; letter-spacing: 0.06em; }
+        .fx-cmp th:last-child, .fx-cmp td:last-child { padding-right: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .fx-index a::before { transition: none; }
+    }
+</style>

@@ -1,0 +1,27 @@
+---
+// Sub-page header: H1, lede, optional slot (actions/meta) below.
+// The faint dial on the right is the logo's 60-tick face; its red hand ticks once a second.
+// `compact` (legal, FAQ, contact): smaller title, no dial.
+const { title, lede, compact = false } = Astro.props;
+const ticks = Array.from({ length: 60 }, (_, i) => i);
+---
+<header class={compact ? 'nz-pagehead nz-pagehead--compact' : 'nz-pagehead'}>
+    {!compact && <svg class="nz-pagehead-dial" viewBox="0 0 400 400" aria-hidden="true">
+        <circle cx="200" cy="200" r="196" fill="none" stroke="currentColor" stroke-width="1" />
+        <circle cx="200" cy="200" r="150" fill="none" stroke="currentColor" stroke-width="0.6" stroke-dasharray="1 5" />
+        {ticks.map((i) => (
+            <line x1="200" y1={i % 5 === 0 ? 14 : 18} x2="200" y2={i % 5 === 0 ? 40 : 28}
+                stroke="currentColor" stroke-width={i % 5 === 0 ? 3 : 1}
+                transform={`rotate(${i * 6} 200 200)`} />
+        ))}
+        <g class="hand">
+            <line x1="200" y1="236" x2="200" y2="40" stroke="#ff4a3d" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="200" cy="200" r="7" fill="none" stroke="#ff4a3d" stroke-width="2.5" />
+        </g>
+    </svg>}
+    <div class="nz-container">
+        <h1 class="nz-h1" set:html={title} />
+        {lede && <p class="nz-lede" set:html={lede} />}
+        <slot />
+    </div>
+</header>
