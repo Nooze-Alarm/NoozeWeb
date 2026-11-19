@@ -6,3 +6,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Friend-invite links: one static page serves every /invite/<uid>.
+[[redirects]]
+  from = "/invite/*"
+  to = "/invite.html"
+  status = 200
