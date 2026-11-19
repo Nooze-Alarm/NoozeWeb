@@ -1,0 +1,14 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.noozealarm.app",
+      "sha256_cert_fingerprints": [
+        "3B:7B:30:13:14:BF:4C:E1:BC:61:03:BF:0E:50:69:6F:43:01:57:47:02:96:A6:A1:6E:F8:D9:23:69:43:91:14",
+        "CA:66:5D:29:C0:49:34:4F:12:E9:E4:AC:D8:BC:02:AA:F5:E4:50:D4:52:39:F7:C4:00:9A:F3:74:B0:63:ED:6D",
+        "5C:6B:FA:DF:A9:7F:2D:A9:21:0D:74:45:95:43:9E:67:6E:A8:D4:AD:D4:7C:20:D7:F6:DF:12:A3:F4:2F:32:03"
+      ]
+    }
+  }
+]
